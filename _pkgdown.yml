@@ -15,7 +15,7 @@ reference:
 
 - title: "Utils"
   contents:
-  - semPaths_layout_maker
+  - node_layout_maker
   - age_in_unit
   - vlookup
 

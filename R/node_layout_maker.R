@@ -1,26 +1,26 @@
-#' Shiny app for manual \code{semPaths} layout
+#' Shiny app for manual Node layout
 #'
-#' @param object Object to get the node names from. \code{\link[semPlot]{semPlotModel}}
+#' @param object Object to get the node names from. Passed to \code{\link[semPlot]{semPlotModel}}. Can also be a vector of names, or a number representing the number of nodes.
 #' @param snap_to_grid Should nodes be auto snapped to the grid?
 #'
-#' @return A layout matrix that can be passed to \code{\link[semPlot]{semPaths}} via \code{layout=}.
+#' @return A matrix with a row per node, and column representing x and y. This matrix can be passed as-is to \code{\link[semPlot]{semPaths}} via \code{layout=}.
 #'
-#' @example examples/examples.semPaths_layout_maker.R
+#' @example examples/examples.node_layout_maker.R
 #'
 #' @export
-semPaths_layout_maker <- function(object, snap_to_grid = TRUE) {
-  .check_namespace("shiny", "ggplot2", "semPlot")
+node_layout_maker <- function(object, snap_to_grid = TRUE) {
+  UseMethod("node_layout_maker")
+}
 
-  distance_xy <- function(x1, y1, x2, y2) {
-    sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
-  }
+#' @rdname node_layout_maker
+#' @export
+node_layout_maker.character <- function(object, snap_to_grid = TRUE) {
+  .check_namespace("shiny", "ggplot2")
 
   #### Setup ####
-  labs <- semPlot::semPlotModel(object)@Vars$name
-
-  dat <- data.frame(labs = labs,
-                    x = seq_along(labs),
-                    y = seq_along(labs))
+  dat <- data.frame(labs = object,
+                    x = seq_along(object),
+                    y = seq_along(object))
 
 
   #### UI ####
@@ -60,7 +60,7 @@ semPaths_layout_maker <- function(object, snap_to_grid = TRUE) {
       ## Which node was selected? (first click) ##
       # Distance from first click
       ds <- mapply(
-        FUN = distance_xy,
+        FUN = .distance_xy,
         vals$dat$x,
         vals$dat$y,
         MoreArgs = list(x2 = first_x, y2 = first_y),
@@ -90,13 +90,14 @@ semPaths_layout_maker <- function(object, snap_to_grid = TRUE) {
 
     ## Plot grid ##
     output$distPlot <- shiny::renderPlot({
+
       ggplot2::ggplot(vals$dat, ggplot2::aes(x, y, label = labs)) +
         ggplot2::geom_label() +
-        ggplot2::scale_x_continuous(minor_breaks = NULL) +
-        ggplot2::scale_y_continuous(minor_breaks = NULL) +
+        ggplot2::scale_x_continuous(breaks = seq_along(object), minor_breaks = NULL) +
+        ggplot2::scale_y_continuous(breaks = seq_along(object), minor_breaks = NULL) +
         ggplot2::coord_cartesian(
-          xlim = range(dat$x) + c(-1, 1),
-          ylim = range(dat$y) + c(-1, 1),
+          xlim = c(1,length(object)) + c(-1, 1),
+          ylim = c(1,length(object)) + c(-1, 1),
           expand = FALSE
         )
 
@@ -106,7 +107,7 @@ semPaths_layout_maker <- function(object, snap_to_grid = TRUE) {
     shiny::observeEvent(input$is_done, {
       m <- as.matrix(vals$dat[, 2:3])
       colnames(m) <- c("x", "y")
-      rownames(m) <- labs
+      rownames(m) <- object
       stopApp(m)
     })
   }
@@ -115,3 +116,30 @@ semPaths_layout_maker <- function(object, snap_to_grid = TRUE) {
   #### Run app ####
   shiny::runApp(list(ui = ui, server = server))
 }
+
+#' @rdname node_layout_maker
+#' @export
+node_layout_maker.numeric <- function(object, snap_to_grid = TRUE) {
+  if (length(object) == 1) {
+    object <- paste0("Node", seq_len(object))
+  } else {
+    object <- as.character(object)
+  }
+  node_layout_maker(object, snap_to_grid = snap_to_grid)
+}
+
+#' @rdname node_layout_maker
+#' @export
+node_layout_maker.default <- function(object, snap_to_grid = TRUE) {
+  .check_namespace("semPlot")
+  labs <- semPlot::semPlotModel(object)@Vars$name
+  node_layout_maker(labs, snap_to_grid = snap_to_grid)
+}
+
+
+
+#' @keywords internal
+.distance_xy <- function(x1, y1, x2, y2) {
+  sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
+}
+

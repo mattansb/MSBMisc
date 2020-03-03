@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • MSBMisc</title>
+<title>Shiny app for manual Node layout — node_layout_maker • MSBMisc</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Shiny app for manual Node layout — node_layout_maker" />
+<meta property="og:description" content="Shiny app for manual Node layout" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -99,111 +101,73 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Shiny app for manual Node layout</h1>
+    
+    <div class="hidden name"><code>node_layout_maker.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Shiny app for manual Node layout</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>node_layout_maker</span>(<span class='no'>object</span>, <span class='kw'>snap_to_grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-inference" class="hasAnchor"><a href="#section-inference" class="anchor"></a>Inference</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="afex_to_BF.html">afex_to_BF()</a></code> </p>
-        </td>
-        <td><p>Refit afex models to produce Bayes Factors</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="chisq.pairwise.html">chisq.pairwise()</a></code> <code><a href="chisq.pairwise.html">chisq.residual()</a></code> </p>
-        </td>
-        <td><p>Follow-up for contingency table test</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-assumptions-and-reliability" class="hasAnchor"><a href="#section-assumptions-and-reliability" class="anchor"></a>Assumptions and Reliability</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="qq_worm_plot.html">qq_worm_plot()</a></code> </p>
-        </td>
-        <td><p>Create a worm plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="r_SB.html">r_SB()</a></code> </p>
-        </td>
-        <td><p>Spearman-Brown Split half reliability</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-rmarkdown" class="hasAnchor"><a href="#section-rmarkdown" class="anchor"></a>RMarkdown</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="print_library.html">print_library()</a></code> <code><a href="print_library.html">print_require()</a></code> </p>
-        </td>
-        <td><p>Print Loading/Attaching of Packages</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-utils" class="hasAnchor"><a href="#section-utils" class="anchor"></a>Utils</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="node_layout_maker.html">node_layout_maker()</a></code> </p>
-        </td>
-        <td><p>Shiny app for manual Node layout</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="age_in_unit.html">age_in_unit()</a></code> </p>
-        </td>
-        <td><p>Age in some units</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vlookup.html">vlookup()</a></code> </p>
-        </td>
-        <td><p>vlookup</p></td>
-      </tr>
-    </tbody>
+<span class='co'># S3 method for character</span>
+<span class='fu'>node_layout_maker</span>(<span class='no'>object</span>, <span class='kw'>snap_to_grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'># S3 method for numeric</span>
+<span class='fu'>node_layout_maker</span>(<span class='no'>object</span>, <span class='kw'>snap_to_grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>node_layout_maker</span>(<span class='no'>object</span>, <span class='kw'>snap_to_grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p>Object to get the node names from. Passed to <code><a href='https://rdrr.io/pkg/semPlot/man/semPlotModel.html'>semPlotModel</a></code>. Can also be a vector of names, or a number representing the number of nodes.</p></td>
+    </tr>
+    <tr>
+      <th>snap_to_grid</th>
+      <td><p>Should nodes be auto snapped to the grid?</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A matrix with a row per node, and column representing x and y. This matrix can be passed as-is to <code><a href='https://rdrr.io/pkg/semPlot/man/semPaths.html'>semPaths</a></code> via <code>layout=</code>.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lavaan</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>semPlot</span>)
+
+  <span class='no'>mediation_model</span> <span class='kw'>&lt;-</span> <span class='st'>"
+    Sepal.Length ~ b * Sepal.Width + c * Petal.Length
+     Sepal.Width ~ a * Petal.Length
+  "</span>
+  <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span>(<span class='no'>mediation_model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>)
+
+  <span class='fu'><a href='https://rdrr.io/pkg/semPlot/man/semPaths.html'>semPaths</a></span>(<span class='no'>fit</span>)
+
+
+  <span class='co'># With user layout</span>
+  <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>node_layout_maker</span>(<span class='no'>fit</span>, <span class='kw'>snap_to_grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+  <span class='fu'><a href='https://rdrr.io/pkg/semPlot/man/semPaths.html'>semPaths</a></span>(<span class='no'>fit</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='no'>m</span>)
+}</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-inference">Inference</a></li>
-      <li><a href="#section-assumptions-and-reliability">Assumptions and Reliability</a></li>
-      <li><a href="#section-rmarkdown">RMarkdown</a></li>
-      <li><a href="#section-utils">Utils</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 
