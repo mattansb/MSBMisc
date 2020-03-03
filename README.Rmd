@@ -1,0 +1,19 @@
+---
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## MSBMisc
+
+A light weight package of some functions I wrote for myself.
+
+If you find then useful - cool!
+
+### Install
+
+```{r, eval=FALSE}
+remotes::install_github("mattansb/MSBMisc")
+```

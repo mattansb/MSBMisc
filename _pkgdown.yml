@@ -1,0 +1,21 @@
+reference:
+- title: "Inference"
+  contents:
+  - afex_to_BF
+  - chisq.pairwise
+
+- title: "Assumptions and Reliability"
+  contents:
+  - qq_worm_plot
+  - r_SB
+
+- title: "RMarkdown"
+  contents:
+  - print_library
+
+- title: "Utils"
+  contents:
+  - semPaths_layout_maker
+  - age_in_unit
+  - vlookup
+

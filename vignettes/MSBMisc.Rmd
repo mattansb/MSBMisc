@@ -1,0 +1,6 @@
+---
+title: "MSBmisc"
+output: rmarkdown::html_vignette
+---
+```{r, child = '../README.Rmd'}
+```
