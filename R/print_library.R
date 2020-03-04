@@ -5,6 +5,7 @@
 #' @param ... Names of packages.
 #' @param .character.only Is \code{...} from characters?
 #' @param .version Print library version?
+#' @param .load Load package, or just print?
 #'
 #' @example examples/examples.print_library.R
 #'
@@ -13,30 +14,36 @@
 print_library <-
   function(...,
            .character.only = FALSE,
-           .version = TRUE) {
+           .version = TRUE,
+           .load = TRUE) {
     if (.character.only) {
       pkgs <- c(...)
     } else {
       pkgs <- sapply(match.call(expand.dots = F)$`...`, deparse)
     }
 
-    res <-
-      suppressMessages(suppressWarnings(suppressPackageStartupMessages(
-        sapply(
-          pkgs,
-          require,
-          character.only = TRUE,
-          quietly = TRUE
-        )
-      )))
+    if (.load) {
+      res <-
+        suppressMessages(suppressWarnings(suppressPackageStartupMessages(
+          sapply(
+            pkgs,
+            require,
+            character.only = TRUE,
+            quietly = TRUE
+          )
+        )))
 
-    if (!all(res)) {
-      stop("Could not load ", paste0(pkgs[!res], collapse = ", "), call. = FALSE)
+      if (!all(res)) {
+        stop("Could not load ", paste0(pkgs[!res], collapse = ", "), call. = FALSE)
+      }
     }
 
     vs <- ""
     if (.version) {
-      vs <- lapply(pkgs, packageVersion)
+      vs <- lapply(pkgs, function(x){
+        tryCatch(packageVersion(x),
+                 error = function(e) "")
+      })
       vs <- sapply(vs, as.character)
 
       sps <- max(nchar(pkgs)) - nchar(pkgs)
@@ -48,7 +55,6 @@ print_library <-
     }
 
     cat(paste0("library(", pkgs, ")", vs, collapse = "\n"), "\n")
-
   }
 
 #' @export

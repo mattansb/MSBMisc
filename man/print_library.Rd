@@ -5,9 +5,9 @@
 \alias{print_require}
 \title{Print Loading/Attaching of Packages}
 \usage{
-print_library(..., .character.only = FALSE, .version = TRUE)
+print_library(..., .character.only = FALSE, .version = TRUE, .load = TRUE)
 
-print_require(..., .character.only = FALSE, .version = TRUE)
+print_require(..., .character.only = FALSE, .version = TRUE, .load = TRUE)
 }
 \arguments{
 \item{...}{Names of packages.}
@@ -15,12 +15,13 @@ print_require(..., .character.only = FALSE, .version = TRUE)
 \item{.character.only}{Is \code{...} from characters?}
 
 \item{.version}{Print library version?}
+
+\item{.load}{Load package, or just print?}
 }
 \description{
 Useful in RMarkdown.
 }
 \examples{
-\dontrun{
-  print_require(afex, tidyverse, emmeans, MASS)
-}
+print_require(afex, tidyverse, emmeans, MASS,
+              .load = FALSE)
 }

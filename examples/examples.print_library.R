@@ -1,3 +1,2 @@
-\dontrun{
-  print_require(afex, tidyverse, emmeans, MASS)
-}
+print_require(afex, tidyverse, emmeans, MASS,
+              .load = FALSE)
