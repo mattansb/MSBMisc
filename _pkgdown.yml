@@ -8,6 +8,7 @@ reference:
   contents:
   - qq_worm_plot
   - r_SB
+  - stat_demo_apps
 
 - title: "RMarkdown"
   contents:

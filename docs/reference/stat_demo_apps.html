@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • MSBMisc</title>
+<title>Some stats demos — stat_demo_apps • MSBMisc</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Some stats demos — stat_demo_apps" />
+<meta property="og:description" content="Some stats demos" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -99,132 +101,47 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Some stats demos</h1>
+    
+    <div class="hidden name"><code>stat_demo_apps.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Some stats demos</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>stat_demo_apps</span>(<span class='kw'>demo</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"paired ttest"</span>, <span class='st'>"truncated correlation"</span>))</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-inference" class="hasAnchor"><a href="#section-inference" class="anchor"></a>Inference</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="afex_to_BF.html">afex_to_BF()</a></code> </p>
-        </td>
-        <td><p>Refit afex models to produce Bayes Factors</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="chisq.pairwise.html">chisq.pairwise()</a></code> <code><a href="chisq.pairwise.html">chisq.residual()</a></code> </p>
-        </td>
-        <td><p>Follow-up for contingency table test</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-assumptions-and-reliability" class="hasAnchor"><a href="#section-assumptions-and-reliability" class="anchor"></a>Assumptions and Reliability</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="qq_worm_plot.html">qq_worm_plot()</a></code> </p>
-        </td>
-        <td><p>Create a worm plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="r_SB.html">r_SB()</a></code> </p>
-        </td>
-        <td><p>Spearman-Brown Split half reliability</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stat_demo_apps.html">stat_demo_apps()</a></code> </p>
-        </td>
-        <td><p>Some stats demos</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-rmarkdown" class="hasAnchor"><a href="#section-rmarkdown" class="anchor"></a>RMarkdown</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="print_library.html">print_library()</a></code> <code><a href="print_library.html">print_require()</a></code> </p>
-        </td>
-        <td><p>Print Loading/Attaching of Packages</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-graphs" class="hasAnchor"><a href="#section-graphs" class="anchor"></a>Graphs</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="node_layout_maker.html">node_layout_maker()</a></code> </p>
-        </td>
-        <td><p>Shiny app for manual Node layout</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="as_tbl_graph.lavaan.html">as_tbl_graph.lavaan()</a></code> </p>
-        </td>
-        <td><p>Method for importing lavaan output to tbl_graph</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-utils" class="hasAnchor"><a href="#section-utils" class="anchor"></a>Utils</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="age_in_unit.html">age_in_unit()</a></code> </p>
-        </td>
-        <td><p>Age in some units</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vlookup.html">vlookup()</a></code> </p>
-        </td>
-        <td><p>vlookup</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>demo</th>
+      <td><p>Which demo to show?</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+<h3>paired ttest</h3>
+<p>Shows a paired vs un-paired ttest, and how these differences are
+affected by the correlation.</p>
+
+<h3>truncated correlation</h3>
+<p>Demo of how truncation affects correlations and doesn't affect MSE.</p>
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-inference">Inference</a></li>
-      <li><a href="#section-assumptions-and-reliability">Assumptions and Reliability</a></li>
-      <li><a href="#section-rmarkdown">RMarkdown</a></li>
-      <li><a href="#section-graphs">Graphs</a></li>
-      <li><a href="#section-utils">Utils</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
+
   </div>
 </div>
 
