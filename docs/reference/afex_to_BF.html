@@ -138,14 +138,14 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-  <span class='co'># Give it a try</span>
   <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>afex</span>)
+
   <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>obk.long</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"afex"</span>)
+
   <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/afex/man/aov_car.html'>aov_ez</a></span>(
     <span class='st'>"id"</span>,
     <span class='st'>"value"</span>,
     <span class='no'>obk.long</span>,
-    <span class='kw'>between</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"treatment"</span>, <span class='st'>"gender"</span>),
     <span class='kw'>within</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"phase"</span>, <span class='st'>"hour"</span>),
     <span class='kw'>covariate</span> <span class='kw'>=</span> <span class='st'>"age"</span>,
     <span class='kw'>factorize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>

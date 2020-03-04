@@ -22,14 +22,15 @@ Create a worm plot
 From https://twitter.com/mattansb/status/1199936633413476358
 }
 \examples{
+
+x <- rnorm(100)
+qq_worm_plot(x)
+qq_worm_plot(x, return = "data")
+
+x <- rbeta(100, shape1 = 2, shape2 = 3)
+qq_worm_plot(x, distribution = "beta", shape1 = 2, shape2 = 3)
+
 \dontrun{
-  x <- rnorm(100)
-  qq_worm_plot(x)
-  qq_worm_plot(x, return = "data")
-
-  x <- rbeta(100, shape1 = 2, shape2 = 3)
-  qq_worm_plot(x, distribution = "beta", shape1 = 2, shape2 = 3)
-
   x <- rexp(100)
   qq_worm_plot(x, distribution = "exp")
 

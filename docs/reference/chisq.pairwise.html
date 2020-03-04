@@ -147,20 +147,28 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-  <span class='no'>M</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/table.html'>as.table</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>762</span>, <span class='fl'>327</span>, <span class='fl'>468</span>),
-                      <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>484</span>, <span class='fl'>239</span>, <span class='fl'>477</span>)))
-  <span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span>(<span class='no'>M</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-    <span class='kw'>gender</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"F"</span>, <span class='st'>"M"</span>),
-    <span class='kw'>party</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Democrat"</span>, <span class='st'>"Independent"</span>, <span class='st'>"Republican"</span>)
-  )
-  <span class='no'>M</span>
-
-  <span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test</a></span>(<span class='no'>M</span>)
-  <span class='fu'>chisq.pairwise</span>(<span class='no'>res</span>)
-  <span class='fu'>chisq.pairwise</span>(<span class='no'>res</span>, <span class='kw'>population_in_row</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-  <span class='fu'>chisq.residual</span>(<span class='no'>res</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>M</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/table.html'>as.table</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>762</span>, <span class='fl'>327</span>, <span class='fl'>468</span>),
+                    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>484</span>, <span class='fl'>239</span>, <span class='fl'>477</span>)))
+<span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span>(<span class='no'>M</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+  <span class='kw'>gender</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"F"</span>, <span class='st'>"M"</span>),
+  <span class='kw'>party</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Democrat"</span>, <span class='st'>"Independent"</span>, <span class='st'>"Republican"</span>)
+)
+<span class='no'>M</span></div><div class='output co'>#&gt;       party
+#&gt; gender Democrat Independent Republican
+#&gt;      F      762         327        468
+#&gt;      M      484         239        477</div><div class='input'>
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test</a></span>(<span class='no'>M</span>)
+<span class='fu'>chisq.pairwise</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt;   comparison   Chi.sq df        p.raw        p.fdr
+#&gt; 1    F vs. M 30.07015  2 2.953589e-07 2.953589e-07</div><div class='input'><span class='fu'>chisq.pairwise</span>(<span class='no'>res</span>, <span class='kw'>population_in_row</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;                   comparison    Chi.sq df        p.raw        p.fdr
+#&gt; 1   Democrat vs. Independent  1.717892  1 1.899646e-01 1.899646e-01
+#&gt; 2    Democrat vs. Republican 29.059545  1 7.018745e-08 2.105623e-07
+#&gt; 3 Independent vs. Republican  9.335659  1 2.247373e-03 3.371060e-03</div><div class='input'><span class='fu'>chisq.residual</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt;   gender       party    z.value       p.raw       p.fdr
+#&gt; 1      F    Democrat  2.1988558 0.027888180 0.041832270
+#&gt; 2      M    Democrat -2.5046695 0.012256586 0.024513173
+#&gt; 3      F Independent  0.4113702 0.680801124 0.680801124
+#&gt; 4      M Independent -0.4685829 0.639367769 0.680801124
+#&gt; 5      F  Republican -2.8432397 0.004465747 0.013397241
+#&gt; 6      M  Republican  3.2386734 0.001200870 0.007205219</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

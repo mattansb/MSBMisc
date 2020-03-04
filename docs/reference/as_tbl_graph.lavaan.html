@@ -140,13 +140,11 @@
     <p>a tbl_graph object that can further be processed with tidygraph, and plotted with ggraph.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lavaan</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidygraph</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggraph</span>)
-
-
-  <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='st'>'
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lavaan</span>)</div><div class='output co'>#&gt; <span class='message'>This is lavaan 0.6-5</span></div><div class='output co'>#&gt; <span class='message'>lavaan is BETA software! Please report any bugs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidygraph</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'tidygraph'</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from 'package:stats':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    filter</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggraph</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'ggraph' was built under R version 3.6.2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='input'>
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='st'>'
    # latent variables
      ind60 =~ x1 + x2 + x3
      dem60 =~ y1 + y2 + y3 + y4
@@ -161,38 +159,38 @@
      y4 ~~ y8
      y6 ~~ y8
 '</span>
-  <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>PoliticalDemocracy</span>)
+<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>PoliticalDemocracy</span>)
 
-  <span class='no'>graph_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/tidygraph/man/tbl_graph.html'>as_tbl_graph</a></span>(<span class='no'>fit</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>graph_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/tidygraph/man/tbl_graph.html'>as_tbl_graph</a></span>(<span class='no'>fit</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-  <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='node_layout_maker.html'>node_layout_maker</a></span>(<span class='no'>graph_data</span>)
+<span class='co'># m &lt;- node_layout_maker(graph_data)</span>
+<span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='st'>"tree"</span>
 
-  <span class='no'>arrow_cap</span>     <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geometry.html'>circle</a></span>(<span class='fl'>5</span>, <span class='st'>'mm'</span>)
-  <span class='no'>label_dodge</span>   <span class='kw'>&lt;-</span> <span class='fu'>unit</span>(<span class='fl'>2.5</span>, <span class='st'>'mm'</span>)
-  <span class='no'>label.padding</span> <span class='kw'>&lt;-</span> <span class='fu'>unit</span>(<span class='fl'>0.7</span>,<span class='st'>"lines"</span>)
+<span class='no'>arrow_cap</span>     <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geometry.html'>circle</a></span>(<span class='fl'>5</span>, <span class='st'>'mm'</span>)
+<span class='no'>label_dodge</span>   <span class='kw'>&lt;-</span> <span class='fu'>unit</span>(<span class='fl'>2.5</span>, <span class='st'>'mm'</span>)
+<span class='no'>label.padding</span> <span class='kw'>&lt;-</span> <span class='fu'>unit</span>(<span class='fl'>0.7</span>,<span class='st'>"lines"</span>)
 
-  <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/ggraph.html'>ggraph</a></span>(<span class='no'>graph_data</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='no'>m</span>) +
-    <span class='co'># edges</span>
-    <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_edge_link.html'>geom_edge_link</a></span>(<span class='fu'>aes</span>(<span class='kw'>filter</span> <span class='kw'>=</span> <span class='no'>relation_type</span> <span class='kw'>==</span> <span class='st'>"regression"</span>),
-                   <span class='kw'>arrow</span>     <span class='kw'>=</span> <span class='fu'>arrow</span>(<span class='fl'>20</span>, <span class='fu'>unit</span>(<span class='fl'>.3</span>, <span class='st'>"cm"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"closed"</span>),
-                   <span class='kw'>start_cap</span> <span class='kw'>=</span> <span class='no'>arrow_cap</span>,
-                   <span class='kw'>end_cap</span>   <span class='kw'>=</span> <span class='no'>arrow_cap</span>) +
-    <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_edge_arc.html'>geom_edge_arc</a></span>(<span class='fu'>aes</span>(<span class='kw'>filter</span> <span class='kw'>=</span> <span class='no'>relation_type</span> <span class='kw'>==</span> <span class='st'>"covariance"</span>),
-                  <span class='kw'>arrow</span>     <span class='kw'>=</span> <span class='fu'>arrow</span>(<span class='fl'>20</span>, <span class='fu'>unit</span>(<span class='fl'>.3</span>, <span class='st'>"cm"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"closed"</span>, <span class='kw'>ends</span> <span class='kw'>=</span> <span class='st'>"both"</span>),
-                  <span class='kw'>start_cap</span> <span class='kw'>=</span> <span class='no'>arrow_cap</span>,
-                  <span class='kw'>end_cap</span>   <span class='kw'>=</span> <span class='no'>arrow_cap</span>) +
-    <span class='co'># nodes</span>
-    <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_node_text.html'>geom_node_label</a></span>(<span class='fu'>aes</span>(<span class='kw'>filter</span> <span class='kw'>=</span> !<span class='no'>latent</span>,
-                        <span class='kw'>label</span>  <span class='kw'>=</span> <span class='no'>name</span>),
-                    <span class='kw'>label.r</span>       <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fl'>0</span>, <span class='st'>"lines"</span>),
-                    <span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='no'>label.padding</span>) +
-    <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_node_text.html'>geom_node_label</a></span>(<span class='fu'>aes</span>(<span class='kw'>filter</span> <span class='kw'>=</span> <span class='no'>latent</span>,
-                        <span class='kw'>label</span>  <span class='kw'>=</span> <span class='no'>name</span>),
-                    <span class='kw'>label.r</span>       <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fl'>1.0</span>, <span class='st'>"lines"</span>),
-                    <span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='no'>label.padding</span>) +
-    <span class='co'># Scales and themes</span>
-    <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/theme_graph.html'>theme_graph</a></span>()
-}</div></pre>
+<span class='fu'><a href='https://ggraph.data-imaginist.com/reference/ggraph.html'>ggraph</a></span>(<span class='no'>graph_data</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='no'>m</span>) +
+  <span class='co'># edges</span>
+  <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_edge_link.html'>geom_edge_link</a></span>(<span class='fu'>aes</span>(<span class='kw'>filter</span> <span class='kw'>=</span> <span class='no'>relation_type</span> <span class='kw'>==</span> <span class='st'>"regression"</span>),
+                 <span class='kw'>arrow</span>     <span class='kw'>=</span> <span class='fu'>arrow</span>(<span class='fl'>20</span>, <span class='fu'>unit</span>(<span class='fl'>.3</span>, <span class='st'>"cm"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"closed"</span>),
+                 <span class='kw'>start_cap</span> <span class='kw'>=</span> <span class='no'>arrow_cap</span>,
+                 <span class='kw'>end_cap</span>   <span class='kw'>=</span> <span class='no'>arrow_cap</span>) +
+  <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_edge_arc.html'>geom_edge_arc</a></span>(<span class='fu'>aes</span>(<span class='kw'>filter</span> <span class='kw'>=</span> <span class='no'>relation_type</span> <span class='kw'>==</span> <span class='st'>"covariance"</span>),
+                <span class='kw'>arrow</span>     <span class='kw'>=</span> <span class='fu'>arrow</span>(<span class='fl'>20</span>, <span class='fu'>unit</span>(<span class='fl'>.3</span>, <span class='st'>"cm"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"closed"</span>, <span class='kw'>ends</span> <span class='kw'>=</span> <span class='st'>"both"</span>),
+                <span class='kw'>start_cap</span> <span class='kw'>=</span> <span class='no'>arrow_cap</span>,
+                <span class='kw'>end_cap</span>   <span class='kw'>=</span> <span class='no'>arrow_cap</span>) +
+  <span class='co'># nodes</span>
+  <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_node_text.html'>geom_node_label</a></span>(<span class='fu'>aes</span>(<span class='kw'>filter</span> <span class='kw'>=</span> !<span class='no'>latent</span>,
+                      <span class='kw'>label</span>  <span class='kw'>=</span> <span class='no'>name</span>),
+                  <span class='kw'>label.r</span>       <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fl'>0</span>, <span class='st'>"lines"</span>),
+                  <span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='no'>label.padding</span>) +
+  <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_node_text.html'>geom_node_label</a></span>(<span class='fu'>aes</span>(<span class='kw'>filter</span> <span class='kw'>=</span> <span class='no'>latent</span>,
+                      <span class='kw'>label</span>  <span class='kw'>=</span> <span class='no'>name</span>),
+                  <span class='kw'>label.r</span>       <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fl'>1.0</span>, <span class='st'>"lines"</span>),
+                  <span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='no'>label.padding</span>) +
+  <span class='co'># Scales and themes</span>
+  <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/theme_graph.html'>theme_graph</a></span>()</div><div class='img'><img src='as_tbl_graph.lavaan-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

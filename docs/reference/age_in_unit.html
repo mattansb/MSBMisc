@@ -136,11 +136,11 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-  <span class='no'>DOB</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"1989-08-05"</span>)
-  <span class='no'>TODAY</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()
-  <span class='fu'>age_in_unit</span>(<span class='no'>DOB</span>, <span class='no'>TODAY</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>DOB</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"1989-08-05"</span>)
+<span class='no'>TODAY</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()
+<span class='fu'>age_in_unit</span>(<span class='no'>DOB</span>, <span class='no'>TODAY</span>)</div><div class='output co'>#&gt; <span class='message'>Note: method with signature 'Duration#ANY' chosen for function '-',</span>
+#&gt; <span class='message'> target signature 'Duration#Duration'.</span>
+#&gt; <span class='message'> "ANY#Duration" would also be valid</span></div><div class='output co'>#&gt; [1] "30 years, 7 months, 0 weeks, 6 days"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
