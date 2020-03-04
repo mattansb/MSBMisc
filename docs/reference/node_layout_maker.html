@@ -117,6 +117,9 @@
 <span class='co'># S3 method for character</span>
 <span class='fu'>node_layout_maker</span>(<span class='no'>object</span>, <span class='kw'>snap_to_grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
+<span class='co'># S3 method for tbl_graph</span>
+<span class='fu'>node_layout_maker</span>(<span class='no'>object</span>, <span class='kw'>snap_to_grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
 <span class='co'># S3 method for numeric</span>
 <span class='fu'>node_layout_maker</span>(<span class='no'>object</span>, <span class='kw'>snap_to_grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
@@ -128,7 +131,10 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>Object to get the node names from. Passed to <code><a href='https://rdrr.io/pkg/semPlot/man/semPlotModel.html'>semPlotModel</a></code>. Can also be a vector of names, or a number representing the number of nodes.</p></td>
+      <td><p>Object to get the node names from.
+Can be a character vector, a number representing the number of nodes,
+a <code><a href='https://rdrr.io/pkg/tidygraph/man/tbl_graph.html'>tbl_graph</a></code> (node names will be taken from the first char column)
+or an object supported by <code><a href='https://rdrr.io/pkg/semPlot/man/semPlotModel.html'>semPlotModel</a></code>.</p></td>
     </tr>
     <tr>
       <th>snap_to_grid</th>
@@ -158,6 +164,21 @@
   <span class='no'>m</span> <span class='kw'>&lt;-</span> <span class='fu'>node_layout_maker</span>(<span class='no'>fit</span>, <span class='kw'>snap_to_grid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
   <span class='fu'><a href='https://rdrr.io/pkg/semPlot/man/semPaths.html'>semPaths</a></span>(<span class='no'>fit</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='no'>m</span>)
+}
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidygraph</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggraph</span>)
+
+  <span class='no'>rstat_nodes</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>person</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Hadley"</span>, <span class='st'>"David"</span>, <span class='st'>"Romain"</span>, <span class='st'>"Julia"</span>))
+  <span class='no'>rstat_edges</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>4</span>, <span class='fl'>4</span>),
+                            <span class='kw'>to</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>))
+  <span class='no'>graph_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/tidygraph/man/tbl_graph.html'>tbl_graph</a></span>(<span class='kw'>nodes</span> <span class='kw'>=</span> <span class='no'>rstat_nodes</span>, <span class='kw'>edges</span> <span class='kw'>=</span> <span class='no'>rstat_edges</span>)
+
+  <span class='no'>m_layout</span> <span class='kw'>&lt;-</span> <span class='fu'>node_layout_maker</span>(<span class='no'>graph_data</span>)
+
+  <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/ggraph.html'>ggraph</a></span>(<span class='no'>graph_data</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='no'>m_layout</span>) +
+    <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_node_text.html'>geom_node_label</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>person</span>))
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

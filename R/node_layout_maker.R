@@ -1,6 +1,9 @@
 #' Shiny app for manual Node layout
 #'
-#' @param object Object to get the node names from. Passed to \code{\link[semPlot]{semPlotModel}}. Can also be a vector of names, or a number representing the number of nodes.
+#' @param object Object to get the node names from.
+#' Can be a character vector, a number representing the number of nodes,
+#' a \code{\link[tidygraph]{tbl_graph}} (node names will be taken from the first char column)
+#' or an object supported by \code{\link[semPlot]{semPlotModel}}.
 #' @param snap_to_grid Should nodes be auto snapped to the grid?
 #'
 #' @return A matrix with a row per node, and column representing x and y. This matrix can be passed as-is to \code{\link[semPlot]{semPaths}} via \code{layout=}.
@@ -119,21 +122,37 @@ node_layout_maker.character <- function(object, snap_to_grid = TRUE) {
 
 #' @rdname node_layout_maker
 #' @export
+node_layout_maker.tbl_graph <- function(object, snap_to_grid = TRUE) {
+  .check_namespace("tidygraph")
+  object <- as.data.frame(tidygraph::activate(object, nodes))
+
+  i <- which(sapply(object, is.character) | sapply(object, is.factor))[1]
+  if (length(i)) {
+    node_layout_maker.character(make.names(object[[i]], unique = TRUE), snap_to_grid = snap_to_grid)
+  } else {
+    node_layout_maker.numeric(nrow(object), snap_to_grid = snap_to_grid)
+  }
+}
+
+#' @rdname node_layout_maker
+#' @export
 node_layout_maker.numeric <- function(object, snap_to_grid = TRUE) {
   if (length(object) == 1) {
     object <- paste0("Node", seq_len(object))
-  } else {
-    object <- as.character(object)
   }
-  node_layout_maker(object, snap_to_grid = snap_to_grid)
+
+  node_layout_maker.character(object, snap_to_grid = snap_to_grid)
 }
+
+#' @export
+node_layout_maker.factor <- node_layout_maker.character
 
 #' @rdname node_layout_maker
 #' @export
 node_layout_maker.default <- function(object, snap_to_grid = TRUE) {
   .check_namespace("semPlot")
   labs <- semPlot::semPlotModel(object)@Vars$name
-  node_layout_maker(labs, snap_to_grid = snap_to_grid)
+  node_layout_maker.character(labs, snap_to_grid = snap_to_grid)
 }
 
 

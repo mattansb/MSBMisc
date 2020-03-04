@@ -3,6 +3,7 @@
 \name{node_layout_maker}
 \alias{node_layout_maker}
 \alias{node_layout_maker.character}
+\alias{node_layout_maker.tbl_graph}
 \alias{node_layout_maker.numeric}
 \alias{node_layout_maker.default}
 \title{Shiny app for manual Node layout}
@@ -11,12 +12,17 @@ node_layout_maker(object, snap_to_grid = TRUE)
 
 \method{node_layout_maker}{character}(object, snap_to_grid = TRUE)
 
+\method{node_layout_maker}{tbl_graph}(object, snap_to_grid = TRUE)
+
 \method{node_layout_maker}{numeric}(object, snap_to_grid = TRUE)
 
 \method{node_layout_maker}{default}(object, snap_to_grid = TRUE)
 }
 \arguments{
-\item{object}{Object to get the node names from. Passed to \code{\link[semPlot]{semPlotModel}}. Can also be a vector of names, or a number representing the number of nodes.}
+\item{object}{Object to get the node names from.
+Can be a character vector, a number representing the number of nodes,
+a \code{\link[tidygraph]{tbl_graph}} (node names will be taken from the first char column)
+or an object supported by \code{\link[semPlot]{semPlotModel}}.}
 
 \item{snap_to_grid}{Should nodes be auto snapped to the grid?}
 }
@@ -44,5 +50,20 @@ Shiny app for manual Node layout
   m <- node_layout_maker(fit, snap_to_grid = TRUE)
 
   semPaths(fit, layout = m)
+}
+
+\dontrun{
+  library(tidygraph)
+  library(ggraph)
+
+  rstat_nodes <- data.frame(person = c("Hadley", "David", "Romain", "Julia"))
+  rstat_edges <- data.frame(from = c(1, 1, 1, 2, 3, 3, 4, 4, 4),
+                            to = c(2, 3, 4, 1, 1, 2, 1, 2, 3))
+  graph_data <- tbl_graph(nodes = rstat_nodes, edges = rstat_edges)
+
+  m_layout <- node_layout_maker(graph_data)
+
+  ggraph(graph_data, layout = m_layout) +
+    geom_node_label(aes(label = person))
 }
 }

@@ -2,9 +2,12 @@
 
 S3method(node_layout_maker,character)
 S3method(node_layout_maker,default)
+S3method(node_layout_maker,factor)
 S3method(node_layout_maker,numeric)
+S3method(node_layout_maker,tbl_graph)
 export(afex_to_BF)
 export(age_in_unit)
+export(as_tbl_graph.lavaan)
 export(chisq.pairwise)
 export(chisq.residual)
 export(node_layout_maker)
