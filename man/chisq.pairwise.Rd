@@ -5,24 +5,16 @@
 \alias{chisq.residual}
 \title{Follow-up for contingency table test}
 \usage{
-chisq.pairwise(
-  Xsq,
-  population_in_row = TRUE,
-  adjust = c("fdr", "BH", "BY", "bonferroni", "holm", "hochberg", "hommel"),
-  ...
-)
+chisq.pairwise(Xsq, population_in_row = TRUE, adjust = p.adjust.methods, ...)
 
-chisq.residual(
-  Xsq,
-  adjust = c("fdr", "BH", "BY", "bonferroni", "holm", "hochberg", "hommel")
-)
+chisq.residual(Xsq, adjust = p.adjust.methods)
 }
 \arguments{
 \item{Xsq}{Result from \code{chisq.test}}
 
 \item{population_in_row}{Comparisons by row? (If not, by column.)}
 
-\item{adjust}{See \code{p.adjust}}
+\item{adjust}{Method for correcting p-values. See \code{\link[stats]{p.adjust}}.}
 
 \item{...}{Passed to \code{chisq.test}.}
 }

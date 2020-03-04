@@ -4,7 +4,7 @@
 #'
 #' @param Xsq Result from \code{chisq.test}
 #' @param population_in_row Comparisons by row? (If not, by column.)
-#' @param adjust See \code{p.adjust}
+#' @param adjust Method for correcting p-values. See \code{\link[stats]{p.adjust}}.
 #' @param ... Passed to \code{chisq.test}.
 #'
 #' @example examples/examples.chisq_followup.R
@@ -12,7 +12,7 @@
 #' @export
 chisq.pairwise <- function(Xsq,
                            population_in_row = TRUE,
-                           adjust = c("fdr", "BH", "BY", "bonferroni", "holm", "hochberg", "hommel"),
+                           adjust = p.adjust.methods,
                            ...) {
   adjust <- match.arg(adjust)
   tbl <- Xsq$observed
@@ -46,7 +46,7 @@ chisq.pairwise <- function(Xsq,
 #' @rdname chisq.pairwise
 #' @export
 chisq.residual <- function(Xsq,
-                           adjust = c("fdr", "BH", "BY", "bonferroni", "holm", "hochberg", "hommel")) {
+                           adjust = p.adjust.methods) {
   adjust <- match.arg(adjust)
 
   tbl <- data.frame(Xsq$residuals)
