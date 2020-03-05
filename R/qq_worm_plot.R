@@ -1,14 +1,14 @@
 #' Create a worm plot
 #'
 #' @param x A numerical vector
-#' @param distribution Name of a distribution, matching the \code{d\*}, \code{p\*} and \code{q\*} function names.
-#' @param return a \code{ggplot} or a data frame?
-#' @param ... Args assed to \code{d\*}, \code{p\*} and \code{q\*} functions.
+#' @param distribution Name of a distribution, matching the `d*`, `p*` and `q*` function names.
+#' @param return a `ggplot` or a data frame?
+#' @param ... Args assed to `d*`, `p*` and `q*` functions.
 #'
 #' @example examples/examples.qq_worm_plot.R
 #'
 #' @details
-#' From https://twitter.com/mattansb/status/1199936633413476358
+#' [Some related tweets](https://twitter.com/mattansb/status/1199936633413476358).
 #'
 #' @export
 qq_worm_plot <-

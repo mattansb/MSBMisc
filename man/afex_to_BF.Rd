@@ -13,7 +13,7 @@ afex_to_BF(fit, method = c("JZS", "BIC"), inclusion = TRUE, ...)
 
 \item{inclusion}{Return inclusions BFs (for matched models) instead of the actual models' BFs.}
 
-\item{...}{passed to generalTestBF.}
+\item{...}{passed to \code{\link[BayesFactor:generalTestBF]{BayesFactor::generalTestBF()}}}
 }
 \description{
 Refit afex models to produce Bayes Factors

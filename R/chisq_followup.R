@@ -1,11 +1,11 @@
 #' Follow-up for contingency table test
 #'
-#' See also \code{mcnemar.test()}
+#' See also [`stats::mcnemar.test()`]
 #'
-#' @param Xsq Result from \code{chisq.test}
+#' @param Xsq Result from `chisq.test()`
 #' @param population_in_row Comparisons by row? (If not, by column.)
-#' @param adjust Method for correcting p-values. See \code{\link[stats]{p.adjust}}.
-#' @param ... Passed to \code{chisq.test}.
+#' @param adjust Method for correcting p-values. See [`stats::p.adjust`].
+#' @param ... Passed to `chisq.test()`.
 #'
 #' @example examples/examples.chisq_followup.R
 #'

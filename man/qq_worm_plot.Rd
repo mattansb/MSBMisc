@@ -9,17 +9,17 @@ qq_worm_plot(x, distribution = "norm", return = c("plot", "data"), ...)
 \arguments{
 \item{x}{A numerical vector}
 
-\item{distribution}{Name of a distribution, matching the \code{d\*}, \code{p\*} and \code{q\*} function names.}
+\item{distribution}{Name of a distribution, matching the \verb{d*}, \verb{p*} and \verb{q*} function names.}
 
 \item{return}{a \code{ggplot} or a data frame?}
 
-\item{...}{Args assed to \code{d\*}, \code{p\*} and \code{q\*} functions.}
+\item{...}{Args assed to \verb{d*}, \verb{p*} and \verb{q*} functions.}
 }
 \description{
 Create a worm plot
 }
 \details{
-From https://twitter.com/mattansb/status/1199936633413476358
+\href{https://twitter.com/mattansb/status/1199936633413476358}{Some related tweets}.
 }
 \examples{
 

@@ -3,7 +3,7 @@
 #' Useful in RMarkdown.
 #'
 #' @param ... Names of packages.
-#' @param .character.only Is \code{...} from characters?
+#' @param .character.only Is `...` from characters?
 #' @param .version Print library version?
 #' @param .load Load package, or just print?
 #'

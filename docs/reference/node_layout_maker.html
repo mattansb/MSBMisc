@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MSBMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.2</span>
       </span>
     </div>
 
@@ -133,8 +133,8 @@
       <th>object</th>
       <td><p>Object to get the node names from.
 Can be a character vector, a number representing the number of nodes,
-a <code><a href='https://rdrr.io/pkg/tidygraph/man/tbl_graph.html'>tbl_graph</a></code> (node names will be taken from the first char column)
-or an object supported by <code><a href='https://rdrr.io/pkg/semPlot/man/semPlotModel.html'>semPlotModel</a></code>.</p></td>
+a <code><a href='https://rdrr.io/pkg/tidygraph/man/tbl_graph.html'>tidygraph::tbl_graph()</a></code> (node names will be taken from the first char column)
+or an object supported by <code><a href='https://rdrr.io/pkg/semPlot/man/semPlotModel.html'>semPlot::semPlotModel()</a></code>.</p></td>
     </tr>
     <tr>
       <th>snap_to_grid</th>
@@ -144,7 +144,8 @@ or an object supported by <code><a href='https://rdrr.io/pkg/semPlot/man/semPlot
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A matrix with a row per node, and column representing x and y. This matrix can be passed as-is to <code><a href='https://rdrr.io/pkg/semPlot/man/semPaths.html'>semPaths</a></code> via <code>layout=</code>.</p>
+    <p>A matrix with a row per node, and column representing x and y.
+This matrix can be passed as-is to <code><a href='https://rdrr.io/pkg/semPlot/man/semPaths.html'>semPlot::semPaths()</a></code> via <code>layout = </code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

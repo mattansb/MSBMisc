@@ -2,11 +2,12 @@
 #'
 #' @param object Object to get the node names from.
 #' Can be a character vector, a number representing the number of nodes,
-#' a \code{\link[tidygraph]{tbl_graph}} (node names will be taken from the first char column)
-#' or an object supported by \code{\link[semPlot]{semPlotModel}}.
+#' a [`tidygraph::tbl_graph()`] (node names will be taken from the first char column)
+#' or an object supported by [`semPlot::semPlotModel()`].
 #' @param snap_to_grid Should nodes be auto snapped to the grid?
 #'
-#' @return A matrix with a row per node, and column representing x and y. This matrix can be passed as-is to \code{\link[semPlot]{semPaths}} via \code{layout=}.
+#' @return A matrix with a row per node, and column representing x and y.
+#' This matrix can be passed as-is to [`semPlot::semPaths()`] via `layout = `.
 #'
 #' @example examples/examples.node_layout_maker.R
 #'

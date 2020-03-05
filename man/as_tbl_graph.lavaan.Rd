@@ -2,24 +2,24 @@
 % Please edit documentation in R/as_tbl_graph.lavaan.R
 \name{as_tbl_graph.lavaan}
 \alias{as_tbl_graph.lavaan}
-\title{Method for importing lavaan output to tbl_graph}
+\title{Method for importing \code{lavaan} output to \code{tbl_graph}}
 \usage{
 as_tbl_graph.lavaan(object, standardize = TRUE, include_var = FALSE, ...)
 }
 \arguments{
-\item{object}{a lavaan object, returned from lavaan's sem/cfa functions.}
+\item{object}{a lavaan object, returned from \code{lavaan}(\code{sem()}/\code{cfa()}/\code{lavaan()}).}
 
-\item{standardize}{should the edge coeffciants be standerdized. curretnyl only `TRUE` is supported.}
+\item{standardize}{should the edge coeffciants be standerdized.}
 
 \item{include_var}{should the variances be included?}
 
-\item{...}{args passed to \code{standardizedSolution} or \code{parameterEstimates}}
+\item{...}{args passed to \code{\link[lavaan:standardizedSolution]{lavaan::standardizedSolution()}} or \code{\link[lavaan:parameterEstimates]{lavaan::parameterEstimates()}}}
 }
 \value{
-a tbl_graph object that can further be processed with tidygraph, and plotted with ggraph.
+a \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph()}} object that can further be processed with \code{tidygraph}, and plotted with \code{ggraph}.
 }
 \description{
-Method for importing lavaan output to tbl_graph
+Method for importing \code{lavaan} output to \code{tbl_graph}
 }
 \examples{
 library(lavaan)

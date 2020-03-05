@@ -2,9 +2,9 @@
 #'
 #' @param this A vector of values
 #' @param data A data frame to search in
-#' @param key Where should \code{this} be looked up?
+#' @param key Where should `this` be looked up?
 #' @param value Name of the column from which values should be returned.
-#' @param add Should \code{this} and the resulting values be returned as a data frame? (Else a vector)
+#' @param add Should `this` and the resulting values be returned as a data frame? (Else a vector)
 #'
 #' @example examples/examples.vlookup.R
 #'

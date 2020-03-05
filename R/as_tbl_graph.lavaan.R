@@ -1,15 +1,15 @@
-#' Method for importing lavaan output to tbl_graph
+#' Method for importing `lavaan` output to `tbl_graph`
 #'
-#' Method for importing lavaan output to tbl_graph
+#' Method for importing `lavaan` output to `tbl_graph`
 #'
 #' @author Mattan S. Ben-Shachar
 #'
-#' @param object a lavaan object, returned from lavaan's sem/cfa functions.
-#' @param standardize should the edge coeffciants be standerdized. curretnyl only `TRUE` is supported.
+#' @param object a lavaan object, returned from `lavaan`(`sem()`/`cfa()`/`lavaan()`).
+#' @param standardize should the edge coeffciants be standerdized.
 #' @param include_var should the variances be included?
-#' @param ... args passed to \code{standardizedSolution} or \code{parameterEstimates}
+#' @param ... args passed to [`lavaan::standardizedSolution()`] or [`lavaan::parameterEstimates()`]
 #'
-#' @return a tbl_graph object that can further be processed with tidygraph, and plotted with ggraph.
+#' @return a [`tidygraph::tbl_graph()`] object that can further be processed with `tidygraph`, and plotted with `ggraph`.
 #'
 #' @example examples/examples.as_tbl_graph.lavaan.R
 #'

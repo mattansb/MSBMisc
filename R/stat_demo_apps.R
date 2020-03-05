@@ -14,7 +14,7 @@
 #'
 #' \subsection{berksons paradox}{
 #' Demo of how How sampling bias can affect estimated correlations and effects.
-#' See related \href{https://www.youtube.com/watch?v=FUD8h9JpEVQ}{Numberphile video}.
+#' See related [Numberphile video](https://www.youtube.com/watch?v=FUD8h9JpEVQ).
 #' }
 #'
 #' @export

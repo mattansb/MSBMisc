@@ -1,8 +1,8 @@
 #' Spearman-Brown Split half reliability
 #'
 #' @param x A correlation or numeric vector
-#' @param y A numeric vector (ignored if \code{x} is not a vector)
-#' @param var.equal Assume equal var of \code{x} and \code{y}? (ignored if \code{x} is not a vector)
+#' @param y A numeric vector (ignored if `x` is not a vector)
+#' @param var.equal Assume equal var of `x` and `y`? (ignored if `x` is not a vector)
 #'
 #' @example examples/examples.r_SB.R
 #'

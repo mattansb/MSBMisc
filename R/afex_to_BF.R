@@ -3,7 +3,7 @@
 #' @param fit An object of class afex_aov.
 #' @param method Should BFs be computed with the BayesFactor package, or by comparing BICs.
 #' @param inclusion Return inclusions BFs (for matched models) instead of the actual models' BFs.
-#' @param ... passed to generalTestBF.
+#' @param ... passed to [`BayesFactor::generalTestBF()`]
 #'
 #' @example examples/examples.afex_to_BF.R
 #'

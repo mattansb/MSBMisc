@@ -21,13 +21,14 @@ node_layout_maker(object, snap_to_grid = TRUE)
 \arguments{
 \item{object}{Object to get the node names from.
 Can be a character vector, a number representing the number of nodes,
-a \code{\link[tidygraph]{tbl_graph}} (node names will be taken from the first char column)
-or an object supported by \code{\link[semPlot]{semPlotModel}}.}
+a \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph()}} (node names will be taken from the first char column)
+or an object supported by \code{\link[semPlot:semPlotModel]{semPlot::semPlotModel()}}.}
 
 \item{snap_to_grid}{Should nodes be auto snapped to the grid?}
 }
 \value{
-A matrix with a row per node, and column representing x and y. This matrix can be passed as-is to \code{\link[semPlot]{semPaths}} via \code{layout=}.
+A matrix with a row per node, and column representing x and y.
+This matrix can be passed as-is to \code{\link[semPlot:semPaths]{semPlot::semPaths()}} via \verb{layout = }.
 }
 \description{
 Shiny app for manual Node layout

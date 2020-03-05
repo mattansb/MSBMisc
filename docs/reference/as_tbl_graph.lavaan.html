@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Method for importing lavaan output to tbl_graph — as_tbl_graph.lavaan • MSBMisc</title>
+<title>Method for importing <code>lavaan</code> output to <code>tbl_graph</code> — as_tbl_graph.lavaan • MSBMisc</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="Method for importing lavaan output to tbl_graph — as_tbl_graph.lavaan" />
+<meta property="og:title" content="Method for importing <code>lavaan</code> output to <code>tbl_graph</code> — as_tbl_graph.lavaan" />
 <meta property="og:description" content="Method for importing lavaan output to tbl_graph" />
 <meta name="twitter:card" content="summary" />
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MSBMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.2</span>
       </span>
     </div>
 
@@ -103,13 +103,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Method for importing lavaan output to tbl_graph</h1>
+    <h1>Method for importing <code>lavaan</code> output to <code>tbl_graph</code></h1>
     
     <div class="hidden name"><code>as_tbl_graph.lavaan.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Method for importing lavaan output to tbl_graph</p>
+    <p>Method for importing <code>lavaan</code> output to <code>tbl_graph</code></p>
     </div>
 
     <pre class="usage"><span class='fu'>as_tbl_graph.lavaan</span>(<span class='no'>object</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>include_var</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
@@ -119,11 +119,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>a lavaan object, returned from lavaan's sem/cfa functions.</p></td>
+      <td><p>a lavaan object, returned from <code>lavaan</code>(<code>sem()</code>/<code>cfa()</code>/<code>lavaan()</code>).</p></td>
     </tr>
     <tr>
       <th>standardize</th>
-      <td><p>should the edge coeffciants be standerdized. curretnyl only `TRUE` is supported.</p></td>
+      <td><p>should the edge coeffciants be standerdized.</p></td>
     </tr>
     <tr>
       <th>include_var</th>
@@ -131,13 +131,13 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>args passed to <code>standardizedSolution</code> or <code>parameterEstimates</code></p></td>
+      <td><p>args passed to <code><a href='https://rdrr.io/pkg/lavaan/man/standardizedSolution.html'>lavaan::standardizedSolution()</a></code> or <code><a href='https://rdrr.io/pkg/lavaan/man/parameterEstimates.html'>lavaan::parameterEstimates()</a></code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tbl_graph object that can further be processed with tidygraph, and plotted with ggraph.</p>
+    <p>a <code><a href='https://rdrr.io/pkg/tidygraph/man/tbl_graph.html'>tidygraph::tbl_graph()</a></code> object that can further be processed with <code>tidygraph</code>, and plotted with <code>ggraph</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>lavaan</span>)</div><div class='output co'>#&gt; <span class='message'>This is lavaan 0.6-5</span></div><div class='output co'>#&gt; <span class='message'>lavaan is BETA software! Please report any bugs.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidygraph</span>)</div><div class='output co'>#&gt; <span class='message'></span>

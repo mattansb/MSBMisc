@@ -10,16 +10,16 @@ chisq.pairwise(Xsq, population_in_row = TRUE, adjust = p.adjust.methods, ...)
 chisq.residual(Xsq, adjust = p.adjust.methods)
 }
 \arguments{
-\item{Xsq}{Result from \code{chisq.test}}
+\item{Xsq}{Result from \code{chisq.test()}}
 
 \item{population_in_row}{Comparisons by row? (If not, by column.)}
 
-\item{adjust}{Method for correcting p-values. See \code{\link[stats]{p.adjust}}.}
+\item{adjust}{Method for correcting p-values. See \code{\link[stats:p.adjust]{stats::p.adjust}}.}
 
-\item{...}{Passed to \code{chisq.test}.}
+\item{...}{Passed to \code{chisq.test()}.}
 }
 \description{
-See also \code{mcnemar.test()}
+See also \code{\link[stats:mcnemar.test]{stats::mcnemar.test()}}
 }
 \examples{
 M <- as.table(rbind(c(762, 327, 468),
