@@ -128,7 +128,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation")) {
   ui <- shiny::fluidPage(
 
     # Application title
-    shiny::titlePanel("Trimmed Correlations"),
+    shiny::titlePanel("Truncated Correlations"),
 
     # Sidebar with a slider input for number of bins
     shiny::sidebarLayout(
@@ -192,7 +192,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation")) {
 
       ggplot2::ggplot(data()[data()$in_range,], ggplot2::aes(V1, V2)) +
         ploting_list +
-        ggplot2::labs(title = paste0("Trimmed r = ", rr),
+        ggplot2::labs(title = paste0("Truncated r = ", rr),
                       subtitle = paste0("MSE = ", round(se,2)))
     })
   }
