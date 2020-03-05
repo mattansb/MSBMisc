@@ -1,6 +1,6 @@
 #' Some stats demos
 #'
-#' @param demo Which demo to show?
+#' @param demo Which demo to show? (Partial matching supported)
 #'
 #' @details
 #' \subsection{paired ttest}{
@@ -12,12 +12,18 @@
 #' Demo of how truncation affects correlations and doesn't affect MSE.
 #' }
 #'
+#' \subsection{berksons paradox}{
+#' Demo of how How sampling bias can affect estimated correlations and effects.
+#' See related \href{https://www.youtube.com/watch?v=FUD8h9JpEVQ}{Numberphile video}.
+#' }
+#'
 #' @export
-stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation")) {
+stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "berksons paradox")) {
   demo <- match.arg(demo)
   switch (demo,
           "paired ttest" = .demo_paired_ttest(),
-          "truncated correlation" = .demo_truncated_correlation()
+          "truncated correlation" = .demo_truncated_correlation(),
+          "berksons paradox" = .demo_berksons_paradox()
   )
 }
 
@@ -199,4 +205,78 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation")) {
 
   # Run the application
   shiny::runApp(list(ui = ui, server = server))
+}
+
+
+.demo_berksons_paradox <- function(){
+  # .check_namespace("shiny", "MASS", "ggplot2")
+
+  ui <- shiny::fluidPage(
+
+    # Application title
+    shiny::titlePanel("Berkson's Paradox"),
+
+    # Sidebar with a slider input for number of bins
+    shiny::sidebarLayout(
+      shiny::sidebarPanel(
+        shiny::sliderInput('r','True Slope',min = -1,max = 1,step = 0.1, value = 0.3),
+        shiny::sliderInput('xcutoff','Cutoff on X',min = -4,max = 4,step = 0.1, value = 1),
+        shiny::sliderInput('ycutoff','Cutoff on Y',min = -4,max = 4,step = 0.1, value = 1)
+      ),
+
+      # Show a plot of the generated distribution
+      shiny::mainPanel(
+        shiny::plotOutput("outPlot")
+      )
+    )
+  )
+
+  # Define server logic required to draw a histogram
+  server <- function(input, output) {
+
+    ## make data ##
+    data <- shiny::reactive({
+      as.data.frame(MASS::mvrnorm(
+        n = 1000,
+        mu = c(0, 0),
+        Sigma = matrix(c(1, input$r, input$r, 1), 2),
+        empirical = TRUE
+      ))
+    })
+
+    ## plot 1 ##
+    output$outPlot <- shiny::renderPlot({
+      plot_data <- data()
+      plot_data$is_in <-
+        plot_data$V1 > input$xcutoff |
+        plot_data$V2 > input$ycutoff
+
+      cut_data <- plot_data[plot_data$is_in, 1:2]
+
+      cut_rr <- cor(cut_data)[2]
+
+      cap <- sprintf("True slope = %.2f;\nSample slope = %.2f", input$r, cut_rr)
+
+      ggplot2::ggplot(plot_data, ggplot2::aes(V1, V2, color = is_in)) +
+        ggplot2::geom_point(alpha = 0.4, shape = 16) +
+        ggplot2::geom_smooth(ggplot2::aes(group = 1),
+                             color = "black",
+                             method = "lm", se = TRUE) +
+        ggplot2::geom_smooth(ggplot2::aes(group = 1), data = cut_data,
+                             color = "red2",
+                             method = "lm", se = TRUE) +
+
+
+        ggplot2::scale_color_manual(values = c('black','red')) +
+        ggplot2::coord_cartesian(xlim = c(-4, 4), ylim = c(-3, 3)) +
+        ggplot2::labs(x = "X", y = "Y") +
+        ggplot2::theme_bw() +
+        ggplot2::theme(legend.position = 'none') +
+        ggplot2::labs(title = cap)
+    })
+  }
+
+  # Run the application
+  shiny::runApp(list(ui = ui, server = server))
+
 }

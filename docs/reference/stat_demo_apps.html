@@ -112,14 +112,16 @@
     <p>Some stats demos</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stat_demo_apps</span>(<span class='kw'>demo</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"paired ttest"</span>, <span class='st'>"truncated correlation"</span>))</pre>
+    <pre class="usage"><span class='fu'>stat_demo_apps</span>(
+  <span class='kw'>demo</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"paired ttest"</span>, <span class='st'>"truncated correlation"</span>, <span class='st'>"berksons paradox"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>demo</th>
-      <td><p>Which demo to show?</p></td>
+      <td><p>Which demo to show? (Partial matching supported)</p></td>
     </tr>
     </table>
 
@@ -132,6 +134,10 @@ affected by the correlation.</p>
 
 <h3>truncated correlation</h3>
 <p>Demo of how truncation affects correlations and doesn't affect MSE.</p>
+
+<h3>berksons paradox</h3>
+<p>Demo of how How sampling bias can affect estimated correlations and effects.
+See related <a href='https://www.youtube.com/watch?v=FUD8h9JpEVQ'>Numberphile video</a>.</p>
 
 
   </div>

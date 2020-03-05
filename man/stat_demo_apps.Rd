@@ -4,10 +4,12 @@
 \alias{stat_demo_apps}
 \title{Some stats demos}
 \usage{
-stat_demo_apps(demo = c("paired ttest", "truncated correlation"))
+stat_demo_apps(
+  demo = c("paired ttest", "truncated correlation", "berksons paradox")
+)
 }
 \arguments{
-\item{demo}{Which demo to show?}
+\item{demo}{Which demo to show? (Partial matching supported)}
 }
 \description{
 Some stats demos
@@ -20,5 +22,10 @@ affected by the correlation.
 
 \subsection{truncated correlation}{
 Demo of how truncation affects correlations and doesn't affect MSE.
+}
+
+\subsection{berksons paradox}{
+Demo of how How sampling bias can affect estimated correlations and effects.
+See related \href{https://www.youtube.com/watch?v=FUD8h9JpEVQ}{Numberphile video}.
 }
 }
