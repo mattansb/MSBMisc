@@ -32,7 +32,8 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
   .check_namespace("shiny", "MASS", "patchwork", "ggplot2")
 
   .tidy_ttest <- function(data, var.equal = FALSE, paired = FALSE){
-    res <- t.test(data[,1],data[,2], var.equal = var.equal, paired = paired)
+
+    res <- t.test(data[[1]],data[[2]], var.equal = var.equal, paired = paired)
 
     data.frame(
       t.value = res$statistic,
@@ -50,8 +51,8 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     # Sidebar with a slider input for number of bins
     shiny::sidebarLayout(
       shiny::sidebarPanel(
-        shiny::sliderInput('r','Correlation',min = -1, max = 0.9999, value = 0.7, step = 0.1),
-        shiny::numericInput('d','Cohens D',value = 0.3, min = 0, step = 0.1),
+        shiny::sliderInput('r','Correlation',min = -1, max = 0.9999, value = 0.7, step = 0.05),
+        shiny::numericInput('d','Cohens D',value = 0.3, min = 0, step = 0.05),
         shiny::numericInput('n','N',value = 30, min = 4, step = 1)
       ),
 
@@ -70,15 +71,17 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
       as.data.frame(MASS::mvrnorm(
         n = input$n,
         mu = c(input$d, 0),
-        Sigma = matrix(c(1, input$r, input$r, 1), 2),
+        Sigma = matrix(c(1, 0, 0, 1), 2),
         empirical = TRUE
       ))
     })
 
     ## Table ##
     output$results <- shiny::renderTable(rownames = TRUE, {
-      res_p <- .tidy_ttest(data(), paired = TRUE)
-      res_up <- .tidy_ttest(data(), var.equal = TRUE)
+      df <- .add_corr(data(), input$r)
+
+      res_p <- .tidy_ttest(df, paired = TRUE)
+      res_up <- .tidy_ttest(df, var.equal = TRUE)
 
       res <- rbind(res_p, res_up)
       rownames(res) <- c('Paired','Indapendant')
@@ -87,18 +90,20 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
     ## Plot ##
     output$plot <- shiny::renderPlot({
-      corr_plot <- ggplot2::ggplot(data(), ggplot2::aes(V1, V2)) +
+      df <- .add_corr(data(), input$r)
+
+      corr_plot <- ggplot2::ggplot(df, ggplot2::aes(V1, V2)) +
         ggplot2::geom_point() +
         ggplot2::theme_bw() +
         ggplot2::labs(x = "X1", y = "X2")
 
       sbs_data <- rbind(
-        data.frame(y = data()[,1],
+        data.frame(y = df[,1],
                    x = "X1",
-                   id = seq_along(data()[,1])),
-        data.frame(y = data()[,2],
+                   id = seq_along(df[,1])),
+        data.frame(y = df[,2],
                    x = "X2",
-                   id = seq_along(data()[,2]))
+                   id = seq_along(df[,2]))
       )
 
       tplot <- ggplot2::ggplot(sbs_data,
@@ -108,7 +113,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
                                  group = .data$id,
                                  color = factor(.data$id)
                                )) +
-        ggplot2::geom_line() +
+        ggplot2::geom_line(alpha = 0.5) +
         ggplot2::theme_bw() +
         ggplot2::theme(legend.position = 'none') +
         ggplot2::labs(x = "", y = "")
@@ -139,8 +144,9 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     # Sidebar with a slider input for number of bins
     shiny::sidebarLayout(
       shiny::sidebarPanel(
-        shiny::sliderInput('r','Correlation',min = -1,max = 1,step = 0.1, value = 0.7),
-        shiny::sliderInput('lims','Set cutoff',min = -4,max = 4,step = 0.1, value = c(-3,3))
+        shiny::sliderInput('r','Correlation',min = -1,max = 1,step = 0.05, value = 0.7),
+        shiny::sliderInput('lims','Set cutoff',min = -4,max = 4,step = 0.05, value = c(-3,3)),
+        shiny::numericInput('n','N',value = 200, min = 4, step = 1)
       ),
 
       # Show a plot of the generated distribution
@@ -157,16 +163,16 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     ## make data ##
     corr_data <- shiny::reactive({
       as.data.frame(MASS::mvrnorm(
-        n = 200,
+        n = input$n,
         mu = c(0, 0),
-        Sigma = matrix(c(1, input$r, input$r, 1), 2),
+        Sigma = matrix(c(1, 0, 0, 1), 2),
         empirical = TRUE
       ))
     })
 
 
     data <- shiny::reactive({
-      df <- corr_data()
+      df <- .add_corr(corr_data(),input$r)
 
       df$in_range <-
         input$lims[1] < df[[1]] &
@@ -207,7 +213,6 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
   shiny::runApp(list(ui = ui, server = server))
 }
 
-
 .demo_berksons_paradox <- function(){
   .check_namespace("shiny", "MASS", "ggplot2")
 
@@ -219,9 +224,10 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     # Sidebar with a slider input for number of bins
     shiny::sidebarLayout(
       shiny::sidebarPanel(
-        shiny::sliderInput('r','True Slope',min = -1,max = 1,step = 0.1, value = 0.3),
+        shiny::sliderInput('r','True Slope',min = -1,max = 1,step = 0.05, value = 0.3),
         shiny::sliderInput('xcutoff','Cutoff on X',min = -4,max = 4,step = 0.1, value = 1),
-        shiny::sliderInput('ycutoff','Cutoff on Y',min = -4,max = 4,step = 0.1, value = 1)
+        shiny::sliderInput('ycutoff','Cutoff on Y',min = -4,max = 4,step = 0.1, value = 1),
+        shiny::numericInput('n','N',value = 1000, min = 4, step = 1)
       ),
 
       # Show a plot of the generated distribution
@@ -237,16 +243,16 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     ## make data ##
     data <- shiny::reactive({
       as.data.frame(MASS::mvrnorm(
-        n = 1000,
+        n = input$n,
         mu = c(0, 0),
-        Sigma = matrix(c(1, input$r, input$r, 1), 2),
+        Sigma = matrix(c(1, 0, 0, 1), 2),
         empirical = TRUE
       ))
     })
 
     ## plot 1 ##
     output$outPlot <- shiny::renderPlot({
-      plot_data <- data()
+      plot_data <- .add_corr(data(), input$r)
       plot_data$is_in <-
         plot_data$V1 > input$xcutoff |
         plot_data$V2 > input$ycutoff
@@ -279,4 +285,25 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
   # Run the application
   shiny::runApp(list(ui = ui, server = server))
 
+}
+
+
+# Utils -------------------------------------------------------------------
+
+#' @keywords internal
+.add_corr <- function(df, rr) {
+  m1 <- mean(df[[1]])
+  m2 <- mean(df[[2]])
+
+  X <- df[[1]]
+  e <- df[[2]]
+
+  Se <- sqrt(1 - rr^2)
+
+  df[[2]] <- rr * X + Se * e
+
+  df[[1]] <- scale(df[[1]], TRUE, FALSE) + m1
+  df[[2]] <- scale(df[[2]], TRUE, FALSE) + m2
+
+  df
 }
