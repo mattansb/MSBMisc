@@ -209,7 +209,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
 
 .demo_berksons_paradox <- function(){
-  # .check_namespace("shiny", "MASS", "ggplot2")
+  .check_namespace("shiny", "MASS", "ggplot2")
 
   ui <- shiny::fluidPage(
 
@@ -260,7 +260,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
       ggplot2::ggplot(plot_data, ggplot2::aes(V1, V2, color = is_in)) +
         ggplot2::geom_point(alpha = 0.4, shape = 16) +
         ggplot2::geom_smooth(ggplot2::aes(group = 1),
-                             color = "black",
+                             color = "blue2",
                              method = "lm", se = TRUE) +
         ggplot2::geom_smooth(ggplot2::aes(group = 1), data = cut_data,
                              color = "red2",
