@@ -128,7 +128,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 }
 
 .demo_truncated_correlation <- function(){
-  .check_namespace("shiny", "MASS", "ggplot2")
+  .check_namespace("shiny", "MASS", "patchwork", "ggplot2")
 
   ploting_list <- list(ggplot2::geom_point(),
                        ggplot2::coord_cartesian(xlim = c(-4, 4), ylim = c(-3, 3)),
@@ -151,8 +151,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
       # Show a plot of the generated distribution
       shiny::mainPanel(
-        shiny::plotOutput("fullPlot"),
-        shiny::plotOutput("trimPlot")
+        shiny::plotOutput("thePlot")
       )
     )
   )
@@ -182,30 +181,25 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     })
 
     ## plot 1 ##
-    output$fullPlot <- shiny::renderPlot({
-      rr <- cor(data()[,1:2])[2]
-      rr <- round(rr,2)
+    output$thePlot <- shiny::renderPlot({
+      rr1 <- cor(data()[,1:2])[2]
+      se1 <- sd(residuals(lm(V2 ~ V1, data())))
 
-      se <- sd(residuals(lm(V2 ~ V1, data())))
+      rr2 <- cor(data()[data()$in_range,1:2])[2]
+      se2 <- sd(residuals(lm(V2 ~ V1, data()[data()$in_range,1:2])))
 
-      ggplot2::ggplot(data(), ggplot2::aes(V1, V2, color = in_range)) +
-        ploting_list +
+
+      p1 <- ggplot2::ggplot(data(), ggplot2::aes(V1, V2, color = in_range)) +
         ggplot2::scale_color_manual(values = c('red','blue')) +
-        ggplot2::labs(title = paste0("r = ", rr),
-                      subtitle = paste0("MSE = ", round(se,2)))
-    })
+        ggplot2::labs(title = paste0("r = ", round(rr1, 2)),
+                      subtitle = paste0("RMSE = ", round(se1, 2)))
 
-    ## plot 2 ##
-    output$trimPlot <- renderPlot({
-      rr <- cor(data()[data()$in_range,1:2])[2]
-      rr <- round(rr,2)
 
-      se <- sd(residuals(lm(V2 ~ V1, data()[data()$in_range,1:2])))
+      p2 <- ggplot2::ggplot(data()[data()$in_range,], ggplot2::aes(V1, V2)) +
+        ggplot2::labs(title = paste0("Truncated r = ", round(rr2, 2)),
+                      subtitle = paste0("RMSE = ", round(se2,2)))
 
-      ggplot2::ggplot(data()[data()$in_range,], ggplot2::aes(V1, V2)) +
-        ploting_list +
-        ggplot2::labs(title = paste0("Truncated r = ", rr),
-                      subtitle = paste0("MSE = ", round(se,2)))
+      p1 / p2 & ploting_list
     })
   }
 
@@ -225,9 +219,20 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     shiny::sidebarLayout(
       shiny::sidebarPanel(
         shiny::sliderInput('r','True Slope',min = -1,max = 1,step = 0.05, value = 0.3),
-        shiny::sliderInput('xcutoff','Cutoff on X',min = -4,max = 4,step = 0.1, value = 1),
-        shiny::sliderInput('ycutoff','Cutoff on Y',min = -4,max = 4,step = 0.1, value = 1),
-        shiny::numericInput('n','N',value = 1000, min = 4, step = 1)
+        shiny::numericInput('n','N',value = 1000, min = 4, step = 1),
+        shiny::selectInput("cuttype", "Cutoff Type",
+                           c("Independent" = "independent",
+                             "Sum" = "joint")),
+        shiny::conditionalPanel(
+          condition = "input.cuttype == 'independent'",
+          shiny::sliderInput('xcutoff','Cutoff on X',min = -4,max = 4,step = 0.1, value = 1),
+          shiny::sliderInput('ycutoff','Cutoff on Y',min = -4,max = 4,step = 0.1, value = 1)
+        ),
+        shiny::conditionalPanel(
+          condition = "input.cuttype == 'joint'",
+          shiny::sliderInput('jointsum','Cuttoff on X + Y',min = -4,max = 4,step = 0.1, value = 0)
+        )
+
       ),
 
       # Show a plot of the generated distribution
@@ -253,9 +258,15 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     ## plot 1 ##
     output$outPlot <- shiny::renderPlot({
       plot_data <- .add_corr(data(), input$r)
-      plot_data$is_in <-
-        plot_data$V1 > input$xcutoff |
-        plot_data$V2 > input$ycutoff
+
+      if (input$cuttype == 'independent') {
+        plot_data$is_in <-
+          plot_data$V1 > input$xcutoff |
+          plot_data$V2 > input$ycutoff
+      } else {
+        plot_data$is_in <-
+          plot_data$V1 + plot_data$V2 > input$jointsum
+      }
 
       cut_data <- plot_data[plot_data$is_in, 1:2]
 
