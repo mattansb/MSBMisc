@@ -101,35 +101,6 @@ F_to_d_CI <- function(f,
 }
 
 
-# ci_cramers_V <- function(chisq, N, a, b, conf.level = 0.9){
-#   if (isTRUE(all.equal(chisq,0))) {
-#     return(c(0, 1)) # unestimatable
-#   }
-#
-#   alpha <- 1 - conf.level
-#   probs <- c(alpha / 2, 1 - alpha / 2)
-#
-#   df <- prod(c(a, b) - 1)
-#
-#   ncp <- suppressWarnings(
-#     c(
-#       optim(chisq, function(x) abs(pchisq(q = chisq, df, ncp = x) - probs[1]))$par,
-#       optim(chisq, function(x) abs(pchisq(q = chisq, df, ncp = x) - probs[2]))$par
-#     )
-#   )
-#
-#   # Convert to pes
-#   x <- effectsize::chisq_to_cramers_v(sort(ncp), N, a, b)
-#   if (x[2] < effectsize::chisq_to_cramers_v(chisq, N, a, b)) {
-#     # this is for dealing with rare cases with very small effect sizes
-#     # where the CI gives nonsencical upper bounds
-#     # (This is an issue in effectsize:::.ci_partial_eta_squared)
-#     x[2] <- 1
-#   }
-#   x
-# }
-
-
 # Utils -------------------------------------------------------------------
 
 #' @keywords internal
@@ -187,3 +158,40 @@ F_to_d_CI <- function(f,
   f_ncp <- sort(ncp$par) / df
   return(f_ncp)
 }
+
+
+# Chisq? ------------------------------------------------------------------
+
+
+#' chisq_to_cramers_v_CI <- function(chisq, N, a, b, conf.level = 0.9) {
+#'   df <- prod(c(a, b) - 1)
+#'
+#'   chis <- .get_ncp_chi(chisq, df, conf.level = conf.level)
+#'
+#'   setNames(effectsize::chisq_to_cramers_v(c(chis[1], chisq, chis[2]), N, a, b),
+#'            c("Lower", "ES", "Upper"))
+#' }
+#'
+#'
+#' #' @keywords internal
+#' .get_ncp_chi <- function(chi, df, conf.level = 0.9) {
+#'   alpha <- 1 - conf.level
+#'   probs <- c(alpha / 2, 1 - alpha / 2)
+#'
+#'   if (isTRUE(all.equal(chi, 0))) {
+#'     return(c(0, Inf)) # unestimatable
+#'   }
+#'
+#'   ncp <- suppressWarnings(optim(
+#'     par = 1.1 * rep(chi, 2),
+#'     fn = function(x) {
+#'       p <- pchisq(q = chi, df, ncp = x)
+#'
+#'       abs(max(p) - probs[2]) +
+#'         abs(min(p) - probs[1])
+#'     },
+#'     control = list(abstol = 1e-09)
+#'   ))
+#'   chi_ncp <- sort(ncp$par)
+#'   return(chi_ncp)
+#' }
