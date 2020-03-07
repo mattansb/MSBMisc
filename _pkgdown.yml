@@ -3,6 +3,7 @@ reference:
   contents:
   - afex_to_BF
   - chisq.pairwise
+  - F_to_PVE_CI
 
 - title: "Assumptions and Reliability"
   contents:
