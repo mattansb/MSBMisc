@@ -146,9 +146,9 @@
   <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>51</span>:<span class='fl'>60</span>
 )
 
-<span class='fu'>vlookup</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"e"</span>, <span class='st'>"c"</span>), <span class='no'>df</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"a"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"b"</span>)</div><div class='output co'>#&gt;  a  e  c 
+<span class='fu'>vlookup</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"e"</span>, <span class='st'>"c"</span>), <span class='no'>df</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"a"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"b"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Found more than 1 match. Returning the first.</span></div><div class='output co'>#&gt;  a  e  c 
 #&gt; 51 56 54 </div><div class='input'>
-<span class='fu'>vlookup</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"e"</span>, <span class='st'>"c"</span>), <span class='no'>df</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"a"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"b"</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   a  b
+<span class='fu'>vlookup</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"e"</span>, <span class='st'>"c"</span>), <span class='no'>df</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"a"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"b"</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Found more than 1 match. Returning the first.</span></div><div class='output co'>#&gt;   a  b
 #&gt; a a 51
 #&gt; e e 56
 #&gt; c c 54</div></pre>
