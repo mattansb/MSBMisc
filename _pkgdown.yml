@@ -2,7 +2,8 @@ reference:
 - title: "Inference"
   contents:
   - afex_to_BF
-  - chisq.pairwise
+  - chisq_pairwise
+  - compare_freqs
 
 - title: "Assumptions and Reliability"
   contents:

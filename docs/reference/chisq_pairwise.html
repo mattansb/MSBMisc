@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Refit afex models to produce Bayes Factors — afex_to_BF • MSBMisc</title>
+<title>Follow-up for contingency table test — chisq_pairwise • MSBMisc</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Refit afex models to produce Bayes Factors — afex_to_BF" />
-<meta property="og:description" content="Refit afex models to produce Bayes Factors" />
+<meta property="og:title" content="Follow-up for contingency table test — chisq_pairwise" />
+<meta property="og:description" content="Follow-up for contingency table test" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -103,56 +103,64 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Refit afex models to produce Bayes Factors</h1>
+    <h1>Follow-up for contingency table test</h1>
     
-    <div class="hidden name"><code>afex_to_BF.Rd</code></div>
+    <div class="hidden name"><code>chisq_pairwise.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Refit afex models to produce Bayes Factors</p>
+    <p>Follow-up for contingency table test</p>
     </div>
 
-    <pre class="usage"><span class='fu'>afex_to_BF</span>(<span class='no'>fit</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"JZS"</span>, <span class='st'>"BIC"</span>), <span class='kw'>inclusion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>chisq_pairwise</span>(<span class='no'>Xsq</span>, <span class='kw'>population_in_row</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>adjust</span> <span class='kw'>=</span> <span class='no'>p.adjust.methods</span>, <span class='no'>...</span>)
+
+<span class='fu'>chisq_residual</span>(<span class='no'>Xsq</span>, <span class='kw'>adjust</span> <span class='kw'>=</span> <span class='no'>p.adjust.methods</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fit</th>
-      <td><p>An object of class afex_aov.</p></td>
+      <th>Xsq</th>
+      <td><p>Result from <code><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test()</a></code></p></td>
     </tr>
     <tr>
-      <th>method</th>
-      <td><p>Should BFs be computed with the BayesFactor package, or by comparing BICs.</p></td>
+      <th>population_in_row</th>
+      <td><p>Comparisons by row? (If not, by column.)</p></td>
     </tr>
     <tr>
-      <th>inclusion</th>
-      <td><p>Return inclusions BFs (for matched models) instead of the actual models' BFs.</p></td>
+      <th>adjust</th>
+      <td><p>Method for correcting p-values. See <code><a href='https://rdrr.io/r/stats/p.adjust.html'>stats::p.adjust</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>passed to <code><a href='https://rdrr.io/pkg/BayesFactor/man/generalTestBF.html'>BayesFactor::generalTestBF()</a></code></p></td>
+      <td><p>Passed to <code><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test()</a></code>.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>afex</span>)
-
-  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>obk.long</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"afex"</span>)
-
-  <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/afex/man/aov_car.html'>aov_ez</a></span>(
-    <span class='st'>"id"</span>,
-    <span class='st'>"value"</span>,
-    <span class='no'>obk.long</span>,
-    <span class='kw'>within</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"phase"</span>, <span class='st'>"hour"</span>),
-    <span class='kw'>covariate</span> <span class='kw'>=</span> <span class='st'>"age"</span>,
-    <span class='kw'>factorize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-  )
-  <span class='no'>fit</span>
-  <span class='fu'>afex_to_BF</span>(<span class='no'>fit</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>M</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/table.html'>as.table</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>762</span>, <span class='fl'>327</span>, <span class='fl'>468</span>),
+                    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>484</span>, <span class='fl'>239</span>, <span class='fl'>477</span>)))
+<span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span>(<span class='no'>M</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+  <span class='kw'>gender</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"F"</span>, <span class='st'>"M"</span>),
+  <span class='kw'>party</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Democrat"</span>, <span class='st'>"Independent"</span>, <span class='st'>"Republican"</span>)
+)
+<span class='no'>M</span></div><div class='output co'>#&gt;       party
+#&gt; gender Democrat Independent Republican
+#&gt;      F      762         327        468
+#&gt;      M      484         239        477</div><div class='input'>
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test</a></span>(<span class='no'>M</span>)
+<span class='fu'>chisq_pairwise</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt;   comparison   Chi.sq df        p.raw       p.holm
+#&gt; 1    F vs. M 30.07015  2 2.953589e-07 2.953589e-07</div><div class='input'><span class='fu'>chisq_pairwise</span>(<span class='no'>res</span>, <span class='kw'>population_in_row</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;                   comparison    Chi.sq df        p.raw       p.holm
+#&gt; 1   Democrat vs. Independent  1.717892  1 1.899646e-01 1.899646e-01
+#&gt; 2    Democrat vs. Republican 29.059545  1 7.018745e-08 2.105623e-07
+#&gt; 3 Independent vs. Republican  9.335659  1 2.247373e-03 4.494746e-03</div><div class='input'><span class='fu'>chisq_residual</span>(<span class='no'>res</span>)</div><div class='output co'>#&gt;   gender       party    z.value       p.raw      p.holm
+#&gt; 1      F    Democrat  2.1988558 0.027888180 0.083664539
+#&gt; 2      M    Democrat -2.5046695 0.012256586 0.049026346
+#&gt; 3      F Independent  0.4113702 0.680801124 1.000000000
+#&gt; 4      M Independent -0.4685829 0.639367769 1.000000000
+#&gt; 5      F  Republican -2.8432397 0.004465747 0.022328734
+#&gt; 6      M  Republican  3.2386734 0.001200870 0.007205219</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

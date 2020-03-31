@@ -7,6 +7,6 @@ dimnames(M) <- list(
 M
 
 res <- chisq.test(M)
-chisq.pairwise(res)
-chisq.pairwise(res, population_in_row = FALSE)
-chisq.residual(res)
+chisq_pairwise(res)
+chisq_pairwise(res, population_in_row = FALSE)
+chisq_residual(res)

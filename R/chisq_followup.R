@@ -1,7 +1,5 @@
 #' Follow-up for contingency table test
 #'
-#' See also [`stats::mcnemar.test()`]
-#'
 #' @param Xsq Result from `chisq.test()`
 #' @param population_in_row Comparisons by row? (If not, by column.)
 #' @param adjust Method for correcting p-values. See [`stats::p.adjust`].
@@ -10,7 +8,7 @@
 #' @example examples/examples.chisq_followup.R
 #'
 #' @export
-chisq.pairwise <- function(Xsq,
+chisq_pairwise <- function(Xsq,
                            population_in_row = TRUE,
                            adjust = p.adjust.methods,
                            ...) {
@@ -43,9 +41,9 @@ chisq.pairwise <- function(Xsq,
 }
 
 
-#' @rdname chisq.pairwise
+#' @rdname chisq_pairwise
 #' @export
-chisq.residual <- function(Xsq,
+chisq_residual <- function(Xsq,
                            adjust = p.adjust.methods) {
   adjust <- match.arg(adjust)
 
