@@ -6,16 +6,26 @@
 \alias{residualize_over_grid.ggeffects}
 \title{Residualize data over a data grid}
 \usage{
-residualize_over_grid(grid, model, ...)
+residualize_over_grid(grid, model, keep = NULL, ...)
 
-\method{residualize_over_grid}{data.frame}(grid, model, pred_name, ...)
+\method{residualize_over_grid}{data.frame}(grid, model, keep = NULL, pred_name = NULL, ...)
 
-\method{residualize_over_grid}{ggeffects}(grid, model, protect_gge_names = TRUE, ...)
+\method{residualize_over_grid}{ggeffects}(
+  grid,
+  model,
+  keep = attr(grid, "terms")[1],
+  protect_gge_names = TRUE,
+  ...
+)
 }
 \arguments{
 \item{grid}{A data grid. Data must be completely crossed (e.g., made with \code{expand.grig()}).}
 
 \item{model}{The original model object.}
+
+\item{keep}{Optional character vector of predictors that should not be
+matched with the \code{grid} but should have their original values kept. Useful
+when plotting along continuous axes (x-, color, etc...).}
 
 \item{...}{Arguments passed to \code{\link[=residuals]{residuals()}}.}
 
@@ -45,7 +55,7 @@ m <- lm(mpg ~ cyl * wt + am * carb, data = mtcars)
 ## Grid with expand.grid
 newdata <- expand.grid(cyl = "6", am = "0",
                        carb = seq(0, 10),
-                       wt = seq(2,4, by = 0.5))
+                       wt = seq(1.5,5.5, by = 1))
 newdata$pred <- predict(m, newdata = newdata)
 
 ggplot(newdata, aes(carb, pred, color = wt)) +
@@ -54,9 +64,17 @@ ggplot(newdata, aes(carb, pred, color = wt)) +
   geom_point(data = residualize_over_grid(newdata, m, pred_name = "pred"))
 
 
+ggplot(newdata, aes(carb, wt, fill = pred)) +
+  geom_raster() +
+  geom_point(data = residualize_over_grid(newdata, m,
+                                          keep = c("carb", "wt"),
+                                          pred_name = "pred"),
+             shape = 21)
+
+
+
 ## Grid with ggeffects
-gge <- ggemmeans(m, c("carb [0:10]", "wt[2:4 by=0.5]"),
-                 condition = list(am = "0", cyl = "6")) # works best when x is [all]
+gge <- ggemmeans(m, c("carb", "wt[1.5:5.5 by=1]"))
 
 
 ggplot(gge, aes(x, predicted)) +

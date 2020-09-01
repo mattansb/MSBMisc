@@ -4,12 +4,15 @@
 #'
 #' @param grid A data grid. Data must be completely crossed (e.g., made with `expand.grig()`).
 #' @param model The original model object.
+#' @param keep Optional character vector of predictors that should not be
+#'   matched with the `grid` but should have their original values kept. Useful
+#'   when plotting along continuous axes (x-, color, etc...).
 #' @param ... Arguments passed to [residuals()].
 #'
 #' @example examples/examples.residualize_over_grid.R
 #'
 #' @export
-residualize_over_grid <- function(grid, model, ...) {
+residualize_over_grid <- function(grid, model, keep = NULL, ...) {
   UseMethod("residualize_over_grid")
 
 }
@@ -18,8 +21,9 @@ residualize_over_grid <- function(grid, model, ...) {
 #' @rdname residualize_over_grid
 #' @param pred_name Additional column name in `grid` that contains the predicted
 #'   outcome (on the response scale).
-residualize_over_grid.data.frame <- function(grid, model, pred_name, ...) {
-  stopifnot("{insight} is required for this function" = requireNamespace("insight"))
+residualize_over_grid.data.frame <- function(grid, model, keep = NULL, pred_name = NULL, ...) {
+  stopifnot("{insight} is required for this function" = requireNamespace("insight"),
+            "Must specift 'pred_name'" = !is.null(pred_name))
 
   mdata <- insight::get_predictors(model)
   fun_link <- insight::link_function(model)
@@ -57,11 +61,19 @@ residualize_over_grid.data.frame <- function(grid, model, pred_name, ...) {
   }
 
   idx <- apply(best_match, 2, which)
+  idx <- sapply(idx, "[", 1)
 
   points <- grid[idx, , drop = FALSE]
   points[[pred_name]] <- inv_fun(
     fun_link(predicted[idx]) + residuals(model, ...) # add errors
   )
+
+  if (!is.null(keep)) {
+    are_in <- keep %in% colnames(points)
+    if (!all(are_in))
+      warning("Some 'keep' names not found: ", keep[are_in], call. = FALSE)
+    points[,keep[are_in]] <- mdata[,keep[are_in]]
+  }
 
   return(points)
 }
@@ -70,15 +82,16 @@ residualize_over_grid.data.frame <- function(grid, model, pred_name, ...) {
 #' @rdname residualize_over_grid
 #' @param protect_gge_names Return the data with the original columns names
 #'   (`x`, `group`, `facet`, `panel`)?
-residualize_over_grid.ggeffects <- function(grid, model, protect_gge_names = TRUE, ...) {
+residualize_over_grid.ggeffects <- function(grid, model, keep = attr(grid,"terms")[1], protect_gge_names = TRUE, ...) {
   names_gge <- c("x", "group", "facet","panel")
   names_orig <- attr(grid,"terms")
+  keep <- keep
 
   grid <- as.data.frame(grid)
   grid <- grid[names(grid) %in% c(names_gge, "predicted")]
   names(grid)[names(grid) %in% names_gge] <- names_orig
 
-  points <- residualize_over_grid(grid, model, pred_name = "predicted", ...)
+  points <- residualize_over_grid(grid, model, keep = keep, pred_name = "predicted", ...)
 
   if (protect_gge_names) {
     for (i in seq_along(names_orig)) {

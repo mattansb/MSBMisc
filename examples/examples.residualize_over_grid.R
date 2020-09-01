@@ -14,7 +14,7 @@ m <- lm(mpg ~ cyl * wt + am * carb, data = mtcars)
 ## Grid with expand.grid
 newdata <- expand.grid(cyl = "6", am = "0",
                        carb = seq(0, 10),
-                       wt = seq(2,4, by = 0.5))
+                       wt = seq(1.5,5.5, by = 1))
 newdata$pred <- predict(m, newdata = newdata)
 
 ggplot(newdata, aes(carb, pred, color = wt)) +
@@ -23,9 +23,17 @@ ggplot(newdata, aes(carb, pred, color = wt)) +
   geom_point(data = residualize_over_grid(newdata, m, pred_name = "pred"))
 
 
+ggplot(newdata, aes(carb, wt, fill = pred)) +
+  geom_raster() +
+  geom_point(data = residualize_over_grid(newdata, m,
+                                          keep = c("carb", "wt"),
+                                          pred_name = "pred"),
+             shape = 21)
+
+
+
 ## Grid with ggeffects
-gge <- ggemmeans(m, c("carb [0:10]", "wt[2:4 by=0.5]"),
-                 condition = list(am = "0", cyl = "6")) # works best when x is [all]
+gge <- ggemmeans(m, c("carb", "wt[1.5:5.5 by=1]"))
 
 
 ggplot(gge, aes(x, predicted)) +
