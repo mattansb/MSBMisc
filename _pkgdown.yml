@@ -4,6 +4,7 @@ reference:
   - afex_to_BF
   - chisq_pairwise
   - compare_freqs
+  - R2
 
 - title: "Assumptions and Reliability"
   contents:
