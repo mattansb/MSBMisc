@@ -19,7 +19,6 @@ reference:
 - title: "Graphs"
   contents:
   - node_layout_maker
-  - residualize_over_grid
   - as_tbl_graph.lavaan
 
 - title: "Utils"
