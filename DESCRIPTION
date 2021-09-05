@@ -18,7 +18,8 @@ Suggests:
     shiny,
     MASS,
     patchwork,
-    testthat
+    testthat,
+    knitr
 LazyData: true
 RoxygenNote: 7.1.1
 Config/testthat/edition: 3
