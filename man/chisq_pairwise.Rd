@@ -5,9 +5,14 @@
 \alias{chisq_residual}
 \title{Follow-up for contingency table test}
 \usage{
-chisq_pairwise(Xsq, population_in_row = TRUE, adjust = p.adjust.methods, ...)
+chisq_pairwise(
+  Xsq,
+  population_in_row = TRUE,
+  adjust = stats::p.adjust.methods,
+  ...
+)
 
-chisq_residual(Xsq, adjust = p.adjust.methods)
+chisq_residual(Xsq, adjust = stats::p.adjust.methods)
 }
 \arguments{
 \item{Xsq}{Result from \code{chisq.test()}}

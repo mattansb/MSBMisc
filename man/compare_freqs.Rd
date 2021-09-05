@@ -4,7 +4,7 @@
 \alias{compare_freqs}
 \title{Compare the frequencies of levels of a factor}
 \usage{
-compare_freqs(f, adjust = p.adjust.methods, correct = TRUE)
+compare_freqs(f, adjust = stats::p.adjust.methods, correct = TRUE)
 }
 \arguments{
 \item{f}{A factor vector.}

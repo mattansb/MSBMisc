@@ -29,7 +29,7 @@ mean_sd <- function(x, na.rm = TRUE, out = c("vector", "data.frame")) {
   match.call()
   out <- match.arg(out)
 
-  x <- mean(x, na.rm = na.rm) + c(-1, 0, 1) * sd(x, na.rm = na.rm)
+  x <- mean(x, na.rm = na.rm) + c(-1, 0, 1) * stats::sd(x, na.rm = na.rm)
   names(x) <- c("-SD", "Mean", "+SD")
   if (out == "data.frame") {
     x <- as.data.frame(as.list(x))

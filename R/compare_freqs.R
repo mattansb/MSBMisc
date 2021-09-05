@@ -17,11 +17,11 @@
 #' compare_freqs(f)
 #'
 #' @export
-compare_freqs <- function(f, adjust = p.adjust.methods, correct = TRUE) {
+compare_freqs <- function(f, adjust = stats::p.adjust.methods, correct = TRUE) {
   adjust <- match.arg(adjust)
 
   levels <- unique(f)
-  pairs <- combn(seq_len(length(levels)), 2)
+  pairs <- utils::combn(seq_len(length(levels)), 2)
 
   res <- lapply(seq_len(ncol(pairs)), function(i) {
     k1 <- pairs[1, i]
@@ -34,7 +34,7 @@ compare_freqs <- function(f, adjust = p.adjust.methods, correct = TRUE) {
 
     tab <- table(f1,f2)
 
-    temp_res <- mcnemar.test(tab, correct = correct)
+    temp_res <- stats::mcnemar.test(tab, correct = correct)
 
     data.frame(
       comparison = paste(level1, " vs. ", level2),
@@ -48,7 +48,7 @@ compare_freqs <- function(f, adjust = p.adjust.methods, correct = TRUE) {
 
   res <- do.call(rbind, res)
   res[[paste0("p.", adjust)]] <-
-    p.adjust(res$p.raw, method = adjust)
+    stats::p.adjust(res$p.raw, method = adjust)
   rownames(res) <- NULL
   return(res)
 }

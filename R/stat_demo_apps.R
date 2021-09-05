@@ -33,7 +33,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
   .tidy_ttest <- function(data, var.equal = FALSE, paired = FALSE){
 
-    res <- t.test(data[[1]],data[[2]], var.equal = var.equal, paired = paired)
+    res <- stats::t.test(data[[1]],data[[2]], var.equal = var.equal, paired = paired)
 
     data.frame(
       t.value = res$statistic,
@@ -92,7 +92,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     output$plot <- shiny::renderPlot({
       df <- .add_corr(data(), input$r)
 
-      corr_plot <- ggplot2::ggplot(df, ggplot2::aes(V1, V2)) +
+      corr_plot <- ggplot2::ggplot(df, ggplot2::aes(.data$V1, .data$V2)) +
         ggplot2::geom_point() +
         ggplot2::theme_bw() +
         ggplot2::labs(x = "X1", y = "X2")
@@ -182,24 +182,24 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
     ## plot 1 ##
     output$thePlot <- shiny::renderPlot({
-      m1 <- lm(V2 ~ V1, data())
+      m1 <- stats::lm(V2 ~ V1, data())
       rr1 <- cor(data()[,1:2])[2]
-      se1 <- sd(residuals(m1))
-      b1 <- coef(m1)[2]
+      se1 <- stats::sd(stats::residuals(m1))
+      b1 <- stats::coef(m1)[2]
 
-      m2 <- lm(V2 ~ V1, data()[data()$in_range,1:2])
+      m2 <- stats::lm(V2 ~ V1, data()[data()$in_range,1:2])
       rr2 <- cor(data()[data()$in_range,1:2])[2]
-      se2 <- sd(residuals(m2))
-      b2 <- coef(m2)[2]
+      se2 <- stats::sd(stats::residuals(m2))
+      b2 <- stats::coef(m2)[2]
 
 
-      p1 <- ggplot2::ggplot(data(), ggplot2::aes(V1, V2, color = in_range)) +
+      p1 <- ggplot2::ggplot(data(), ggplot2::aes(.data$V1, .data$V2, color = .data$in_range)) +
         ggplot2::scale_color_manual(values = c('red','blue')) +
         ggplot2::labs(title = paste0("r = ", round(rr1, 2)),
                       subtitle = paste0("b = ", round(b1, 3) ,", RMSE = ", round(se1, 2)))
 
 
-      p2 <- ggplot2::ggplot(data()[data()$in_range,], ggplot2::aes(V1, V2)) +
+      p2 <- ggplot2::ggplot(data()[data()$in_range,], ggplot2::aes(.data$V1, .data$V2)) +
         ggplot2::labs(title = paste0("Truncated r = ", round(rr2, 2)),
                       subtitle = paste0("b = ", round(b2, 3) ,", RMSE = ", round(se2, 2)))
 
@@ -274,11 +274,11 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
       cut_data <- plot_data[plot_data$is_in, 1:2]
 
-      cut_rr <- cor(cut_data)[2]
+      cut_rr <- stats::cor(cut_data)[2]
 
       cap <- sprintf("True slope = %.2f;\nSample slope = %.2f", input$r, cut_rr)
 
-      ggplot2::ggplot(plot_data, ggplot2::aes(V1, V2, color = is_in)) +
+      ggplot2::ggplot(plot_data, ggplot2::aes(.data$V1, .data$V2, color = .data$is_in)) +
         ggplot2::geom_point(alpha = 0.4, shape = 16) +
         ggplot2::geom_smooth(ggplot2::aes(group = 1),
                              formula = y ~ x,

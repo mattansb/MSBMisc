@@ -14,9 +14,9 @@
 #' @export
 r_SB <- function(x, y = NULL, var.equal = TRUE) {
   if (!is.null(y)) {
-    r <- cov(cbind(x, y))
+    r <- stats::cov(cbind(x, y))
     if (var.equal) {
-      r <- cov2cor(r)
+      r <- stats::cov2cor(r)
     }
 
     if (r[1, 2] < 0) {

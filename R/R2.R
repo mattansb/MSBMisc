@@ -88,7 +88,7 @@ R2 <- function(pred, obs, type = 1, na.rm = TRUE) {
 
 #' @keywords internal
 .r2_6 <- function(pred, obs) {
-  cor(pred, obs) ^ 2
+  stats::cor(pred, obs) ^ 2
 }
 
 #' @keywords internal

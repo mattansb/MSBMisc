@@ -22,7 +22,7 @@
 #' @export
 chisq_pairwise <- function(Xsq,
                            population_in_row = TRUE,
-                           adjust = p.adjust.methods,
+                           adjust = stats::p.adjust.methods,
                            ...) {
   adjust <- match.arg(adjust)
   tbl <- Xsq$observed
@@ -32,10 +32,10 @@ chisq_pairwise <- function(Xsq,
   popsNames <- rownames(tbl)
 
 
-  pairs <- combn(1:nrow(tbl), 2)
+  pairs <- utils::combn(1:nrow(tbl), 2)
   res <- lapply(seq_len(ncol(pairs)), function(i) {
     pair <- pairs[, i]
-    temp_res <- chisq.test(tbl[pair,], ...)
+    temp_res <- stats::chisq.test(tbl[pair,], ...)
 
     data.frame(
       comparison = paste(popsNames[pair], collapse = " vs. "),
@@ -47,7 +47,7 @@ chisq_pairwise <- function(Xsq,
 
   res <- do.call(rbind, res)
   res[[paste0("p.", adjust)]] <-
-    p.adjust(res$p.raw, method = adjust)
+    stats::p.adjust(res$p.raw, method = adjust)
   rownames(res) <- NULL
   return(res)
 }
@@ -56,14 +56,14 @@ chisq_pairwise <- function(Xsq,
 #' @rdname chisq_pairwise
 #' @export
 chisq_residual <- function(Xsq,
-                           adjust = p.adjust.methods) {
+                           adjust = stats::p.adjust.methods) {
   adjust <- match.arg(adjust)
 
   tbl <- data.frame(Xsq$residuals)
   tbl$z.value <- tbl$Freq
   tbl$Freq <- NULL
-  tbl$p.raw <- 2 * pnorm(abs(tbl$z.value), lower.tail = FALSE)
-  tbl[paste0("p.", adjust)] <- p.adjust(tbl$p.raw, method = adjust)
+  tbl$p.raw <- 2 * stats::pnorm(abs(tbl$z.value), lower.tail = FALSE)
+  tbl[paste0("p.", adjust)] <- stats::p.adjust(tbl$p.raw, method = adjust)
 
   return(tbl)
 }

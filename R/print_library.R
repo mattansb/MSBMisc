@@ -33,7 +33,7 @@ print_library <-
     vs <- ""
     if (.version) {
       vs <- pkgs |> lapply(\(x){
-        tryCatch(packageVersion(x),
+        tryCatch(utils::packageVersion(x),
                  error = function(e) "")
       }) |>
         sapply(as.character)

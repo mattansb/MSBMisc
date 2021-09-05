@@ -56,18 +56,18 @@ qq_worm_plot <-
 
       ggplot2::ggplot(mapping = ggplot2::aes(sample = x)) +
         # Dots
-        ggplot2::stat_qq(ggplot2::aes(y = stat(sample - theoretical)),
+        ggplot2::stat_qq(ggplot2::aes(y = ggplot2::after_stat(sample - theoretical)),
                          distribution = q,
                          dparams = dparams) +
         # Funnel
         ggplot2::stat_qq(
-          ggplot2::aes(y = stat(worm_ci_UL(theoretical))),
+          ggplot2::aes(y = ggplot2::after_stat(worm_ci_UL(theoretical))),
           distribution = q,
           dparams = dparams,
           geom = "line"
         ) +
         ggplot2::stat_qq(
-          ggplot2::aes(y = stat(worm_ci_LL(theoretical))),
+          ggplot2::aes(y = ggplot2::after_stat(worm_ci_LL(theoretical))),
           distribution = q,
           dparams = dparams,
           geom = "line"
@@ -75,7 +75,7 @@ qq_worm_plot <-
         ggplot2::labs(x = paste0("theoretical ", distribution, " quantiles")) +
         NULL
     } else {
-      theoretical <- q(ppoints(x), ...)[order(order(x))]
+      theoretical <- q(stats::ppoints(x), ...)[order(order(x))]
       diff <- x - theoretical
       UCL <- worm_ci_UL(theoretical)
       LCL <- worm_ci_LL(theoretical)
