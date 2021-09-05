@@ -40,7 +40,7 @@
 #' @export
 R2 <- function(pred, obs, type = 1, na.rm = TRUE) {
   if (na.rm) {
-    good <- complete.cases(pred, obs)
+    good <- stats::complete.cases(pred, obs)
     pred <- pred[good]
     obs <- obs[good]
   }

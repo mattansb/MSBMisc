@@ -324,3 +324,6 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
   df
 }
+
+#' @keywords internal
+.data <- NULL
