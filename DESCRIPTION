@@ -13,11 +13,12 @@ Imports:
     stats,
     utils
 Suggests:
+    emmeans,
     ggplot2,
     lubridate,
-    shiny,
     MASS,
     patchwork,
+    shiny,
     testthat (>= 3.0.0),
     knitr
 LazyData: true

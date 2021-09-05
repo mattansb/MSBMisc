@@ -11,3 +11,9 @@ test_that("seq", {
 
   expect_equal(mean_sd(-1:1), c(`-SD` = -1, Mean = 0, `+SD` = 1))
 })
+
+
+test_that("cw", {
+  expect_error(cw(-2, 1))
+  expect_equal(cw(-2, 2, 0), c(-1, 1, 0))
+})
