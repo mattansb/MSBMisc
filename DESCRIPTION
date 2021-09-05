@@ -19,6 +19,7 @@ Suggests:
     MASS,
     patchwork,
     shiny,
+    tidySEM,
     testthat (>= 3.0.0),
     knitr
 LazyData: true
