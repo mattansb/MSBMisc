@@ -87,9 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../articles/MSBMisc.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
@@ -117,9 +114,14 @@
     <p>Follow-up for contingency table test</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>chisq_pairwise</span><span class='op'>(</span><span class='va'>Xsq</span>, population_in_row <span class='op'>=</span> <span class='cn'>TRUE</span>, adjust <span class='op'>=</span> <span class='va'>p.adjust.methods</span>, <span class='va'>...</span><span class='op'>)</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>chisq_pairwise</span><span class='op'>(</span>
+  <span class='va'>Xsq</span>,
+  population_in_row <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  adjust <span class='op'>=</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/r/stats/p.adjust.html'>p.adjust.methods</a></span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>chisq_residual</span><span class='op'>(</span><span class='va'>Xsq</span>, adjust <span class='op'>=</span> <span class='va'>p.adjust.methods</span><span class='op'>)</span></code></pre></div>
+<span class='fu'>chisq_residual</span><span class='op'>(</span><span class='va'>Xsq</span>, adjust <span class='op'>=</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/r/stats/p.adjust.html'>p.adjust.methods</a></span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
