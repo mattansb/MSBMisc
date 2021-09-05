@@ -5,7 +5,27 @@
 #' @param return a `ggplot` or a data frame?
 #' @param ... Args assed to `d*`, `p*` and `q*` functions.
 #'
-#' @example examples/examples.qq_worm_plot.R
+#' @examples
+#' x <- rnorm(100)
+#' qq_worm_plot(x)
+#' qq_worm_plot(x, return = "data")
+#'
+#' x <- rbeta(100, shape1 = 2, shape2 = 3)
+#' qq_worm_plot(x, distribution = "beta", shape1 = 2, shape2 = 3)
+#'
+#' \dontrun{
+#'   x <- rexp(100)
+#'   qq_worm_plot(x, distribution = "exp")
+#'
+#'   x <- rpois(100, lambda = 15)
+#'   qq_worm_plot(x, distribution = "pois", lambda = 15)
+#'
+#'   x <- rt(100, df = 3)
+#'   qq_worm_plot(x, distribution = "t", df = 3)
+#'
+#'   x <- runif(100)
+#'   qq_worm_plot(x, distribution = "unif")
+#' }
 #'
 #' @details
 #' [Some related tweets](https://twitter.com/mattansb/status/1199936633413476358).
@@ -16,7 +36,6 @@ qq_worm_plot <-
            distribution = "norm",
            return = c("plot", "data"),
            ...) {
-    .check_namespace("ggplot2")
 
     d <- match.fun(paste0("d", distribution))
     p <- match.fun(paste0("p", distribution))
@@ -33,6 +52,8 @@ qq_worm_plot <-
     }
 
     if (return == "plot") {
+      .check_namespace("ggplot2")
+
       ggplot2::ggplot(mapping = ggplot2::aes(sample = x)) +
         # Dots
         ggplot2::stat_qq(ggplot2::aes(y = stat(sample - theoretical)),

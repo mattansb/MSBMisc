@@ -5,7 +5,7 @@
 #' @param pred The predicted values by some model; typically the result of a
 #'   call to [predict()].
 #' @param obs The true observed values.
-#' @param type Which of the 8 $R^2$ to use. See details.
+#' @param type Which of the 8 \enq{R^2} to use. See details.
 #' @param na.rm a logical value indicating whether NA values should be stripped
 #'   before the computation proceeds.
 #'
@@ -22,14 +22,27 @@
 #'
 #' @references Kvålseth, T. O. (1985). Cautionary note about R 2. The American Statistician, 39(4), 279-285.
 #'
-#' @example examples/examples.R2.R
+#' @examples
+#' X <-  c(1, 2, 3, 4, 5, 6)
+#' Y <- c(15, 37, 52, 59, 83, 92)
+#'
+#' m1 <- lm(Y ~ X)
+#' m2 <- lm(Y ~ 0 + X)
+#' m3 <- lm(log(Y) ~ X)
+#'
+#' # Table 2
+#' data.frame(
+#'   mod1 = sapply(1:8, R2, pred = predict(m1), obs = Y),
+#'   mod2 = sapply(1:8, R2, pred = predict(m2), obs = Y),
+#'   mod3 = sapply(1:8, R2, pred = exp(predict(m3)), obs = Y)
+#' )
 #'
 #' @export
 R2 <- function(pred, obs, type = 1, na.rm = TRUE) {
   if (na.rm) {
-    dat <- na.omit(data.frame(pred,obs))
-    pred <- dat$pred
-    obs <- dat$obs
+    good <- complete.cases(pred, obs)
+    pred <- pred[good]
+    obs <- obs[good]
   }
 
   f <- switch(as.character(type),
@@ -90,5 +103,6 @@ R2 <- function(pred, obs, type = 1, na.rm = TRUE) {
 
 #' @keywords internal
 .SS <- function(x, y) {
+  stopifnot(length(x) == length(y) || length(x) == 1L || length(y) == 1L)
   sum((x - y) ^ 2)
 }

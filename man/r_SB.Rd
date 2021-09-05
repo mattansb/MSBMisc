@@ -9,9 +9,9 @@ r_SB(x, y = NULL, var.equal = TRUE)
 \arguments{
 \item{x}{A correlation or numeric vector}
 
-\item{y}{A numeric vector (ignored if \code{x} is not a vector)}
+\item{y}{A numeric vector}
 
-\item{var.equal}{Assume equal var of \code{x} and \code{y}? (ignored if \code{x} is not a vector)}
+\item{var.equal}{Assume equal var of \code{x} and \code{y}? (ignored if \code{y} is not \code{NULL})}
 }
 \description{
 Spearman-Brown Split half reliability
@@ -22,4 +22,5 @@ r_SB(1:30,-exp(1/1:30), var.equal = TRUE)
 r_SB(1:30,-exp(1/1:30), var.equal = FALSE)
 
 r_SB(0.57)
+
 }

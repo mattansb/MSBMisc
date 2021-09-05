@@ -3,7 +3,10 @@
 #' @param DOB,REFDATE Two dates
 #' @param years,months,weeks,days the units.
 #'
-#' @example examples/examples.age_in_unit.R
+#' @examples
+#' DOB <- as.Date("1989-08-05")
+#' TODAY <- Sys.Date()
+#' age_in_unit(DOB, TODAY)
 #'
 #' @export
 age_in_unit <- function(DOB,

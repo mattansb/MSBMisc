@@ -7,7 +7,9 @@
 #' @param .version Print library version?
 #' @param .load Load package, or just print?
 #'
-#' @example examples/examples.print_library.R
+#' @examples
+#' print_library(afex, tidyverse, emmeans, MASS,
+#'               .load = FALSE)
 #'
 #' @export
 #'
@@ -19,39 +21,26 @@ print_library <-
     if (.character.only) {
       pkgs <- c(...)
     } else {
-      pkgs <- sapply(match.call(expand.dots = F)$`...`, deparse)
+      pkgs <- sapply(match.call(expand.dots = FALSE)$`...`, deparse)
     }
 
     if (.load) {
-      res <-
-        suppressMessages(suppressWarnings(suppressPackageStartupMessages(
-          sapply(
-            pkgs,
-            require,
-            character.only = TRUE,
-            quietly = TRUE
-          )
-        )))
-
-      if (!all(res)) {
-        stop("Could not load ", paste0(pkgs[!res], collapse = ", "), call. = FALSE)
-      }
+      suppressMessages(suppressWarnings(suppressPackageStartupMessages(
+        .check_namespace(pkgs)
+      )))
     }
 
     vs <- ""
     if (.version) {
-      vs <- lapply(pkgs, function(x){
+      vs <- pkgs |> lapply(\(x){
         tryCatch(packageVersion(x),
                  error = function(e) "")
-      })
-      vs <- sapply(vs, as.character)
+      }) |>
+        sapply(as.character)
 
-      sps <- max(nchar(pkgs)) - nchar(pkgs)
-      sps <-
-        sapply(sps, function(x)
-          paste0(rep(" ", x), collapse = ""))
-
-      vs <- paste0(sps, " # ", vs)
+      vs <- (max(nchar(pkgs)) - nchar(pkgs)) |>
+        sapply(\(x) paste0(rep(" ", x), collapse = "")) |>
+        paste0(" # ", vs)
     }
 
     cat(paste0("library(", pkgs, ")", vs, collapse = "\n"), "\n")

@@ -14,7 +14,7 @@ compare_freqs(f, adjust = p.adjust.methods, correct = TRUE)
 \item{correct}{a logical indicating whether to apply continuity correction when computing the test statistic.}
 }
 \description{
-Using \code{\link[stats:mcnemar.test]{stats::mcnemar.test}} for comparing dependant proportions.
+Using \code{\link[stats:mcnemar.test]{stats::mcnemar.test}} for comparing dependent proportions.
 }
 \examples{
 f <- c(
@@ -25,4 +25,5 @@ f <- c(
 )
 
 compare_freqs(f)
+
 }

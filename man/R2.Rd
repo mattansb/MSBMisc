@@ -12,7 +12,7 @@ call to \code{\link[=predict]{predict()}}.}
 
 \item{obs}{The true observed values.}
 
-\item{type}{Which of the 8 $R^2$ to use. See details.}
+\item{type}{Which of the 8 \enq{R^2} to use. See details.}
 
 \item{na.rm}{a logical value indicating whether NA values should be stripped
 before the computation proceeds.}
@@ -47,6 +47,7 @@ data.frame(
   mod2 = sapply(1:8, R2, pred = predict(m2), obs = Y),
   mod3 = sapply(1:8, R2, pred = exp(predict(m3)), obs = Y)
 )
+
 }
 \references{
 Kvålseth, T. O. (1985). Cautionary note about R 2. The American Statistician, 39(4), 279-285.

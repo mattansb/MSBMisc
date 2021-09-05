@@ -6,7 +6,12 @@
 #' @param value Name of the column from which values should be returned.
 #' @param add Should `this` and the resulting values be returned as a data frame? (Else a vector)
 #'
-#' @example examples/examples.vlookup.R
+#' @examples
+#' df <- data.frame(a = letters[c(1,1:9)],
+#'                  b = 51:60)
+#'
+#' vlookup(c("a", "e", "c"), df, key = "a", value = "b")
+#' vlookup(c("a", "e", "c"), df, key = "a", value = "b", add = TRUE)
 #'
 #' @export
 vlookup <- function(this, data, key, value, add = FALSE) {

@@ -1,19 +1,27 @@
 #' Compare the frequencies of levels of a factor
 #'
-#' Using [`stats::mcnemar.test`] for comparing dependant proportions.
+#' Using [`stats::mcnemar.test`] for comparing dependent proportions.
 #'
 #' @param f A factor vector.
 #' @param adjust Method for correcting p-values. See [`stats::p.adjust`].
 #' @param correct a logical indicating whether to apply continuity correction when computing the test statistic.
 #'
-#' @example examples/examples.compare_freqs.R
+#' @examples
+#' f <- c(
+#'   rep("A", 12),
+#'   rep("B", 45),
+#'   rep("C", 42),
+#'   rep("D", 20)
+#' )
+#'
+#' compare_freqs(f)
 #'
 #' @export
 compare_freqs <- function(f, adjust = p.adjust.methods, correct = TRUE) {
   adjust <- match.arg(adjust)
 
   levels <- unique(f)
-  pairs <- combn(1:length(levels), 2)
+  pairs <- combn(seq_len(length(levels)), 2)
 
   res <- lapply(seq_len(ncol(pairs)), function(i) {
     k1 <- pairs[1, i]

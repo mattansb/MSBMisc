@@ -1,14 +1,19 @@
 #' Spearman-Brown Split half reliability
 #'
 #' @param x A correlation or numeric vector
-#' @param y A numeric vector (ignored if `x` is not a vector)
-#' @param var.equal Assume equal var of `x` and `y`? (ignored if `x` is not a vector)
+#' @param y A numeric vector
+#' @param var.equal Assume equal var of `x` and `y`? (ignored if `y` is not `NULL`)
 #'
-#' @example examples/examples.r_SB.R
+#' @examples
+#' r_SB(1:30,-exp(1/1:30), var.equal = TRUE)
+#'
+#' r_SB(1:30,-exp(1/1:30), var.equal = FALSE)
+#'
+#' r_SB(0.57)
 #'
 #' @export
 r_SB <- function(x, y = NULL, var.equal = TRUE) {
-  if (length(x) > 1) {
+  if (!is.null(y)) {
     r <- cov(cbind(x, y))
     if (var.equal) {
       r <- cov2cor(r)

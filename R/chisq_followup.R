@@ -5,7 +5,19 @@
 #' @param adjust Method for correcting p-values. See [`stats::p.adjust`].
 #' @param ... Passed to `chisq.test()`.
 #'
-#' @example examples/examples.chisq_followup.R
+#' @examples
+#' M <- as.table(rbind(c(762, 327, 468),
+#'                     c(484, 239, 477)))
+#' dimnames(M) <- list(
+#'   gender = c("F", "M"),
+#'   party = c("Democrat", "Independent", "Republican")
+#' )
+#' M
+#'
+#' res <- chisq.test(M)
+#' chisq_pairwise(res)
+#' chisq_pairwise(res, population_in_row = FALSE)
+#' chisq_residual(res)
 #'
 #' @export
 chisq_pairwise <- function(Xsq,

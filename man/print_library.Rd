@@ -22,6 +22,7 @@ print_require(..., .character.only = FALSE, .version = TRUE, .load = TRUE)
 Useful in RMarkdown.
 }
 \examples{
-print_require(afex, tidyverse, emmeans, MASS,
+print_library(afex, tidyverse, emmeans, MASS,
               .load = FALSE)
+
 }

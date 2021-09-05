@@ -77,7 +77,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     })
 
     ## Table ##
-    output$results <- shiny::renderTable(rownames = TRUE, {
+    output$results <- shiny::renderTable(rownames = TRUE, digits = 3, {
       df <- .add_corr(data(), input$r)
 
       res_p <- .tidy_ttest(df, paired = TRUE)
@@ -182,22 +182,26 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
     ## plot 1 ##
     output$thePlot <- shiny::renderPlot({
+      m1 <- lm(V2 ~ V1, data())
       rr1 <- cor(data()[,1:2])[2]
-      se1 <- sd(residuals(lm(V2 ~ V1, data())))
+      se1 <- sd(residuals(m1))
+      b1 <- coef(m1)[2]
 
+      m2 <- lm(V2 ~ V1, data()[data()$in_range,1:2])
       rr2 <- cor(data()[data()$in_range,1:2])[2]
-      se2 <- sd(residuals(lm(V2 ~ V1, data()[data()$in_range,1:2])))
+      se2 <- sd(residuals(m2))
+      b2 <- coef(m2)[2]
 
 
       p1 <- ggplot2::ggplot(data(), ggplot2::aes(V1, V2, color = in_range)) +
         ggplot2::scale_color_manual(values = c('red','blue')) +
         ggplot2::labs(title = paste0("r = ", round(rr1, 2)),
-                      subtitle = paste0("RMSE = ", round(se1, 2)))
+                      subtitle = paste0("b = ", round(b1, 3) ,", RMSE = ", round(se1, 2)))
 
 
       p2 <- ggplot2::ggplot(data()[data()$in_range,], ggplot2::aes(V1, V2)) +
         ggplot2::labs(title = paste0("Truncated r = ", round(rr2, 2)),
-                      subtitle = paste0("RMSE = ", round(se2,2)))
+                      subtitle = paste0("b = ", round(b2, 3) ,", RMSE = ", round(se2, 2)))
 
       p1 / p2 & ploting_list
     })
@@ -277,9 +281,11 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
       ggplot2::ggplot(plot_data, ggplot2::aes(V1, V2, color = is_in)) +
         ggplot2::geom_point(alpha = 0.4, shape = 16) +
         ggplot2::geom_smooth(ggplot2::aes(group = 1),
+                             formula = y ~ x,
                              color = "blue2",
                              method = "lm", se = TRUE) +
         ggplot2::geom_smooth(ggplot2::aes(group = 1), data = cut_data,
+                             formula = y ~ x,
                              color = "red2",
                              method = "lm", se = TRUE) +
 
