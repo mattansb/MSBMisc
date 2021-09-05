@@ -22,6 +22,9 @@
     <loc>/reference/compare_freqs.html</loc>
   </url>
   <url>
+    <loc>/reference/contrast_weights.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
@@ -35,6 +38,9 @@
   </url>
   <url>
     <loc>/reference/seq_range.html</loc>
+  </url>
+  <url>
+    <loc>/reference/simple_mediation_plot.html</loc>
   </url>
   <url>
     <loc>/reference/stat_demo_apps.html</loc>
