@@ -5,7 +5,7 @@
 #' @param pred The predicted values by some model; typically the result of a
 #'   call to [predict()].
 #' @param obs The true observed values.
-#' @param type Which of the 8 \enq{R^2} to use. See details.
+#' @param type Which of the 8 versions of *R*-square to use. See details.
 #' @param na.rm a logical value indicating whether NA values should be stripped
 #'   before the computation proceeds.
 #'

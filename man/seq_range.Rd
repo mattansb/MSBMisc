@@ -16,6 +16,9 @@ mean_sd(x, na.rm = TRUE, out = c("vector", "data.frame"))
     non-negative number, which for \code{seq} and \code{seq.int} will be
     rounded up if fractional.}
 
+\item{na.rm}{a logical value indicating whether \code{NA}
+    values should be stripped before the computation proceeds.}
+
 \item{out}{If \code{"data.frame"} can be used as a summary function in \code{ggplot2}.}
 }
 \description{

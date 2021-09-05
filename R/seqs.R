@@ -2,7 +2,7 @@
 #'
 #' @param x A numeric vector
 #' @inheritParams base::seq
-#' @inheritParams base::seq
+#' @inheritParams base::mean
 #'
 #' @examples
 #' set.seed(1)
