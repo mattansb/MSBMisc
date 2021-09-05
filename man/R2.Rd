@@ -12,7 +12,7 @@ call to \code{\link[=predict]{predict()}}.}
 
 \item{obs}{The true observed values.}
 
-\item{type}{Which of the 8 \enq{R^2} to use. See details.}
+\item{type}{Which of the 8 versions of \emph{R}-square to use. See details.}
 
 \item{na.rm}{a logical value indicating whether NA values should be stripped
 before the computation proceeds.}
