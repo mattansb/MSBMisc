@@ -1,1 +1,4 @@
-test_check("bayestestR")
+library(testthat)
+library(MSBMisc)
+
+test_check("MSBMisc")
