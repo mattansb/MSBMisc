@@ -13,6 +13,7 @@ Imports:
     stats,
     utils
 Suggests:
+    dplyr,
     emmeans,
     ggplot2,
     lubridate,
