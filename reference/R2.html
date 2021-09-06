@@ -164,21 +164,21 @@ before the computation proceeds.</p></td>
 <span class='r-in'><span class='va'>m2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Y</span> <span class='op'>~</span> <span class='fl'>0</span> <span class='op'>+</span> <span class='va'>X</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>m3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>Y</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>X</span><span class='op'>)</span></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># Table 2</span></span>
+<span class='r-in'><span class='co'># Table 2 from KvÃ¥lset0 (1985)</span></span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span></span>
 <span class='r-in'>  mod1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>8</span>, <span class='va'>R2</span>, pred <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>m1</span><span class='op'>)</span>, obs <span class='op'>=</span> <span class='va'>Y</span><span class='op'>)</span>,</span>
 <span class='r-in'>  mod2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>8</span>, <span class='va'>R2</span>, pred <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>m2</span><span class='op'>)</span>, obs <span class='op'>=</span> <span class='va'>Y</span><span class='op'>)</span>,</span>
-<span class='r-in'>  mod3 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>8</span>, <span class='va'>R2</span>, pred <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>exp</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>m3</span><span class='op'>)</span><span class='op'>)</span>, obs <span class='op'>=</span> <span class='va'>Y</span><span class='op'>)</span></span>
+<span class='r-in'>  mod3 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>8</span>, <span class='va'>R2</span>, pred <span class='op'>=</span> <span class='fl'>16.3757</span> <span class='op'>*</span> <span class='va'>X</span> <span class='op'>^</span> <span class='fl'>0.99</span>, obs <span class='op'>=</span> <span class='va'>Y</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>        mod1      mod2      mod3</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 0.9808189 0.9776853 0.8543902</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 0.9808189 1.0836003 1.4062228</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 0.9808189 1.0829977 1.4060719</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 0.9808189 0.9782880 0.8545411</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 0.9808189 0.9776853 0.9777219</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 0.9808189 1.0836003 1.0982588</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 0.9808189 1.0829977 1.0982028</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 0.9808189 0.9782880 0.9777779</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 5        NA        NA        NA</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 0.9808189 0.9808189 0.9086255</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 7 0.9966075 0.9960532 0.9742461</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 8 0.9966075 0.9960532 1.0812233</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 0.9808189 0.9808189 0.9810793</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7 0.9966075 0.9960532 0.9960597</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8 0.9966075 0.9960532 1.0230915</span>
 <span class='r-in'></span>
 </code></pre></div>
   </div>
