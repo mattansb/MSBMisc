@@ -20,24 +20,24 @@ Create a worm plot
 \href{https://twitter.com/mattansb/status/1199936633413476358}{Some related tweets}.
 }
 \examples{
-if (require("ggplot2")) {
-  x <- rnorm(100)
-  qq_worm_plot(x)
+\dontrun{
+x <- rnorm(100)
+qq_worm_plot(x)
 
-  x <- rbeta(100, shape1 = 2, shape2 = 3)
-  qq_worm_plot(x, distribution = "beta", shape1 = 2, shape2 = 3)
+x <- rbeta(100, shape1 = 2, shape2 = 3)
+qq_worm_plot(x, distribution = "beta", shape1 = 2, shape2 = 3)
 
-  # x <- rexp(100)
-  # qq_worm_plot(x, distribution = "exp")
+x <- rt(100, df = 3)
+qq_worm_plot(x, distribution = "t", df = 3)
 
-  # x <- rpois(100, lambda = 15)
-  # qq_worm_plot(x, distribution = "pois", lambda = 15)
+# x <- rexp(100)
+# qq_worm_plot(x, distribution = "exp")
 
-  # x <- runif(100)
-  # qq_worm_plot(x, distribution = "unif")
+# x <- rpois(100, lambda = 15)
+# qq_worm_plot(x, distribution = "pois", lambda = 15)
 
-  # x <- rt(100, df = 3)
-  # qq_worm_plot(x, distribution = "t", df = 3)
+# x <- runif(100)
+# qq_worm_plot(x, distribution = "unif")
 }
 
 }

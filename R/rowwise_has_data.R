@@ -4,17 +4,17 @@
 #' @param .name Name of the new column with the logical index.
 #'
 #' @examples
-#' if (require("dplyr")) {
-#'   data(mtcars)
+#' \dontrun{
+#' data(mtcars)
 #'
-#'   mtcars[1, 1] <- NA
-#'   mtcars[2, ] <- NA
+#' mtcars[1, 1] <- NA
+#' mtcars[2, ] <- NA
 #'
-#'   mtcars[1:3, 1:3] |>
-#'     has_any_data(mpg:disp, .name = "has_any") |>
-#'     has_all_data(mpg:disp, .name = "has_all") |>
-#'     missing_any_data(mpg:disp, .name = "missing_any") |>
-#'     missing_all_data(mpg:disp, .name = "missing_all")
+#' mtcars[1:3, 1:3] |>
+#'   has_any_data(mpg:disp, .name = "has_any") |>
+#'   has_all_data(mpg:disp, .name = "has_all") |>
+#'   missing_any_data(mpg:disp, .name = "missing_any") |>
+#'   missing_all_data(mpg:disp, .name = "missing_all")
 #' }
 #'
 #' @export

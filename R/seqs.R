@@ -11,10 +11,11 @@
 #'
 #' mean_sd(x)
 #'
-#' if (require("ggplot2"))
-#'   ggplot(mtcars, aes(cyl, mpg)) +
-#'     stat_summary(fun.data = mean_sd, fun.args = list(out = "data.frame"))
-#'
+#' \dontrun{
+#' library(ggplot2)
+#' ggplot(mtcars, aes(cyl, mpg)) +
+#'   stat_summary(fun.data = mean_sd, fun.args = list(out = "data.frame"))
+#' }
 #' @export
 seq_range <- function(x, length.out = 20, na.rm = TRUE) {
   match.call()

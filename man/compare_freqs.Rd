@@ -19,6 +19,7 @@ Using \code{\link[stats:mcnemar.test]{stats::mcnemar.test}} for comparing depend
 This is function is dubious. Best not to use it.
 }
 \examples{
+\dontrun{
 f <- c(
   rep("A", 12),
   rep("B", 45),
@@ -27,5 +28,5 @@ f <- c(
 )
 
 compare_freqs(f)
-
+}
 }

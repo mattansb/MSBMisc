@@ -9,6 +9,7 @@
 #' @param correct a logical indicating whether to apply continuity correction when computing the test statistic.
 #'
 #' @examples
+#' \dontrun{
 #' f <- c(
 #'   rep("A", 12),
 #'   rep("B", 45),
@@ -17,7 +18,7 @@
 #' )
 #'
 #' compare_freqs(f)
-#'
+#' }
 #' @export
 compare_freqs <- function(f, adjust = stats::p.adjust.methods, correct = TRUE) {
   warning("This is function is dubious. Best not to use it.", call. = FALSE, immediate. = TRUE)

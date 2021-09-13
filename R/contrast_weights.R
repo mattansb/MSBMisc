@@ -27,15 +27,16 @@
 #' (my_contrasts2 <- cw(my_contrasts))
 #' my_contrasts3 <- cw(my_contrasts, .adjust = "fdr")
 #'
-#' if (require("emmeans")) {
-#'   (emms <- emmeans(mod, ~ cyl + am))
+#' \dontrun{
+#' library(emmeans)
+#' (emms <- emmeans(mod, ~ cyl + am))
 #'
-#'   contrast(emms, method = my_contrasts, by = "am")
-#'   contrast(emms, method = my_contrasts2, by = "am") # estimate is affected!
-#'   contrast(emms, method = my_contrasts3, by = "am") # p value is affected
+#' contrast(emms, method = my_contrasts, by = "am")
+#' contrast(emms, method = my_contrasts2, by = "am") # estimate is affected!
+#' contrast(emms, method = my_contrasts3, by = "am") # p value is affected
 #'
-#'   # Also in interaction contrasts
-#'   contrast(emms, interaction = list(cyl = my_contrasts2, am = "pairwise"))
+#' # Also in interaction contrasts
+#' contrast(emms, interaction = list(cyl = my_contrasts2, am = "pairwise"))
 #' }
 #'
 #' @export

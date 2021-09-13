@@ -4,10 +4,10 @@
 #' @param years,months,weeks,days the units.
 #'
 #' @examples
-#' if (require(lubridate)) {
-#'   DOB <- as.Date("1989-08-05")
-#'   TODAY <- Sys.Date()
-#'   age_in_unit(DOB, TODAY)
+#' \dontrun{
+#' DOB <- as.Date("1989-08-05")
+#' TODAY <- Sys.Date()
+#' age_in_unit(DOB, TODAY)
 #' }
 #'
 #' @export

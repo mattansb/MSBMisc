@@ -6,7 +6,7 @@
 #' @param ... Passed to [tidySEM::prepare_graph].
 #'
 #' @examples
-#'
+#' \dontrun{
 #' mod_a <- lm(hp ~ gear, data = mtcars)
 #' mod_bc <- lm(mpg ~ hp + gear, data = mtcars)
 #'
@@ -16,19 +16,18 @@
 #' indirect <- a * b
 #' total <- direct + indirect
 #'
-#' if (require("tidySEM")) {
-#'   med_plot <- simple_mediation_plot(
-#'     a = round(a, 3),
-#'     b = round(b, 3),
-#'     direct = round(direct, 3),
-#'     indirect = round(indirect, 3),
-#'     total = round(total, 3),
-#'     X_name = "Gears",
-#'     M_name = "Horse\nPower",
-#'     Y_name = "Miles\nPer Gallon"
-#'   )
+#' med_plot <- simple_mediation_plot(
+#'   a = round(a, 3),
+#'   b = round(b, 3),
+#'   direct = round(direct, 3),
+#'   indirect = round(indirect, 3),
+#'   total = round(total, 3),
+#'   X_name = "Gears",
+#'   M_name = "Horse\nPower",
+#'   Y_name = "Miles\nPer Gallon"
+#' )
 #'
-#'   plot(med_plot)
+#' plot(med_plot)
 #' }
 #'
 
