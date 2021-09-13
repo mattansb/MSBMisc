@@ -40,7 +40,9 @@
 
 
 <meta property="og:title" content="Compare the frequencies of levels of a factor — compare_freqs" />
-<meta property="og:description" content="Using stats::mcnemar.test for comparing dependent proportions." />
+<meta property="og:description" content="Using stats::mcnemar.test for comparing dependent proportions.
+
+This is function is dubious. Best not to use it." />
 
 
 
@@ -80,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MSBMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.8</span>
       </span>
     </div>
 
@@ -111,7 +113,9 @@
     </div>
 
     <div class="ref-description">
-    <p>Using <code><a href='https://rdrr.io/r/stats/mcnemar.test.html'>stats::mcnemar.test</a></code> for comparing dependent proportions.</p>
+    <p>Using <code><a href='https://rdrr.io/r/stats/mcnemar.test.html'>stats::mcnemar.test</a></code> for comparing dependent proportions.
+<br /><br />
+This is function is dubious. Best not to use it.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>compare_freqs</span><span class='op'>(</span><span class='va'>f</span>, adjust <span class='op'>=</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/r/stats/p.adjust.html'>p.adjust.methods</a></span>, correct <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></code></pre></div>
@@ -143,6 +147,7 @@
 <span class='r-in'><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='fu'>compare_freqs</span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>This is function is dubious. Best not to use it.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   comparison     prop1     prop2      Chi.sq df        p.raw       p.holm</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 1  A  vs.  B 0.1008403 0.3781513 17.96491228  1 2.250146e-05 0.0001350088</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 2  A  vs.  C 0.1008403 0.3529412 15.57407407  1 7.933499e-05 0.0003966749</span>

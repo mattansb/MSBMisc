@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MSBMisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.8</span>
       </span>
     </div>
 
@@ -118,10 +118,17 @@
   <span class='va'>Xsq</span>,
   population_in_row <span class='op'>=</span> <span class='cn'>TRUE</span>,
   adjust <span class='op'>=</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/r/stats/p.adjust.html'>p.adjust.methods</a></span>,
+  effect_size <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"V"</span>, <span class='st'>"phi"</span><span class='op'>)</span>,
+  ci <span class='op'>=</span> <span class='fl'>0.95</span>,
   <span class='va'>...</span>
 <span class='op'>)</span>
 
-<span class='fu'>chisq_residual</span><span class='op'>(</span><span class='va'>Xsq</span>, adjust <span class='op'>=</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/r/stats/p.adjust.html'>p.adjust.methods</a></span><span class='op'>)</span></code></pre></div>
+<span class='fu'>chisq_residual</span><span class='op'>(</span>
+  <span class='va'>Xsq</span>,
+  adjust <span class='op'>=</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/r/stats/p.adjust.html'>p.adjust.methods</a></span>,
+  res_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pearson"</span>, <span class='st'>"standardized"</span><span class='op'>)</span>,
+  ci <span class='op'>=</span> <span class='fl'>0.95</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,8 +146,20 @@
       <td><p>Method for correcting p-values. See <code><a href='https://rdrr.io/r/stats/p.adjust.html'>stats::p.adjust</a></code>.</p></td>
     </tr>
     <tr>
+      <th>effect_size</th>
+      <td><p>Type of effect size to use.</p></td>
+    </tr>
+    <tr>
+      <th>ci</th>
+      <td><p>Confidence Interval (CI) level</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Passed to <code><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>res_type</th>
+      <td><p>Type of residuals to use.</p></td>
     </tr>
     </table>
 
@@ -160,21 +179,48 @@
 <span class='r-in'></span>
 <span class='r-in'><span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test</a></span><span class='op'>(</span><span class='va'>M</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>chisq_pairwise</span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   comparison   Chi.sq df        p.raw       p.holm</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1    F vs. M 30.07015  2 2.953589e-07 2.953589e-07</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Registered S3 methods overwritten by 'parameters':</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   method                           from      </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   as.double.parameters_kurtosis    datawizard</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   as.double.parameters_skewness    datawizard</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   as.double.parameters_smoothness  datawizard</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   as.numeric.parameters_kurtosis   datawizard</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   as.numeric.parameters_skewness   datawizard</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   as.numeric.parameters_smoothness datawizard</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   print.parameters_distribution    datawizard</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   print.parameters_kurtosis        datawizard</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   print.parameters_skewness        datawizard</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   summary.parameters_kurtosis      datawizard</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   summary.parameters_skewness      datawizard</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   comparison   Chi.sq df         V   V.CI_low V.CI_high        p.raw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1    F vs. M 30.07015  2 0.1044358 0.06490742 0.1402639 2.953589e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         p.holm</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 2.953589e-07</span>
 <span class='r-in'><span class='fu'>chisq_pairwise</span><span class='op'>(</span><span class='va'>res</span>, population_in_row <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                   comparison    Chi.sq df        p.raw       p.holm</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1   Democrat vs. Independent  1.717892  1 1.899646e-01 1.899646e-01</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2    Democrat vs. Republican 29.059545  1 7.018745e-08 2.105623e-07</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 Independent vs. Republican  9.335659  1 2.247373e-03 4.494746e-03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                   comparison    Chi.sq df          V   V.CI_low  V.CI_high</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1   Democrat vs. Independent  1.717892  1 0.03200649 0.00000000 0.07804948</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2    Democrat vs. Republican 29.059545  1 0.11609430 0.07422201 0.15796661</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 Independent vs. Republican  9.335659  1 0.07997241 0.02954635 0.13039392</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          p.raw       p.holm</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 1.899646e-01 1.899646e-01</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 7.018745e-08 2.105623e-07</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 2.247373e-03 4.494746e-03</span>
+<span class='r-in'></span>
 <span class='r-in'><span class='fu'>chisq_residual</span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   gender       party    z.value       p.raw      p.holm</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 1      F    Democrat  2.1988558 0.027888180 0.083664539</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 2      M    Democrat -2.5046695 0.012256586 0.049026346</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 3      F Independent  0.4113702 0.680801124 1.000000000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 4      M Independent -0.4685829 0.639367769 1.000000000</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 5      F  Republican -2.8432397 0.004465747 0.022328734</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 6      M  Republican  3.2386734 0.001200870 0.007205219</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   gender       party    z.value n.obs           d     d.CI_low   d.CI_high</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1      F    Democrat  2.1988558   762  0.07965614  0.008654136  0.15065814</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2      M    Democrat -2.5046695   484 -0.11384861 -0.202937885 -0.02475934</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3      F Independent  0.4113702   327  0.02274882 -0.085637434  0.13113508</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4      M Independent -0.4685829   239 -0.03031011 -0.157089642  0.09646942</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5      F  Republican -2.8432397   468 -0.13142880 -0.222028170 -0.04082944</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6      M  Republican  3.2386734   477  0.14828867  0.058548084  0.23802926</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         p.raw      p.holm</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 0.027888180 0.083664539</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 0.012256586 0.049026346</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 0.680801124 1.000000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 0.639367769 1.000000000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 0.004465747 0.022328734</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 0.001200870 0.007205219</span>
 <span class='r-in'></span>
 </code></pre></div>
   </div>
