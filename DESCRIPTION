@@ -1,7 +1,7 @@
 Package: MSBMisc
 Type: Package
 Title: Some functions I wrote that I find useful
-Version: 0.0.1.7
+Version: 0.0.1.8
 Author: person("Mattan S.", "Ben-Shachar")
 Maintainer: Mattan S. Ben-Shachar <mattan.s.b@gmail.com>
 Description: misc. functions.
@@ -14,11 +14,13 @@ Imports:
     utils
 Suggests:
     dplyr,
+    effectsize,
     emmeans,
     ggplot2,
     lubridate,
     MASS,
     patchwork,
+    qqplotr,
     shiny,
     tidySEM,
     testthat (>= 3.0.0),

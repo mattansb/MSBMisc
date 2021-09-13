@@ -18,6 +18,9 @@ print_library <-
            .character.only = FALSE,
            .version = TRUE,
            .load = TRUE) {
+    cl <- match.call()
+    type <- ifelse(grepl("require$", as.character(cl[[1]])), "require", "library")
+
     if (.character.only) {
       pkgs <- c(...)
     } else {
@@ -25,9 +28,7 @@ print_library <-
     }
 
     if (.load) {
-      suppressMessages(suppressWarnings(suppressPackageStartupMessages(
-        .check_namespace(pkgs)
-      )))
+      suppressMessages(suppressWarnings(suppressPackageStartupMessages(require(pkgs, character.only = TRUE))))
     }
 
     vs <- ""
@@ -43,9 +44,16 @@ print_library <-
         paste0(" # ", vs)
     }
 
-    cat(paste0("library(", pkgs, ")", vs, collapse = "\n"), "\n")
+    out <- paste0(type, "(", pkgs, ")", vs)
+    class(out) <- c("msb_print_library", class(out))
+    out
   }
 
 #' @export
 #' @rdname print_library
 print_require <- print_library
+
+#' @export
+print.msb_print_library <- function(x, ...) {
+  cat(paste0(x, collapse = "\n"), "\n")
+}

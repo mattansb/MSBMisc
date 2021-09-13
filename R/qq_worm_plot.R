@@ -2,29 +2,27 @@
 #'
 #' @param x A numerical vector
 #' @param distribution Name of a distribution, matching the `d*`, `p*` and `q*` function names.
-#' @param return a `ggplot` or a data frame?
 #' @param ... Args assed to `d*`, `p*` and `q*` functions.
 #'
 #' @examples
-#' x <- rnorm(100)
-#' qq_worm_plot(x)
-#' qq_worm_plot(x, return = "data")
+#' if (require("ggplot2")) {
+#'   x <- rnorm(100)
+#'   qq_worm_plot(x)
 #'
-#' x <- rbeta(100, shape1 = 2, shape2 = 3)
-#' qq_worm_plot(x, distribution = "beta", shape1 = 2, shape2 = 3)
+#'   x <- rbeta(100, shape1 = 2, shape2 = 3)
+#'   qq_worm_plot(x, distribution = "beta", shape1 = 2, shape2 = 3)
 #'
-#' \dontrun{
-#'   x <- rexp(100)
-#'   qq_worm_plot(x, distribution = "exp")
+#'   # x <- rexp(100)
+#'   # qq_worm_plot(x, distribution = "exp")
 #'
-#'   x <- rpois(100, lambda = 15)
-#'   qq_worm_plot(x, distribution = "pois", lambda = 15)
+#'   # x <- rpois(100, lambda = 15)
+#'   # qq_worm_plot(x, distribution = "pois", lambda = 15)
 #'
-#'   x <- rt(100, df = 3)
-#'   qq_worm_plot(x, distribution = "t", df = 3)
+#'   # x <- runif(100)
+#'   # qq_worm_plot(x, distribution = "unif")
 #'
-#'   x <- runif(100)
-#'   qq_worm_plot(x, distribution = "unif")
+#'   # x <- rt(100, df = 3)
+#'   # qq_worm_plot(x, distribution = "t", df = 3)
 #' }
 #'
 #' @details
@@ -34,51 +32,19 @@
 qq_worm_plot <-
   function(x,
            distribution = "norm",
-           return = c("plot", "data"),
            ...) {
+    .Deprecated("qqplotr::stat_pp_point etc.")
 
-    d <- match.fun(paste0("d", distribution))
-    p <- match.fun(paste0("p", distribution))
-    q <- match.fun(paste0("q", distribution))
-    return <- match.arg(return)
+    .check_namespace("ggplot2", "qqplotr")
+
     dparams <- list(...)
-
-    worm_ci_UL <- function(nx) {
-      1.96 * sqrt(p(nx, ...) * (1 - p(nx, ...)) / length(nx)) / d(nx, ...)
+    if (!is.null(dparams$return)) {
+      warning("This functions no longer returns data.")
+      dparams$return <- NULL
     }
 
-    worm_ci_LL <- function(nx) {
-      -1.96 * sqrt(p(nx, ...) * (1 - p(nx, ...)) / length(nx)) / d(nx, ...)
-    }
-
-    if (return == "plot") {
-      .check_namespace("ggplot2")
-
-      ggplot2::ggplot(mapping = ggplot2::aes(sample = x)) +
-        # Dots
-        ggplot2::stat_qq(ggplot2::aes(y = ggplot2::after_stat(sample - theoretical)),
-                         distribution = q,
-                         dparams = dparams) +
-        # Funnel
-        ggplot2::stat_qq(
-          ggplot2::aes(y = ggplot2::after_stat(worm_ci_UL(theoretical))),
-          distribution = q,
-          dparams = dparams,
-          geom = "line"
-        ) +
-        ggplot2::stat_qq(
-          ggplot2::aes(y = ggplot2::after_stat(worm_ci_LL(theoretical))),
-          distribution = q,
-          dparams = dparams,
-          geom = "line"
-        ) +
-        ggplot2::labs(x = paste0("theoretical ", distribution, " quantiles")) +
-        NULL
-    } else {
-      theoretical <- q(stats::ppoints(x), ...)[order(order(x))]
-      diff <- x - theoretical
-      UCL <- worm_ci_UL(theoretical)
-      LCL <- worm_ci_LL(theoretical)
-      data.frame(theoretical, sample_deviation = diff, UCL, LCL)
-    }
+    ggplot2::ggplot(mapping = ggplot2::aes(sample = x)) +
+      qqplotr::stat_qq_band(detrend = TRUE, distribution = distribution, dparams = dparams) +
+      qqplotr::stat_qq_line(detrend = TRUE, distribution = distribution, dparams = dparams) +
+      qqplotr::stat_qq_point(detrend = TRUE, distribution = distribution, dparams = dparams)
   }

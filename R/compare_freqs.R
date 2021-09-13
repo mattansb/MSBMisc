@@ -1,6 +1,8 @@
 #' Compare the frequencies of levels of a factor
 #'
 #' Using [`stats::mcnemar.test`] for comparing dependent proportions.
+#' \cr\cr
+#' This is function is dubious. Best not to use it.
 #'
 #' @param f A factor vector.
 #' @param adjust Method for correcting p-values. See [`stats::p.adjust`].
@@ -18,6 +20,7 @@
 #'
 #' @export
 compare_freqs <- function(f, adjust = stats::p.adjust.methods, correct = TRUE) {
+  warning("This is function is dubious. Best not to use it.", call. = FALSE, immediate. = TRUE)
   adjust <- match.arg(adjust)
 
   levels <- unique(f)
@@ -47,8 +50,7 @@ compare_freqs <- function(f, adjust = stats::p.adjust.methods, correct = TRUE) {
   })
 
   res <- do.call(rbind, res)
-  res[[paste0("p.", adjust)]] <-
-    stats::p.adjust(res$p.raw, method = adjust)
+  res[[paste0("p.", adjust)]] <- stats::p.adjust(res$p.raw, method = adjust)
   rownames(res) <- NULL
   return(res)
 }

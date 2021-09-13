@@ -183,12 +183,12 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     ## plot 1 ##
     output$thePlot <- shiny::renderPlot({
       m1 <- stats::lm(V2 ~ V1, data())
-      rr1 <- cor(data()[,1:2])[2]
+      rr1 <- stats::cor(data()[,1:2])[2]
       se1 <- stats::sd(stats::residuals(m1))
       b1 <- stats::coef(m1)[2]
 
       m2 <- stats::lm(V2 ~ V1, data()[data()$in_range,1:2])
-      rr2 <- cor(data()[data()$in_range,1:2])[2]
+      rr2 <- stats::cor(data()[data()$in_range,1:2])[2]
       se2 <- stats::sd(stats::residuals(m2))
       b2 <- stats::coef(m2)[2]
 

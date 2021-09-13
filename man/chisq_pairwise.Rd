@@ -9,10 +9,17 @@ chisq_pairwise(
   Xsq,
   population_in_row = TRUE,
   adjust = stats::p.adjust.methods,
+  effect_size = c("V", "phi"),
+  ci = 0.95,
   ...
 )
 
-chisq_residual(Xsq, adjust = stats::p.adjust.methods)
+chisq_residual(
+  Xsq,
+  adjust = stats::p.adjust.methods,
+  res_type = c("pearson", "standardized"),
+  ci = 0.95
+)
 }
 \arguments{
 \item{Xsq}{Result from \code{chisq.test()}}
@@ -21,7 +28,13 @@ chisq_residual(Xsq, adjust = stats::p.adjust.methods)
 
 \item{adjust}{Method for correcting p-values. See \code{\link[stats:p.adjust]{stats::p.adjust}}.}
 
+\item{effect_size}{Type of effect size to use.}
+
+\item{ci}{Confidence Interval (CI) level}
+
 \item{...}{Passed to \code{chisq.test()}.}
+
+\item{res_type}{Type of residuals to use.}
 }
 \description{
 Follow-up for contingency table test
@@ -38,6 +51,7 @@ M
 res <- chisq.test(M)
 chisq_pairwise(res)
 chisq_pairwise(res, population_in_row = FALSE)
+
 chisq_residual(res)
 
 }

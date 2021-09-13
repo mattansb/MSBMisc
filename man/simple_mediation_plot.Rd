@@ -37,18 +37,20 @@ direct <- coef(mod_bc)[3]
 indirect <- a * b
 total <- direct + indirect
 
+if (require("tidySEM")) {
+  med_plot <- simple_mediation_plot(
+    a = round(a, 3),
+    b = round(b, 3),
+    direct = round(direct, 3),
+    indirect = round(indirect, 3),
+    total = round(total, 3),
+    X_name = "Gears",
+    M_name = "Horse\nPower",
+    Y_name = "Miles\nPer Gallon"
+  )
 
-med_plot <- simple_mediation_plot(
-  a = round(a, 3),
-  b = round(b, 3),
-  direct = round(direct, 3),
-  indirect = round(indirect, 3),
-  total = round(total, 3),
-  X_name = "Gears",
-  M_name = "Horse\nPower",
-  Y_name = "Miles\nPer Gallon"
-)
+  plot(med_plot)
+}
 
-plot(med_plot)
 
 }

@@ -16,19 +16,22 @@
 #' indirect <- a * b
 #' total <- direct + indirect
 #'
+#' if (require("tidySEM")) {
+#'   med_plot <- simple_mediation_plot(
+#'     a = round(a, 3),
+#'     b = round(b, 3),
+#'     direct = round(direct, 3),
+#'     indirect = round(indirect, 3),
+#'     total = round(total, 3),
+#'     X_name = "Gears",
+#'     M_name = "Horse\nPower",
+#'     Y_name = "Miles\nPer Gallon"
+#'   )
 #'
-#' med_plot <- simple_mediation_plot(
-#'   a = round(a, 3),
-#'   b = round(b, 3),
-#'   direct = round(direct, 3),
-#'   indirect = round(indirect, 3),
-#'   total = round(total, 3),
-#'   X_name = "Gears",
-#'   M_name = "Horse\nPower",
-#'   Y_name = "Miles\nPer Gallon"
-#' )
+#'   plot(med_plot)
+#' }
 #'
-#' plot(med_plot)
+
 #'
 #' @export
 simple_mediation_plot <- function(a = NA, b = NA, direct = NA,
@@ -73,7 +76,7 @@ simple_mediation_plot <- function(a = NA, b = NA, direct = NA,
     nodes$label[2] <- paste0(nodes$label[2], "\n", indirect)
   }
 
-  require(tidySEM)
+  require("tidySEM")
   g <- tidySEM::prepare_graph(
     edges = edges,
     nodes = nodes,

@@ -31,8 +31,8 @@ seq_range(x, length.out = 5)
 
 mean_sd(x)
 
-library(ggplot2)
-ggplot(mtcars, aes(cyl, mpg)) +
-  stat_summary(fun.data = mean_sd, fun.args = list(out = "data.frame"))
+if (require("ggplot2"))
+  ggplot(mtcars, aes(cyl, mpg)) +
+    stat_summary(fun.data = mean_sd, fun.args = list(out = "data.frame"))
 
 }

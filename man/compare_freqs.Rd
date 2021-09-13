@@ -15,6 +15,8 @@ compare_freqs(f, adjust = stats::p.adjust.methods, correct = TRUE)
 }
 \description{
 Using \code{\link[stats:mcnemar.test]{stats::mcnemar.test}} for comparing dependent proportions.
+\cr\cr
+This is function is dubious. Best not to use it.
 }
 \examples{
 f <- c(
