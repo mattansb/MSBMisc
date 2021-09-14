@@ -28,15 +28,15 @@ has_any_data <- function(.data, ..., .name) {
 #' @rdname has_any_data
 has_all_data <- function(.data, ..., .name) {
   .check_namespace("dplyr")
-  .data[[.name]] <- apply(dplyr::select(.data, ...), 1, Negate(anyNA))
+  .data[[.name]] <- stats::complete.cases(dplyr::select(.data, ...))
   .data
 }
 
 #' @export
 #' @rdname has_any_data
 missing_any_data <- function(.data, ..., .name) {
-  .data <- has_all_data(.data, ..., .name = .name)
-  .data[[.name]] <- !.data[[.name]]
+  .check_namespace("dplyr")
+  .data[[.name]] <- !stats::complete.cases(dplyr::select(.data, ...))
   .data
 }
 
