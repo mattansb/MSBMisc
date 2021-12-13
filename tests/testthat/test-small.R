@@ -95,3 +95,26 @@ test_that("vlookup", {
   expect_warning(r <- vlookup(c("a", "e", "c"), df, key = "a", value = "b", add = TRUE))
   expect_s3_class(r, "data.frame")
 })
+
+
+test_that("vlookup", {
+  skip_if_not_installed("afex")
+  skip_if_not_installed("emmeans")
+  skip_if_not_installed("insight")
+  skip_if_not_installed("stringr")
+
+
+  data(obk.long, package = "afex")
+  A <- afex::aov_car(value ~ treatment * gender + Error(id/(phase*hour)),
+                     data = obk.long)
+
+  se1 <- simple_effects(A, effect = "phase", within = c("treatment", "gender"))
+  expect_s3_class(se1, "summary_emm")
+  expect_equal(nrow(se1), 30L)
+  expect_equal(ncol(se1), 7L)
+
+  se2 <- simple_effects(A, effect = "phase:treatment", within = "gender")
+  expect_s3_class(se2, "summary_emm")
+  expect_equal(nrow(se2), 10L)
+  expect_equal(ncol(se2), 6L)
+})
