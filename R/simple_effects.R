@@ -73,8 +73,8 @@ simple_effects.lm <- function(model, effect, inside, ...) {
   class(jt) <- c("summary_emm", class(jt))
 
 
-  cl <- quote(update(jt))
-  cl$by <- if (length(inside) > 1L) tail(inside, -1)
+  cl <- quote(stats::update(jt))
+  cl$by <- if (length(inside) > 1L) utils::tail(inside, -1)
   cl$mesg <- paste0("Omnibus test for ",
                     paste0(rep("simple", length(inside)), collapse = "-"),
                     " effect of ",
@@ -82,7 +82,7 @@ simple_effects.lm <- function(model, effect, inside, ...) {
                     ".\n")
   jt <- eval(cl)
 
-  if (length(inside) == 1L) jt <- update(jt, by = NULL)
+  if (length(inside) == 1L) jt <- stats::update(jt, by = NULL)
 
   jt
 }

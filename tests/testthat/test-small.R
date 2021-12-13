@@ -104,7 +104,7 @@ test_that("vlookup", {
   skip_if_not_installed("stringr")
 
 
-  data(obk.long, package = "afex")
+  obk.long <- afex::obk.long
   A <- afex::aov_car(value ~ treatment * gender + Error(id/(phase*hour)),
                      data = obk.long)
 
