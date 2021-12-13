@@ -12,8 +12,9 @@ simple_effects(model, effect, inside, ...)
 \item{effect}{The name of the required simple effect. e.g., \code{"A"} for a
 simple effect of \emph{A}, or \code{"A:B"} for a simple \emph{A-by-B} interaction.}
 
-\item{inside}{The name of the variable(s) within whose levels the \code{effect}
-will be tested.}
+\item{inside}{A vector of the name(s) of the variable(s) within whose levels
+the \code{effect} will be tested. Can also be the name of an interaction (e.g.,
+\code{"B:C"}). If not specified, will use all the terms not in \code{effect}.}
 
 \item{...}{Passed to \code{emmeans::joint_tests()}, e.g., \code{cov.reduce}, \code{at}, etc.}
 }
@@ -33,11 +34,15 @@ simple_effects(A, effect = "treatment")
 
 simple_effects(A, effect = "treatment:phase")
 
-simple_effects(A, effect = "phase", within = "treatment")
+simple_effects(A, effect = "phase", inside = "treatment")
 
-simple_effects(A, effect = "phase", within = c("treatment", "gender"))
+simple_effects(A, effect = "phase", inside = c("treatment", "gender"))
+# simple_effects(A, effect = "phase", inside = "treatment:gender") # same
 
-simple_effects(A, effect = "phase:treatment", within = "gender")
+simple_effects(A, effect = "phase", inside = c("treatment", "gender"),
+               at = list(gender = "F"))
+
+simple_effects(A, effect = "phase:treatment", inside = "gender")
 }
 
 

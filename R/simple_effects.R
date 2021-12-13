@@ -6,8 +6,9 @@
 #' @param model The model.
 #' @param effect The name of the required simple effect. e.g., `"A"` for a
 #'   simple effect of *A*, or `"A:B"` for a simple *A-by-B* interaction.
-#' @param inside The name of the variable(s) within whose levels the `effect`
-#'   will be tested.
+#' @param inside A vector of the name(s) of the variable(s) within whose levels
+#'   the `effect` will be tested. Can also be the name of an interaction (e.g.,
+#'   `"B:C"`). If not specified, will use all the terms not in `effect`.
 #' @param ... Passed to `emmeans::joint_tests()`, e.g., `cov.reduce`, `at`, etc.
 #'
 #'
@@ -23,11 +24,15 @@
 #'
 #' simple_effects(A, effect = "treatment:phase")
 #'
-#' simple_effects(A, effect = "phase", within = "treatment")
+#' simple_effects(A, effect = "phase", inside = "treatment")
 #'
-#' simple_effects(A, effect = "phase", within = c("treatment", "gender"))
+#' simple_effects(A, effect = "phase", inside = c("treatment", "gender"))
+#' # simple_effects(A, effect = "phase", inside = "treatment:gender") # same
 #'
-#' simple_effects(A, effect = "phase:treatment", within = "gender")
+#' simple_effects(A, effect = "phase", inside = c("treatment", "gender"),
+#'                at = list(gender = "F"))
+#'
+#' simple_effects(A, effect = "phase:treatment", inside = "gender")
 #' }
 #'
 #'
@@ -49,12 +54,13 @@ simple_effects.lm <- function(model, effect, inside, ...) {
     stop("'effect' must be specified.")
   }
 
-  effects <- c(stringr::str_split(effect, pattern = ":",
-                                  simplify = TRUE))
-  IVs <- insight::find_predictors(model)[["fixed"]]
+  effects <- unique(unlist(stringr::str_split(effect, pattern = ":")))
+  IVs <- insight::find_predictors(model)[[1]]
 
   if (missing(inside)) {
     inside <- setdiff(IVs, effects)
+  } else {
+    inside <- unique(unlist(stringr::str_split(inside, pattern = ":")))
   }
 
   jt <- emmeans::joint_tests(model, by = inside, ...)

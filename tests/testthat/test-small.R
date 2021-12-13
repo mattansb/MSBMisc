@@ -108,13 +108,13 @@ test_that("vlookup", {
   A <- afex::aov_car(value ~ treatment * gender + Error(id/(phase*hour)),
                      data = obk.long)
 
-  se1 <- simple_effects(A, effect = "phase", within = c("treatment", "gender"))
+  se1 <- simple_effects(A, effect = "phase", inside = c("treatment", "gender"))
   expect_s3_class(se1, "summary_emm")
-  expect_equal(nrow(se1), 30L)
-  expect_equal(ncol(se1), 7L)
+  expect_equal(nrow(se1), 6L)
+  expect_equal(ncol(se1), 6L)
 
-  se2 <- simple_effects(A, effect = "phase:treatment", within = "gender")
+  se2 <- simple_effects(A, effect = "phase:treatment", inside = "gender")
   expect_s3_class(se2, "summary_emm")
-  expect_equal(nrow(se2), 10L)
-  expect_equal(ncol(se2), 6L)
+  expect_equal(nrow(se2), 2L)
+  expect_equal(ncol(se2), 5L)
 })
