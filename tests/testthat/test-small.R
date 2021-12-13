@@ -20,7 +20,7 @@ test_that("cw", {
 })
 
 test_that("print_library", {
-  expect_match(print_library(MSBMisc), "0.0.1.8", fixed = TRUE)
+  expect_match(print_library(MSBMisc), "0.0.1.9", fixed = TRUE)
   expect_match(print_library(MSBMisc), "library", fixed = TRUE)
   expect_match(print_require(MSBMisc), "require", fixed = TRUE)
 })

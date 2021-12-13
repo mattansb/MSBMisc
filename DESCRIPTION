@@ -13,6 +13,7 @@ Imports:
     stats,
     utils
 Suggests:
+    afex,
     insight,
     dplyr,
     effectsize,
