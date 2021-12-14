@@ -10,7 +10,7 @@ test_that("age_in_unit", {
 test_that("seq", {
   expect_equal(seq_range(1:4, length.out = 3), seq(1, 4, length.out = 3))
 
-  expect_equal(mean_sd(-1:1), c(`-SD` = -1, Mean = 0, `+SD` = 1))
+  expect_equal(mean_sd(-1:1), c("-SD" = -1, "Mean" = 0, "+SD" = 1))
 })
 
 
@@ -97,7 +97,7 @@ test_that("vlookup", {
 })
 
 
-test_that("vlookup", {
+test_that("simple_effects", {
   skip_if_not_installed("afex")
   skip_if_not_installed("emmeans")
   skip_if_not_installed("insight")

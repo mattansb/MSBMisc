@@ -1,13 +1,16 @@
-#' Sequence Generation Baed on Range
+#' Sequence Generation Based on the Values of a Vector
 #'
 #' @param x A numeric vector
+#' @param length.out desired length of the sequence. If no other arguments are
+#'   valued, defaults to 20.
 #' @inheritParams base::seq
 #' @inheritParams base::mean
 #'
 #' @examples
 #' set.seed(1)
-#' x <- rnorm(100)
+#' x <- rt(100, df = 3)
 #' seq_range(x, length.out = 5)
+#' seq_IQR(x, length.out = 5)
 #'
 #' mean_sd(x)
 #'
@@ -17,11 +20,34 @@
 #'   stat_summary(fun.data = mean_sd, fun.args = list(out = "data.frame"))
 #' }
 #' @export
-seq_range <- function(x, length.out = 20, na.rm = TRUE) {
+seq_range <- function(x, length.out = NULL, by = NULL, along.with = NULL, na.rm = TRUE) {
   match.call()
   range <- range(x, na.rm = na.rm)
-  seq(range[1], range[2], length.out = length.out)
+
+  .seq(range, length.out = length.out, by = by, along.with = along.with)
 }
+
+
+#' @export
+#' @rdname seq_range
+seq_IQR <- function(x, length.out = NULL, by = NULL, along.with = NULL, na.rm = TRUE) {
+  match.call()
+  range <- quantile(x, c(0.25, 0.75), na.rm = na.rm)
+
+  .seq(range, length.out = length.out, by = by, along.with = along.with)
+}
+
+
+#' @keywords internal
+.seq <- function(range, length.out = NULL, by = NULL, along.with = NULL) {
+  if (is.null(length.out) && is.null(by) && is.null(along.with)) length.out <- 20
+  cl <- quote(seq(range[1], range[2]))
+  cl$length.out <- length.out
+  cl$by <- by
+  cl$along.with <- along.with
+  eval(cl)
+}
+
 
 #' @export
 #' @rdname seq_range
