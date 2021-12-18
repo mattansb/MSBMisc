@@ -43,12 +43,9 @@ simple_effects <- function(model, effect, inside, ...) {
 
 #' @export
 simple_effects.lm <- function(model, effect, inside, ...) {
-  stopifnot(requireNamespace("insight"),
-            length(effect) == 1L,
-            is.character(effect))
+  .check_namespace("insight", "emmeans", "stringr")
 
-  insight::check_if_installed("emmeans")
-  insight::check_if_installed("stringr")
+  stopifnot("Effect must me a char of length 1." = is.character(effect) && length(effect) == 1L)
 
   if (missing(effect)) {
     stop("'effect' must be specified.")
