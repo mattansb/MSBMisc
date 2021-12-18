@@ -88,18 +88,59 @@ weights to -1).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3    -0.5      0</span>
 <span class="r-in"><span class="va">my_contrasts3</span> <span class="op">&lt;-</span> <span class="fu">cw</span><span class="op">(</span><span class="va">my_contrasts</span>, .adjust <span class="op">=</span> <span class="st">"fdr"</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rvlenth/emmeans" class="external-link">emmeans</a></span><span class="op">)</span></span>
 <span class="r-in"><span class="op">(</span><span class="va">emms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans</a></span><span class="op">(</span><span class="va">mod</span>, <span class="op">~</span> <span class="va">cyl</span> <span class="op">+</span> <span class="va">am</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  cyl am emmean    SE df lower.CL upper.CL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4  0   22.9 1.751 26     19.3     26.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    6  0   19.1 1.516 26     16.0     22.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    8  0   15.1 0.875 26     13.3     16.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4  1   28.1 1.072 26     25.9     30.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    6  1   20.6 1.751 26     17.0     24.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    8  1   15.4 2.144 26     11.0     19.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Confidence level used: 0.95 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">contrast</a></span><span class="op">(</span><span class="va">emms</span>, method <span class="op">=</span> <span class="va">my_contrasts</span>, by <span class="op">=</span> <span class="st">"am"</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> am = 0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  contrast estimate    SE df t.ratio p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  squares      0.30  3.61 26   0.083  0.9344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4 vs 6    -113.25 69.48 26  -1.630  0.1152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> am = 1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  contrast estimate    SE df t.ratio p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  squares     -2.34  4.24 26  -0.552  0.5858</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4 vs 6    -225.25 61.59 26  -3.658  0.0011</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">contrast</a></span><span class="op">(</span><span class="va">emms</span>, method <span class="op">=</span> <span class="va">my_contrasts2</span>, by <span class="op">=</span> <span class="st">"am"</span><span class="op">)</span> <span class="co"># estimate is affected!</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> am = 0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  contrast estimate   SE df t.ratio p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  squares      0.15 1.80 26   0.083  0.9344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4 vs 6      -3.77 2.32 26  -1.630  0.1152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> am = 1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  contrast estimate   SE df t.ratio p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  squares     -1.17 2.12 26  -0.552  0.5858</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4 vs 6      -7.51 2.05 26  -3.658  0.0011</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">contrast</a></span><span class="op">(</span><span class="va">emms</span>, method <span class="op">=</span> <span class="va">my_contrasts3</span>, by <span class="op">=</span> <span class="st">"am"</span><span class="op">)</span> <span class="co"># p value is affected</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> am = 0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  contrast estimate   SE df t.ratio p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  squares      0.15 1.80 26   0.083  0.9344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4 vs 6      -3.77 2.32 26  -1.630  0.2303</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> am = 1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  contrast estimate   SE df t.ratio p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  squares     -1.17 2.12 26  -0.552  0.5858</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4 vs 6      -7.51 2.05 26  -3.658  0.0023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> P value adjustment: fdr method for 2 tests </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Also in interaction contrasts</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/contrast.html" class="external-link">contrast</a></span><span class="op">(</span><span class="va">emms</span>, interaction <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>cyl <span class="op">=</span> <span class="va">my_contrasts2</span>, am <span class="op">=</span> <span class="st">"pairwise"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  cyl_custom am_pairwise estimate   SE df t.ratio p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  squares    0 - 1           1.32 2.79 26   0.474  0.6393</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4 vs 6     0 - 1           3.73 3.09 26   1.206  0.2386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </div>

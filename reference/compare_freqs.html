@@ -63,8 +63,7 @@ This is function is dubious. Best not to use it.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="fl">12</span><span class="op">)</span>,</span>
 <span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"B"</span>, <span class="fl">45</span><span class="op">)</span>,</span>
 <span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="fl">42</span><span class="op">)</span>,</span>
@@ -72,7 +71,15 @@ This is function is dubious. Best not to use it.</p>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">compare_freqs</span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>This is function is dubious. Best not to use it.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   comparison     prop1     prop2      Chi.sq df        p.raw       p.holm</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  A  vs.  B 0.1008403 0.3781513 17.96491228  1 2.250146e-05 0.0001350088</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  A  vs.  C 0.1008403 0.3529412 15.57407407  1 7.933499e-05 0.0003966749</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  A  vs.  D 0.1008403 0.1680672  1.53125000  1 2.159249e-01 0.4318498779</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  B  vs.  C 0.3781513 0.3529412  0.04597701  1 8.302176e-01 0.8302175918</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  B  vs.  D 0.3781513 0.1680672  8.86153846  1 2.912420e-03 0.0116496803</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  C  vs.  D 0.3529412 0.1680672  7.11290323  1 7.653106e-03 0.0229593194</span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
