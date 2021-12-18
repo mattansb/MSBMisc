@@ -27,7 +27,7 @@
 #' (my_contrasts2 <- cw(my_contrasts))
 #' my_contrasts3 <- cw(my_contrasts, .adjust = "fdr")
 #'
-#' \dontrun{
+#' @examplesIf require("emmeans")
 #' library(emmeans)
 #' (emms <- emmeans(mod, ~ cyl + am))
 #'
@@ -37,7 +37,6 @@
 #'
 #' # Also in interaction contrasts
 #' contrast(emms, interaction = list(cyl = my_contrasts2, am = "pairwise"))
-#' }
 #'
 #' @export
 contrast_weights <- function(..., .name = "custom", .adjust = NULL) {

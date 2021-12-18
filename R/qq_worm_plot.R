@@ -4,8 +4,7 @@
 #' @param distribution Name of a distribution, matching the `d*`, `p*` and `q*` function names.
 #' @param ... Args assed to `d*`, `p*` and `q*` functions.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf require("ggplot2")
 #' x <- rnorm(100)
 #' qq_worm_plot(x)
 #'
@@ -23,7 +22,6 @@
 #'
 #' # x <- runif(100)
 #' # qq_worm_plot(x, distribution = "unif")
-#' }
 #'
 #' @details
 #' [Some related tweets](https://twitter.com/mattansb/status/1199936633413476358).

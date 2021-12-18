@@ -23,7 +23,7 @@ This is a wrapper for \code{emmeans::joint_tests()} that provides an easy way to
 specify which simple effects we wish to test, and within what variable(s).
 }
 \examples{
-\dontrun{
+\dontshow{if (require("ggplot2") && require("insight") && require("stringr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(afex)
 
 data(obk.long, package = "afex")
@@ -43,7 +43,6 @@ simple_effects(A, effect = "phase", inside = c("treatment", "gender"),
                at = list(gender = "F"))
 
 simple_effects(A, effect = "phase:treatment", inside = "gender")
-}
 
-
+\dontshow{\}) # examplesIf}
 }

@@ -22,10 +22,9 @@ age_in_unit(
 Age in some units
 }
 \examples{
-\dontrun{
+\dontshow{if (require("lubridate")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 DOB <- as.Date("1989-08-05")
 TODAY <- Sys.Date()
 age_in_unit(DOB, TODAY)
-}
-
+\dontshow{\}) # examplesIf}
 }

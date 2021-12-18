@@ -38,9 +38,9 @@ seq_IQR(x, length.out = 5)
 
 mean_sd(x)
 
-\dontrun{
+\dontshow{if (require("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(ggplot2)
 ggplot(mtcars, aes(cyl, mpg)) +
   stat_summary(fun.data = mean_sd, fun.args = list(out = "data.frame"))
-}
+\dontshow{\}) # examplesIf}
 }

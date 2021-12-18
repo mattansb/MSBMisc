@@ -12,8 +12,7 @@
 #' @param ... Passed to `emmeans::joint_tests()`, e.g., `cov.reduce`, `at`, etc.
 #'
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf require("ggplot2") && require("insight") && require("stringr")
 #' library(afex)
 #'
 #' data(obk.long, package = "afex")
@@ -33,7 +32,6 @@
 #'                at = list(gender = "F"))
 #'
 #' simple_effects(A, effect = "phase:treatment", inside = "gender")
-#' }
 #'
 #'
 #' @export

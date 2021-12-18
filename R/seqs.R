@@ -14,11 +14,11 @@
 #'
 #' mean_sd(x)
 #'
-#' \dontrun{
+#' @examplesIf require("ggplot2")
 #' library(ggplot2)
 #' ggplot(mtcars, aes(cyl, mpg)) +
 #'   stat_summary(fun.data = mean_sd, fun.args = list(out = "data.frame"))
-#' }
+#'
 #' @export
 seq_range <- function(x, length.out = NULL, by = NULL, along.with = NULL, na.rm = TRUE) {
   match.call()

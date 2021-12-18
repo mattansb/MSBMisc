@@ -3,8 +3,7 @@
 #' @inheritParams dplyr::select
 #' @param .name Name of the new column with the logical index.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf require("dplyr")
 #' data(mtcars)
 #'
 #' mtcars[1, 1] <- NA
@@ -15,7 +14,6 @@
 #'   has_all_data(mpg:disp, .name = "has_all") |>
 #'   missing_any_data(mpg:disp, .name = "missing_any") |>
 #'   missing_all_data(mpg:disp, .name = "missing_all")
-#' }
 #'
 #' @export
 has_any_data <- function(.data, ..., .name) {

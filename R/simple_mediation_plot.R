@@ -5,8 +5,7 @@
 #' @param X_name,M_name,Y_name Values or labels to put on the variables (nodes).
 #' @param ... Passed to [tidySEM::prepare_graph].
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf require("tidySEM") && require("ggplot2")
 #' mod_a <- lm(hp ~ gear, data = mtcars)
 #' mod_bc <- lm(mpg ~ hp + gear, data = mtcars)
 #'
@@ -28,7 +27,6 @@
 #' )
 #'
 #' plot(med_plot)
-#' }
 #'
 
 #'

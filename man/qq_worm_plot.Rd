@@ -20,7 +20,7 @@ Create a worm plot
 \href{https://twitter.com/mattansb/status/1199936633413476358}{Some related tweets}.
 }
 \examples{
-\dontrun{
+\dontshow{if (require("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 x <- rnorm(100)
 qq_worm_plot(x)
 
@@ -38,6 +38,5 @@ qq_worm_plot(x, distribution = "t", df = 3)
 
 # x <- runif(100)
 # qq_worm_plot(x, distribution = "unif")
-}
-
+\dontshow{\}) # examplesIf}
 }
