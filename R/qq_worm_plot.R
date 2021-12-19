@@ -1,10 +1,12 @@
 #' Create a worm plot
 #'
+#' This function is a wrapper around `qqplotr::stat_pp_*(detrend = TRUE)`.
+#'
 #' @param x A numerical vector
 #' @param distribution Name of a distribution, matching the `d*`, `p*` and `q*` function names.
-#' @param ... Args assed to `d*`, `p*` and `q*` functions.
+#' @param ... Args passed to `d*`, `p*` and `q*` functions.
 #'
-#' @examplesIf require("ggplot2")
+#' @examplesIf require("ggplot2") && require("qqplotr")
 #' x <- rnorm(100)
 #' qq_worm_plot(x)
 #'
@@ -31,8 +33,6 @@ qq_worm_plot <-
   function(x,
            distribution = "norm",
            ...) {
-    .Deprecated("qqplotr::stat_pp_point etc.")
-
     .check_namespace("ggplot2", "qqplotr")
 
     dparams <- list(...)
