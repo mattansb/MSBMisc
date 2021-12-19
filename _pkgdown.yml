@@ -1,0 +1,16 @@
+authors:
+  Mattan S. Ben-Shachar:
+    href: https://github.com/mattansb
+
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, tutorials, news]
+    right: [search, twitter, github]
+  components:
+    twitter:
+      icon: fa-twitter
+      href: http://twitter.com/mattansb
+      aria-label: Twitter
