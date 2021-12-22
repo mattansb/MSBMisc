@@ -1,11 +1,20 @@
 #' Information criteria for log-normal models
 #'
 #' Log-likelihood (and by extension *AIC* and *BIC*) for log-normal models fit
-#' with `stats::lm(log(y) ~ ...)` are computed with `dnorm(log(y), ...)` instead
-#' of with `dlnorm(y, ...)`, which makes comparing different families difficult.
-#' This function is aimed at rectifying this. See examples.
+#' with `stats::lm(log(y) ~ ...)` are computed with `stats::dnorm(log(y), ...)`
+#' instead of with `stats::dlnorm(y, ...)`, which makes comparing different
+#' families difficult. This function is aimed at rectifying this. See examples.
 #'
+#' @param object A fitted model object. The model must meet all of the
+#'   following (will throw an error if not met):
+#'   1. A Gaussian likelihood with an identity link function.
+#'   2. The LHS of the model's formula must use the `log()` function.
+#'   3. No weights (not yet supported).
+#' @param REML Only `FALSE` supported.
 #' @inheritParams stats::AIC
+#'
+#' @note `REML` is not (yet) supported. Make sure you are comparing correct
+#'   LL/AIC/BIC values.
 #'
 #' @examples
 #'
@@ -25,8 +34,8 @@
 #'
 #' @examplesIf require("lme4")
 #' # Should support any model really... =====================
-#' model_lnorm <- lme4::lmer(log(mpg) ~ factor(cyl) + (1 | gear), mtcars)
-#' model_norm <- lme4::lmer(mpg ~ factor(cyl) + (1 | gear), mtcars)
+#' model_lnorm <- lme4::lmer(log(mpg) ~ factor(cyl) + (1 | gear), mtcars, REML = FALSE)
+#' model_norm <- lme4::lmer(mpg ~ factor(cyl) + (1 | gear), mtcars, REML = FALSE)
 #' model_pois <- lme4::glmer(mpg ~ factor(cyl) + (1 | gear), mtcars, family = poisson())
 #'
 #' # No, that first one is wrong...
@@ -37,20 +46,23 @@
 #'
 #'
 #' @export
-logLik_lnorm <- function(object) {
+logLik_lnorm <- function(object, REML = FALSE) {
   .check_namespace("insight")
 
   stopifnot(
     "Model is not log-normal" = .is_lnorm(object)
   )
 
-  ll <- stats::logLik(object)
-  df <- attr(ll, "df")
-  nobs <- attr(ll, "nobs")
+  if (REML) warning("logLik with `REML = TRUE` not supported. Setting `REML = FALSE`")
 
-  y <- insight::get_response(object)
-  ll[1] <- stats::dlnorm(y, meanlog = fitted(object), sdlog = sigma(object),
-                         log = TRUE) |> sum()
+  ll <- stats::logLik(object)
+
+  ll[1] <- stats::dlnorm(
+    x = insight::get_response(object),
+    meanlog = stats::fitted(object),
+    sdlog = stats::sigma(object),
+    log = TRUE
+  ) |> sum()
 
   ll
 }
@@ -58,36 +70,17 @@ logLik_lnorm <- function(object) {
 
 #' @rdname logLik_lnorm
 #' @export
-AIC_lnorm <- function(object, ..., k = 2) {
-  if (length(list(...))) {
-    cl <- match.call()
-    cl[[1]] <- quote(stats::AIC)
-    out <- eval(cl)
-    out[["AIC"]] <- sapply(list(object, ...), AIC_lnorm, k = k)
-  } else {
-    ll <- logLik_lnorm(object)
-    df <- attr(ll, "df")
-    out <- k * df - 2 * ll
-  }
-  out
+AIC_lnorm <- function(object, k = 2, REML = FALSE) {
+  logLik_lnorm(object) |>
+    stats::AIC(k = k)
 }
 
 
 #' @rdname logLik_lnorm
 #' @export
-BIC_lnorm <- function(object, ...) {
-  if (length(list(...))) {
-    cl <- match.call()
-    cl[[1]] <- quote(stats::BIC)
-    out <- eval(cl)
-    out[["BIC"]] <- sapply(list(object, ...), BIC_lnorm)
-  } else {
-    ll <- logLik_lnorm(object)
-    df <- attr(ll, "df")
-    nobs <- attr(ll, "nobs")
-    out <- df * log(nobs) - 2 * ll
-  }
-  out
+BIC_lnorm <- function(object, REML = FALSE) {
+  logLik_lnorm(object, REML = REML) |>
+    stats::BIC()
 }
 
 
@@ -109,7 +102,7 @@ BIC_lnorm <- function(object, ...) {
   fam$family == "gaussian" &&
     fam$link == "identity" &&
     length(LHS <- form[2]) == 1L &&
-    length(LHS <- as.character(LHS[[1]])) == 2L &&
+    length(LHS <- as.character(LHS[[1]])) >= 2L &&
     LHS[1] == "log"
 }
 

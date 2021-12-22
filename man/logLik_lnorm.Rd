@@ -6,27 +6,35 @@
 \alias{BIC_lnorm}
 \title{Information criteria for log-normal models}
 \usage{
-logLik_lnorm(object)
+logLik_lnorm(object, REML = FALSE)
 
-AIC_lnorm(object, ..., k = 2)
+AIC_lnorm(object, k = 2, REML = FALSE)
 
-BIC_lnorm(object, ...)
+BIC_lnorm(object, REML = FALSE)
 }
 \arguments{
-\item{object}{a fitted model object for which there exists a
-    \code{logLik} method to extract the corresponding log-likelihood, or
-    an object inheriting from class \code{logLik}.}
+\item{object}{A fitted model object. The model must meet all of the
+following (will throw an error if not met):
+\enumerate{
+\item A Gaussian likelihood with an identity link function.
+\item The LHS of the model's formula must use the \code{log()} function.
+\item No weights (not yet supported).
+}}
 
-\item{...}{optionally more fitted model objects.}
+\item{REML}{Only \code{FALSE} supported.}
 
 \item{k}{numeric, the \emph{penalty} per parameter to be used; the
     default \code{k = 2} is the classical AIC.}
 }
 \description{
 Log-likelihood (and by extension \emph{AIC} and \emph{BIC}) for log-normal models fit
-with \code{stats::lm(log(y) ~ ...)} are computed with \code{dnorm(log(y), ...)} instead
-of with \code{dlnorm(y, ...)}, which makes comparing different families difficult.
-This function is aimed at rectifying this. See examples.
+with \code{stats::lm(log(y) ~ ...)} are computed with \code{stats::dnorm(log(y), ...)}
+instead of with \code{stats::dlnorm(y, ...)}, which makes comparing different
+families difficult. This function is aimed at rectifying this. See examples.
+}
+\note{
+\code{REML} is not (yet) supported. Make sure you are comparing correct
+LL/AIC/BIC values.
 }
 \examples{
 
@@ -46,8 +54,8 @@ aics # better!
 
 \dontshow{if (require("lme4")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Should support any model really... =====================
-model_lnorm <- lme4::lmer(log(mpg) ~ factor(cyl) + (1 | gear), mtcars)
-model_norm <- lme4::lmer(mpg ~ factor(cyl) + (1 | gear), mtcars)
+model_lnorm <- lme4::lmer(log(mpg) ~ factor(cyl) + (1 | gear), mtcars, REML = FALSE)
+model_norm <- lme4::lmer(mpg ~ factor(cyl) + (1 | gear), mtcars, REML = FALSE)
 model_pois <- lme4::glmer(mpg ~ factor(cyl) + (1 | gear), mtcars, family = poisson())
 
 # No, that first one is wrong...
