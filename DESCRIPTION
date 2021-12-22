@@ -21,6 +21,7 @@ Suggests:
     ggplot2,
     lubridate,
     MASS,
+    lme4,
     patchwork,
     qqplotr,
     shiny,
