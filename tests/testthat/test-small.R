@@ -118,3 +118,24 @@ test_that("simple_effects", {
   expect_equal(nrow(se2), 2L)
   expect_equal(ncol(se2), 5L)
 })
+
+
+test_that("ll lnorm", {
+  skip_if_not_installed("insight")
+
+  data("mtcars")
+  mtcars$mpg <- floor(mtcars$mpg)
+
+  m0 <- lm(log(mpg) ~ 1, mtcars)
+  m1 <- lm(log(mpg) ~ factor(cyl), mtcars)
+  m2 <- lm(log(mpg) ~ factor(cyl) * am, mtcars)
+
+  expect_equal(AIC_lnorm(m0, m1, m2)$AIC, c(205.379, 168.365, 170.345), tolerance = 0.001)
+  expect_equal(BIC_lnorm(m0, m1, m2)$BIC, c(208.310, 174.228, 180.605), tolerance = 0.001)
+
+
+  mb <- lm(mpg ~ factor(cyl) * am, mtcars)
+  expect_error(logLik_lnorm(mb), "not log-normal")
+  expect_error(AIC_lnorm(mb), "not log-normal")
+  expect_error(BIC_lnorm(mb), "not log-normal")
+})
