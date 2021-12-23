@@ -1,5 +1,7 @@
-# library(testthat)
-# library(MSBMisc)
+if (FALSE) {
+  library(testthat)
+  library(MSBMisc)
+}
 
 test_that("age_in_unit", {
   skip_if_not_installed("lubridate")
@@ -20,7 +22,7 @@ test_that("cw", {
 })
 
 test_that("print_library", {
-  expect_match(print_library(MSBMisc), "0.0.1.9", fixed = TRUE)
+  expect_match(print_library(MSBMisc), "0.0.1.10", fixed = TRUE)
   expect_match(print_library(MSBMisc), "library", fixed = TRUE)
   expect_match(print_require(MSBMisc), "require", fixed = TRUE)
 })
@@ -130,8 +132,8 @@ test_that("ll lnorm", {
   m1 <- lm(log(mpg) ~ factor(cyl), mtcars)
   m2 <- lm(log(mpg) ~ factor(cyl) * am, mtcars)
 
-  expect_equal(AIC_lnorm(m0, m1, m2)$AIC, c(205.379, 168.365, 170.345), tolerance = 0.001)
-  expect_equal(BIC_lnorm(m0, m1, m2)$BIC, c(208.310, 174.228, 180.605), tolerance = 0.001)
+  expect_equal(sapply(list(m0, m1, m2), AIC_lnorm), c(205.379, 168.365, 170.345), tolerance = 0.001)
+  expect_equal(sapply(list(m0, m1, m2), BIC_lnorm), c(208.310, 174.228, 180.605), tolerance = 0.001)
 
 
   mb <- lm(mpg ~ factor(cyl) * am, mtcars)

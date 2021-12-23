@@ -84,6 +84,46 @@ BIC_lnorm <- function(object, REML = FALSE) {
 }
 
 
+# lnorm <- function(link = "log") {
+#   stopifnot("Only a log-link is supported." = link == "log")
+#
+#   lnorm <- poisson()
+#
+#   lnorm$family <- "lnorm"
+#
+#   lnorm$initialize <- expression({
+#     if (any(y < 0))
+#       stop("negative values not allowed for the 'log-Normal' family")
+#     n <- rep.int(1, nobs)
+#     mustart <- y + 0.1
+#   })
+#
+#   lnorm$simulate <- function (object, nsim) {
+#     wts <- object$prior.weights
+#     if (any(wts != 1))
+#       warning("ignoring prior weights")
+#     ftd <- fitted(object)
+#     s <- sigma(object)
+#     rlnorm(nsim * length(ftd), ftd, s)
+#   }
+#
+#   # ??? -----
+#
+#   lnorm$variance <- function(mu) {
+#     exp(2 * log(mu))
+#   }
+#
+#   lnorm$dev.resids <- gaussian()$dev.resids
+#
+#   lnorm$aic <- function (y, n, mu, wt, dev) {
+#     nobs <- length(y)
+#     -2 * sum(dlnorm(y, mu, dev/nobs, log = TRUE) * wt)
+#   }
+#
+#   return(lnorm)
+# }
+
+
 # Utils -------------------------------------------------------------------
 
 
