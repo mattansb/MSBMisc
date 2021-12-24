@@ -6,6 +6,8 @@ Author: person("Mattan S.", "Ben-Shachar")
 Maintainer: Mattan S. Ben-Shachar <matanshm@post.bgu.ac.il>
 Description: misc. functions.
 License: GPL-3
+URL: https://mattansb.github.io/MSBMisc/
+BugReports: https://github.com/mattansb/MSBMisc/issues/
 Encoding: UTF-8
 Depends:
     R (>= 4.1)
