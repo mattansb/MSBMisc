@@ -141,3 +141,27 @@ test_that("ll lnorm", {
   expect_error(AIC_lnorm(mb), "not log-normal")
   expect_error(BIC_lnorm(mb), "not log-normal")
 })
+
+
+test_that("delta method", {
+  skip_if_not_installed("emmeans")
+
+  m <- glm(am ~ factor(cyl),
+           family = binomial(), data = mtcars)
+
+  em <- emmeans::emmeans(m, ~ cyl) |>
+    emmeans::regrid(transform = "none")
+
+  colnames(em@V) <- rownames(em@V) <-
+    names(em@bhat) <- paste0("p", c(4, 6, 8))
+
+  d <- delta_method(
+    1/(1+exp(-p4)), 1/(1+exp(-p6)), 1/(1+exp(-p8)),
+    .means = em@bhat, .V = em@V
+  )
+
+  em <- regrid(em)
+
+  expect_equal(d$means, em@bhat, ignore_attr = TRUE)
+  expect_equal(d$V, em@V, ignore_attr = TRUE)
+})
