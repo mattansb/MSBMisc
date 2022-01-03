@@ -34,4 +34,23 @@ delta_method(
   .means = M, .V = V
 )
 
+# Sobel Test ----
+
+data("mtcars")
+mod.y <- lm(mpg ~ hp + cyl, mtcars)
+mod.m <- lm(hp ~ cyl, mtcars)
+
+bhat <- c(coef(mod.y), coef(mod.m))[c(2,5)]
+Vhat <- dbind(vcov(mod.y), vcov(mod.m))[c(2,5), c(2,5)]
+
+res <- delta_method(
+  hp * cyl,
+  .means = bhat, .V = Vhat
+)
+
+res$means / sqrt(c(res$V))
+
+# Compare:
+(bhat[1] * bhat[2]) /
+  sqrt(bhat[1]^2 * Vhat[2,2] + bhat[2]^2 * Vhat[1,1])
 }
