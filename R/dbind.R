@@ -1,14 +1,30 @@
 #' Bind matrices diagonally
 #'
-#' @param ... Numerical matrices.
+#' @param ... Matrices.
 #' @param .fill Value to fill the off-"diagonal" values.
+#'
+#'
+#' @examples
+
+#' M1 <- matrix(1:9, 3, 3)
+#' M2 <- matrix(10:15, 2, 2)
+#'
+#' dbind(M1, M2)
+#' dbind(M1, M2, .fill = NA)
+#'
+#'
+#'
+#' M1 <- matrix(letters[1:9], 3, 3)
+#' M2 <- matrix(LETTERS[10:15], 2, 2)
+#'
+#' dbind(M1, M2, .fill = "Banana")
+#' dbind(M1, M2, .fill = NA)
 #'
 #' @export
 dbind <- function(..., .fill = 0) {
   mats <- list(...) |> lapply(as.matrix)
 
-  stopifnot("All inputs must be matrices." = all(sapply(mats, is.matrix)),
-            "All inputs must be numeric." = all(sapply(mats, is.numeric)))
+  stopifnot("All inputs must be matrices." = all(sapply(mats, is.matrix)))
 
   n.row <- sapply(mats, nrow)
   n.col <- sapply(mats, ncol)

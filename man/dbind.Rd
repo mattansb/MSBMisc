@@ -7,10 +7,26 @@
 dbind(..., .fill = 0)
 }
 \arguments{
-\item{...}{Numerical matrices.}
+\item{...}{Matrices.}
 
 \item{.fill}{Value to fill the off-"diagonal" values.}
 }
 \description{
 Bind matrices diagonally
+}
+\examples{
+M1 <- matrix(1:9, 3, 3)
+M2 <- matrix(10:15, 2, 2)
+
+dbind(M1, M2)
+dbind(M1, M2, .fill = NA)
+
+
+
+M1 <- matrix(letters[1:9], 3, 3)
+M2 <- matrix(LETTERS[10:15], 2, 2)
+
+dbind(M1, M2, .fill = "Banana")
+dbind(M1, M2, .fill = NA)
+
 }
