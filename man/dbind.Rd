@@ -4,29 +4,34 @@
 \alias{dbind}
 \title{Bind matrices diagonally}
 \usage{
-dbind(..., .fill = 0)
+dbind(..., .fill = NULL)
 }
 \arguments{
 \item{...}{Matrices.}
 
-\item{.fill}{Value to fill the off-"diagonal" values.}
+\item{.fill}{Value to fill the off-"diagonal" values. If \code{NULL}, the value is
+the default value of the inputs' mode.}
 }
 \description{
 Bind matrices diagonally
 }
 \examples{
-M1 <- matrix(1:9, 3, 3)
-M2 <- matrix(10:15, 2, 2)
 
+M1 <- matrix(1:8, 2, 4)
+M2 <- matrix(9:14, 2, 2)
 dbind(M1, M2)
 dbind(M1, M2, .fill = NA)
 
 
-
-M1 <- matrix(letters[1:9], 3, 3)
-M2 <- matrix(LETTERS[10:15], 2, 2)
-
+M1 <- matrix(letters[1:4], 2, 2)
+M2 <- matrix(LETTERS[5:10], 3, 2)
+dbind(M1, M2)
 dbind(M1, M2, .fill = "Banana")
-dbind(M1, M2, .fill = NA)
+
+
+M1 <- matrix(TRUE, 2, 3)
+M2 <- matrix(NA, 3, 4)
+dbind(M1, M2)
+
 
 }
