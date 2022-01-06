@@ -2,8 +2,7 @@
 #'
 #' @param ... Unquoted transformations. See example.
 #' @param .means A named vector of means.
-#' @param .V A covariance matrix with named columns and rows corresponding to
-#'   `names(.means)`.
+#' @param .V A covariance matrix.
 #'
 #' @return A list with `means` and `V` of the transformed variables. (row/col)
 #'   names are of the `g` transformations. See examples.
@@ -55,7 +54,7 @@ delta_method <- function(..., .means, .V) {
   }
   names(g) <- g
 
-  nms1 <- paste0("\\b", colnames(.V), "\\b")
+  nms1 <- paste0("\\b", names(.means), "\\b")
   nms2 <- paste0("x", seq_along(.means))
 
   meansout <- g |>

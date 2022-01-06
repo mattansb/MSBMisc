@@ -11,8 +11,7 @@ delta_method(..., .means, .V)
 
 \item{.means}{A named vector of means.}
 
-\item{.V}{A covariance matrix with named columns and rows corresponding to
-\code{names(.means)}.}
+\item{.V}{A covariance matrix.}
 }
 \value{
 A list with \code{means} and \code{V} of the transformed variables. (row/col)
