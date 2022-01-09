@@ -43,14 +43,17 @@
 #' pred_ggeffects <- ggeffects::ggpredict(mod, c("hp [50:350, by = 50]", "cyl [4]"))
 #' get_data_for_grid(pred_ggeffects, residualize = TRUE)
 #'
+#'
 #' @examplesIf require("insight") && require("emmeans")
-#' at <- list(hp = seq(50, 350, by = 50), cyl = 4)
+#' at <- list(hp = seq(50, 350, by = 50), cyl = "4")
 #' pred_emmeans <- emmeans::emmeans(mod, ~ hp + cyl, at = at)
 #' get_data_for_grid(pred_emmeans, mod, residualize = TRUE)
+#'
 #'
 #' @examplesIf require("insight") && require("marginaleffects")
 #' pred_marginaleffects <- marginaleffects::predictions(mod, newdata = nd)
 #' get_data_for_grid(pred_marginaleffects, residualize = TRUE)
+#'
 #'
 #'
 #' @examplesIf require("insight") && require("marginaleffects") &&  require("lme4")
