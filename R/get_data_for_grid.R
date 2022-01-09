@@ -216,7 +216,7 @@ residualize_over_grid <- function(data, grid, model, pred_name) {
   idx <- apply(best_match, 2, which)
   idx <- sapply(idx, "[", 1)
 
-  res <- stats::residuals(model, type = "working")
+  res <- stats::residuals(model, type = if (inherits(model, "glmmTMB")) "response" else "working")
 
   points <- grid[idx, , drop = FALSE]
   points[[pred_name]] <- inv_fun(fun_link(predicted[idx]) + res) # add errors
@@ -249,6 +249,7 @@ collapse_by_group <- function(data, grid, model, collapse_by, pred_name) {
     colnames(data)[colnames(data) == resp_name] <- pred_name
   }
 
+  grid <- grid[lengths(lapply(grid, unique)) > 1]
   data <- data[,colnames(data) %in% c(colnames(grid), pred_name, collapse_by), drop = FALSE]
 
   agg_data <- stats::aggregate(data[[pred_name]],
