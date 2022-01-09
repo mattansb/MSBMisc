@@ -177,11 +177,22 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D             4  50  25.08816</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230              4 100  22.51327</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280              6 100  22.09131</span>
-<span class="r-in"><span class="va">at</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>hp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">350</span>, by <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>, cyl <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">at</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>hp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">350</span>, by <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>, cyl <span class="op">=</span> <span class="st">"4"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">pred_emmeans</span> <span class="op">&lt;-</span> <span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans</a></span><span class="op">(</span><span class="va">mod</span>, <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">cyl</span>, at <span class="op">=</span> <span class="va">at</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in `contrasts&lt;-`(`*tmp*`, value = contrasts.arg[[nn]]):</span> contrasts apply only to factors</span>
 <span class="r-in"><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_emmeans</span>, <span class="va">mod</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_data_for_grid(pred_emmeans, mod, residualize = TRUE):</span> object 'pred_emmeans' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   cyl  hp   emmean</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4           6 100 23.14580</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag       6 100 23.14580</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710          4 100 22.39857</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive      6 100 23.54580</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout   8 150 19.70311</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Valiant             6 100 19.95907</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Duster 360          8 250 13.58271</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D           4  50 25.08816</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230            4 100 22.51327</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280            6 100 22.09131</span>
+<span class="r-in"></span>
 <span class="r-in"><span class="va">pred_marginaleffects</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">nd</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_marginaleffects</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   cyl  hp predicted</span>
@@ -195,6 +206,7 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D           4  50  25.08816</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230            4 100  22.51327</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280            6 100  22.09131</span>
+<span class="r-in"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## Collapes across group ------</span></span>
 <span class="r-in"><span class="va">fm1</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">angle</span> <span class="op">~</span> <span class="va">temperature</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">recipe</span><span class="op">)</span>,</span>
