@@ -5,10 +5,76 @@
 #' @param residualize Should data be residualized?
 #' @param collapse_by Name of grouping variable to collaple across. If `TRUE`
 #'   name of grouping variable is automatically detected from the model.
+#' @param ... Args passed from / to other functions.
+#'
+#' @examplesIf require("insight")
+#'
+#' data("mtcars")
+#' mtcars <- mtcars |> transform(cyl = factor(cyl))
+#' mod <- lm(mpg ~ hp + cyl, data = mtcars[1:10, ])
+#'
+#' nd <- expand.grid(hp = seq(50, 350, by = 50),
+#'                   cyl = "4")
+#'
+#' nd$predicted_mpg <- predict(mod, newdata = nd)
+#'
+#' get_data_for_grid(nd, mod)
+#'
+#' get_data_for_grid(nd, mod, residualize = TRUE, pred_name = "predicted_mpg")
+#'
+#' @examplesIf require("insight") && require("ggeffects")
+#'
+#' library(ggplot2)
+#' ggplot(nd, aes(hp, predicted_mpg)) +
+#'   geom_line() +
+#'   geom_point(aes(y = mpg, color = "Raw"),
+#'              data = get_data_for_grid(nd, mod)) +
+#'   geom_point(aes(color = "Residualized"),
+#'              data = get_data_for_grid(nd, mod, residualize = TRUE, pred_name = "predicted_mpg")) +
+#'   labs(title = "Partial residual plot",
+#'        color = "Data")
+#'
+#' ## Support of data-gripd + prediction packages ------
+#' - ggeffcts
+#' - emmeans
+#' - marginaleffects
+#'
+#' @examplesIf require("insight") && require("ggeffects")
+#' pred_ggeffects <- ggeffects::ggpredict(mod, c("hp [50:350, by = 50]", "cyl [4]"))
+#' get_data_for_grid(pred_ggeffects, residualize = TRUE)
+#'
+#' @examplesIf require("insight") && require("emmeans")
+#' at <- list(hp = seq(50, 350, by = 50), cyl = 4)
+#' pred_emmeans <- emmeans::emmeans(mod, ~ hp + cyl, at = at)
+#' get_data_for_grid(pred_emmeans, mod, residualize = TRUE)
+#'
+#' @examplesIf require("insight") && require("marginaleffects")
+#' pred_marginaleffects <- marginaleffects::predictions(mod, newdata = nd)
+#' get_data_for_grid(pred_marginaleffects, residualize = TRUE)
+#'
+#'
+#' @examplesIf require("insight") && require("marginaleffects") &&  require("lme4")
+#' ## Collapes across group ------
+#' fm1 <- lme4::lmer(angle ~ temperature + (1|recipe),
+#'                   data = cake)
+#'
+#' pred_ggeffects <- ggeffects::ggpredict(fm1, c("temperature", "recipe"))
+#' nd <- marginaleffects::datagrid(temperature = unique(cake$temperature),
+#'                                 model = fm1)
+#' pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd)
+#'
+#' get_data_for_grid(pred_marginaleffects, collapse_by = TRUE)
+#' get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)
+#'
 #'
 #' @export
 get_data_for_grid <- function(grid, model, residualize = FALSE, collapse_by = FALSE, ...) {
-  warning("experimental")
+  if (getOption("get_data_for_grid.warn", TRUE)) {
+    warning("'get_data_for_grid()' is experimental.", call. = FALSE)
+    options(get_data_for_grid.warn = FALSE)
+  }
+
+  .check_namespace("insight")
   UseMethod("get_data_for_grid")
 }
 
@@ -73,7 +139,10 @@ get_data_for_grid.ggeffects <- function(grid, model, residualize = FALSE, collap
 #' @rdname get_data_for_grid
 get_data_for_grid.emmGrid <- function(grid, model, residualize = FALSE, collapse_by = FALSE,
                                       protect_names = TRUE, ...) {
-  grid <- regrid(grid, transform = "response")
+
+  .check_namespace("emmeans")
+
+  grid <- emmeans::regrid(grid, transform = "response")
   s <- as.data.frame(grid)
   pred_name <- grid@misc[["estName"]]
 
@@ -82,6 +151,25 @@ get_data_for_grid.emmGrid <- function(grid, model, residualize = FALSE, collapse
      residualize = residualize,
      collapse_by = collapse_by,
      pred_name = pred_name
+  )
+}
+
+
+#' @export
+#' @rdname get_data_for_grid
+get_data_for_grid.predictions <- function(grid, model, residualize = FALSE, collapse_by = FALSE,
+                                          ...) {
+  stopifnot("Type must be 'response'." = attr(grid, "type") == "response")
+
+  if (missing(model)) {
+    model <- attr(grid, "model")
+  }
+
+  get_data_for_grid.data.frame(
+    grid[c(unlist(attr(grid, "variables")), "predicted")], model,
+    residualize = residualize,
+    collapse_by = collapse_by,
+    pred_name = "predicted"
   )
 }
 

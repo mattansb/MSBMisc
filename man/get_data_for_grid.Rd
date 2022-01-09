@@ -5,6 +5,7 @@
 \alias{get_data_for_grid.data.frame}
 \alias{get_data_for_grid.ggeffects}
 \alias{get_data_for_grid.emmGrid}
+\alias{get_data_for_grid.predictions}
 \title{Get raw data for plotting with model predictions}
 \usage{
 get_data_for_grid(grid, model, residualize = FALSE, collapse_by = FALSE, ...)
@@ -35,6 +36,8 @@ get_data_for_grid(grid, model, residualize = FALSE, collapse_by = FALSE, ...)
   protect_names = TRUE,
   ...
 )
+
+\method{get_data_for_grid}{predictions}(grid, model, residualize = FALSE, collapse_by = FALSE, ...)
 }
 \arguments{
 \item{grid}{A data grid with predictions}
@@ -46,6 +49,8 @@ get_data_for_grid(grid, model, residualize = FALSE, collapse_by = FALSE, ...)
 \item{collapse_by}{Name of grouping variable to collaple across. If \code{TRUE}
 name of grouping variable is automatically detected from the model.}
 
+\item{...}{Args passed from / to other functions.}
+
 \item{pred_name}{Name of column that has the predictions in the data grid}
 
 \item{protect_names}{Logical, if \code{TRUE}, preserves column names from the
@@ -53,4 +58,66 @@ name of grouping variable is automatically detected from the model.}
 }
 \description{
 Get raw data for plotting with model predictions
+}
+\examples{
+\dontshow{if (require("insight")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
+data("mtcars")
+mtcars <- mtcars |> transform(cyl = factor(cyl))
+mod <- lm(mpg ~ hp + cyl, data = mtcars[1:10, ])
+
+nd <- expand.grid(hp = seq(50, 350, by = 50),
+                  cyl = "4")
+
+nd$predicted_mpg <- predict(mod, newdata = nd)
+
+get_data_for_grid(nd, mod)
+
+get_data_for_grid(nd, mod, residualize = TRUE, pred_name = "predicted_mpg")
+\dontshow{\}) # examplesIf}
+\dontshow{if (require("insight") && require("ggeffects")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
+library(ggplot2)
+ggplot(nd, aes(hp, predicted_mpg)) +
+  geom_line() +
+  geom_point(aes(y = mpg, color = "Raw"),
+             data = get_data_for_grid(nd, mod)) +
+  geom_point(aes(color = "Residualized"),
+             data = get_data_for_grid(nd, mod, residualize = TRUE, pred_name = "predicted_mpg")) +
+  labs(title = "Partial residual plot",
+       color = "Data")
+
+## Support of data-gripd + prediction packages ------
+- ggeffcts
+- emmeans
+- marginaleffects
+\dontshow{\}) # examplesIf}
+\dontshow{if (require("insight") && require("ggeffects")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+pred_ggeffects <- ggeffects::ggpredict(mod, c("hp [50:350, by = 50]", "cyl [4]"))
+get_data_for_grid(pred_ggeffects, residualize = TRUE)
+\dontshow{\}) # examplesIf}
+\dontshow{if (require("insight") && require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+at <- list(hp = seq(50, 350, by = 50), cyl = 4)
+pred_emmeans <- emmeans::emmeans(mod, ~ hp + cyl, at = at)
+get_data_for_grid(pred_emmeans, mod, residualize = TRUE)
+\dontshow{\}) # examplesIf}
+\dontshow{if (require("insight") && require("marginaleffects")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+pred_marginaleffects <- marginaleffects::predictions(mod, newdata = nd)
+get_data_for_grid(pred_marginaleffects, residualize = TRUE)
+
+\dontshow{\}) # examplesIf}
+\dontshow{if (require("insight") && require("marginaleffects") &&  require("lme4")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+## Collapes across group ------
+fm1 <- lme4::lmer(angle ~ temperature + (1|recipe),
+                  data = cake)
+
+pred_ggeffects <- ggeffects::ggpredict(fm1, c("temperature", "recipe"))
+nd <- marginaleffects::datagrid(temperature = unique(cake$temperature),
+                                model = fm1)
+pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd)
+
+get_data_for_grid(pred_marginaleffects, collapse_by = TRUE)
+get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)
+
+\dontshow{\}) # examplesIf}
 }
