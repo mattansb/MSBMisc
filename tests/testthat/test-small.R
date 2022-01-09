@@ -3,6 +3,12 @@ if (FALSE) {
   library(MSBMisc)
 }
 
+test_that("print_library", {
+  expect_match(print_library(MSBMisc), "0.0.1.11", fixed = TRUE)
+  expect_match(print_library(MSBMisc), "library", fixed = TRUE)
+  expect_match(print_require(MSBMisc), "require", fixed = TRUE)
+})
+
 test_that("age_in_unit", {
   skip_if_not_installed("lubridate")
   expect_equal(age_in_unit("1989-08-05", "2021-11-16"), "32 years, 3 months, 1 weeks, 4 days")
@@ -20,14 +26,6 @@ test_that("cw", {
   expect_error(cw(-2, 1))
   expect_equal(cw(-2, 2, 0), c(-1, 1, 0))
 })
-
-test_that("print_library", {
-  expect_match(print_library(MSBMisc), "0.0.1.10", fixed = TRUE)
-  expect_match(print_library(MSBMisc), "library", fixed = TRUE)
-  expect_match(print_require(MSBMisc), "require", fixed = TRUE)
-})
-
-
 
 test_that("chisq FU", {
   skip_if_not_installed("effectsize")
