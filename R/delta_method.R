@@ -7,7 +7,7 @@
 #' @return A list with `means` and `V` of the transformed variables. (row/col)
 #'   names are of the `g` transformations. See examples.
 #'
-#' @note Most of this function is mostly copied from [msm::deltamethod()].
+#' @note Most of this function is mostly copied from `msm::deltamethod()`.
 #'
 #' @examples
 #'
@@ -73,7 +73,7 @@ delta_method <- function(..., .means, .V) {
   Vout <- msm.deltamethod(gl, .means, .V, FALSE)
   # attr(Vout, "correlation") <- cov2cor(Vout)
 
-  list(means = setNames(meansout, nm = names(g)),
+  list(means = stats::setNames(meansout, nm = names(g)),
        V = Vout)
 }
 

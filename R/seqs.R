@@ -32,7 +32,7 @@ seq_range <- function(x, length.out = NULL, by = NULL, along.with = NULL, na.rm 
 #' @rdname seq_range
 seq_IQR <- function(x, length.out = NULL, by = NULL, along.with = NULL, na.rm = TRUE) {
   match.call()
-  range <- quantile(x, c(0.25, 0.75), na.rm = na.rm)
+  range <- stats::quantile(x, c(0.25, 0.75), na.rm = na.rm)
 
   .seq(range, length.out = length.out, by = by, along.with = along.with)
 }

@@ -35,9 +35,9 @@
 #'        color = "Data")
 #'
 #' ## Support of data-gripd + prediction packages ------
-#' - ggeffcts
-#' - emmeans
-#' - marginaleffects
+#' # - ggeffects
+#' # - emmeans
+#' # - marginaleffects
 #'
 #' @examplesIf require("insight") && require("ggeffects")
 #' pred_ggeffects <- ggeffects::ggpredict(mod, c("hp [50:350, by = 50]", "cyl [4]"))

@@ -88,9 +88,9 @@ ggplot(nd, aes(hp, predicted_mpg)) +
        color = "Data")
 
 ## Support of data-gripd + prediction packages ------
-- ggeffcts
-- emmeans
-- marginaleffects
+# - ggeffects
+# - emmeans
+# - marginaleffects
 \dontshow{\}) # examplesIf}
 \dontshow{if (require("insight") && require("ggeffects")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 pred_ggeffects <- ggeffects::ggpredict(mod, c("hp [50:350, by = 50]", "cyl [4]"))

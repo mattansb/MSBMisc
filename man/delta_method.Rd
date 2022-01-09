@@ -21,7 +21,7 @@ names are of the \code{g} transformations. See examples.
 Transform means a (co)variances using the \emph{delta} method
 }
 \note{
-Most of this function is mostly copied from \code{\link[msm:deltamethod]{msm::deltamethod()}}.
+Most of this function is mostly copied from \code{msm::deltamethod()}.
 }
 \examples{
 

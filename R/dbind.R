@@ -41,7 +41,7 @@ dbind <- function(..., .fill = NULL) {
   start.cols <- end.cols - n.col + 1
 
   if (is.null(.fill)) .fill <- vector(mode = mode(mats[[1]]), length = 1)
-  out <- matrix(.fill, nrow = tail(end.rows, 1), ncol = tail(end.cols, 1),
+  out <- matrix(.fill, nrow = utils::tail(end.rows, 1), ncol = utils::tail(end.cols, 1),
                 dimnames = list(1:sum(n.row), 1:sum(n.col)))
   for (m in seq_along(mats)) {
     out[start.rows[m]:end.rows[m],
