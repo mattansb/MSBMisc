@@ -34,7 +34,7 @@
 #'   labs(title = "Partial residual plot",
 #'        color = "Data")
 #'
-#' ## Support of data-gripd + prediction packages ------
+#' ## Support of data-grid packages ------
 #' # - ggeffects
 #' # - emmeans
 #' # - marginaleffects
