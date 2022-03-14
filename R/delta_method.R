@@ -49,10 +49,20 @@ delta_method <- function(..., .means, .V) {
   cl <- match.call()
   cl$.means <- cl$.V <- NULL
   g <- character(length(cl) - 1)
-  for (gi in seq_len(length(cl) - 1)) {
+  for (gi in seq_along(g)) {
     g[gi] <- as.character(cl[gi + 1])
   }
-  names(g) <- g
+
+  if (!is.null(names(cl)[-1])) {
+    names(g) <- names(cl)[-1]
+    blank_names <- names(g) == ""
+    if (any(blank_names)) {
+      names(g)[blank_names] <- g[blank_names]
+    }
+  } else {
+    names(g) <- g
+  }
+
 
   nms1 <- paste0("\\b", names(.means), "\\b")
   nms2 <- paste0("x", seq_along(.means))
