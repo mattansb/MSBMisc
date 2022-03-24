@@ -28,14 +28,28 @@
 #'
 #'
 #' # Also works with facets!
-#' polar_plot_fact <- polar_plot +
-#'   facet_grid(~ gear)
+#' d <- data.frame(
+#'   x = seq(1, 7, length = 6*5),
+#'   y = rnorm(6*5),
+#'   g = rep(letters[1:6], each = 5)
+#' )
 #'
-#' crop_coord_polar(polar_plot_fact, end = pi)
+#' polar_plot_facet <- ggplot(d, aes(x, y)) +
+#'   geom_point(aes(color = x), size = 2) +
+#'   facet_wrap(~g) +
+#'   scale_x_continuous(breaks = seq(0, 6), minor_breaks = NULL) +
+#'   coord_polar()
+#'
+#' crop_coord_polar(polar_plot_facet, start = pi)
 #'
 #' # Use multiple values - one for each facet:
-#' crop_coord_polar(polar_plot_fact,
-#'                  start = c(0, pi/2, pi), end = c(pi/2, pi, 2*pi))
+#' start <- seq(0, 5) * 2 * pi / 6
+#' end <- start + start[2]
+#'
+#' crop_coord_polar(polar_plot_facet,
+#'                  start = start, end = end)
+#'
+#'
 #'
 #' @export
 crop_coord_polar <- function(plot, start = 0, end = 2*pi,
@@ -52,6 +66,10 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
     all(end <= 2*pi),
     padding >= 0
   )
+
+  if (!inherits(plot$coordinates, "CoordPolar")) {
+    warning("Plot does not seem to use polar coordinates.")
+  }
 
   trbl <- .get_trbl(start, end, padding)
 
@@ -126,6 +144,7 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
 
   t. <- r. <- rep(1, nrow(start.xy))
   b. <- l. <- rep(0, nrow(start.xy))
+
   for (k in seq_len(nrow(start.xy))) {
     # t
     if (!.is_between_angle(start[k], 0, end[k])) {
