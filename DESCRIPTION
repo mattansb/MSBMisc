@@ -1,7 +1,7 @@
 Package: MSBMisc
 Type: Package
 Title: Some functions I wrote that I find useful
-Version: 0.0.1.11
+Version: 0.0.1.12
 Author: person("Mattan S.", "Ben-Shachar")
 Maintainer: Mattan S. Ben-Shachar <matanshm@post.bgu.ac.il>
 Description: misc. functions.
@@ -21,6 +21,7 @@ Suggests:
     emmeans,
     ggeffects,
     ggplot2,
+    ggtrace,
     insight,
     lme4,
     lubridate,
