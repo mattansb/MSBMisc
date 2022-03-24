@@ -25,6 +25,11 @@ starts and ends.}
 \description{
 Crop \code{coord_polar}
 }
+\details{
+This function uses
+\href{https://yjunechoe.github.io/ggtrace/}{\code{{ggtrace}}} by June Choe, adapted
+from \href{https://twitter.com/yjunechoe/status/1506672410208051201}{this twitter thread}.
+}
 \examples{
 \dontshow{if (require("ggplot2") && require("ggtrace")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 

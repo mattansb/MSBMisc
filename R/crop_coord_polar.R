@@ -7,6 +7,9 @@
 #' @param padding How much padding to add around the crop?
 #' @param fix_aspect.ratio Should the aspect ratio be fixed?
 #'
+#' @details This function uses
+#'   [`{ggtrace}`](https://yjunechoe.github.io/ggtrace/) by June Choe, adapted
+#'   from [this twitter thread](https://twitter.com/yjunechoe/status/1506672410208051201).
 #'
 #' @examplesIf require("ggplot2") && require("ggtrace")
 #'
