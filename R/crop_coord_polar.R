@@ -53,53 +53,12 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
     padding >= 0
   )
 
-  theta_to_xy <- function(theta) {
-    theta <- (2*pi - theta) + pi/2
-    cbind(cos(theta), sin(theta))
-  }
-
-  is_between_angle <- function(min, theta, max) {
-    arc_long <- max - min
-    if (arc_long < 0) arc_long <- arc_long + 360
-
-    arc_short1 <- theta - min
-    arc_short2 <- max - theta
-    if (arc_short1 < 0) arc_short1 <- arc_short1 + 360
-    if (arc_short2 < 0) arc_short2 <- arc_short2 + 360
-
-    arc_long >= arc_short1 && arc_long >= arc_short2
-  }
-
-  center.xy <- c(0, 0) + 0.5
-  start.xy <- theta_to_xy(start) / 2 + 0.5
-  end.xy <- theta_to_xy(end) / 2 + 0.5
-
-  t. <- r. <- rep(1, nrow(start.xy))
-  b. <- l. <- rep(0, nrow(start.xy))
-  for (k in seq_len(nrow(start.xy))) {
-    # t
-    if (!is_between_angle(start[k], 0, end[k])) {
-      t.[k] <- pmax(center.xy[2], start.xy[k, 2], end.xy[k, 2]) + padding
-    }
-
-    # r
-    if (!is_between_angle(start[k], pi/2, end[k])) {
-      r.[k] <- pmax(center.xy[1], start.xy[k, 1], end.xy[k, 1]) + padding
-    }
-
-    # b
-    if (!is_between_angle(start[k], pi, end[k])) {
-      b.[k] <- pmin(center.xy[2], start.xy[k, 2], end.xy[k, 2]) - padding
-    }
-
-    # l
-    if (!is_between_angle(start[k], 3*pi/2, end[k])) {
-      l.[k] <- pmin(center.xy[1], start.xy[k, 1], end.xy[k, 1]) - padding
-    }
-  }
+  trbl <- .get_trbl(start, end, padding)
 
   if (isTRUE(fix_aspect.ratio)) {
-    aspect.ratio <- (b. - t.) / (l. - r.)
+    aspect.ratio <-
+      (trbl[["b."]] - trbl[["t."]]) /
+      (trbl[["l."]] - trbl[["r."]])
 
     if (!all(aspect.ratio[1] == aspect.ratio)) aspect.ratio <- 1
 
@@ -115,17 +74,17 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
     l <- l.
 
     n_panels <- length(panels)
-    if (length(b) != n_panels) b <- rep(b, n_panels)
-    if (length(t) != n_panels) t <- rep(t, n_panels)
-    if (length(r) != n_panels) r <- rep(r, n_panels)
-    if (length(l) != n_panels) l <- rep(l, n_panels)
+    if (length(b) != n_panels) b <- rep(b, length.out = n_panels)
+    if (length(t) != n_panels) t <- rep(t, length.out = n_panels)
+    if (length(r) != n_panels) r <- rep(r, length.out = n_panels)
+    if (length(l) != n_panels) l <- rep(l, length.out = n_panels)
 
     for (p in seq_len(n_panels)) {
       panels[[p]] <- editGrob(panels[[p]],
                               vp = viewport(yscale = c(b[p], t[p]),
                                             xscale = c(l[p], r[p])))
     }
-  })
+  }, env = trbl)
 
   trace_plot <- ggtrace::with_ggtrace(
     x = plot,
@@ -135,4 +94,59 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
     out = "g"
   )
   trace_plot
+}
+
+
+# Utils -----
+
+#' @keywords internal
+.theta_to_xy <- function(theta) {
+  theta <- (2*pi - theta) + pi/2
+  cbind(cos(theta), sin(theta))
+}
+
+#' @keywords internal
+.is_between_angle <- function(min, theta, max) {
+  arc_long <- max - min
+  if (arc_long < 0) arc_long <- arc_long + 360
+
+  arc_short1 <- theta - min
+  arc_short2 <- max - theta
+  if (arc_short1 < 0) arc_short1 <- arc_short1 + 360
+  if (arc_short2 < 0) arc_short2 <- arc_short2 + 360
+
+  arc_long >= arc_short1 && arc_long >= arc_short2
+}
+
+#' @keywords internal
+.get_trbl <- function(start, end, padding) {
+  center.xy <- c(0, 0) + 0.5
+  start.xy <- .theta_to_xy(start) / 2 + 0.5
+  end.xy <- .theta_to_xy(end) / 2 + 0.5
+
+  t. <- r. <- rep(1, nrow(start.xy))
+  b. <- l. <- rep(0, nrow(start.xy))
+  for (k in seq_len(nrow(start.xy))) {
+    # t
+    if (!.is_between_angle(start[k], 0, end[k])) {
+      t.[k] <- pmax(center.xy[2], start.xy[k, 2], end.xy[k, 2]) + padding
+    }
+
+    # r
+    if (!.is_between_angle(start[k], pi/2, end[k])) {
+      r.[k] <- pmax(center.xy[1], start.xy[k, 1], end.xy[k, 1]) + padding
+    }
+
+    # b
+    if (!.is_between_angle(start[k], pi, end[k])) {
+      b.[k] <- pmin(center.xy[2], start.xy[k, 2], end.xy[k, 2]) - padding
+    }
+
+    # l
+    if (!.is_between_angle(start[k], 3*pi/2, end[k])) {
+      l.[k] <- pmin(center.xy[1], start.xy[k, 1], end.xy[k, 1]) - padding
+    }
+  }
+
+  data.frame(t., r., b., l.)
 }
