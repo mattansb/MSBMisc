@@ -1,7 +1,6 @@
 #' It's just logical
 #'
-#' @inheritParams base::isTRUE
-#' @param ... Values to be tested.
+#' @param x,... Values to be tested.
 #'
 #' @examples
 #' x <- list(1, TRUE, list(TRUE), FALSE, "Hello world!")
@@ -12,7 +11,7 @@
 #'
 #' allTRUE(TRUE, FALSE, stop("NOOOO"))
 #'
-#' anyTRUE(FALSE, TRUE, stop("NOOOO"))
+#' anyTRUE(TRUE, FALSE, stop("NOOOO"))
 #'
 #' @export
 is.TRUE <- Vectorize(isTRUE, "x", SIMPLIFY = TRUE)

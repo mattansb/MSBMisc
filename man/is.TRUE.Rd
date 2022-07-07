@@ -16,7 +16,7 @@ allTRUE(...)
 anyTRUE(...)
 }
 \arguments{
-\item{...}{Values to be tested.}
+\item{x, ...}{Values to be tested.}
 }
 \description{
 It's just logical
@@ -30,6 +30,6 @@ is.FALSE(x)
 
 allTRUE(TRUE, FALSE, stop("NOOOO"))
 
-anyTRUE(FALSE, TRUE, stop("NOOOO"))
+anyTRUE(TRUE, FALSE, stop("NOOOO"))
 
 }
