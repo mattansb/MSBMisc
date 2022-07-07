@@ -1,7 +1,7 @@
 Package: MSBMisc
 Type: Package
 Title: Some functions I wrote that I find useful
-Version: 0.0.1.12
+Version: 0.0.1.13
 Author: person("Mattan S.", "Ben-Shachar")
 Maintainer: Mattan S. Ben-Shachar <matanshm@post.bgu.ac.il>
 Description: misc. functions.
@@ -16,6 +16,7 @@ Imports:
     utils
 Suggests:
     afex,
+    clipr,
     dplyr,
     effectsize,
     emmeans,
@@ -29,6 +30,7 @@ Suggests:
     MASS,
     patchwork,
     qqplotr,
+    rstudioapi,
     shiny,
     stringr,
     tidySEM,
@@ -37,7 +39,7 @@ Suggests:
 Remotes:
     yjunechoe/ggtrace
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: 

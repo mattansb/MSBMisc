@@ -1,0 +1,19 @@
+Name: Paste as comment
+Description: Paste the clipboard content as a comment
+Binding: Paste
+Interactive: false
+
+Name: Paste as roxygen
+Description: Paste the clipboard content as roxygen lines
+Binding: PasteRoxygen
+Interactive: false
+
+Name: Bracketify file
+Description: Transform `foo$bar` to `foo[["bar"]] in current file.
+Binding: bracketifyFile
+Interactive: false
+
+Name: Bracketify selection
+Description: Transform `foo$bar` to `foo[["bar"]] in current selection.
+Binding: bracketifySelection
+Interactive: false

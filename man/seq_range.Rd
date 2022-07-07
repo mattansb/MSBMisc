@@ -42,8 +42,9 @@ valued, defaults to 20.}
 
 \item{along.with}{take the length from the length of this argument.}
 
-\item{na.rm}{a logical value indicating whether \code{NA}
-    values should be stripped before the computation proceeds.}
+\item{na.rm}{a logical evaluating to \code{TRUE} or \code{FALSE}
+    indicating whether \code{NA} values should be stripped before the
+    computation proceeds.}
 
 \item{padding}{Padding factor for the range.}
 

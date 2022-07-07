@@ -16,11 +16,6 @@ allTRUE(...)
 anyTRUE(...)
 }
 \arguments{
-\item{x}{\code{\link[base]{raw}}, \code{\link[base]{logical}} or \sQuote{number-like} vectors (i.e., of
-    types \code{\link[base]{double}} (class \code{\link[base]{numeric}}),
-    \code{\link[base]{integer}} and \code{\link[base]{complex}}), or objects for
-    which methods have been written.}
-
 \item{...}{Values to be tested.}
 }
 \description{
