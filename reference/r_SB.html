@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">MSBMisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.12</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.13</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,30 +54,35 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">r_SB</span><span class="op">(</span><span class="va">x</span>, y <span class="op">=</span> <span class="cn">NULL</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">r_SB</span><span class="op">(</span><span class="va">x</span>, y <span class="op">=</span> <span class="cn">NULL</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>A correlation or numeric vector</p></dd>
+
+
 <dt>y</dt>
 <dd><p>A numeric vector</p></dd>
+
+
 <dt>var.equal</dt>
 <dd><p>Assume equal var of <code>x</code> and <code>y</code>? (ignored if <code>y</code> is not <code>NULL</code>)</p></dd>
+
 </dl></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">r_SB</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">r_SB</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7207338</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">r_SB</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">r_SB</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07863447</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">r_SB</span><span class="op">(</span><span class="fl">0.57</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">r_SB</span><span class="op">(</span><span class="fl">0.57</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7261146</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -89,7 +94,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.9000.</p>
 </div>
 
     </footer></div>

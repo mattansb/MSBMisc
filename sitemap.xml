@@ -10,10 +10,16 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/Paste.html</loc>
+  </url>
+  <url>
     <loc>/reference/R2.html</loc>
   </url>
   <url>
     <loc>/reference/age_in_unit.html</loc>
+  </url>
+  <url>
+    <loc>/reference/bracketifyFile.html</loc>
   </url>
   <url>
     <loc>/reference/chisq_pairwise.html</loc>

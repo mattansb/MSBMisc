@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">MSBMisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.12</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.13</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,75 +54,88 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">grid</span>, <span class="va">model</span>, residualize <span class="op">=</span> <span class="cn">FALSE</span>, collapse_by <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for data.frame</span>
-<span class="fu">get_data_for_grid</span><span class="op">(</span>
-  <span class="va">grid</span>,
-  <span class="va">model</span>,
-  residualize <span class="op">=</span> <span class="cn">FALSE</span>,
-  collapse_by <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">pred_name</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for ggeffects</span>
-<span class="fu">get_data_for_grid</span><span class="op">(</span>
-  <span class="va">grid</span>,
-  <span class="va">model</span>,
-  residualize <span class="op">=</span> <span class="cn">FALSE</span>,
-  collapse_by <span class="op">=</span> <span class="cn">FALSE</span>,
-  protect_names <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for emmGrid</span>
-<span class="fu">get_data_for_grid</span><span class="op">(</span>
-  <span class="va">grid</span>,
-  <span class="va">model</span>,
-  residualize <span class="op">=</span> <span class="cn">FALSE</span>,
-  collapse_by <span class="op">=</span> <span class="cn">FALSE</span>,
-  protect_names <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for predictions</span>
-<span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">grid</span>, <span class="va">model</span>, residualize <span class="op">=</span> <span class="cn">FALSE</span>, collapse_by <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">grid</span>, <span class="va">model</span>, residualize <span class="op">=</span> <span class="cn">FALSE</span>, collapse_by <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for data.frame</span></span>
+<span><span class="fu">get_data_for_grid</span><span class="op">(</span></span>
+<span>  <span class="va">grid</span>,</span>
+<span>  <span class="va">model</span>,</span>
+<span>  residualize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  collapse_by <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">pred_name</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ggeffects</span></span>
+<span><span class="fu">get_data_for_grid</span><span class="op">(</span></span>
+<span>  <span class="va">grid</span>,</span>
+<span>  <span class="va">model</span>,</span>
+<span>  residualize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  collapse_by <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  protect_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for emmGrid</span></span>
+<span><span class="fu">get_data_for_grid</span><span class="op">(</span></span>
+<span>  <span class="va">grid</span>,</span>
+<span>  <span class="va">model</span>,</span>
+<span>  residualize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  collapse_by <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  protect_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for predictions</span></span>
+<span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">grid</span>, <span class="va">model</span>, residualize <span class="op">=</span> <span class="cn">FALSE</span>, collapse_by <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>grid</dt>
 <dd><p>A data grid with predictions</p></dd>
+
+
 <dt>model</dt>
 <dd><p>The statistical model</p></dd>
+
+
 <dt>residualize</dt>
 <dd><p>Should data be residualized?</p></dd>
+
+
 <dt>collapse_by</dt>
 <dd><p>Name of grouping variable to collaple across. If <code>TRUE</code>
 name of grouping variable is automatically detected from the model.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Args passed from / to other functions.</p></dd>
+
+
 <dt>pred_name</dt>
 <dd><p>Name of column that has the predictions in the data grid</p></dd>
+
+
 <dt>protect_names</dt>
 <dd><p>Logical, if <code>TRUE</code>, preserves column names from the
 <code>ggeffects</code> object.</p></dd>
+
 </dl></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mtcars</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>cyl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">nd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>hp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">350</span>, by <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>,</span>
-<span class="r-in">                  cyl <span class="op">=</span> <span class="st">"4"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">nd</span><span class="op">$</span><span class="va">predicted_mpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">nd</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">nd</span>, <span class="va">mod</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mtcars</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>cyl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">nd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>hp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">350</span>, by <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  cyl <span class="op">=</span> <span class="st">"4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">nd</span><span class="op">$</span><span class="va">predicted_mpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">nd</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">nd</span>, <span class="va">mod</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'get_data_for_grid()' is experimental.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg  hp cyl</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0 110   6</span>
@@ -135,8 +148,8 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D         24.4  62   4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230          22.8  95   4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280          19.2 123   6</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">nd</span>, <span class="va">mod</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span>, pred_name <span class="op">=</span> <span class="st">"predicted_mpg"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">nd</span>, <span class="va">mod</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span>, pred_name <span class="op">=</span> <span class="st">"predicted_mpg"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   cyl  hp predicted_mpg</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4           6 100      23.14580</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag       6 100      23.14580</span>
@@ -148,24 +161,24 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D           4  50      25.08816</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230            4 100      22.51327</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280            6 100      22.09131</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">nd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">hp</span>, <span class="va">predicted_mpg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">mpg</span>, color <span class="op">=</span> <span class="st">"Raw"</span><span class="op">)</span>,</span>
-<span class="r-in">             data <span class="op">=</span> <span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">nd</span>, <span class="va">mod</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Residualized"</span><span class="op">)</span>,</span>
-<span class="r-in">             data <span class="op">=</span> <span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">nd</span>, <span class="va">mod</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span>, pred_name <span class="op">=</span> <span class="st">"predicted_mpg"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Partial residual plot"</span>,</span>
-<span class="r-in">       color <span class="op">=</span> <span class="st">"Data"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">nd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">hp</span>, <span class="va">predicted_mpg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">mpg</span>, color <span class="op">=</span> <span class="st">"Raw"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>             data <span class="op">=</span> <span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">nd</span>, <span class="va">mod</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Residualized"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>             data <span class="op">=</span> <span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">nd</span>, <span class="va">mod</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span>, pred_name <span class="op">=</span> <span class="st">"predicted_mpg"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Partial residual plot"</span>,</span></span>
+<span class="r-in"><span>       color <span class="op">=</span> <span class="st">"Data"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="get_data_for_grid-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Support of data-grid packages ------</span></span>
-<span class="r-in"><span class="co"># - ggeffects</span></span>
-<span class="r-in"><span class="co"># - emmeans</span></span>
-<span class="r-in"><span class="co"># - marginaleffects</span></span>
-<span class="r-in"><span class="va">pred_ggeffects</span> <span class="op">&lt;-</span> <span class="fu">ggeffects</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggpredict</a></span><span class="op">(</span><span class="va">mod</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hp [50:350, by = 50]"</span>, <span class="st">"cyl [4]"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_ggeffects</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Support of data-grid packages ------</span></span></span>
+<span class="r-in"><span><span class="co"># - ggeffects</span></span></span>
+<span class="r-in"><span><span class="co"># - emmeans</span></span></span>
+<span class="r-in"><span><span class="co"># - marginaleffects</span></span></span>
+<span class="r-in"><span><span class="va">pred_ggeffects</span> <span class="op">&lt;-</span> <span class="fu">ggeffects</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggpredict</a></span><span class="op">(</span><span class="va">mod</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hp [50:350, by = 50]"</span>, <span class="st">"cyl [4]"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_ggeffects</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   group   x predicted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4             6 100  23.14580</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag         6 100  23.14580</span>
@@ -177,10 +190,10 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D             4  50  25.08816</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230              4 100  22.51327</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280              6 100  22.09131</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">at</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>hp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">350</span>, by <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>, cyl <span class="op">=</span> <span class="st">"4"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pred_emmeans</span> <span class="op">&lt;-</span> <span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans</a></span><span class="op">(</span><span class="va">mod</span>, <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">cyl</span>, at <span class="op">=</span> <span class="va">at</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_emmeans</span>, <span class="va">mod</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">at</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>hp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">350</span>, by <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>, cyl <span class="op">=</span> <span class="st">"4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pred_emmeans</span> <span class="op">&lt;-</span> <span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html" class="external-link">emmeans</a></span><span class="op">(</span><span class="va">mod</span>, <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">cyl</span>, at <span class="op">=</span> <span class="va">at</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_emmeans</span>, <span class="va">mod</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   cyl  hp   emmean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4           6 100 23.14580</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag       6 100 23.14580</span>
@@ -192,9 +205,9 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D           4  50 25.08816</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230            4 100 22.51327</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280            6 100 22.09131</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pred_marginaleffects</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">nd</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_marginaleffects</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pred_marginaleffects</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">nd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_marginaleffects</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   cyl  hp predicted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4           6 100  23.14580</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag       6 100  23.14580</span>
@@ -206,18 +219,18 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D           4  50  25.08816</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230            4 100  22.51327</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280            6 100  22.09131</span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Collapes across group ------</span></span>
-<span class="r-in"><span class="va">fm1</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">angle</span> <span class="op">~</span> <span class="va">temperature</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">recipe</span><span class="op">)</span>,</span>
-<span class="r-in">                  data <span class="op">=</span> <span class="va">cake</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pred_ggeffects</span> <span class="op">&lt;-</span> <span class="fu">ggeffects</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggpredict</a></span><span class="op">(</span><span class="va">fm1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temperature"</span>, <span class="st">"recipe"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">nd</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/marginaleffects/reference/datagrid.html" class="external-link">datagrid</a></span><span class="op">(</span>temperature <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">cake</span><span class="op">$</span><span class="va">temperature</span><span class="op">)</span>,</span>
-<span class="r-in">                                model <span class="op">=</span> <span class="va">fm1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pred_marginaleffects</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">fm1</span>, newdata <span class="op">=</span> <span class="va">nd</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_marginaleffects</span>, collapse_by <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Collapes across group ------</span></span></span>
+<span class="r-in"><span><span class="va">fm1</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">angle</span> <span class="op">~</span> <span class="va">temperature</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">recipe</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  data <span class="op">=</span> <span class="va">cake</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pred_ggeffects</span> <span class="op">&lt;-</span> <span class="fu">ggeffects</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggpredict</a></span><span class="op">(</span><span class="va">fm1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temperature"</span>, <span class="st">"recipe"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">nd</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/marginaleffects/reference/datagrid.html" class="external-link">datagrid</a></span><span class="op">(</span>temperature <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">cake</span><span class="op">$</span><span class="va">temperature</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                                model <span class="op">=</span> <span class="va">fm1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pred_marginaleffects</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">fm1</span>, newdata <span class="op">=</span> <span class="va">nd</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_marginaleffects</span>, collapse_by <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    temperature recipe predicted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1          175      A  29.13333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2          185      A  31.53333</span>
@@ -237,7 +250,7 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16         205      C  30.86667</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17         215      C  34.40000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18         225      C  35.73333</span>
-<span class="r-in"><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_marginaleffects</span>, collapse_by <span class="op">=</span> <span class="cn">TRUE</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_marginaleffects</span>, collapse_by <span class="op">=</span> <span class="cn">TRUE</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    recipe temperature predicted</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1       A         175  29.13333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2       B         175  27.01606</span>
@@ -257,7 +270,7 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16      A         225  35.06667</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17      B         225  35.41606</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18      C         225  35.88722</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -269,7 +282,7 @@ name of grouping variable is automatically detected from the model.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.9000.</p>
 </div>
 
     </footer></div>
