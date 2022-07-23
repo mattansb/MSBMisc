@@ -4,7 +4,7 @@
 \alias{delta_method}
 \title{Transform means a (co)variances using the \emph{delta} method}
 \usage{
-delta_method(..., .means, .V)
+delta_method(..., .means, .V, return = c("means", "cov", "stddev", "cor"))
 }
 \arguments{
 \item{...}{Unquoted transformations. See example.}
@@ -30,7 +30,8 @@ V <- cov(mtcars)
 
 delta_method(
   (mpg^2)/hp, log1p(am),
-  .means = M, .V = V
+  .means = M, .V = V,
+  return = "cor"
 )
 
 # Sobel Test ----
@@ -44,10 +45,11 @@ Vhat <- dbind(vcov(mod.y), vcov(mod.m))[c(2,5), c(2,5)]
 
 res <- delta_method(
   hp * cyl,
-  .means = bhat, .V = Vhat
+  .means = bhat, .V = Vhat,
+  return = c("means", "stddev")
 )
 
-res$means / sqrt(c(res$V))
+res$means / res$stddev
 
 # Compare:
 (bhat[1] * bhat[2]) /

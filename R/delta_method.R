@@ -16,7 +16,8 @@
 #'
 #' delta_method(
 #'   (mpg^2)/hp, log1p(am),
-#'   .means = M, .V = V
+#'   .means = M, .V = V,
+#'   return = "cor"
 #' )
 #'
 #' # Sobel Test ----
@@ -30,10 +31,11 @@
 #'
 #' res <- delta_method(
 #'   hp * cyl,
-#'   .means = bhat, .V = Vhat
+#'   .means = bhat, .V = Vhat,
+#'   return = c("means", "stddev")
 #' )
 #'
-#' res$means / sqrt(c(res$V))
+#' res$means / res$stddev
 #'
 #' # Compare:
 #' (bhat[1] * bhat[2]) /
@@ -41,13 +43,13 @@
 #'
 #'
 #' @export
-delta_method <- function(..., .means, .V) {
+delta_method <- function(..., .means, .V, return = c("means", "cov", "stddev", "cor")) {
 
   if (all(diag(.V) == 1))
     warning("'V' should be a (co) variance matrix, but the diag is all 1s.")
 
   cl <- match.call()
-  cl$.means <- cl$.V <- NULL
+  cl$.means <- cl$.V <- cl$return <- NULL
   g <- character(length(cl) - 1)
   for (gi in seq_along(g)) {
     g[gi] <- as.character(cl[gi + 1])
@@ -81,10 +83,13 @@ delta_method <- function(..., .means, .V) {
   names(gl) <- names(g)
 
   Vout <- msm.deltamethod(gl, .means, .V, FALSE)
+  dimnames(Vout) <- list(nm <- names(g), nm)
   # attr(Vout, "correlation") <- cov2cor(Vout)
 
-  list(means = stats::setNames(meansout, nm = names(g)),
-       V = Vout)
+  list(means = stats::setNames(meansout, nm = nm),
+       cov = Vout,
+       stddev = stats::setNames(sqrt(diag(Vout)), nm = nm),
+       cor = cov2cor(Vout))[return]
 }
 
 #' @keywords internal
