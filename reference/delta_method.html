@@ -125,6 +125,36 @@ names are of the <code>g</code> transformations. See examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        hp </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -1.641799 </span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Special character will give you a bad time...</span></span></span>
+<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">bhat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">bhat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cyl4"</span>, <span class="st">"cyl6"</span>, <span class="st">"cyl8"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/vcov.html" class="external-link">vcov</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">delta_method</span><span class="op">(</span><span class="va">cyl4</span>, <span class="va">cyl4</span> <span class="op">+</span> <span class="va">cyl6</span>, <span class="va">cyl4</span> <span class="op">+</span> <span class="va">cyl8</span>,</span></span>
+<span class="r-in"><span>             .means <span class="op">=</span> <span class="va">bhat</span>,</span></span>
+<span class="r-in"><span>             .V <span class="op">=</span> <span class="va">V</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $means</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        cyl4 cyl4 + cyl6 cyl4 + cyl8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    22.80000    21.13333    18.70000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $cov</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      cyl4   cyl4 + cyl6   cyl4 + cyl8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl4         5.333333e-02 -1.387779e-17 -1.387779e-17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl4 + cyl6 -1.387779e-17  1.777778e-02  0.000000e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl4 + cyl8 -1.387779e-17  0.000000e+00  5.333333e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $stddev</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        cyl4 cyl4 + cyl6 cyl4 + cyl8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.2309401   0.1333333   0.2309401 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $cor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      cyl4   cyl4 + cyl6   cyl4 + cyl8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl4         1.000000e+00 -4.506944e-16 -2.602085e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl4 + cyl6 -4.506944e-16  1.000000e+00  0.000000e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl4 + cyl8 -2.602085e-16  0.000000e+00  1.000000e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
