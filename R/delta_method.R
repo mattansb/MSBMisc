@@ -41,6 +41,16 @@
 #' (bhat[1] * bhat[2]) /
 #'   sqrt(bhat[1]^2 * Vhat[2,2] + bhat[2]^2 * Vhat[1,1])
 #'
+#' # Special character will give you a bad time...
+#' m <- lm(mpg ~ factor(cyl), mtcars[1:5,])
+#'
+#' bhat <- coef(m)
+#' names(bhat) <- c("cyl4", "cyl6", "cyl8")
+#' V <- vcov(m)
+#'
+#' delta_method(cyl4, cyl4 + cyl6, cyl4 + cyl8,
+#'              .means = bhat,
+#'              .V = V)
 #'
 #' @export
 delta_method <- function(..., .means, .V, return = c("means", "cov", "stddev", "cor")) {
@@ -86,10 +96,12 @@ delta_method <- function(..., .means, .V, return = c("means", "cov", "stddev", "
   dimnames(Vout) <- list(nm <- names(g), nm)
   # attr(Vout, "correlation") <- cov2cor(Vout)
 
-  list(means = stats::setNames(meansout, nm = nm),
-       cov = Vout,
-       stddev = stats::setNames(sqrt(diag(Vout)), nm = nm),
-       cor = cov2cor(Vout))[return]
+  list(
+    means = stats::setNames(meansout, nm = nm),
+    cov = Vout,
+    stddev = sqrt(diag(Vout)),
+    cor = cov2cor(Vout)
+  )[return]
 }
 
 #' @keywords internal

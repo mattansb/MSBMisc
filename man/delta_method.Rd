@@ -55,5 +55,15 @@ res$means / res$stddev
 (bhat[1] * bhat[2]) /
   sqrt(bhat[1]^2 * Vhat[2,2] + bhat[2]^2 * Vhat[1,1])
 
+# Special character will give you a bad time...
+m <- lm(mpg ~ factor(cyl), mtcars[1:5,])
+
+bhat <- coef(m)
+names(bhat) <- c("cyl4", "cyl6", "cyl8")
+V <- vcov(m)
+
+delta_method(cyl4, cyl4 + cyl6, cyl4 + cyl8,
+             .means = bhat,
+             .V = V)
 
 }
