@@ -2,7 +2,7 @@
 #'
 #' @param x,y,... Vectors, typically numerical, to be compared.
 #'
-#' @return A logical vector. For the operator, a `lat_y` attribute stores the
+#' @return A logical vector. For the operator, a `last_y` attribute stores the
 #'   last RHS values from the comparisons (strip away with `as.vector()`). See
 #'   examples.
 #'

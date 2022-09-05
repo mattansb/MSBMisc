@@ -43,7 +43,7 @@ x \%>=\% y
 \item{x, y, ...}{Vectors, typically numerical, to be compared.}
 }
 \value{
-A logical vector. For the operator, a \code{lat_y} attribute stores the
+A logical vector. For the operator, a \code{last_y} attribute stores the
 last RHS values from the comparisons (strip away with \code{as.vector()}). See
 examples.
 }
