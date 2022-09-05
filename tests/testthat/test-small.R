@@ -173,3 +173,27 @@ test_that("lgl ops", {
   expect_equal(lt(-1, x, 2),
                -1 < x & x < 2)
 })
+
+test_that("index_matrix", {
+  M <- matrix(1:12, 3, 4)
+
+  expect_equal(index_matrix(M, 1:2, 3:4),
+               c(M[1, 3], M[2, 4]))
+
+  index_matrix(M, 1:2, 3:4) <- NA
+  expect_equal(index_matrix(M, 1:2, 3:4), c(NA_real_, NA_real_))
+
+  rownames(M) <- letters[1:3]
+
+  expect_equal(index_matrix(M, c("b", "c"), 2:3),
+               c(M["b", 2], M["c", 3]))
+
+  index_matrix(M, c("b", "c"), 2:3) <- c(-99, 0)
+  expect_equal(index_matrix(M, c("b", "c"), 2:3), c(b = -99, c = 0))
+
+
+  expect_error(index_matrix(M, 1, -1), "must")
+  expect_error(index_matrix(M, 1, -1) <- 1, "must")
+  expect_error(index_matrix(M, 1, TRUE), "must")
+  expect_error(index_matrix(M, 1, TRUE) <- 1, "must")
+})

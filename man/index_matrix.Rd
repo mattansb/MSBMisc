@@ -18,7 +18,7 @@ index_matrix(x, ...) <- value
 \arguments{
 \item{x}{A matrix}
 
-\item{...}{vectors of indices}
+\item{...}{vectors of indices (numeric or char)}
 
 \item{value}{vector of values to replace}
 }
@@ -26,14 +26,13 @@ index_matrix(x, ...) <- value
 Vectorised Extract and Replace from Matrix
 }
 \examples{
-(M <- matrix(1:12, 3, 4))
 
+(M <- matrix(1:12, 3, 4))
 
 index_matrix(M, 1:2, 3:4) # get values at (i = 1, j = 3) and (2, 4)
 
 # same as:
 c(M[1, 3], M[2, 4])
-
 
 # replace values
 index_matrix(M, 1:2, 3:4) <- NA
