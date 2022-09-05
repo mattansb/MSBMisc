@@ -51,8 +51,8 @@
 #'
 #'
 #' @examplesIf require("insight") && require("marginaleffects")
-#' pred_marginaleffects <- marginaleffects::predictions(mod, newdata = nd)
-#' get_data_for_grid(pred_marginaleffects, residualize = TRUE)
+#' # pred_marginaleffects <- marginaleffects::predictions(mod, newdata = nd)
+#' # get_data_for_grid(pred_marginaleffects, residualize = TRUE)
 #'
 #'
 #'
@@ -67,7 +67,7 @@
 #' pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd)
 #'
 #' get_data_for_grid(pred_marginaleffects, collapse_by = TRUE)
-#' get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)
+#' # get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)
 #'
 #'
 #' @export

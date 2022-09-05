@@ -104,8 +104,8 @@ get_data_for_grid(pred_emmeans, mod, residualize = TRUE)
 
 \dontshow{\}) # examplesIf}
 \dontshow{if (require("insight") && require("marginaleffects")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-pred_marginaleffects <- marginaleffects::predictions(mod, newdata = nd)
-get_data_for_grid(pred_marginaleffects, residualize = TRUE)
+# pred_marginaleffects <- marginaleffects::predictions(mod, newdata = nd)
+# get_data_for_grid(pred_marginaleffects, residualize = TRUE)
 
 
 \dontshow{\}) # examplesIf}
@@ -120,7 +120,7 @@ nd <- marginaleffects::datagrid(temperature = unique(cake$temperature),
 pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd)
 
 get_data_for_grid(pred_marginaleffects, collapse_by = TRUE)
-get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)
+# get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)
 
 \dontshow{\}) # examplesIf}
 }
