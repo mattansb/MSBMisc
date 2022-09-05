@@ -70,14 +70,20 @@
 <dt>.V</dt>
 <dd><p>A covariance matrix.</p></dd>
 
+
+<dt>return</dt>
+<dd><p>What should be returned?</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A list with <code>means</code> and <code>V</code> of the transformed variables. (row/col)
-names are of the <code>g</code> transformations. See examples.</p>
-    </div>
+<p>A list with one of (optionally named):</p><ul><li><p><code>means</code> of the transformed variables.</p></li>
+<li><p><code>cov</code> (co) variance matrix of the the transformed variables.</p></li>
+<li><p><code>stddev</code> standard deviations of the transformed variables (<code>sqrt(diag(cov))</code>).</p></li>
+<li><p><code>cor</code> correlation matrix of the transformed variables. (<code>cov2cor(cov)</code>)</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>Most of this function is mostly copied from <code>msm::deltamethod()</code>.</p>
@@ -90,14 +96,14 @@ names are of the <code>g</code> transformations. See examples.</p>
 <span class="r-in"><span><span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cov</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">delta_method</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="op">(</span><span class="va">mpg</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="va">hp</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log1p</a></span><span class="op">(</span><span class="va">am</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="op">(</span><span class="va">mpg</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="va">hp</span>, log_am <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log1p</a></span><span class="op">(</span><span class="va">am</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  .means <span class="op">=</span> <span class="va">M</span>, .V <span class="op">=</span> <span class="va">V</span>,</span></span>
 <span class="r-in"><span>  return <span class="op">=</span> <span class="st">"cor"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            (mpg^2)/hp log1p(am)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            (mpg^2)/hp    log_am</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (mpg^2)/hp  1.0000000 0.4703339</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> log1p(am)   0.4703339 1.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> log_am      0.4703339 1.0000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sobel Test ----</span></span></span>

@@ -206,9 +206,8 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230            4 100 22.51327</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280            6 100 22.09131</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">pred_marginaleffects</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://vincentarelbundock.github.io/marginaleffects/reference/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="va">nd</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_marginaleffects</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in residualize_over_grid(data, grid, model, pred_name):</span> Grid for partial residuals must be a fully crossed grid.</span>
+<span class="r-in"><span><span class="co"># pred_marginaleffects &lt;- marginaleffects::predictions(mod, newdata = nd)</span></span></span>
+<span class="r-in"><span><span class="co"># get_data_for_grid(pred_marginaleffects, residualize = TRUE)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Collapes across group ------</span></span></span>
@@ -225,8 +224,7 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1      A  33.12222</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2      B  31.64444</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3      C  31.60000</span>
-<span class="r-in"><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_marginaleffects</span>, collapse_by <span class="op">=</span> <span class="cn">TRUE</span>, residualize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in residualize_over_grid(data, grid, model, pred_name):</span> Grid for partial residuals must be a fully crossed grid.</span>
+<span class="r-in"><span><span class="co"># get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
