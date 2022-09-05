@@ -4,7 +4,7 @@ if (FALSE) {
 }
 
 test_that("print_library", {
-  expect_match(print_library(MSBMisc), "0.0.1.13", fixed = TRUE)
+  expect_match(print_library(MSBMisc), "0.0.1.14", fixed = TRUE)
   expect_match(print_library(MSBMisc), "library", fixed = TRUE)
   expect_match(print_require(MSBMisc), "require", fixed = TRUE)
 })
@@ -161,5 +161,15 @@ test_that("delta method", {
   em <- emmeans::regrid(em)
 
   expect_equal(d$means, em@bhat, ignore_attr = TRUE)
-  expect_equal(d$V, em@V, ignore_attr = TRUE)
+  expect_equal(d$cov, em@V, ignore_attr = TRUE)
+})
+
+test_that("lgl ops", {
+  x <- 1:3
+
+  expect_equal(as.vector(-1 %<<% x %<<% 2),
+               -1 < x & x < 2)
+
+  expect_equal(lt(-1, x, 2),
+               -1 < x & x < 2)
 })
