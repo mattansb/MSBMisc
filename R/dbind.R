@@ -8,7 +8,7 @@
 #' @examples
 #'
 #' M1 <- matrix(1:8, 2, 4)
-#' M2 <- matrix(9:14, 2, 2)
+#' M2 <- matrix(9:14, 2, 3)
 #' dbind(M1, M2)
 #' dbind(M1, M2, .fill = NA)
 #'

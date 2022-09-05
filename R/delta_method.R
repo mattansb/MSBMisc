@@ -100,7 +100,7 @@ delta_method <- function(..., .means, .V, return = c("means", "cov", "stddev", "
     means = stats::setNames(meansout, nm = nm),
     cov = Vout,
     stddev = sqrt(diag(Vout)),
-    cor = cov2cor(Vout)
+    cor = stats::cov2cor(Vout)
   )[return]
 }
 

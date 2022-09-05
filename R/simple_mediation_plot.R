@@ -73,7 +73,7 @@ simple_mediation_plot <- function(a = NA, b = NA, direct = NA,
     nodes$label[2] <- paste0(nodes$label[2], "\n", indirect)
   }
 
-  require("tidySEM")
+  requireNamespace("tidySEM")
   g <- tidySEM::prepare_graph(
     edges = edges,
     nodes = nodes,
