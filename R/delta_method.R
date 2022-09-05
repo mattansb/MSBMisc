@@ -3,9 +3,13 @@
 #' @param ... Unquoted transformations. See example.
 #' @param .means A named vector of means.
 #' @param .V A covariance matrix.
+#' @param return What should be returned?
 #'
-#' @return A list with `means` and `V` of the transformed variables. (row/col)
-#'   names are of the `g` transformations. See examples.
+#' @return A list with one of (optionally named):
+#' - `means` of the transformed variables.
+#' - `cov` (co) variance matrix of the the transformed variables.
+#' - `stddev` standard deviations of the transformed variables (`sqrt(diag(cov))`).
+#' - `cor` correlation matrix of the transformed variables. (`cov2cor(cov)`)
 #'
 #' @note Most of this function is mostly copied from `msm::deltamethod()`.
 #'
@@ -15,7 +19,7 @@
 #' V <- cov(mtcars)
 #'
 #' delta_method(
-#'   (mpg^2)/hp, log1p(am),
+#'   (mpg^2)/hp, log_am = log1p(am),
 #'   .means = M, .V = V,
 #'   return = "cor"
 #' )

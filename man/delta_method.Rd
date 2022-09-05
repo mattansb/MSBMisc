@@ -12,10 +12,17 @@ delta_method(..., .means, .V, return = c("means", "cov", "stddev", "cor"))
 \item{.means}{A named vector of means.}
 
 \item{.V}{A covariance matrix.}
+
+\item{return}{What should be returned?}
 }
 \value{
-A list with \code{means} and \code{V} of the transformed variables. (row/col)
-names are of the \code{g} transformations. See examples.
+A list with one of (optionally named):
+\itemize{
+\item \code{means} of the transformed variables.
+\item \code{cov} (co) variance matrix of the the transformed variables.
+\item \code{stddev} standard deviations of the transformed variables (\code{sqrt(diag(cov))}).
+\item \code{cor} correlation matrix of the transformed variables. (\code{cov2cor(cov)})
+}
 }
 \description{
 Transform means a (co)variances using the \emph{delta} method
@@ -29,7 +36,7 @@ M <- sapply(mtcars, mean)
 V <- cov(mtcars)
 
 delta_method(
-  (mpg^2)/hp, log1p(am),
+  (mpg^2)/hp, log_am = log1p(am),
   .means = M, .V = V,
   return = "cor"
 )
