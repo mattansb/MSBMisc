@@ -12,7 +12,7 @@ specify which simple effects we wish to test, and within what variable(s)."><!--
     
     <a class="navbar-brand me-2" href="../index.html">MSBMisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.13</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.14</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -215,6 +215,18 @@ the <code>effect</code> will be tested. Can also be the name of an interaction (
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">simple_effects</span><span class="op">(</span><span class="va">A</span>, effect <span class="op">=</span> <span class="st">"phase"</span>, inside <span class="op">=</span> <span class="st">"treatment"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 2.06567e-19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 3.67534e-19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.40043e-19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.03889e-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 9.86756e-20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.37789e-18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  treatment df1 df2 F.ratio p.value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  control     2  10   0.142  0.8693</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  A           2  10   9.119  0.0056</span>
@@ -224,6 +236,30 @@ the <code>effect</code> will be tested. Can also be the name of an interaction (
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">simple_effects</span><span class="op">(</span><span class="va">A</span>, effect <span class="op">=</span> <span class="st">"phase"</span>, inside <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"treatment"</span>, <span class="st">"gender"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 5.36978e-19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.10019e-17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.21249e-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.43614e-17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 8.60451e-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 8.61359e-20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.27793e-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 7.11874e-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 6.48829e-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 2.66086e-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.14801e-17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.44236e-18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gender = F:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  treatment df1 df2 F.ratio p.value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  control     2  10   0.416  0.6708</span>
@@ -242,6 +278,18 @@ the <code>effect</code> will be tested. Can also be the name of an interaction (
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">simple_effects</span><span class="op">(</span><span class="va">A</span>, effect <span class="op">=</span> <span class="st">"phase"</span>, inside <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"treatment"</span>, <span class="st">"gender"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>               at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 5.36978e-19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.10019e-17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.21249e-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.27793e-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 7.11874e-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 6.48829e-18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gender = F:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  treatment df1 df2 F.ratio p.value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  control     2  10   0.416  0.6708</span>
@@ -252,6 +300,14 @@ the <code>effect</code> will be tested. Can also be the name of an interaction (
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">simple_effects</span><span class="op">(</span><span class="va">A</span>, effect <span class="op">=</span> <span class="st">"phase:treatment"</span>, inside <span class="op">=</span> <span class="st">"gender"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 2.29602e-20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 1.48356e-19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 4.20904e-20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in solve.default(zcov, z) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   system is computationally singular: reciprocal condition number = 4.86218e-20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  gender df1 df2 F.ratio p.value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  F        4  10   4.498  0.0245</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  M        4  10   1.930  0.1819</span>
