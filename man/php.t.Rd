@@ -31,3 +31,35 @@ php.guf(p, alpha = 0.05)
 Based on \href{https://stat.uiowa.edu/sites/stat.uiowa.edu/files/techrep/tr378.pdf}{Lenth (2007) \emph{Post Hoc Power: Tables and Commentary}}.
 \code{php.guf()} give's Lenth's \emph{grand unified formula for post hoc power}.
 }
+\examples{
+
+lm(hp ~ am, mtcars) |> summary()
+
+php.t(p = 0.18, df = 30)
+
+php.guf(p = 0.18)
+
+
+
+# Table 1
+expand.grid(
+  p = c(.001, .01, .05, .1, .25, .5, .75),
+  df = c(1, 2, 5, 10, 20, 50, 200, 1000, Inf)
+) |>
+  transform(PHP = php.t(p = p, df = df)) |>
+  stats::reshape(direction = "wide",
+                 idvar = "df", timevar = "p")
+
+
+# Table 2
+expand.grid(
+  p = c(.001, .01, .05, .1, .25, .5, .75),
+  df2 = c(1, 2, 5, 10, 20, 50, 200, 1000, Inf),
+  df1 = c(2, 3, 4, 10)
+) |>
+  transform(PHP = php.F(p = p, df1 = df1, df2 = df2)) |>
+  stats::reshape(direction = "wide",
+                 idvar = c("df1", "df2"), timevar = "p")
+
+
+}

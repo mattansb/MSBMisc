@@ -8,32 +8,61 @@
 #' @param df,df1,df2 Test statistics' degrees of freedom
 #' @param alpha Confidence level of the test.
 #'
+#' @examples
+#'
+#' lm(hp ~ am, mtcars) |> summary()
+#'
+#' php.t(p = 0.18, df = 30)
+#'
+#' php.guf(p = 0.18)
+#'
+#'
+#'
+#' # Table 1
+#' expand.grid(
+#'   p = c(.001, .01, .05, .1, .25, .5, .75),
+#'   df = c(1, 2, 5, 10, 20, 50, 200, 1000, Inf)
+#' ) |>
+#'   transform(PHP = php.t(p = p, df = df)) |>
+#'   stats::reshape(direction = "wide",
+#'                  idvar = "df", timevar = "p")
+#'
+#'
+#' # Table 2
+#' expand.grid(
+#'   p = c(.001, .01, .05, .1, .25, .5, .75),
+#'   df2 = c(1, 2, 5, 10, 20, 50, 200, 1000, Inf),
+#'   df1 = c(2, 3, 4, 10)
+#' ) |>
+#'   transform(PHP = php.F(p = p, df1 = df1, df2 = df2)) |>
+#'   stats::reshape(direction = "wide",
+#'                  idvar = c("df1", "df2"), timevar = "p")
 #'
 #'
 #' @export
 php.t <- function(tval, p, df = Inf, alpha = 0.05) {
   if (missing(tval)) {
-    tval <- qt(p / 2, df = df, ncp = 0)
+    tval <- stats::qt(p / 2, df = df, ncp = 0)
   }
-  crit <- qt(1 - alpha / 2, df = df, ncp = 0)
+  crit <- stats::qt(1 - alpha / 2, df = df, ncp = 0)
 
   ncp <- abs(tval)
 
-  pt(crit, df = df, ncp = ncp, lower.tail = FALSE) +
-    pt(-crit, df = df, ncp = ncp, lower.tail = TRUE)
+  stats::pt(crit, df = df, ncp = ncp, lower.tail = FALSE) +
+    stats::pt(-crit, df = df, ncp = ncp, lower.tail = TRUE)
 }
 
 #' @export
 #' @rdname php.t
 php.F <- function(Fval, p, df1, df2 = Inf, alpha = 0.05) {
   if (missing(Fval)) {
-    Fval <- qf(p, df1, df2, ncp = 0, lower.tail = FALSE)
+    Fval <- stats::qf(p, df1, df2, ncp = 0, lower.tail = FALSE)
   }
-  crit <- qf(1 - alpha, df1, df2, ncp = 0, lower.tail = TRUE)
+  crit <- stats::qf(1 - alpha, df1, df2, ncp = 0, lower.tail = TRUE)
 
   ncp <- Fval * df1
 
-  pf(crit, df1, df2, ncp = ncp, lower.tail = FALSE)
+  stats::pf(crit, df1, df2, ncp = ncp, lower.tail = FALSE)
 }
 
 #' @export
@@ -53,12 +82,3 @@ php.chisq <- function(chisqval, p, df, alpha = 0.05) {
 php.guf <- function(p, alpha = 0.05) {
   as.numeric(p < alpha)
 }
-
-
-
-
-
-
-
-
-# Fp_to_pwr(0.1, 2, 50, random = T)
