@@ -40,6 +40,9 @@
     <loc>/reference/delta_method.html</loc>
   </url>
   <url>
+    <loc>/reference/fa_reliability.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_data_for_grid.html</loc>
   </url>
   <url>
@@ -62,6 +65,9 @@
   </url>
   <url>
     <loc>/reference/logLik_lnorm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/php.t.html</loc>
   </url>
   <url>
     <loc>/reference/print_library.html</loc>
