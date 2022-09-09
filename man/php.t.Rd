@@ -8,11 +8,11 @@
 \alias{php.guf}
 \title{Function for Post-Hoc Power analysis}
 \usage{
-php.t(tval, p, df = Inf, alpha = 0.05)
+php.t(tval, p, df = Inf, alpha = 0.05, one.tailed = FALSE)
 
 php.F(Fval, p, df1, df2 = Inf, alpha = 0.05)
 
-php.z(zval, p, alpha = 0.05)
+php.z(zval, p, alpha = 0.05, one.tailed = FALSE)
 
 php.chisq(chisqval, p, df, alpha = 0.05)
 
@@ -26,6 +26,8 @@ php.guf(p, alpha = 0.05)
 \item{df, df1, df2}{Test statistics' degrees of freedom}
 
 \item{alpha}{Confidence level of the test.}
+
+\item{one.tailed}{Is the p-value from a one-tailed test?}
 }
 \description{
 Based on \href{https://stat.uiowa.edu/sites/stat.uiowa.edu/files/techrep/tr378.pdf}{Lenth (2007) \emph{Post Hoc Power: Tables and Commentary}}.
@@ -41,7 +43,17 @@ php.guf(p = 0.18)
 
 
 
-# Table 1
+# Table 1 - one tailed
+expand.grid(
+  p = c(.001, .01, .05, .1, .25, .5, .75),
+  df = c(1, 2, 5, 10, 20, 50, 200, 1000, Inf)
+) |>
+  transform(PHP = php.t(p = p, df = df, one.tailed = TRUE)) |>
+  stats::reshape(direction = "wide",
+                 idvar = "df", timevar = "p")
+
+
+# Table 1 - two tailed
 expand.grid(
   p = c(.001, .01, .05, .1, .25, .5, .75),
   df = c(1, 2, 5, 10, 20, 50, 200, 1000, Inf)

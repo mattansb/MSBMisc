@@ -7,6 +7,7 @@
 #' @param p Observed p-value (used if test statistic not supplied)
 #' @param df,df1,df2 Test statistics' degrees of freedom
 #' @param alpha Confidence level of the test.
+#' @param one.tailed Is the p-value from a one-tailed test?
 #'
 #' @examples
 #'
@@ -18,7 +19,17 @@
 #'
 #'
 #'
-#' # Table 1
+#' # Table 1 - one tailed
+#' expand.grid(
+#'   p = c(.001, .01, .05, .1, .25, .5, .75),
+#'   df = c(1, 2, 5, 10, 20, 50, 200, 1000, Inf)
+#' ) |>
+#'   transform(PHP = php.t(p = p, df = df, one.tailed = TRUE)) |>
+#'   stats::reshape(direction = "wide",
+#'                  idvar = "df", timevar = "p")
+#'
+#'
+#' # Table 1 - two tailed
 #' expand.grid(
 #'   p = c(.001, .01, .05, .1, .25, .5, .75),
 #'   df = c(1, 2, 5, 10, 20, 50, 200, 1000, Inf)
@@ -40,16 +51,28 @@
 #'
 #'
 #' @export
-php.t <- function(tval, p, df = Inf, alpha = 0.05) {
+php.t <- function(tval, p, df = Inf, alpha = 0.05, one.tailed = FALSE) {
   if (missing(tval)) {
-    tval <- stats::qt(p / 2, df = df, ncp = 0)
+    if (one.tailed) {
+      tval <- stats::qt(p, df = df, ncp = 0, lower.tail = FALSE)
+    } else {
+      tval <- stats::qt(p / 2, df = df, ncp = 0, lower.tail = FALSE)
+    }
   }
-  crit <- stats::qt(1 - alpha / 2, df = df, ncp = 0)
 
-  ncp <- abs(tval)
+  if (one.tailed) {
+    crit <- stats::qt(alpha, df = df, ncp = 0, lower.tail = FALSE)
+    ncp <- tval
+  } else {
+    crit <- stats::qt(alpha / 2, df = df, ncp = 0, lower.tail = FALSE)
+    ncp <- abs(tval)
+  }
 
-  stats::pt(crit, df = df, ncp = ncp, lower.tail = FALSE) +
-    stats::pt(-crit, df = df, ncp = ncp, lower.tail = TRUE)
+  php <- stats::pt(crit, df = df, ncp = ncp, lower.tail = FALSE)
+  if (!one.tailed) {
+    php <- php + stats::pt(-crit, df = df, ncp = ncp, lower.tail = TRUE)
+  }
+  php
 }
 
 #' @export
@@ -58,7 +81,7 @@ php.F <- function(Fval, p, df1, df2 = Inf, alpha = 0.05) {
   if (missing(Fval)) {
     Fval <- stats::qf(p, df1, df2, ncp = 0, lower.tail = FALSE)
   }
-  crit <- stats::qf(1 - alpha, df1, df2, ncp = 0, lower.tail = TRUE)
+  crit <- stats::qf(alpha, df1, df2, ncp = 0, lower.tail = FALSE)
 
   ncp <- Fval * df1
 
@@ -67,8 +90,8 @@ php.F <- function(Fval, p, df1, df2 = Inf, alpha = 0.05) {
 
 #' @export
 #' @rdname php.t
-php.z <- function(zval, p, alpha = 0.05) {
-  php.t(zval, p, alpha = alpha)
+php.z <- function(zval, p, alpha = 0.05, one.tailed = FALSE) {
+  php.t(zval, p, alpha = alpha, one.tailed = one.tailed)
 }
 
 #' @export
