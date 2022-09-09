@@ -57,11 +57,11 @@ php.guf() give's Lenth's grand unified formula for post hoc power."><!-- mathjax
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">php.t</span><span class="op">(</span><span class="va">tval</span>, <span class="va">p</span>, df <span class="op">=</span> <span class="cn">Inf</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">php.t</span><span class="op">(</span><span class="va">tval</span>, <span class="va">p</span>, df <span class="op">=</span> <span class="cn">Inf</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, one.tailed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">php.F</span><span class="op">(</span><span class="va">Fval</span>, <span class="va">p</span>, <span class="va">df1</span>, df2 <span class="op">=</span> <span class="cn">Inf</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">php.z</span><span class="op">(</span><span class="va">zval</span>, <span class="va">p</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="fu">php.z</span><span class="op">(</span><span class="va">zval</span>, <span class="va">p</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, one.tailed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">php.chisq</span><span class="op">(</span><span class="va">chisqval</span>, <span class="va">p</span>, <span class="va">df</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span></span>
@@ -84,6 +84,10 @@ php.guf() give's Lenth's grand unified formula for post hoc power."><!-- mathjax
 
 <dt>alpha</dt>
 <dd><p>Confidence level of the test.</p></dd>
+
+
+<dt>one.tailed</dt>
+<dd><p>Is the p-value from a one-tailed test?</p></dd>
 
 </dl></div>
 
@@ -119,7 +123,27 @@ php.guf() give's Lenth's grand unified formula for post hoc power."><!-- mathjax
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Table 1</span></span></span>
+<span class="r-in"><span><span class="co"># Table 1 - one tailed</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.001</span>, <span class="fl">.01</span>, <span class="fl">.05</span>, <span class="fl">.1</span>, <span class="fl">.25</span>, <span class="fl">.5</span>, <span class="fl">.75</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">50</span>, <span class="fl">200</span>, <span class="fl">1000</span>, <span class="cn">Inf</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>PHP <span class="op">=</span> <span class="fu">php.t</span><span class="op">(</span>p <span class="op">=</span> <span class="va">p</span>, df <span class="op">=</span> <span class="va">df</span>, one.tailed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a></span><span class="op">(</span>direction <span class="op">=</span> <span class="st">"wide"</span>,</span></span>
+<span class="r-in"><span>                 idvar <span class="op">=</span> <span class="st">"df"</span>, timevar <span class="op">=</span> <span class="st">"p"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      df PHP.0.001  PHP.0.01  PHP.0.05   PHP.0.1  PHP.0.25 PHP.0.5   PHP.0.75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     1 1.0000000 0.9999994 0.6766947 0.3698439 0.1347904    0.05 0.01048100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     2 1.0000000 0.9910253 0.5995969 0.3570984 0.1434485    0.05 0.01178402</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15    5 0.9995122 0.8898963 0.5365274 0.3565384 0.1556676    0.05 0.01117923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22   10 0.9860350 0.8225320 0.5173531 0.3573495 0.1607017    0.05 0.01072806</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29   20 0.9627161 0.7870282 0.5084397 0.3577849 0.1633066    0.05 0.01046688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36   50 0.9420174 0.7659860 0.5033189 0.3580337 0.1648815    0.05 0.01030144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43  200 0.9300290 0.7556379 0.5008226 0.3581515 0.1656698    0.05 0.01021671</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50 1000 0.9266729 0.7529027 0.5001641 0.3581821 0.1658800    0.05 0.01019392</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57  Inf 0.9258242 0.7522206 0.5000000 0.3581896 0.1659326    0.05 0.01018821</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Table 1 - two tailed</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.001</span>, <span class="fl">.01</span>, <span class="fl">.05</span>, <span class="fl">.1</span>, <span class="fl">.25</span>, <span class="fl">.5</span>, <span class="fl">.75</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">50</span>, <span class="fl">200</span>, <span class="fl">1000</span>, <span class="cn">Inf</span><span class="op">)</span></span></span>
