@@ -103,13 +103,29 @@ between the two groups.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Test dependent correlations ------------------</span></span></span>
 <span class="r-in"><span><span class="co">## different variables</span></span></span>
 <span class="r-in"><span><span class="fu">compare_cor</span><span class="op">(</span><span class="va">mtcars</span>, r1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"hp"</span><span class="op">)</span>, r2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"drat"</span>, <span class="st">"am"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> The following packages are not installed and are required for this function:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> 	- correlation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Correlations</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Variables          r   CI     CI_low    CI_high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> r1  mpg with hp -0.7761684 0.95 -0.8852686 -0.5860994</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> r2 drat with am  0.7127111 0.95  0.4843991  0.8501319</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    Test         z           p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Test of difference between two dependent correlations -6.133834 8.57858e-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## 1 shared variable</span></span></span>
 <span class="r-in"><span><span class="fu">compare_cor</span><span class="op">(</span><span class="va">mtcars</span>, r1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"hp"</span><span class="op">)</span>, r2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"am"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> The following packages are not installed and are required for this function:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> 	- correlation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Correlations</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Variables          r   CI     CI_low    CI_high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> r1 mpg with hp -0.7761684 0.95 -0.8852686 -0.5860994</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> r2 mpg with am -0.2432043 0.95 -0.5456270  0.1152646</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      Test         t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Test of difference between two correlated  correlations -5.563815</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 5.301858e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
@@ -117,13 +133,27 @@ between the two groups.</p></dd>
 <span class="r-in"><span><span class="co">## Different data sets</span></span></span>
 <span class="r-in"><span><span class="fu">compare_cor</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, r1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>            data2 <span class="op">=</span> <span class="va">iris</span>, r2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> The following packages are not installed and are required for this function:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> 	- correlation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Correlations</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                Variables          r   CI     CI_low     CI_high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> r1                   mpg with hp (data1) -0.7761684 0.95 -0.8852686 -0.58609941</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> r2 Sepal.Length with Sepal.Width (data2) -0.1175698 0.95 -0.2726932  0.04351158</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      Test        z            p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Test of difference between two independent correlations 4.515732 6.309853e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Groups</span></span></span>
 <span class="r-in"><span><span class="fu">compare_cor</span><span class="op">(</span><span class="va">mtcars</span>, r1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"hp"</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"am"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> The following packages are not installed and are required for this function:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> 	- correlation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Correlations</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Variables          r   CI     CI_low    CI_high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> r1 mpg with hp (am=0) -0.8315065 0.95 -0.9332484 -0.6062733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> r2 mpg with hp (am=1) -0.8006683 0.95 -0.9378951 -0.4467852</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      Test         z        p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Test of difference between two independent correlations 0.2295313 0.818456</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
