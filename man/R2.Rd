@@ -39,7 +39,7 @@ Y <- c(15, 37, 52, 59, 83, 92)
 
 m1 <- lm(Y ~ X)
 m2 <- lm(Y ~ 0 + X)
-m3 <- lm(log(Y) ~ X)
+m3 <- nls(Y ~ a * X ^ b, start = c(a = 1, b = 1))
 
 # Table 2 from Kvålset0 (1985)
 data.frame(
