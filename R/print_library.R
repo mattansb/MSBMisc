@@ -19,7 +19,7 @@ print_library <-
            .version = TRUE,
            .load = TRUE) {
     cl <- match.call()
-    type <- ifelse(grepl("require$", as.character(cl[[1]])), "require", "library")
+    type <- ifelse(grepl("require$", deparse(cl[[1]])), "require", "library")
 
     if (.character.only) {
       pkgs <- c(...)
@@ -28,7 +28,7 @@ print_library <-
     }
 
     if (.load) {
-      suppressMessages(suppressWarnings(suppressPackageStartupMessages(require(pkgs, character.only = TRUE))))
+      suppressMessages(suppressWarnings(suppressPackageStartupMessages(sapply(pkgs, require, character.only = TRUE))))
     }
 
     vs <- ""
