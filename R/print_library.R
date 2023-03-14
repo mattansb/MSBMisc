@@ -57,3 +57,16 @@ print_require <- print_library
 print.msb_print_library <- function(x, ...) {
   cat(paste0(x, collapse = "\n"), "\n")
 }
+
+#' @export
+#' @rdname print_library
+print_library_md <- function(...) {
+  cl <- match.call()
+  cl[[1]] <- quote(MSBMisc::print_library)
+  x <- eval.parent(cl)
+  cat("```r\n")
+  print(x)
+  cat("```\n")
+  invisible(NULL)
+}
+formals(print_library_md) <- formals(print_library)

@@ -3,11 +3,14 @@
 \name{print_library}
 \alias{print_library}
 \alias{print_require}
+\alias{print_library_md}
 \title{Print Loading/Attaching of Packages}
 \usage{
 print_library(..., .character.only = FALSE, .version = TRUE, .load = TRUE)
 
 print_require(..., .character.only = FALSE, .version = TRUE, .load = TRUE)
+
+print_library_md(..., .character.only = FALSE, .version = TRUE, .load = TRUE)
 }
 \arguments{
 \item{...}{Names of packages.}
