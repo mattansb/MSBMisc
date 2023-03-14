@@ -16,8 +16,9 @@
 #' library(afex)
 #'
 #' data(obk.long, package = "afex")
-#' A <- aov_car(value ~ treatment * gender + Error(id/(phase*hour)),
-#'              data = obk.long)
+#' A <- aov_car(value ~ treatment * gender + Error(id / (phase * hour)),
+#'   data = obk.long
+#' )
 #'
 #' simple_effects(A, effect = "treatment")
 #'
@@ -28,11 +29,12 @@
 #' simple_effects(A, effect = "phase", inside = c("treatment", "gender"))
 #' # simple_effects(A, effect = "phase", inside = "treatment:gender") # same
 #'
-#' simple_effects(A, effect = "phase", inside = c("treatment", "gender"),
-#'                at = list(gender = "F"))
+#' simple_effects(A,
+#'   effect = "phase", inside = c("treatment", "gender"),
+#'   at = list(gender = "F")
+#' )
 #'
 #' simple_effects(A, effect = "phase:treatment", inside = "gender")
-#'
 #'
 #' @export
 simple_effects <- function(model, effect, inside, ...) {
@@ -76,11 +78,13 @@ simple_effects.lm <- function(model, effect, inside, ...) {
 
   cl <- quote(stats::update(jt))
   cl$by <- if (length(inside) > 1L) utils::tail(inside, -1)
-  cl$mesg <- paste0("Omnibus test for ",
-                    paste0(rep("simple", length(inside)), collapse = "-"),
-                    " effect of ",
-                    effect,
-                    ".\n")
+  cl$mesg <- paste0(
+    "Omnibus test for ",
+    paste0(rep("simple", length(inside)), collapse = "-"),
+    " effect of ",
+    effect,
+    ".\n"
+  )
   jt <- eval(cl)
 
   if (length(inside) == 1L) jt <- stats::update(jt, by = NULL)

@@ -16,8 +16,10 @@ test_that("age_in_unit", {
 
 
 test_that("seq", {
-  expect_equal(seq_range(1:4, length.out = 3, padding = 0),
-               seq(1, 4, length.out = 3))
+  expect_equal(
+    seq_range(1:4, length.out = 3, padding = 0),
+    seq(1, 4, length.out = 3)
+  )
 
   expect_equal(mean_sd(-1:1), c("-SD" = -1, "Mean" = 0, "+SD" = 1))
 })
@@ -31,8 +33,10 @@ test_that("cw", {
 test_that("chisq FU", {
   skip_if_not_installed("effectsize")
 
-  M <- as.table(rbind(c(762, 327, 468),
-                      c(484, 239, 477)))
+  M <- as.table(rbind(
+    c(762, 327, 468),
+    c(484, 239, 477)
+  ))
   dimnames(M) <- list(
     gender = c("F", "M"),
     party = c("Democrat", "Independent", "Republican")
@@ -54,7 +58,7 @@ test_that("chisq FU", {
   expect_equal(o1$Chi.sq, 30.07015, tolerance = 0.0001)
   expect_equal(o1$df, 2L)
   expect_equal(o2$Chi.sq, c(1.7178, 29.0595, 9.3356), tolerance = 0.0001)
-  expect_equal(o2$df, c(1,1,1))
+  expect_equal(o2$df, c(1, 1, 1))
   expect_equal(o3$z.value, c(2.1989, -2.5047, 0.4114, -0.4686, -2.8432, 3.2387), tolerance = 0.0001)
   expect_equal(o3$n.obs, c(762, 484, 327, 239, 468, 477))
 })
@@ -77,18 +81,22 @@ test_that("r_SB", {
     missing_any_data(mpg:disp, .name = "missing_any") |>
     missing_all_data(mpg:disp, .name = "missing_all")
 
-  E <- data.frame(has_any = c(TRUE, FALSE, TRUE),
-                  has_all = c(FALSE, FALSE, TRUE),
-                  missing_any = c(TRUE, TRUE, FALSE),
-                  missing_all = c(FALSE, TRUE, FALSE))
+  E <- data.frame(
+    has_any = c(TRUE, FALSE, TRUE),
+    has_all = c(FALSE, FALSE, TRUE),
+    missing_any = c(TRUE, TRUE, FALSE),
+    missing_all = c(FALSE, TRUE, FALSE)
+  )
 
-  expect_equal(O[,4:7], E, ignore_attr = TRUE)
+  expect_equal(O[, 4:7], E, ignore_attr = TRUE)
 })
 
 
 test_that("vlookup", {
-  df <- data.frame(a = letters[c(1,1:9)],
-                   b = 51:60)
+  df <- data.frame(
+    a = letters[c(1, 1:9)],
+    b = 51:60
+  )
 
   expect_warning(r <- vlookup(c("a", "e", "c"), df, key = "a", value = "b"))
   expect_equal(r, c(a = 51L, e = 56L, c = 54L))
@@ -106,8 +114,9 @@ test_that("simple_effects", {
 
 
   obk.long <- afex::obk.long
-  A <- afex::aov_car(value ~ treatment * gender + Error(id/(phase*hour)),
-                     data = obk.long)
+  A <- afex::aov_car(value ~ treatment * gender + Error(id / (phase * hour)),
+    data = obk.long
+  )
 
   se1 <- simple_effects(A, effect = "phase", inside = c("treatment", "gender"))
   expect_s3_class(se1, "summary_emm")
@@ -146,15 +155,16 @@ test_that("delta method", {
   skip_if_not_installed("emmeans")
 
   m <- glm(am ~ factor(cyl),
-           family = binomial(), data = mtcars)
+    family = binomial(), data = mtcars
+  )
 
-  em <- emmeans::emmeans(m, ~ cyl) |>
+  em <- emmeans::emmeans(m, ~cyl) |>
     emmeans::regrid(transform = "none")
 
   names(em@bhat) <- paste0("p", c(4, 6, 8))
 
   d <- delta_method(
-    1/(1+exp(-p4)), 1/(1+exp(-p6)), 1/(1+exp(-p8)),
+    1 / (1 + exp(-p4)), 1 / (1 + exp(-p6)), 1 / (1 + exp(-p8)),
     .means = em@bhat, .V = em@V
   )
 
@@ -167,9 +177,13 @@ test_that("delta method", {
 test_that("lgl ops", {
   x <- 1:3
 
-  expect_equal(as.vector(-1 %<<% x %<<% 2),
-               -1 < x & x < 2)
+  expect_equal(
+    as.vector(-1 %<<% x %<<% 2),
+    -1 < x & x < 2
+  )
 
-  expect_equal(lt(-1, x, 2),
-               -1 < x & x < 2)
+  expect_equal(
+    lt(-1, x, 2),
+    -1 < x & x < 2
+  )
 })

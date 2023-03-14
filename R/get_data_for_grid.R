@@ -13,8 +13,10 @@
 #' mtcars <- mtcars |> transform(cyl = factor(cyl))
 #' mod <- lm(mpg ~ hp + cyl, data = mtcars[1:10, ])
 #'
-#' nd <- expand.grid(hp = seq(50, 350, by = 50),
-#'                   cyl = "4")
+#' nd <- expand.grid(
+#'   hp = seq(50, 350, by = 50),
+#'   cyl = "4"
+#' )
 #'
 #' nd$predicted_mpg <- predict(mod, newdata = nd)
 #'
@@ -28,11 +30,15 @@
 #' ggplot(nd, aes(hp, predicted_mpg)) +
 #'   geom_line() +
 #'   geom_point(aes(y = mpg, color = "Raw"),
-#'              data = get_data_for_grid(nd, mod)) +
+#'     data = get_data_for_grid(nd, mod)
+#'   ) +
 #'   geom_point(aes(color = "Residualized"),
-#'              data = get_data_for_grid(nd, mod, residualize = TRUE, pred_name = "predicted_mpg")) +
-#'   labs(title = "Partial residual plot",
-#'        color = "Data")
+#'     data = get_data_for_grid(nd, mod, residualize = TRUE, pred_name = "predicted_mpg")
+#'   ) +
+#'   labs(
+#'     title = "Partial residual plot",
+#'     color = "Data"
+#'   )
 #'
 #' ## Support of data-grid packages ------
 #' # - ggeffects
@@ -43,32 +49,30 @@
 #' pred_ggeffects <- ggeffects::ggpredict(mod, c("hp [50:350, by = 50]", "cyl [4]"))
 #' get_data_for_grid(pred_ggeffects, residualize = TRUE)
 #'
-#'
 #' @examplesIf require("insight") && require("emmeans")
 #' at <- list(hp = seq(50, 350, by = 50), cyl = "4")
 #' pred_emmeans <- emmeans::emmeans(mod, ~ hp + cyl, at = at)
 #' get_data_for_grid(pred_emmeans, mod, residualize = TRUE)
 #'
-#'
 #' @examplesIf require("insight") && require("marginaleffects")
 #' # pred_marginaleffects <- marginaleffects::predictions(mod, newdata = nd)
 #' # get_data_for_grid(pred_marginaleffects, residualize = TRUE)
 #'
-#'
-#'
-#' @examplesIf require("insight") && require("marginaleffects") &&  require("lme4")
+#' @examplesIf require("insight") && require("marginaleffects") && require("lme4")
 #' ## Collapes across group ------
-#' fm1 <- lme4::lmer(angle ~ temperature + (1|recipe),
-#'                   data = cake)
+#' fm1 <- lme4::lmer(angle ~ temperature + (1 | recipe),
+#'   data = cake
+#' )
 #'
 #' pred_ggeffects <- ggeffects::ggpredict(fm1, c("temperature", "recipe"))
-#' nd <- marginaleffects::datagrid(temperature = unique(cake$temperature),
-#'                                 model = fm1)
+#' nd <- marginaleffects::datagrid(
+#'   temperature = unique(cake$temperature),
+#'   model = fm1
+#' )
 #' pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd)
 #'
 #' get_data_for_grid(pred_marginaleffects, collapse_by = TRUE)
 #' # get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)
-#'
 #'
 #' @export
 get_data_for_grid <- function(grid, model, residualize = FALSE, collapse_by = FALSE, ...) {
@@ -87,8 +91,6 @@ get_data_for_grid <- function(grid, model, residualize = FALSE, collapse_by = FA
 #' @param pred_name Name of column that has the predictions in the data grid
 get_data_for_grid.data.frame <- function(grid, model, residualize = FALSE, collapse_by = FALSE,
                                          pred_name, ...) {
-
-
   data <- insight::get_data(model)
 
   if (isTRUE(residualize)) {
@@ -113,7 +115,7 @@ get_data_for_grid.ggeffects <- function(grid, model, residualize = FALSE, collap
   new_d <- as.data.frame(grid)
   new_d <- new_d[colnames(new_d) %in% c("x", "group", "facet", "panel", "predicted")]
 
-  colnames(new_d)[colnames(new_d) %in% c("x", "group", "facet","panel")] <- attr(grid, "terms")
+  colnames(new_d)[colnames(new_d) %in% c("x", "group", "facet", "panel")] <- attr(grid, "terms")
 
   if (missing(model)) {
     model <- get(attr(grid, "model.name"), envir = parent.frame())
@@ -127,8 +129,8 @@ get_data_for_grid.ggeffects <- function(grid, model, residualize = FALSE, collap
   )
 
   if (protect_names && !is.null(points)) {
-    colnames_gge <- c("x", "group", "facet","panel")
-    colnames_orig <- attr(grid,"terms")
+    colnames_gge <- c("x", "group", "facet", "panel")
+    colnames_orig <- attr(grid, "terms")
     for (i in seq_along(colnames_orig)) {
       colnames(points)[colnames(points) == colnames_orig[i]] <- colnames_gge[i]
     }
@@ -142,7 +144,6 @@ get_data_for_grid.ggeffects <- function(grid, model, residualize = FALSE, collap
 #' @rdname get_data_for_grid
 get_data_for_grid.emmGrid <- function(grid, model, residualize = FALSE, collapse_by = FALSE,
                                       protect_names = TRUE, ...) {
-
   .check_namespace("emmeans")
 
   grid <- emmeans::regrid(grid, transform = "response")
@@ -151,9 +152,9 @@ get_data_for_grid.emmGrid <- function(grid, model, residualize = FALSE, collapse
 
   get_data_for_grid.data.frame(
     s[c(grid@roles[["predictors"]], pred_name)], model,
-     residualize = residualize,
-     collapse_by = collapse_by,
-     pred_name = pred_name
+    residualize = residualize,
+    collapse_by = collapse_by,
+    pred_name = pred_name
   )
 }
 
@@ -189,7 +190,7 @@ residualize_over_grid <- function(data, grid, model, pred_name) {
   grid[[pred_name]] <- NULL
 
   is_fixed <- sapply(grid, function(x) length(unique(x))) == 1
-  grid <- grid[,!is_fixed, drop = FALSE]
+  grid <- grid[, !is_fixed, drop = FALSE]
   other_columns <- data[setdiff(colnames(data), c(insight::find_response(model), colnames(grid)))]
   data <- data[intersect(colnames(data), colnames(grid))]
 
@@ -238,7 +239,9 @@ collapse_by_group <- function(data, grid, model, collapse_by, pred_name) {
   if (length(collapse_by) > 1) {
     collapse_by <- collapse_by[1]
     warning("More than one random grouping variable found.",
-            "\n  Using `", collapse_by, "`.", call. = FALSE)
+      "\n  Using `", collapse_by, "`.",
+      call. = FALSE
+    )
   }
 
   if (!collapse_by %in% colnames(data)) {
@@ -250,11 +253,12 @@ collapse_by_group <- function(data, grid, model, collapse_by, pred_name) {
   }
 
   grid <- grid[lengths(lapply(grid, unique)) > 1]
-  data <- data[,colnames(data) %in% c(colnames(grid), pred_name, collapse_by), drop = FALSE]
+  data <- data[, colnames(data) %in% c(colnames(grid), pred_name, collapse_by), drop = FALSE]
 
   agg_data <- stats::aggregate(data[[pred_name]],
-                               by = data[colnames(data) != pred_name],
-                               FUN = mean)
+    by = data[colnames(data) != pred_name],
+    FUN = mean
+  )
 
   colnames(agg_data)[ncol(agg_data)] <- pred_name
 
@@ -276,7 +280,7 @@ collapse_by_group <- function(data, grid, model, collapse_by, pred_name) {
   df2 <- do.call(expand.grid, args = unq)
   df2[["..1"]] <- 1
 
-  res <- merge(df,df2, by = colnames(df), all = TRUE)
+  res <- merge(df, df2, by = colnames(df), all = TRUE)
 
   return(sum(res[["..1"]]) == sum(df2[["..1"]]))
 }

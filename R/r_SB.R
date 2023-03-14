@@ -5,9 +5,9 @@
 #' @param var.equal Assume equal var of `x` and `y`? (ignored if `y` is not `NULL`)
 #'
 #' @examples
-#' r_SB(1:30,-exp(1/1:30), var.equal = TRUE)
+#' r_SB(1:30, -exp(1 / 1:30), var.equal = TRUE)
 #'
-#' r_SB(1:30,-exp(1/1:30), var.equal = FALSE)
+#' r_SB(1:30, -exp(1 / 1:30), var.equal = FALSE)
 #'
 #' r_SB(0.57)
 #'

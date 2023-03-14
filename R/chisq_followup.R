@@ -9,8 +9,10 @@
 #' @param ... Passed to `chisq.test()`.
 #'
 #' @examples
-#' M <- as.table(rbind(c(762, 327, 468),
-#'                     c(484, 239, 477)))
+#' M <- as.table(rbind(
+#'   c(762, 327, 468),
+#'   c(484, 239, 477)
+#' ))
 #' dimnames(M) <- list(
 #'   gender = c("F", "M"),
 #'   party = c("Democrat", "Independent", "Republican")
@@ -41,14 +43,15 @@ chisq_pairwise <- function(Xsq,
 
   if (have_effectsize <- .check_namespace("effectsize", quietly = TRUE)) {
     esf <- switch(effect_size,
-                  V = effectsize::chisq_to_cramers_v,
-                  phi = effectsize::chisq_to_phi)
+      V = effectsize::chisq_to_cramers_v,
+      phi = effectsize::chisq_to_phi
+    )
   }
 
   pairs <- utils::combn(1:nrow(tbl), 2)
   res <- lapply(seq_len(ncol(pairs)), function(i) {
     pair <- pairs[, i]
-    temp_res <- stats::chisq.test(tbl[pair,], ...)
+    temp_res <- stats::chisq.test(tbl[pair, ], ...)
 
     .tmp <- data.frame(
       comparison = paste(popsNames[pair], collapse = " vs. "),
@@ -61,7 +64,6 @@ chisq_pairwise <- function(Xsq,
       .tmp[[effect_size]] <- ES[[1]]
       .tmp[[paste0(effect_size, ".CI_low")]] <- ES$CI_low
       .tmp[[paste0(effect_size, ".CI_high")]] <- ES$CI_high
-
     }
     .tmp$p.raw <- temp_res$p.value
     .tmp
@@ -85,8 +87,7 @@ chisq_residual <- function(Xsq,
   res_type <- match.arg(res_type)
 
 
-  resids <- switch (
-    res_type,
+  resids <- switch(res_type,
     pearson = Xsq$residuals,
     standardized = Xsq$stdres
   )
@@ -94,8 +95,10 @@ chisq_residual <- function(Xsq,
   Obs <- Xsq$observed
 
   tbl <- expand.grid(dimnames(Obs)) |>
-    cbind(z.value = c(resids),
-          n.obs = c(Obs))
+    cbind(
+      z.value = c(resids),
+      n.obs = c(Obs)
+    )
 
   # Effect size
   if (.check_namespace("effectsize", quietly = TRUE)) {

@@ -7,8 +7,10 @@
 #' @param add Should `this` and the resulting values be returned as a data frame? (Else a vector)
 #'
 #' @examples
-#' df <- data.frame(a = letters[c(1,1:9)],
-#'                  b = 51:60)
+#' df <- data.frame(
+#'   a = letters[c(1, 1:9)],
+#'   b = 51:60
+#' )
 #'
 #' vlookup(c("a", "e", "c"), df, key = "a", value = "b")
 #' vlookup(c("a", "e", "c"), df, key = "a", value = "b", add = TRUE)

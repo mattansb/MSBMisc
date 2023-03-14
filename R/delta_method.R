@@ -19,7 +19,8 @@
 #' V <- cov(mtcars)
 #'
 #' delta_method(
-#'   (mpg^2)/hp, log_am = log1p(am),
+#'   (mpg^2) / hp,
+#'   log_am = log1p(am),
 #'   .means = M, .V = V,
 #'   return = "cor"
 #' )
@@ -27,11 +28,11 @@
 #' # Sobel Test ----
 #'
 #' data("mtcars")
-#' mod.y <- lm(mpg ~ hp + cyl, mtcars[1:5,])
-#' mod.m <- lm(hp ~ cyl, mtcars[1:5,])
+#' mod.y <- lm(mpg ~ hp + cyl, mtcars[1:5, ])
+#' mod.m <- lm(hp ~ cyl, mtcars[1:5, ])
 #'
-#' bhat <- c(coef(mod.y), coef(mod.m))[c(2,5)]
-#' Vhat <- dbind(vcov(mod.y), vcov(mod.m))[c(2,5), c(2,5)]
+#' bhat <- c(coef(mod.y), coef(mod.m))[c(2, 5)]
+#' Vhat <- dbind(vcov(mod.y), vcov(mod.m))[c(2, 5), c(2, 5)]
 #'
 #' res <- delta_method(
 #'   hp * cyl,
@@ -43,24 +44,25 @@
 #'
 #' # Compare:
 #' (bhat[1] * bhat[2]) /
-#'   sqrt(bhat[1]^2 * Vhat[2,2] + bhat[2]^2 * Vhat[1,1])
+#'   sqrt(bhat[1]^2 * Vhat[2, 2] + bhat[2]^2 * Vhat[1, 1])
 #'
 #' # Special character will give you a bad time...
-#' m <- lm(mpg ~ factor(cyl), mtcars[1:5,])
+#' m <- lm(mpg ~ factor(cyl), mtcars[1:5, ])
 #'
 #' bhat <- coef(m)
 #' names(bhat) <- c("cyl4", "cyl6", "cyl8")
 #' V <- vcov(m)
 #'
 #' delta_method(cyl4, cyl4 + cyl6, cyl4 + cyl8,
-#'              .means = bhat,
-#'              .V = V)
+#'   .means = bhat,
+#'   .V = V
+#' )
 #'
 #' @export
 delta_method <- function(..., .means, .V, return = c("means", "cov", "stddev", "cor")) {
-
-  if (all(diag(.V) == 1))
+  if (all(diag(.V) == 1)) {
     warning("'V' should be a (co) variance matrix, but the diag is all 1s.")
+  }
 
   cl <- match.call()
   cl$.means <- cl$.V <- cl$return <- NULL
@@ -109,14 +111,18 @@ delta_method <- function(..., .means, .V, return = c("means", "cov", "stddev", "
 }
 
 #' @keywords internal
-msm.deltamethod <- function (g, mean, cov, ses = TRUE) {
+msm.deltamethod <- function(g, mean, cov, ses = TRUE) {
   cov <- as.matrix(cov)
   n <- length(mean)
-  if (!is.list(g))
+  if (!is.list(g)) {
     g <- list(g)
-  if ((dim(cov)[1] != n) || (dim(cov)[2] != n))
-    stop(paste("Covariances should be a ", n, " by ", n,
-               " matrix"))
+  }
+  if ((dim(cov)[1] != n) || (dim(cov)[2] != n)) {
+    stop(paste(
+      "Covariances should be a ", n, " by ", n,
+      " matrix"
+    ))
+  }
   syms <- paste("x", 1:n, sep = "")
   for (i in 1:n) assign(syms[i], mean[i])
   gdashmu <- t(sapply(g, function(form) {
@@ -126,8 +132,9 @@ msm.deltamethod <- function (g, mean, cov, ses = TRUE) {
   if (ses) {
     new.se <- sqrt(diag(new.covar))
     new.se
+  } else {
+    new.covar
   }
-  else new.covar
 }
 
 

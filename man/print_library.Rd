@@ -26,6 +26,7 @@ Useful in RMarkdown.
 }
 \examples{
 print_library(afex, tidyverse, emmeans, MASS,
-              .load = FALSE)
+  .load = FALSE
+)
 
 }

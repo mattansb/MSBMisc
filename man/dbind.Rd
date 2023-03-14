@@ -33,5 +33,4 @@ M1 <- matrix(TRUE, 2, 3)
 M2 <- matrix(NA, 3, 4)
 dbind(M1, M2)
 
-
 }

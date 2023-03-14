@@ -20,11 +20,15 @@
 #' @examplesIf require("ggplot2")
 #' library(ggplot2)
 #' ggplot(mtcars, aes(cyl, mpg)) +
-#'   stat_summary(aes(color = "Mean (SD)"), fun.data = mean_sd,
-#'                fun.args = list(out = "data.frame")) +
-#'   stat_summary(aes(color = "Median (MAD)"), fun.data = median_mad,
-#'                fun.args = list(out = "data.frame"),
-#'                position = position_nudge(x = 0.5))
+#'   stat_summary(aes(color = "Mean (SD)"),
+#'     fun.data = mean_sd,
+#'     fun.args = list(out = "data.frame")
+#'   ) +
+#'   stat_summary(aes(color = "Median (MAD)"),
+#'     fun.data = median_mad,
+#'     fun.args = list(out = "data.frame"),
+#'     position = position_nudge(x = 0.5)
+#'   )
 #'
 #' @export
 seq_range <- function(x, length.out = NULL, by = NULL, along.with = NULL,
@@ -58,7 +62,7 @@ seq_IQR <- function(x, length.out = NULL, by = NULL, along.with = NULL,
                     na.rm = TRUE) {
   cl <- match.call()
   cl[[1]] <- quote(seq_quantile)
-  cl$probs = c(.25, .75)
+  cl$probs <- c(.25, .75)
   eval(cl)
 }
 

@@ -43,5 +43,4 @@ median(x)
 lnorm_sd(meanlog, sdlog)
 sd(x)
 
-
 }

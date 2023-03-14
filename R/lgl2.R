@@ -129,7 +129,7 @@ geq <- function(...) {
 
   out <- rep(TRUE, length = max(Ls))
   for (i in seq_len(length(x) - 1)) {
-    out <- out & f(x[[i]], x[[i+1]])
+    out <- out & f(x[[i]], x[[i + 1]])
   }
   out
 }
@@ -151,5 +151,3 @@ geq <- function(...) {
 
 
 # Examples -----------------------
-
-

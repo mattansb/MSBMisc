@@ -15,22 +15,22 @@
 #'
 #' library(ggplot2)
 #'
-#' polar_plot <- ggplot(mtcars ,aes(hp, mpg)) +
+#' polar_plot <- ggplot(mtcars, aes(hp, mpg)) +
 #'   geom_point() +
 #'   geom_smooth(method = "lm") +
 #'   expand_limits(y = c(0, 60)) +
 #'   coord_polar(start = 0, theta = "y")
 #'
 #' crop_coord_polar(polar_plot, end = pi)
-#' crop_coord_polar(polar_plot, end = pi/2)
+#' crop_coord_polar(polar_plot, end = pi / 2)
 #' crop_coord_polar(polar_plot, start = 3 * pi / 2, end = pi / 2)
 #'
 #'
 #'
 #' # Also works with facets!
 #' d <- data.frame(
-#'   x = seq(1, 7, length = 6*5),
-#'   y = rnorm(6*5),
+#'   x = seq(1, 7, length = 6 * 5),
+#'   y = rnorm(6 * 5),
 #'   g = rep(letters[1:6], each = 5)
 #' )
 #'
@@ -47,12 +47,11 @@
 #' end <- start + start[2]
 #'
 #' crop_coord_polar(polar_plot_facet,
-#'                  start = start, end = end)
-#'
-#'
+#'   start = start, end = end
+#' )
 #'
 #' @export
-crop_coord_polar <- function(plot, start = 0, end = 2*pi,
+crop_coord_polar <- function(plot, start = 0, end = 2 * pi,
                              padding = 0.02,
                              fix_aspect.ratio = TRUE) {
   .check_namespace("ggplot2", "ggtrace")
@@ -61,9 +60,9 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
     inherits(plot, "gg"),
     length(start) == length(end),
     all(start >= 0),
-    all(start <= 2*pi),
+    all(start <= 2 * pi),
     all(end >= 0),
-    all(end <= 2*pi),
+    all(end <= 2 * pi),
     padding >= 0
   )
 
@@ -76,7 +75,7 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
   if (isTRUE(fix_aspect.ratio)) {
     aspect.ratio <-
       (trbl[["b."]] - trbl[["t."]]) /
-      (trbl[["l."]] - trbl[["r."]])
+        (trbl[["l."]] - trbl[["r."]])
 
     if (!all(aspect.ratio[1] == aspect.ratio)) aspect.ratio <- 1
 
@@ -85,24 +84,30 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
   }
 
 
-  expr <- substitute({
-    b <- b.
-    t <- t.
-    r <- r.
-    l <- l.
+  expr <- substitute(
+    {
+      b <- b.
+      t <- t.
+      r <- r.
+      l <- l.
 
-    n_panels <- length(panels)
-    if (length(b) != n_panels) b <- rep(b, length.out = n_panels)
-    if (length(t) != n_panels) t <- rep(t, length.out = n_panels)
-    if (length(r) != n_panels) r <- rep(r, length.out = n_panels)
-    if (length(l) != n_panels) l <- rep(l, length.out = n_panels)
+      n_panels <- length(panels)
+      if (length(b) != n_panels) b <- rep(b, length.out = n_panels)
+      if (length(t) != n_panels) t <- rep(t, length.out = n_panels)
+      if (length(r) != n_panels) r <- rep(r, length.out = n_panels)
+      if (length(l) != n_panels) l <- rep(l, length.out = n_panels)
 
-    for (p in seq_len(n_panels)) {
-      panels[[p]] <- editGrob(panels[[p]],
-                              vp = viewport(yscale = c(b[p], t[p]),
-                                            xscale = c(l[p], r[p])))
-    }
-  }, env = trbl)
+      for (p in seq_len(n_panels)) {
+        panels[[p]] <- editGrob(panels[[p]],
+          vp = viewport(
+            yscale = c(b[p], t[p]),
+            xscale = c(l[p], r[p])
+          )
+        )
+      }
+    },
+    env = trbl
+  )
 
   trace_plot <- ggtrace::with_ggtrace(
     x = plot,
@@ -119,7 +124,7 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
 
 #' @keywords internal
 .theta_to_xy <- function(theta) {
-  theta <- (2*pi - theta) + pi/2
+  theta <- (2 * pi - theta) + pi / 2
   cbind(cos(theta), sin(theta))
 }
 
@@ -152,7 +157,7 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
     }
 
     # r
-    if (!.is_between_angle(start[k], pi/2, end[k])) {
+    if (!.is_between_angle(start[k], pi / 2, end[k])) {
       r.[k] <- pmax(center.xy[1], start.xy[k, 1], end.xy[k, 1]) + padding
     }
 
@@ -162,7 +167,7 @@ crop_coord_polar <- function(plot, start = 0, end = 2*pi,
     }
 
     # l
-    if (!.is_between_angle(start[k], 3*pi/2, end[k])) {
+    if (!.is_between_angle(start[k], 3 * pi / 2, end[k])) {
       l.[k] <- pmin(center.xy[1], start.xy[k, 1], end.xy[k, 1]) - padding
     }
   }

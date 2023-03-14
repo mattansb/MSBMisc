@@ -22,11 +22,10 @@
 #' lnorm_sd(meanlog, sdlog)
 #' sd(x)
 #'
-#'
 #' @export
 lnorm_mean <- function(meanlog, sdlog, ...) {
   .same.length(meanlog, sdlog)
-  Vlog <- sdlog ^ 2
+  Vlog <- sdlog^2
   exp(meanlog + Vlog / 2) |>
     unname()
 }
@@ -42,7 +41,7 @@ lnorm_median <- function(meanlog, ...) {
 #' @rdname lnorm_mean
 lnorm_var <- function(meanlog, sdlog, ...) {
   .same.length(meanlog, sdlog)
-  Vlog <- sdlog ^ 2
+  Vlog <- sdlog^2
   (exp(Vlog) - 1) * exp(2 * meanlog + Vlog) |>
     unname()
 }
@@ -62,9 +61,8 @@ lnorm_sd <- function(meanlog, sdlog, ...) {
   stopifnot(
     "Vector inputs must be of the same length." =
       length(x) == length(y) ||
-      length(x) == 1L ||
-      length(y) == 1L
+        length(x) == 1L ||
+        length(y) == 1L
   )
   invisible(NULL)
 }
-

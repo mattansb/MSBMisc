@@ -17,14 +17,13 @@
 #' fa_reliability(EFA)
 #'
 #' @examplesIf require("lavaan") && require("semTools")
-#' HS.model <- ' visual  =~ x1 + x2 + x3
+#' HS.model <- " visual  =~ x1 + x2 + x3
 #'               textual =~ x4 + x5 + x6
-#'               speed   =~ x7 + x8 + x9 '
+#'               speed   =~ x7 + x8 + x9 "
 #'
 #' CFA <- lavaan::cfa(HS.model, data = lavaan::HolzingerSwineford1939)
 #'
 #' fa_reliability(CFA)
-#'
 #'
 #' @export
 fa_reliability <- function(x, ...) {
@@ -44,10 +43,11 @@ fa_reliability.fa <- function(x, keys = NULL, threshold = 0, labels = NULL, ...)
     Omega = colSums(keys * L)^2 / diag(t(keys) %*% r %*% keys)
   )
 
-  if (!is.null(labels))
+  if (!is.null(labels)) {
     out$Factor <- labels
-  else
+  } else {
     rownames(out) <- NULL
+  }
 
   out
 }

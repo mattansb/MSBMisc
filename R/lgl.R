@@ -30,7 +30,7 @@ allTRUE <- function(...) {
   while (verdict && i <= length(cl)) {
     verdict <-
       verdict &&
-      eval(cl[[i]], envir = parent.frame())
+        eval(cl[[i]], envir = parent.frame())
     i <- i + 1
   }
   return(verdict)
@@ -45,7 +45,7 @@ anyTRUE <- function(...) {
   while (!verdict && i <= length(cl)) {
     verdict <-
       verdict ||
-      eval(cl[[i]], envir = parent.frame())
+        eval(cl[[i]], envir = parent.frame())
     i <- i + 1
   }
   return(verdict)

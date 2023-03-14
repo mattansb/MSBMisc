@@ -40,8 +40,10 @@ chisq_residual(
 Follow-up for contingency table test
 }
 \examples{
-M <- as.table(rbind(c(762, 327, 468),
-                    c(484, 239, 477)))
+M <- as.table(rbind(
+  c(762, 327, 468),
+  c(484, 239, 477)
+))
 dimnames(M) <- list(
   gender = c("F", "M"),
   party = c("Democrat", "Independent", "Republican")

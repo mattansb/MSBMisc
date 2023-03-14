@@ -34,18 +34,18 @@ The types of \eqn{R^2}:
 }
 }
 \examples{
-X <-  c(1, 2, 3, 4, 5, 6)
+X <- c(1, 2, 3, 4, 5, 6)
 Y <- c(15, 37, 52, 59, 83, 92)
 
 m1 <- lm(Y ~ X)
 m2 <- lm(Y ~ 0 + X)
-m3 <- nls(Y ~ a * X ^ b, start = c(a = 1, b = 1))
+m3 <- nls(Y ~ a * X^b, start = c(a = 1, b = 1))
 
 # Table 2 from Kvålset0 (1985)
 data.frame(
   mod1 = sapply(1:8, R2, pred = predict(m1), obs = Y),
   mod2 = sapply(1:8, R2, pred = predict(m2), obs = Y),
-  mod3 = sapply(1:8, R2, pred = 16.3757 * X ^ 0.99, obs = Y)
+  mod3 = sapply(1:8, R2, pred = 16.3757 * X^0.99, obs = Y)
 )
 
 }

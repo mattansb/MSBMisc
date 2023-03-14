@@ -51,7 +51,6 @@ model_pois <- glm(mpg ~ factor(cyl), mtcars, family = poisson())
 aics[1, "AIC"] <- AIC_lnorm(model_lnorm)
 aics # better!
 
-
 \dontshow{if (require("lme4")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Should support any model really... =====================
 model_lnorm <- lme4::lmer(log(mpg) ~ factor(cyl) + (1 | gear), mtcars, REML = FALSE)
@@ -63,6 +62,5 @@ model_pois <- lme4::glmer(mpg ~ factor(cyl) + (1 | gear), mtcars, family = poiss
 
 aics[1, "AIC"] <- AIC_lnorm(model_lnorm)
 aics # better!
-
 \dontshow{\}) # examplesIf}
 }

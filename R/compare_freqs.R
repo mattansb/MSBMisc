@@ -35,7 +35,7 @@ compare_freqs <- function(f, adjust = stats::p.adjust.methods, correct = TRUE) {
     f1 <- f == level1
     f2 <- f == level2
 
-    tab <- table(f1,f2)
+    tab <- table(f1, f2)
 
     temp_res <- stats::mcnemar.test(tab, correct = correct)
 

@@ -20,9 +20,11 @@
 #' mod <- lm(mpg ~ factor(cyl) * am, mtcars)
 #'
 #'
-#' my_contrasts <- data.frame("squares" = c(-1, 2, -1),
-#'                            "4 vs 6" = c(-30, 30, 0),
-#'                            check.names = FALSE)
+#' my_contrasts <- data.frame(
+#'   "squares" = c(-1, 2, -1),
+#'   "4 vs 6" = c(-30, 30, 0),
+#'   check.names = FALSE
+#' )
 #'
 #' (my_contrasts2 <- cw(my_contrasts))
 #' my_contrasts3 <- cw(my_contrasts, .adjust = "fdr")
@@ -46,10 +48,10 @@ contrast_weights <- function(..., .name = "custom", .adjust = NULL) {
     x <- c(...)
     stopifnot(
       "Weights do not define a proper contrast!" =
-        isTRUE(all.equal(sum(x), 0)) && any(x>0)
+        isTRUE(all.equal(sum(x), 0)) && any(x > 0)
     )
 
-    nf <- sum(x[x>0])
+    nf <- sum(x[x > 0])
     return(x / nf)
   }
 

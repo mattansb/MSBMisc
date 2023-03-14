@@ -17,9 +17,9 @@ r_SB(x, y = NULL, var.equal = TRUE)
 Spearman-Brown Split half reliability
 }
 \examples{
-r_SB(1:30,-exp(1/1:30), var.equal = TRUE)
+r_SB(1:30, -exp(1 / 1:30), var.equal = TRUE)
 
-r_SB(1:30,-exp(1/1:30), var.equal = FALSE)
+r_SB(1:30, -exp(1 / 1:30), var.equal = FALSE)
 
 r_SB(0.57)
 

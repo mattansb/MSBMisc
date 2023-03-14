@@ -52,11 +52,12 @@ compare_cor(mtcars, r1 = c("mpg", "hp"), r2 = c("mpg", "am"))
 
 # Test independent correlations -----------------
 ## Different data sets
-compare_cor(data = mtcars, r1 = c("mpg", "hp"),
-            data2 = iris, r2 = c("Sepal.Length", "Sepal.Width"))
+compare_cor(
+  data = mtcars, r1 = c("mpg", "hp"),
+  data2 = iris, r2 = c("Sepal.Length", "Sepal.Width")
+)
 
 ## Groups
 compare_cor(mtcars, r1 = c("mpg", "hp"), by = "am")
-
 
 }

@@ -23,5 +23,5 @@ You can see a list of all functions [here](https://mattansb.github.io/MSBMisc/re
 You can install the package from [my *R-Universe*](https://mattansb.r-universe.dev/):
 
 ```{r, eval=FALSE}
-install.packages('MSBMisc', repos = 'https://mattansb.r-universe.dev')
+install.packages("MSBMisc", repos = "https://mattansb.r-universe.dev")
 ```

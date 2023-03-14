@@ -35,9 +35,11 @@ data(mtcars)
 mod <- lm(mpg ~ factor(cyl) * am, mtcars)
 
 
-my_contrasts <- data.frame("squares" = c(-1, 2, -1),
-                           "4 vs 6" = c(-30, 30, 0),
-                           check.names = FALSE)
+my_contrasts <- data.frame(
+  "squares" = c(-1, 2, -1),
+  "4 vs 6" = c(-30, 30, 0),
+  check.names = FALSE
+)
 
 (my_contrasts2 <- cw(my_contrasts))
 my_contrasts3 <- cw(my_contrasts, .adjust = "fdr")

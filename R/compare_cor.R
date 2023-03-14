@@ -35,12 +35,13 @@
 #'
 #' # Test independent correlations -----------------
 #' ## Different data sets
-#' compare_cor(data = mtcars, r1 = c("mpg", "hp"),
-#'             data2 = iris, r2 = c("Sepal.Length", "Sepal.Width"))
+#' compare_cor(
+#'   data = mtcars, r1 = c("mpg", "hp"),
+#'   data2 = iris, r2 = c("Sepal.Length", "Sepal.Width")
+#' )
 #'
 #' ## Groups
 #' compare_cor(mtcars, r1 = c("mpg", "hp"), by = "am")
-#'
 #'
 #' @export
 compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL,
@@ -50,7 +51,7 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL,
   if (!is.null(by)) {
     stopifnot(missing(r2), is.null(data2))
     splits <- split(data, data[[by]])
-    stopifnot(length(splits)==2L)
+    stopifnot(length(splits) == 2L)
     data <- splits[[1]]
     data2 <- splits[[2]]
     r2 <- r1
@@ -71,41 +72,45 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL,
 
   if (is.null(data2)) {
     # This is a dependent correlation
-    data <- na.omit(data[unique(c(r1,r2))])
+    data <- na.omit(data[unique(c(r1, r2))])
     n <- nrow(data)
 
     if (!any(r2 %in% r1)) {
       # Different variables
-      r <- cor(data[c(r1,r2)])
+      r <- cor(data[c(r1, r2)])
 
-      r12 <- r[1,2]
-      r34 <- cor(data[r2])[1,2]
+      r12 <- r[1, 2]
+      r34 <- cor(data[r2])[1, 2]
 
       # Other cors
-      r12 <- cor(data[r1])[1,2]
-      r34 <- cor(data[r2])[1,2]
+      r12 <- cor(data[r1])[1, 2]
+      r34 <- cor(data[r2])[1, 2]
 
-      out <- psych::r.test(n = n,
-                           r12 = r12 <- r[1,2],
-                           r34 = r34 <- r[3,4],
-                           # Other cors
-                           r13 = r[1,3],
-                           r14 = r[1,4],
-                           r23 = r[2,3],
-                           r24 = r[2,4])
+      out <- psych::r.test(
+        n = n,
+        r12 = r12 <- r[1, 2],
+        r34 = r34 <- r[3, 4],
+        # Other cors
+        r13 = r[1, 3],
+        r14 = r[1, 4],
+        r23 = r[2, 3],
+        r24 = r[2, 4]
+      )
       Corr1 <- data.frame(r = r12, CI = ci, correlation::cor_to_ci(r12, n, ci = ci))
       Corr2 <- data.frame(r = r34, CI = ci, correlation::cor_to_ci(r34, n, ci = ci))
     } else {
       # One variable in common
-      v2 <- intersect(r1,r2)
-      v1 <- setdiff(r1,v2)
-      v3 <- setdiff(r2,v2)
+      v2 <- intersect(r1, r2)
+      v1 <- setdiff(r1, v2)
+      v3 <- setdiff(r2, v2)
 
-      out <- psych::r.test(n = n,
-                           r12 = r12 <- cor(data[[v1]], data[[v2]]),
-                           r13 = r13 <- cor(data[[v1]], data[[v3]]),
-                           # Other cors
-                           r23 = cor(data[[v2]], data[[v3]]))
+      out <- psych::r.test(
+        n = n,
+        r12 = r12 <- cor(data[[v1]], data[[v2]]),
+        r13 = r13 <- cor(data[[v1]], data[[v3]]),
+        # Other cors
+        r23 = cor(data[[v2]], data[[v3]])
+      )
       Corr1 <- data.frame(r = r12, CI = ci, correlation::cor_to_ci(r12, n, ci = ci))
       Corr2 <- data.frame(r = r13, CI = ci, correlation::cor_to_ci(r13, n, ci = ci))
     }
@@ -119,9 +124,11 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL,
     data2 <- na.omit(data2[r2])
     n2 <- nrow(data2)
 
-    out <- psych::r.test(n = n, n2 = n2,
-                         r12 = r12 <- cor(data)[1,2],
-                         r34 = r34 <- cor(data2)[1,2])
+    out <- psych::r.test(
+      n = n, n2 = n2,
+      r12 = r12 <- cor(data)[1, 2],
+      r34 = r34 <- cor(data2)[1, 2]
+    )
     Corr1 <- data.frame(r = r12, CI = ci, correlation::cor_to_ci(r12, n, ci = ci))
     Corr2 <- data.frame(r = r34, CI = ci, correlation::cor_to_ci(r34, n2, ci = ci))
   }

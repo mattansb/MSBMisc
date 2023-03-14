@@ -23,18 +23,18 @@
 #' @references Kvålseth, T. O. (1985). Cautionary note about R 2. The American Statistician, 39(4), 279-285.
 #'
 #' @examples
-#' X <-  c(1, 2, 3, 4, 5, 6)
+#' X <- c(1, 2, 3, 4, 5, 6)
 #' Y <- c(15, 37, 52, 59, 83, 92)
 #'
 #' m1 <- lm(Y ~ X)
 #' m2 <- lm(Y ~ 0 + X)
-#' m3 <- nls(Y ~ a * X ^ b, start = c(a = 1, b = 1))
+#' m3 <- nls(Y ~ a * X^b, start = c(a = 1, b = 1))
 #'
 #' # Table 2 from Kvålset0 (1985)
 #' data.frame(
 #'   mod1 = sapply(1:8, R2, pred = predict(m1), obs = Y),
 #'   mod2 = sapply(1:8, R2, pred = predict(m2), obs = Y),
-#'   mod3 = sapply(1:8, R2, pred = 16.3757 * X ^ 0.99, obs = Y)
+#'   mod3 = sapply(1:8, R2, pred = 16.3757 * X^0.99, obs = Y)
 #' )
 #'
 #' @export
@@ -46,16 +46,17 @@ R2 <- function(pred, obs, type = 1, na.rm = TRUE) {
   }
 
   f <- switch(as.character(type),
-              "MSE" = ,
-              "1" = .r2_1,
-              "2" = .r2_2,
-              "3" = .r2_3,
-              "4" = .r2_4,
-              "5" = .r2_5,
-              "corr" = ,
-              "6" = .r2_6,
-              "7" = .r2_7,
-              "8" = .r2_8)
+    "MSE" = ,
+    "1" = .r2_1,
+    "2" = .r2_2,
+    "3" = .r2_3,
+    "4" = .r2_4,
+    "5" = .r2_5,
+    "corr" = ,
+    "6" = .r2_6,
+    "7" = .r2_7,
+    "8" = .r2_8
+  )
 
   f(pred, obs)
 }
@@ -88,7 +89,7 @@ R2 <- function(pred, obs, type = 1, na.rm = TRUE) {
 
 #' @keywords internal
 .r2_6 <- function(pred, obs) {
-  stats::cor(pred, obs) ^ 2
+  stats::cor(pred, obs)^2
 }
 
 #' @keywords internal
@@ -104,5 +105,5 @@ R2 <- function(pred, obs, type = 1, na.rm = TRUE) {
 #' @keywords internal
 .SS <- function(x, y) {
   stopifnot(length(x) == length(y) || length(x) == 1L || length(y) == 1L)
-  sum((x - y) ^ 2)
+  sum((x - y)^2)
 }

@@ -25,8 +25,10 @@
 #'   df = c(1, 2, 5, 10, 20, 50, 200, 1000, Inf)
 #' ) |>
 #'   transform(PHP = php.t(p = p, df = df, one.tailed = TRUE)) |>
-#'   stats::reshape(direction = "wide",
-#'                  idvar = "df", timevar = "p")
+#'   stats::reshape(
+#'     direction = "wide",
+#'     idvar = "df", timevar = "p"
+#'   )
 #'
 #'
 #' # Table 1 - two tailed
@@ -35,8 +37,10 @@
 #'   df = c(1, 2, 5, 10, 20, 50, 200, 1000, Inf)
 #' ) |>
 #'   transform(PHP = php.t(p = p, df = df)) |>
-#'   stats::reshape(direction = "wide",
-#'                  idvar = "df", timevar = "p")
+#'   stats::reshape(
+#'     direction = "wide",
+#'     idvar = "df", timevar = "p"
+#'   )
 #'
 #'
 #' # Table 2
@@ -46,9 +50,10 @@
 #'   df1 = c(2, 3, 4, 10)
 #' ) |>
 #'   transform(PHP = php.F(p = p, df1 = df1, df2 = df2)) |>
-#'   stats::reshape(direction = "wide",
-#'                  idvar = c("df1", "df2"), timevar = "p")
-#'
+#'   stats::reshape(
+#'     direction = "wide",
+#'     idvar = c("df1", "df2"), timevar = "p"
+#'   )
 #'
 #' @export
 php.t <- function(tval, p, df = Inf, alpha = 0.05, one.tailed = FALSE) {

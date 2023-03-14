@@ -27,8 +27,9 @@ specify which simple effects we wish to test, and within what variable(s).
 library(afex)
 
 data(obk.long, package = "afex")
-A <- aov_car(value ~ treatment * gender + Error(id/(phase*hour)),
-             data = obk.long)
+A <- aov_car(value ~ treatment * gender + Error(id / (phase * hour)),
+  data = obk.long
+)
 
 simple_effects(A, effect = "treatment")
 
@@ -39,10 +40,11 @@ simple_effects(A, effect = "phase", inside = "treatment")
 simple_effects(A, effect = "phase", inside = c("treatment", "gender"))
 # simple_effects(A, effect = "phase", inside = "treatment:gender") # same
 
-simple_effects(A, effect = "phase", inside = c("treatment", "gender"),
-               at = list(gender = "F"))
+simple_effects(A,
+  effect = "phase", inside = c("treatment", "gender"),
+  at = list(gender = "F")
+)
 
 simple_effects(A, effect = "phase:treatment", inside = "gender")
-
 \dontshow{\}) # examplesIf}
 }

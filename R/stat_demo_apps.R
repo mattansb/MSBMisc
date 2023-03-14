@@ -20,20 +20,19 @@
 #' @export
 stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "berksons paradox")) {
   demo <- match.arg(demo)
-  switch (demo,
-          "paired ttest" = .demo_paired_ttest(),
-          "truncated correlation" = .demo_truncated_correlation(),
-          "berksons paradox" = .demo_berksons_paradox()
+  switch(demo,
+    "paired ttest" = .demo_paired_ttest(),
+    "truncated correlation" = .demo_truncated_correlation(),
+    "berksons paradox" = .demo_berksons_paradox()
   )
 }
 
 
-.demo_paired_ttest <- function(){
+.demo_paired_ttest <- function() {
   .check_namespace("shiny", "MASS", "patchwork", "ggplot2")
 
-  .tidy_ttest <- function(data, var.equal = FALSE, paired = FALSE){
-
-    res <- stats::t.test(data[[1]],data[[2]], var.equal = var.equal, paired = paired)
+  .tidy_ttest <- function(data, var.equal = FALSE, paired = FALSE) {
+    res <- stats::t.test(data[[1]], data[[2]], var.equal = var.equal, paired = paired)
 
     data.frame(
       t.value = res$statistic,
@@ -51,22 +50,21 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     # Sidebar with a slider input for number of bins
     shiny::sidebarLayout(
       shiny::sidebarPanel(
-        shiny::sliderInput('r','Correlation',min = -1, max = 0.9999, value = 0.7, step = 0.05),
-        shiny::numericInput('d','Cohens D',value = 0.3, min = 0, step = 0.05),
-        shiny::numericInput('n','N',value = 30, min = 4, step = 1)
+        shiny::sliderInput("r", "Correlation", min = -1, max = 0.9999, value = 0.7, step = 0.05),
+        shiny::numericInput("d", "Cohens D", value = 0.3, min = 0, step = 0.05),
+        shiny::numericInput("n", "N", value = 30, min = 4, step = 1)
       ),
 
       # Show a plot of the generated distribution
       shiny::mainPanel(
-        shiny::tableOutput('results'),
-        shiny::plotOutput('plot')
+        shiny::tableOutput("results"),
+        shiny::plotOutput("plot")
       )
     )
   )
 
   # Define server logic required to draw a histogram
   server <- function(input, output) {
-
     data <- shiny::reactive({
       as.data.frame(MASS::mvrnorm(
         n = input$n,
@@ -84,7 +82,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
       res_up <- .tidy_ttest(df, var.equal = TRUE)
 
       res <- rbind(res_p, res_up)
-      rownames(res) <- c('Paired','Indapendant')
+      rownames(res) <- c("Paired", "Indapendant")
       res
     })
 
@@ -98,24 +96,30 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
         ggplot2::labs(x = "X1", y = "X2")
 
       sbs_data <- rbind(
-        data.frame(y = df[,1],
-                   x = "X1",
-                   id = seq_along(df[,1])),
-        data.frame(y = df[,2],
-                   x = "X2",
-                   id = seq_along(df[,2]))
+        data.frame(
+          y = df[, 1],
+          x = "X1",
+          id = seq_along(df[, 1])
+        ),
+        data.frame(
+          y = df[, 2],
+          x = "X2",
+          id = seq_along(df[, 2])
+        )
       )
 
-      tplot <- ggplot2::ggplot(sbs_data,
-                               ggplot2::aes(
-                                 .data$x,
-                                 .data$y,
-                                 group = .data$id,
-                                 color = factor(.data$id)
-                               )) +
+      tplot <- ggplot2::ggplot(
+        sbs_data,
+        ggplot2::aes(
+          .data$x,
+          .data$y,
+          group = .data$id,
+          color = factor(.data$id)
+        )
+      ) +
         ggplot2::geom_line(alpha = 0.5) +
         ggplot2::theme_bw() +
-        ggplot2::theme(legend.position = 'none') +
+        ggplot2::theme(legend.position = "none") +
         ggplot2::labs(x = "", y = "")
 
 
@@ -127,14 +131,16 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
   shiny::runApp(list(ui = ui, server = server))
 }
 
-.demo_truncated_correlation <- function(){
+.demo_truncated_correlation <- function() {
   .check_namespace("shiny", "MASS", "patchwork", "ggplot2")
 
-  ploting_list <- list(ggplot2::geom_point(),
-                       ggplot2::coord_cartesian(xlim = c(-4, 4), ylim = c(-3, 3)),
-                       ggplot2::labs(x = "X", y = "Y"),
-                       ggplot2::theme_bw(),
-                       ggplot2::theme(legend.position = 'none'))
+  ploting_list <- list(
+    ggplot2::geom_point(),
+    ggplot2::coord_cartesian(xlim = c(-4, 4), ylim = c(-3, 3)),
+    ggplot2::labs(x = "X", y = "Y"),
+    ggplot2::theme_bw(),
+    ggplot2::theme(legend.position = "none")
+  )
 
   ui <- shiny::fluidPage(
 
@@ -144,9 +150,9 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     # Sidebar with a slider input for number of bins
     shiny::sidebarLayout(
       shiny::sidebarPanel(
-        shiny::sliderInput('r','Correlation',min = -1,max = 1,step = 0.05, value = 0.7),
-        shiny::sliderInput('lims','Set cutoff',min = -4,max = 4,step = 0.05, value = c(-3,3)),
-        shiny::numericInput('n','N',value = 200, min = 4, step = 1)
+        shiny::sliderInput("r", "Correlation", min = -1, max = 1, step = 0.05, value = 0.7),
+        shiny::sliderInput("lims", "Set cutoff", min = -4, max = 4, step = 0.05, value = c(-3, 3)),
+        shiny::numericInput("n", "N", value = 200, min = 4, step = 1)
       ),
 
       # Show a plot of the generated distribution
@@ -158,7 +164,6 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
   # Define server logic required to draw a histogram
   server <- function(input, output) {
-
     ## make data ##
     corr_data <- shiny::reactive({
       as.data.frame(MASS::mvrnorm(
@@ -171,11 +176,11 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
 
     data <- shiny::reactive({
-      df <- .add_corr(corr_data(),input$r)
+      df <- .add_corr(corr_data(), input$r)
 
       df$in_range <-
         input$lims[1] < df[[1]] &
-        df[[1]] < input$lims[2]
+          df[[1]] < input$lims[2]
 
       df
     })
@@ -183,25 +188,29 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     ## plot 1 ##
     output$thePlot <- shiny::renderPlot({
       m1 <- stats::lm(V2 ~ V1, data())
-      rr1 <- stats::cor(data()[,1:2])[2]
+      rr1 <- stats::cor(data()[, 1:2])[2]
       se1 <- stats::sd(stats::residuals(m1))
       b1 <- stats::coef(m1)[2]
 
-      m2 <- stats::lm(V2 ~ V1, data()[data()$in_range,1:2])
-      rr2 <- stats::cor(data()[data()$in_range,1:2])[2]
+      m2 <- stats::lm(V2 ~ V1, data()[data()$in_range, 1:2])
+      rr2 <- stats::cor(data()[data()$in_range, 1:2])[2]
       se2 <- stats::sd(stats::residuals(m2))
       b2 <- stats::coef(m2)[2]
 
 
       p1 <- ggplot2::ggplot(data(), ggplot2::aes(.data$V1, .data$V2, color = .data$in_range)) +
-        ggplot2::scale_color_manual(values = c('red','blue')) +
-        ggplot2::labs(title = paste0("r = ", round(rr1, 2)),
-                      subtitle = paste0("b = ", round(b1, 3) ,", RMSE = ", round(se1, 2)))
+        ggplot2::scale_color_manual(values = c("red", "blue")) +
+        ggplot2::labs(
+          title = paste0("r = ", round(rr1, 2)),
+          subtitle = paste0("b = ", round(b1, 3), ", RMSE = ", round(se1, 2))
+        )
 
 
-      p2 <- ggplot2::ggplot(data()[data()$in_range,], ggplot2::aes(.data$V1, .data$V2)) +
-        ggplot2::labs(title = paste0("Truncated r = ", round(rr2, 2)),
-                      subtitle = paste0("b = ", round(b2, 3) ,", RMSE = ", round(se2, 2)))
+      p2 <- ggplot2::ggplot(data()[data()$in_range, ], ggplot2::aes(.data$V1, .data$V2)) +
+        ggplot2::labs(
+          title = paste0("Truncated r = ", round(rr2, 2)),
+          subtitle = paste0("b = ", round(b2, 3), ", RMSE = ", round(se2, 2))
+        )
 
       p1 / p2 & ploting_list
     })
@@ -211,7 +220,7 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
   shiny::runApp(list(ui = ui, server = server))
 }
 
-.demo_berksons_paradox <- function(){
+.demo_berksons_paradox <- function() {
   .check_namespace("shiny", "MASS", "ggplot2")
 
   ui <- shiny::fluidPage(
@@ -222,21 +231,24 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     # Sidebar with a slider input for number of bins
     shiny::sidebarLayout(
       shiny::sidebarPanel(
-        shiny::sliderInput('r','True Slope',min = -1,max = 1,step = 0.05, value = 0.3),
-        shiny::numericInput('n','N',value = 1000, min = 4, step = 1),
-        shiny::selectInput("cuttype", "Cutoff Type",
-                           c("Independent" = "independent",
-                             "Sum" = "joint")),
+        shiny::sliderInput("r", "True Slope", min = -1, max = 1, step = 0.05, value = 0.3),
+        shiny::numericInput("n", "N", value = 1000, min = 4, step = 1),
+        shiny::selectInput(
+          "cuttype", "Cutoff Type",
+          c(
+            "Independent" = "independent",
+            "Sum" = "joint"
+          )
+        ),
         shiny::conditionalPanel(
           condition = "input.cuttype == 'independent'",
-          shiny::sliderInput('xcutoff','Cutoff on X',min = -4,max = 4,step = 0.1, value = 1),
-          shiny::sliderInput('ycutoff','Cutoff on Y',min = -4,max = 4,step = 0.1, value = 1)
+          shiny::sliderInput("xcutoff", "Cutoff on X", min = -4, max = 4, step = 0.1, value = 1),
+          shiny::sliderInput("ycutoff", "Cutoff on Y", min = -4, max = 4, step = 0.1, value = 1)
         ),
         shiny::conditionalPanel(
           condition = "input.cuttype == 'joint'",
-          shiny::sliderInput('jointsum','Cuttoff on X + Y',min = -4,max = 4,step = 0.1, value = 0)
+          shiny::sliderInput("jointsum", "Cuttoff on X + Y", min = -4, max = 4, step = 0.1, value = 0)
         )
-
       ),
 
       # Show a plot of the generated distribution
@@ -248,7 +260,6 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
 
   # Define server logic required to draw a histogram
   server <- function(input, output) {
-
     ## make data ##
     data <- shiny::reactive({
       as.data.frame(MASS::mvrnorm(
@@ -263,10 +274,10 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
     output$outPlot <- shiny::renderPlot({
       plot_data <- .add_corr(data(), input$r)
 
-      if (input$cuttype == 'independent') {
+      if (input$cuttype == "independent") {
         plot_data$is_in <-
           plot_data$V1 > input$xcutoff |
-          plot_data$V2 > input$ycutoff
+            plot_data$V2 > input$ycutoff
       } else {
         plot_data$is_in <-
           plot_data$V1 + plot_data$V2 > input$jointsum
@@ -281,27 +292,27 @@ stat_demo_apps <- function(demo = c("paired ttest", "truncated correlation", "be
       ggplot2::ggplot(plot_data, ggplot2::aes(.data$V1, .data$V2, color = .data$is_in)) +
         ggplot2::geom_point(alpha = 0.4, shape = 16) +
         ggplot2::geom_smooth(ggplot2::aes(group = 1),
-                             formula = y ~ x,
-                             color = "blue2",
-                             method = "lm", se = TRUE) +
-        ggplot2::geom_smooth(ggplot2::aes(group = 1), data = cut_data,
-                             formula = y ~ x,
-                             color = "red2",
-                             method = "lm", se = TRUE) +
-
-
-        ggplot2::scale_color_manual(values = c('black','red')) +
+          formula = y ~ x,
+          color = "blue2",
+          method = "lm", se = TRUE
+        ) +
+        ggplot2::geom_smooth(ggplot2::aes(group = 1),
+          data = cut_data,
+          formula = y ~ x,
+          color = "red2",
+          method = "lm", se = TRUE
+        ) +
+        ggplot2::scale_color_manual(values = c("black", "red")) +
         ggplot2::coord_cartesian(xlim = c(-4, 4), ylim = c(-3, 3)) +
         ggplot2::labs(x = "X", y = "Y") +
         ggplot2::theme_bw() +
-        ggplot2::theme(legend.position = 'none') +
+        ggplot2::theme(legend.position = "none") +
         ggplot2::labs(title = cap)
     })
   }
 
   # Run the application
   shiny::runApp(list(ui = ui, server = server))
-
 }
 
 

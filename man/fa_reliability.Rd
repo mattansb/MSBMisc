@@ -36,14 +36,13 @@ EFA <- psych::fa(Harman74.cor$cov, 4)
 fa_reliability(EFA)
 \dontshow{\}) # examplesIf}
 \dontshow{if (require("lavaan") && require("semTools")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-HS.model <- ' visual  =~ x1 + x2 + x3
+HS.model <- " visual  =~ x1 + x2 + x3
               textual =~ x4 + x5 + x6
-              speed   =~ x7 + x8 + x9 '
+              speed   =~ x7 + x8 + x9 "
 
 CFA <- lavaan::cfa(HS.model, data = lavaan::HolzingerSwineford1939)
 
 fa_reliability(CFA)
-
 \dontshow{\}) # examplesIf}
 }
 \author{

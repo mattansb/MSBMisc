@@ -69,10 +69,14 @@ mean_sd(x)
 \dontshow{if (require("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(ggplot2)
 ggplot(mtcars, aes(cyl, mpg)) +
-  stat_summary(aes(color = "Mean (SD)"), fun.data = mean_sd,
-               fun.args = list(out = "data.frame")) +
-  stat_summary(aes(color = "Median (MAD)"), fun.data = median_mad,
-               fun.args = list(out = "data.frame"),
-               position = position_nudge(x = 0.5))
+  stat_summary(aes(color = "Mean (SD)"),
+    fun.data = mean_sd,
+    fun.args = list(out = "data.frame")
+  ) +
+  stat_summary(aes(color = "Median (MAD)"),
+    fun.data = median_mad,
+    fun.args = list(out = "data.frame"),
+    position = position_nudge(x = 0.5)
+  )
 \dontshow{\}) # examplesIf}
 }

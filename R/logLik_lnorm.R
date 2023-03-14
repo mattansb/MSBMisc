@@ -31,7 +31,6 @@
 #' aics[1, "AIC"] <- AIC_lnorm(model_lnorm)
 #' aics # better!
 #'
-#'
 #' @examplesIf require("lme4")
 #' # Should support any model really... =====================
 #' model_lnorm <- lme4::lmer(log(mpg) ~ factor(cyl) + (1 | gear), mtcars, REML = FALSE)
@@ -43,7 +42,6 @@
 #'
 #' aics[1, "AIC"] <- AIC_lnorm(model_lnorm)
 #' aics # better!
-#'
 #'
 #' @export
 logLik_lnorm <- function(object, REML = FALSE) {
@@ -145,11 +143,3 @@ BIC_lnorm <- function(object, REML = FALSE) {
     length(LHS <- as.character(LHS[[1]])) >= 2L &&
     LHS[1] == "log"
 }
-
-
-
-
-
-
-
-

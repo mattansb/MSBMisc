@@ -36,7 +36,8 @@ M <- sapply(mtcars, mean)
 V <- cov(mtcars)
 
 delta_method(
-  (mpg^2)/hp, log_am = log1p(am),
+  (mpg^2) / hp,
+  log_am = log1p(am),
   .means = M, .V = V,
   return = "cor"
 )
@@ -44,11 +45,11 @@ delta_method(
 # Sobel Test ----
 
 data("mtcars")
-mod.y <- lm(mpg ~ hp + cyl, mtcars[1:5,])
-mod.m <- lm(hp ~ cyl, mtcars[1:5,])
+mod.y <- lm(mpg ~ hp + cyl, mtcars[1:5, ])
+mod.m <- lm(hp ~ cyl, mtcars[1:5, ])
 
-bhat <- c(coef(mod.y), coef(mod.m))[c(2,5)]
-Vhat <- dbind(vcov(mod.y), vcov(mod.m))[c(2,5), c(2,5)]
+bhat <- c(coef(mod.y), coef(mod.m))[c(2, 5)]
+Vhat <- dbind(vcov(mod.y), vcov(mod.m))[c(2, 5), c(2, 5)]
 
 res <- delta_method(
   hp * cyl,
@@ -60,17 +61,18 @@ res$means / res$stddev
 
 # Compare:
 (bhat[1] * bhat[2]) /
-  sqrt(bhat[1]^2 * Vhat[2,2] + bhat[2]^2 * Vhat[1,1])
+  sqrt(bhat[1]^2 * Vhat[2, 2] + bhat[2]^2 * Vhat[1, 1])
 
 # Special character will give you a bad time...
-m <- lm(mpg ~ factor(cyl), mtcars[1:5,])
+m <- lm(mpg ~ factor(cyl), mtcars[1:5, ])
 
 bhat <- coef(m)
 names(bhat) <- c("cyl4", "cyl6", "cyl8")
 V <- vcov(m)
 
 delta_method(cyl4, cyl4 + cyl6, cyl4 + cyl8,
-             .means = bhat,
-             .V = V)
+  .means = bhat,
+  .V = V
+)
 
 }

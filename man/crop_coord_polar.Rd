@@ -35,22 +35,22 @@ from \href{https://twitter.com/yjunechoe/status/1506672410208051201}{this twitte
 
 library(ggplot2)
 
-polar_plot <- ggplot(mtcars ,aes(hp, mpg)) +
+polar_plot <- ggplot(mtcars, aes(hp, mpg)) +
   geom_point() +
   geom_smooth(method = "lm") +
   expand_limits(y = c(0, 60)) +
   coord_polar(start = 0, theta = "y")
 
 crop_coord_polar(polar_plot, end = pi)
-crop_coord_polar(polar_plot, end = pi/2)
+crop_coord_polar(polar_plot, end = pi / 2)
 crop_coord_polar(polar_plot, start = 3 * pi / 2, end = pi / 2)
 
 
 
 # Also works with facets!
 d <- data.frame(
-  x = seq(1, 7, length = 6*5),
-  y = rnorm(6*5),
+  x = seq(1, 7, length = 6 * 5),
+  y = rnorm(6 * 5),
   g = rep(letters[1:6], each = 5)
 )
 
@@ -67,8 +67,7 @@ start <- seq(0, 5) * 2 * pi / 6
 end <- start + start[2]
 
 crop_coord_polar(polar_plot_facet,
-                 start = start, end = end)
-
-
+  start = start, end = end
+)
 \dontshow{\}) # examplesIf}
 }

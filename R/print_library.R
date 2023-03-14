@@ -9,7 +9,8 @@
 #'
 #' @examples
 #' print_library(afex, tidyverse, emmeans, MASS,
-#'               .load = FALSE)
+#'   .load = FALSE
+#' )
 #'
 #' @export
 #'
@@ -33,10 +34,12 @@ print_library <-
 
     vs <- ""
     if (.version) {
-      vs <- pkgs |> lapply(\(x){
-        tryCatch(utils::packageVersion(x),
-                 error = function(e) "")
-      }) |>
+      vs <- pkgs |>
+        lapply(\(x){
+          tryCatch(utils::packageVersion(x),
+            error = function(e) ""
+          )
+        }) |>
         sapply(as.character)
 
       vs <- (max(nchar(pkgs)) - nchar(pkgs)) |>
