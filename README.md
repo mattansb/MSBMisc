@@ -20,5 +20,5 @@ You can install the package from [my
 *R-Universe*](https://mattansb.r-universe.dev/):
 
 ``` r
-install.packages('MSBMisc', repos = 'https://mattansb.r-universe.dev')
+install.packages("MSBMisc", repos = "https://mattansb.r-universe.dev")
 ```
