@@ -119,7 +119,6 @@ LL/AIC/BIC values.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> model_norm   4 170.8753</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> model_pois   3 173.5910</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Should support any model really... =====================</span></span></span>
 <span class="r-in"><span><span class="va">model_lnorm</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">gear</span><span class="op">)</span>, <span class="va">mtcars</span>, REML <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> boundary (singular) fit: see help('isSingular')</span>
@@ -141,7 +140,6 @@ LL/AIC/BIC values.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> model_lnorm  5 170.2152</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> model_norm   5 172.8753</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> model_pois   4 175.5910</span>
-<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

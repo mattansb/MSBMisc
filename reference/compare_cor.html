@@ -131,8 +131,10 @@ between the two groups.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Test independent correlations -----------------</span></span></span>
 <span class="r-in"><span><span class="co">## Different data sets</span></span></span>
-<span class="r-in"><span><span class="fu">compare_cor</span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, r1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>            data2 <span class="op">=</span> <span class="va">iris</span>, r2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">compare_cor</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>, r1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"hp"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  data2 <span class="op">=</span> <span class="va">iris</span>, r2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Correlations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                Variables          r   CI     CI_low     CI_high</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> r1                   mpg with hp (data1) -0.7761684 0.95 -0.8852686 -0.58609941</span>
@@ -154,7 +156,6 @@ between the two groups.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                      Test         z        p</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Test of difference between two independent correlations 0.2295313 0.818456</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -129,8 +129,10 @@ php.guf() give's Lenth's grand unified formula for post hoc power."><!-- mathjax
 <span class="r-in"><span>  df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">50</span>, <span class="fl">200</span>, <span class="fl">1000</span>, <span class="cn">Inf</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>PHP <span class="op">=</span> <span class="fu">php.t</span><span class="op">(</span>p <span class="op">=</span> <span class="va">p</span>, df <span class="op">=</span> <span class="va">df</span>, one.tailed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a></span><span class="op">(</span>direction <span class="op">=</span> <span class="st">"wide"</span>,</span></span>
-<span class="r-in"><span>                 idvar <span class="op">=</span> <span class="st">"df"</span>, timevar <span class="op">=</span> <span class="st">"p"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    direction <span class="op">=</span> <span class="st">"wide"</span>,</span></span>
+<span class="r-in"><span>    idvar <span class="op">=</span> <span class="st">"df"</span>, timevar <span class="op">=</span> <span class="st">"p"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      df PHP.0.001  PHP.0.01  PHP.0.05   PHP.0.1  PHP.0.25 PHP.0.5   PHP.0.75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     1 1.0000000 0.9999994 0.6766947 0.3698439 0.1347904    0.05 0.01048100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8     2 1.0000000 0.9910253 0.5995969 0.3570984 0.1434485    0.05 0.01178402</span>
@@ -149,8 +151,10 @@ php.guf() give's Lenth's grand unified formula for post hoc power."><!-- mathjax
 <span class="r-in"><span>  df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">50</span>, <span class="fl">200</span>, <span class="fl">1000</span>, <span class="cn">Inf</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>PHP <span class="op">=</span> <span class="fu">php.t</span><span class="op">(</span>p <span class="op">=</span> <span class="va">p</span>, df <span class="op">=</span> <span class="va">df</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a></span><span class="op">(</span>direction <span class="op">=</span> <span class="st">"wide"</span>,</span></span>
-<span class="r-in"><span>                 idvar <span class="op">=</span> <span class="st">"df"</span>, timevar <span class="op">=</span> <span class="st">"p"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    direction <span class="op">=</span> <span class="st">"wide"</span>,</span></span>
+<span class="r-in"><span>    idvar <span class="op">=</span> <span class="st">"df"</span>, timevar <span class="op">=</span> <span class="st">"p"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      df PHP.0.001  PHP.0.01  PHP.0.05   PHP.0.1  PHP.0.25    PHP.0.5   PHP.0.75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     1 1.0000000 1.0000000 0.6811954 0.3796619 0.1505611 0.07298889 0.05421092</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8     2 1.0000000 0.9921973 0.6147232 0.3730893 0.1619273 0.08037867 0.05615497</span>
@@ -170,8 +174,10 @@ php.guf() give's Lenth's grand unified formula for post hoc power."><!-- mathjax
 <span class="r-in"><span>  df1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>PHP <span class="op">=</span> <span class="fu">php.F</span><span class="op">(</span>p <span class="op">=</span> <span class="va">p</span>, df1 <span class="op">=</span> <span class="va">df1</span>, df2 <span class="op">=</span> <span class="va">df2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a></span><span class="op">(</span>direction <span class="op">=</span> <span class="st">"wide"</span>,</span></span>
-<span class="r-in"><span>                 idvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"df1"</span>, <span class="st">"df2"</span><span class="op">)</span>, timevar <span class="op">=</span> <span class="st">"p"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/reshape.html" class="external-link">reshape</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    direction <span class="op">=</span> <span class="st">"wide"</span>,</span></span>
+<span class="r-in"><span>    idvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"df1"</span>, <span class="st">"df2"</span><span class="op">)</span>, timevar <span class="op">=</span> <span class="st">"p"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      df2 df1 PHP.0.001  PHP.0.01  PHP.0.05   PHP.0.1  PHP.0.25    PHP.0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1      1   2 1.0000000 0.9999994 0.6826910 0.3829361 0.1587031 0.08176220</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8      2   2 1.0000000 0.9932708 0.6325960 0.3942533 0.1823274 0.09633205</span>
@@ -246,7 +252,6 @@ php.guf() give's Lenth's grand unified formula for post hoc power."><!-- mathjax
 <span class="r-out co"><span class="r-pr">#&gt;</span> 232 0.34647984</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 239 0.36054167</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 246 0.36421246</span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
