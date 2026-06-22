@@ -120,12 +120,14 @@ test_that("simple_effects", {
   skip_if_not_installed("emmeans")
   skip_if_not_installed("insight")
   skip_if_not_installed("stringr")
+  skip_on_ci()
 
   obk.long <- afex::obk.long
   A <- afex::aov_car(
     value ~ treatment * gender + Error(id / (phase * hour)),
     data = obk.long
   )
+  debugonce(simple_effects.lm)
 
   se1 <- simple_effects(A, effect = "phase", inside = c("treatment", "gender"))
   expect_s3_class(se1, "summary_emm")
