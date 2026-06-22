@@ -4,7 +4,7 @@ if (FALSE) {
 }
 
 test_that("print_library", {
-  expect_match(print_library(MSBMisc), "0.0.1.14", fixed = TRUE)
+  expect_match(print_library(MSBMisc), "0.0.1.15", fixed = TRUE)
   expect_match(print_library(MSBMisc), "library", fixed = TRUE)
   expect_match(print_require(MSBMisc), "require", fixed = TRUE)
 })
