@@ -32,11 +32,19 @@ fa_reliability <- function(x, ...) {
 
 #' @export
 #' @rdname fa_reliability
-fa_reliability.fa <- function(x, keys = NULL, threshold = 0, labels = NULL, ...) {
+fa_reliability.fa <- function(
+  x,
+  keys = NULL,
+  threshold = 0,
+  labels = NULL,
+  ...
+) {
   L <- unclass(x$loadings)
   r <- x$r
 
-  if (is.null(keys)) keys <- sign(L) * (abs(L) > threshold)
+  if (is.null(keys)) {
+    keys <- sign(L) * (abs(L) > threshold)
+  }
 
   out <- data.frame(
     Factor = colnames(L),

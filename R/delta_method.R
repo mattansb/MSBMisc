@@ -59,7 +59,12 @@
 #' )
 #'
 #' @export
-delta_method <- function(..., .means, .V, return = c("means", "cov", "stddev", "cor")) {
+delta_method <- function(
+  ...,
+  .means,
+  .V,
+  return = c("means", "cov", "stddev", "cor")
+) {
   if (all(diag(.V) == 1)) {
     warning("'V' should be a (co) variance matrix, but the diag is all 1s.")
   }
@@ -80,7 +85,6 @@ delta_method <- function(..., .means, .V, return = c("means", "cov", "stddev", "
   } else {
     names(g) <- g
   }
-
 
   nms1 <- paste0("\\b", names(.means), "\\b")
   nms2 <- paste0("x", seq_along(.means))
@@ -119,12 +123,17 @@ msm.deltamethod <- function(g, mean, cov, ses = TRUE) {
   }
   if ((dim(cov)[1] != n) || (dim(cov)[2] != n)) {
     stop(paste(
-      "Covariances should be a ", n, " by ", n,
+      "Covariances should be a ",
+      n,
+      " by ",
+      n,
       " matrix"
     ))
   }
   syms <- paste("x", 1:n, sep = "")
-  for (i in 1:n) assign(syms[i], mean[i])
+  for (i in 1:n) {
+    assign(syms[i], mean[i])
+  }
   gdashmu <- t(sapply(g, function(form) {
     as.numeric(attr(eval(stats::deriv(form, syms)), "gradient"))
   }))
@@ -136,7 +145,6 @@ msm.deltamethod <- function(g, mean, cov, ses = TRUE) {
     new.covar
   }
 }
-
 
 # # gives similar results to msms....
 # car::deltaMethod(object = sapply(mtcars, mean),

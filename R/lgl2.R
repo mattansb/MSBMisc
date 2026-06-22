@@ -76,8 +76,6 @@ geq <- function(...) {
 }
 
 
-
-
 # Opers -------------------------
 
 #' @export
@@ -118,7 +116,6 @@ geq <- function(...) {
 
 # Internals -------------------------
 
-
 #' @keywords internal
 .vect_lgl_comps <- function(..., type) {
   x <- list(...)
@@ -148,6 +145,5 @@ geq <- function(...) {
   attr(out, "last_y ") <- y
   out
 }
-
 
 # Examples -----------------------

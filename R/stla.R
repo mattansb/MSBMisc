@@ -88,9 +88,7 @@ bracketifySelection <- function() {
 }
 
 
-
 # Utils -------------------------------------------------------------------
-
 
 .prefix_from_clipboard <- function(prefix = "#> ") {
   .check_namespace("clipr")

@@ -45,7 +45,8 @@ R2 <- function(pred, obs, type = 1, na.rm = TRUE) {
     obs <- obs[good]
   }
 
-  f <- switch(as.character(type),
+  f <- switch(
+    as.character(type),
     "MSE" = ,
     "1" = .r2_1,
     "2" = .r2_2,

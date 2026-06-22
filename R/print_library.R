@@ -15,10 +15,7 @@
 #' @export
 #'
 print_library <-
-  function(...,
-           .character.only = FALSE,
-           .version = TRUE,
-           .load = TRUE) {
+  function(..., .character.only = FALSE, .version = TRUE, .load = TRUE) {
     cl <- match.call()
     type <- ifelse(grepl("require$", deparse(cl[[1]])), "require", "library")
 
@@ -29,16 +26,18 @@ print_library <-
     }
 
     if (.load) {
-      suppressMessages(suppressWarnings(suppressPackageStartupMessages(sapply(pkgs, require, character.only = TRUE))))
+      suppressMessages(suppressWarnings(suppressPackageStartupMessages(sapply(
+        pkgs,
+        require,
+        character.only = TRUE
+      ))))
     }
 
     vs <- ""
     if (.version) {
       vs <- pkgs |>
-        lapply(\(x){
-          tryCatch(utils::packageVersion(x),
-            error = function(e) ""
-          )
+        lapply(\(x) {
+          tryCatch(utils::packageVersion(x), error = function(e) "")
         }) |>
         sapply(as.character)
 

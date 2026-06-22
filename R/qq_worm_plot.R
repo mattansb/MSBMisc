@@ -30,9 +30,7 @@
 #'
 #' @export
 qq_worm_plot <-
-  function(x,
-           distribution = "norm",
-           ...) {
+  function(x, distribution = "norm", ...) {
     .check_namespace("ggplot2", "qqplotr")
 
     dparams <- list(...)
@@ -42,7 +40,19 @@ qq_worm_plot <-
     }
 
     ggplot2::ggplot(mapping = ggplot2::aes(sample = x)) +
-      qqplotr::stat_qq_band(detrend = TRUE, distribution = distribution, dparams = dparams) +
-      qqplotr::stat_qq_line(detrend = TRUE, distribution = distribution, dparams = dparams) +
-      qqplotr::stat_qq_point(detrend = TRUE, distribution = distribution, dparams = dparams)
+      qqplotr::stat_qq_band(
+        detrend = TRUE,
+        distribution = distribution,
+        dparams = dparams
+      ) +
+      qqplotr::stat_qq_line(
+        detrend = TRUE,
+        distribution = distribution,
+        dparams = dparams
+      ) +
+      qqplotr::stat_qq_point(
+        detrend = TRUE,
+        distribution = distribution,
+        dparams = dparams
+      )
   }

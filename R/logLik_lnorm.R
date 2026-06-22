@@ -51,7 +51,9 @@ logLik_lnorm <- function(object, REML = FALSE) {
     "Model is not log-normal" = .is_lnorm(object)
   )
 
-  if (REML) warning("logLik with `REML = TRUE` not supported. Setting `REML = FALSE`")
+  if (REML) {
+    warning("logLik with `REML = TRUE` not supported. Setting `REML = FALSE`")
+  }
 
   ll <- stats::logLik(object)
 
@@ -60,7 +62,8 @@ logLik_lnorm <- function(object, REML = FALSE) {
     meanlog = stats::fitted(object),
     sdlog = stats::sigma(object),
     log = TRUE
-  ) |> sum()
+  ) |>
+    sum()
 
   ll
 }
@@ -121,17 +124,17 @@ BIC_lnorm <- function(object, REML = FALSE) {
 #   return(lnorm)
 # }
 
-
 # Utils -------------------------------------------------------------------
-
-
 
 #' @keywords internal
 .is_lnorm <- function(object, check_weights = TRUE) {
   .check_namespace("insight")
 
   if (check_weights && !is.null(insight::get_weights(object))) {
-    stop("Oops, model has weights... Mattan was too lazy to solve this", call. = FALSE)
+    stop(
+      "Oops, model has weights... Mattan was too lazy to solve this",
+      call. = FALSE
+    )
   }
 
   fam <- insight::get_family(object)

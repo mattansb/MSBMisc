@@ -44,8 +44,7 @@
 #' compare_cor(mtcars, r1 = c("mpg", "hp"), by = "am")
 #'
 #' @export
-compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL,
-                        ci = 0.95) {
+compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL, ci = 0.95) {
   .check_namespace("psych", "correlation")
 
   if (!is.null(by)) {
@@ -96,8 +95,16 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL,
         r23 = r[2, 3],
         r24 = r[2, 4]
       )
-      Corr1 <- data.frame(r = r12, CI = ci, correlation::cor_to_ci(r12, n, ci = ci))
-      Corr2 <- data.frame(r = r34, CI = ci, correlation::cor_to_ci(r34, n, ci = ci))
+      Corr1 <- data.frame(
+        r = r12,
+        CI = ci,
+        correlation::cor_to_ci(r12, n, ci = ci)
+      )
+      Corr2 <- data.frame(
+        r = r34,
+        CI = ci,
+        correlation::cor_to_ci(r34, n, ci = ci)
+      )
     } else {
       # One variable in common
       v2 <- intersect(r1, r2)
@@ -111,8 +118,16 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL,
         # Other cors
         r23 = cor(data[[v2]], data[[v3]])
       )
-      Corr1 <- data.frame(r = r12, CI = ci, correlation::cor_to_ci(r12, n, ci = ci))
-      Corr2 <- data.frame(r = r13, CI = ci, correlation::cor_to_ci(r13, n, ci = ci))
+      Corr1 <- data.frame(
+        r = r12,
+        CI = ci,
+        correlation::cor_to_ci(r12, n, ci = ci)
+      )
+      Corr2 <- data.frame(
+        r = r13,
+        CI = ci,
+        correlation::cor_to_ci(r13, n, ci = ci)
+      )
     }
   } else {
     stopifnot(all(r2 %in% colnames(data2)))
@@ -125,14 +140,22 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL,
     n2 <- nrow(data2)
 
     out <- psych::r.test(
-      n = n, n2 = n2,
+      n = n,
+      n2 = n2,
       r12 = r12 <- cor(data)[1, 2],
       r34 = r34 <- cor(data2)[1, 2]
     )
-    Corr1 <- data.frame(r = r12, CI = ci, correlation::cor_to_ci(r12, n, ci = ci))
-    Corr2 <- data.frame(r = r34, CI = ci, correlation::cor_to_ci(r34, n2, ci = ci))
+    Corr1 <- data.frame(
+      r = r12,
+      CI = ci,
+      correlation::cor_to_ci(r12, n, ci = ci)
+    )
+    Corr2 <- data.frame(
+      r = r34,
+      CI = ci,
+      correlation::cor_to_ci(r34, n2, ci = ci)
+    )
   }
-
 
   res <- rbind(Corr1, Corr2)
   rownames(res) <- paste0("r", 1:2)

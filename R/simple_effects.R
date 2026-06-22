@@ -45,7 +45,10 @@ simple_effects <- function(model, effect, inside, ...) {
 simple_effects.lm <- function(model, effect, inside, ...) {
   .check_namespace("insight", "emmeans", "stringr")
 
-  stopifnot("Effect must me a char of length 1." = is.character(effect) && length(effect) == 1L)
+  stopifnot(
+    "Effect must me a char of length 1." = is.character(effect) &&
+      length(effect) == 1L
+  )
 
   if (missing(effect)) {
     stop("'effect' must be specified.")
@@ -75,7 +78,6 @@ simple_effects.lm <- function(model, effect, inside, ...) {
   jt[["model term"]] <- NULL
   class(jt) <- c("summary_emm", class(jt))
 
-
   cl <- quote(stats::update(jt))
   cl$by <- if (length(inside) > 1L) utils::tail(inside, -1)
   cl$mesg <- paste0(
@@ -87,7 +89,9 @@ simple_effects.lm <- function(model, effect, inside, ...) {
   )
   jt <- eval(cl)
 
-  if (length(inside) == 1L) jt <- stats::update(jt, by = NULL)
+  if (length(inside) == 1L) {
+    jt <- stats::update(jt, by = NULL)
+  }
 
   jt
 }

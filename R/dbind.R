@@ -29,7 +29,8 @@ dbind <- function(..., .fill = NULL) {
 
   stopifnot(
     "All inputs must be matrices." = all(sapply(mats, is.matrix)),
-    "All inputs must be of same mode." = length(unique(sapply(mats, mode))) == 1L
+    "All inputs must be of same mode." = length(unique(sapply(mats, mode))) ==
+      1L
   )
 
   n.row <- sapply(mats, nrow)
@@ -41,9 +42,13 @@ dbind <- function(..., .fill = NULL) {
   start.rows <- end.rows - n.row + 1
   start.cols <- end.cols - n.col + 1
 
-  if (is.null(.fill)) .fill <- vector(mode = mode(mats[[1]]), length = 1)
-  out <- matrix(.fill,
-    nrow = utils::tail(end.rows, 1), ncol = utils::tail(end.cols, 1),
+  if (is.null(.fill)) {
+    .fill <- vector(mode = mode(mats[[1]]), length = 1)
+  }
+  out <- matrix(
+    .fill,
+    nrow = utils::tail(end.rows, 1),
+    ncol = utils::tail(end.cols, 1),
     dimnames = list(1:sum(n.row), 1:sum(n.col))
   )
   for (m in seq_along(mats)) {

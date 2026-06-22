@@ -75,7 +75,13 @@
 #' # get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)
 #'
 #' @export
-get_data_for_grid <- function(grid, model, residualize = FALSE, collapse_by = FALSE, ...) {
+get_data_for_grid <- function(
+  grid,
+  model,
+  residualize = FALSE,
+  collapse_by = FALSE,
+  ...
+) {
   if (getOption("get_data_for_grid.warn", TRUE)) {
     warning("'get_data_for_grid()' is experimental.", call. = FALSE)
     options(get_data_for_grid.warn = FALSE)
@@ -89,8 +95,14 @@ get_data_for_grid <- function(grid, model, residualize = FALSE, collapse_by = FA
 #' @export
 #' @rdname get_data_for_grid
 #' @param pred_name Name of column that has the predictions in the data grid
-get_data_for_grid.data.frame <- function(grid, model, residualize = FALSE, collapse_by = FALSE,
-                                         pred_name, ...) {
+get_data_for_grid.data.frame <- function(
+  grid,
+  model,
+  residualize = FALSE,
+  collapse_by = FALSE,
+  pred_name,
+  ...
+) {
   data <- insight::get_data(model)
 
   if (isTRUE(residualize)) {
@@ -101,7 +113,6 @@ get_data_for_grid.data.frame <- function(grid, model, residualize = FALSE, colla
     data <- collapse_by_group(data, grid, model, collapse_by, pred_name)
   }
 
-
   data
 }
 
@@ -110,19 +121,30 @@ get_data_for_grid.data.frame <- function(grid, model, residualize = FALSE, colla
 #' @rdname get_data_for_grid
 #' @param protect_names Logical, if `TRUE`, preserves column names from the
 #'   `ggeffects` object.
-get_data_for_grid.ggeffects <- function(grid, model, residualize = FALSE, collapse_by = FALSE,
-                                        protect_names = TRUE, ...) {
+get_data_for_grid.ggeffects <- function(
+  grid,
+  model,
+  residualize = FALSE,
+  collapse_by = FALSE,
+  protect_names = TRUE,
+  ...
+) {
   new_d <- as.data.frame(grid)
-  new_d <- new_d[colnames(new_d) %in% c("x", "group", "facet", "panel", "predicted")]
+  new_d <- new_d[
+    colnames(new_d) %in% c("x", "group", "facet", "panel", "predicted")
+  ]
 
-  colnames(new_d)[colnames(new_d) %in% c("x", "group", "facet", "panel")] <- attr(grid, "terms")
+  colnames(new_d)[
+    colnames(new_d) %in% c("x", "group", "facet", "panel")
+  ] <- attr(grid, "terms")
 
   if (missing(model)) {
     model <- get(attr(grid, "model.name"), envir = parent.frame())
   }
 
   points <- get_data_for_grid.data.frame(
-    new_d, model,
+    new_d,
+    model,
     residualize = residualize,
     collapse_by = collapse_by,
     pred_name = "predicted"
@@ -142,8 +164,14 @@ get_data_for_grid.ggeffects <- function(grid, model, residualize = FALSE, collap
 
 #' @export
 #' @rdname get_data_for_grid
-get_data_for_grid.emmGrid <- function(grid, model, residualize = FALSE, collapse_by = FALSE,
-                                      protect_names = TRUE, ...) {
+get_data_for_grid.emmGrid <- function(
+  grid,
+  model,
+  residualize = FALSE,
+  collapse_by = FALSE,
+  protect_names = TRUE,
+  ...
+) {
   .check_namespace("emmeans")
 
   grid <- emmeans::regrid(grid, transform = "response")
@@ -151,7 +179,8 @@ get_data_for_grid.emmGrid <- function(grid, model, residualize = FALSE, collapse
   pred_name <- grid@misc[["estName"]]
 
   get_data_for_grid.data.frame(
-    s[c(grid@roles[["predictors"]], pred_name)], model,
+    s[c(grid@roles[["predictors"]], pred_name)],
+    model,
     residualize = residualize,
     collapse_by = collapse_by,
     pred_name = pred_name
@@ -161,8 +190,13 @@ get_data_for_grid.emmGrid <- function(grid, model, residualize = FALSE, collapse
 
 #' @export
 #' @rdname get_data_for_grid
-get_data_for_grid.predictions <- function(grid, model, residualize = FALSE, collapse_by = FALSE,
-                                          ...) {
+get_data_for_grid.predictions <- function(
+  grid,
+  model,
+  residualize = FALSE,
+  collapse_by = FALSE,
+  ...
+) {
   stopifnot("Type must be 'response'." = attr(grid, "type") == "response")
 
   if (missing(model)) {
@@ -170,7 +204,8 @@ get_data_for_grid.predictions <- function(grid, model, residualize = FALSE, coll
   }
 
   get_data_for_grid.data.frame(
-    grid[c(unlist(attr(grid, "variables")), "predicted")], model,
+    grid[c(unlist(attr(grid, "variables")), "predicted")],
+    model,
     residualize = residualize,
     collapse_by = collapse_by,
     pred_name = "predicted"
@@ -179,7 +214,6 @@ get_data_for_grid.predictions <- function(grid, model, residualize = FALSE, coll
 
 
 # Resid and collapse ------------------------------------------------------
-
 
 #' @keywords internal
 residualize_over_grid <- function(data, grid, model, pred_name) {
@@ -191,7 +225,10 @@ residualize_over_grid <- function(data, grid, model, pred_name) {
 
   is_fixed <- sapply(grid, function(x) length(unique(x))) == 1
   grid <- grid[, !is_fixed, drop = FALSE]
-  other_columns <- data[setdiff(colnames(data), c(insight::find_response(model), colnames(grid)))]
+  other_columns <- data[setdiff(
+    colnames(data),
+    c(insight::find_response(model), colnames(grid))
+  )]
   data <- data[intersect(colnames(data), colnames(grid))]
 
   if (!.is_grid(grid)) {
@@ -202,7 +239,9 @@ residualize_over_grid <- function(data, grid, model, pred_name) {
   best_match <- NULL
 
   for (p in colnames(data)) {
-    if (is.factor(data[[p]]) || is.logical(data[[p]]) || is.character(data[[p]])) {
+    if (
+      is.factor(data[[p]]) || is.logical(data[[p]]) || is.character(data[[p]])
+    ) {
       grid[[p]] <- as.character(grid[[p]])
       data[[p]] <- as.character(data[[p]])
     } else {
@@ -217,7 +256,10 @@ residualize_over_grid <- function(data, grid, model, pred_name) {
   idx <- apply(best_match, 2, which)
   idx <- sapply(idx, "[", 1)
 
-  res <- stats::residuals(model, type = if (inherits(model, "glmmTMB")) "response" else "working")
+  res <- stats::residuals(
+    model,
+    type = if (inherits(model, "glmmTMB")) "response" else "working"
+  )
 
   points <- grid[idx, , drop = FALSE]
   points[[pred_name]] <- inv_fun(fun_link(predicted[idx]) + res) # add errors
@@ -238,8 +280,11 @@ collapse_by_group <- function(data, grid, model, collapse_by, pred_name) {
 
   if (length(collapse_by) > 1) {
     collapse_by <- collapse_by[1]
-    warning("More than one random grouping variable found.",
-      "\n  Using `", collapse_by, "`.",
+    warning(
+      "More than one random grouping variable found.",
+      "\n  Using `",
+      collapse_by,
+      "`.",
       call. = FALSE
     )
   }
@@ -248,14 +293,21 @@ collapse_by_group <- function(data, grid, model, collapse_by, pred_name) {
     stop("Could not find `", collapse_by, "` column.", call. = FALSE)
   }
 
-  if ((resp_name <- insight::find_response(model)) != pred_name && resp_name %in% colnames(data)) {
+  if (
+    (resp_name <- insight::find_response(model)) != pred_name &&
+      resp_name %in% colnames(data)
+  ) {
     colnames(data)[colnames(data) == resp_name] <- pred_name
   }
 
   grid <- grid[lengths(lapply(grid, unique)) > 1]
-  data <- data[, colnames(data) %in% c(colnames(grid), pred_name, collapse_by), drop = FALSE]
+  data <- data[,
+    colnames(data) %in% c(colnames(grid), pred_name, collapse_by),
+    drop = FALSE
+  ]
 
-  agg_data <- stats::aggregate(data[[pred_name]],
+  agg_data <- stats::aggregate(
+    data[[pred_name]],
     by = data[colnames(data) != pred_name],
     FUN = mean
   )
@@ -264,7 +316,6 @@ collapse_by_group <- function(data, grid, model, collapse_by, pred_name) {
 
   agg_data
 }
-
 
 
 # Utils -------------------------------------------------------------------

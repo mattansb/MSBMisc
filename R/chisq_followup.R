@@ -26,23 +26,28 @@
 #' chisq_residual(res)
 #'
 #' @export
-chisq_pairwise <- function(Xsq,
-                           population_in_row = TRUE,
-                           adjust = stats::p.adjust.methods,
-                           effect_size = c("V", "phi"),
-                           ci = 0.95,
-                           ...) {
+chisq_pairwise <- function(
+  Xsq,
+  population_in_row = TRUE,
+  adjust = stats::p.adjust.methods,
+  effect_size = c("V", "phi"),
+  ci = 0.95,
+  ...
+) {
   adjust <- match.arg(adjust)
   effect_size <- match.arg(effect_size)
 
   tbl <- Xsq$observed
 
-  if (!population_in_row) tbl <- t(tbl)
+  if (!population_in_row) {
+    tbl <- t(tbl)
+  }
 
   popsNames <- rownames(tbl)
 
   if (have_effectsize <- .check_namespace("effectsize", quietly = TRUE)) {
-    esf <- switch(effect_size,
+    esf <- switch(
+      effect_size,
       V = effectsize::chisq_to_cramers_v,
       phi = effectsize::chisq_to_phi
     )
@@ -79,18 +84,16 @@ chisq_pairwise <- function(Xsq,
 
 #' @rdname chisq_pairwise
 #' @export
-chisq_residual <- function(Xsq,
-                           adjust = stats::p.adjust.methods,
-                           res_type = c("pearson", "standardized"),
-                           ci = 0.95) {
+chisq_residual <- function(
+  Xsq,
+  adjust = stats::p.adjust.methods,
+  res_type = c("pearson", "standardized"),
+  ci = 0.95
+) {
   adjust <- match.arg(adjust)
   res_type <- match.arg(res_type)
 
-
-  resids <- switch(res_type,
-    pearson = Xsq$residuals,
-    standardized = Xsq$stdres
-  )
+  resids <- switch(res_type, pearson = Xsq$residuals, standardized = Xsq$stdres)
 
   Obs <- Xsq$observed
 

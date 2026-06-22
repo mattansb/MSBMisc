@@ -31,11 +31,20 @@
 #'   )
 #'
 #' @export
-seq_range <- function(x, length.out = NULL, by = NULL, along.with = NULL,
-                      na.rm = TRUE, padding = 0.05) {
+seq_range <- function(
+  x,
+  length.out = NULL,
+  by = NULL,
+  along.with = NULL,
+  na.rm = TRUE,
+  padding = 0.05
+) {
   match.call()
 
-  stopifnot("'padding' must be a positive scalar." = padding >= 0 && length(padding) == 1L)
+  stopifnot(
+    "'padding' must be a positive scalar." = padding >= 0 &&
+      length(padding) == 1L
+  )
   range <- range(x, na.rm = na.rm)
   e <- diff(range) * padding
   range <- range + c(-1, 1) * e
@@ -46,8 +55,14 @@ seq_range <- function(x, length.out = NULL, by = NULL, along.with = NULL,
 
 #' @export
 #' @rdname seq_range
-seq_quantile <- function(x, probs, length.out = NULL, by = NULL, along.with = NULL,
-                         na.rm = TRUE) {
+seq_quantile <- function(
+  x,
+  probs,
+  length.out = NULL,
+  by = NULL,
+  along.with = NULL,
+  na.rm = TRUE
+) {
   match.call()
   stopifnot("'probs' must be of length 2." = length(probs) == 2L)
   range <- stats::quantile(x, probs = probs, na.rm = na.rm)
@@ -58,8 +73,13 @@ seq_quantile <- function(x, probs, length.out = NULL, by = NULL, along.with = NU
 
 #' @export
 #' @rdname seq_range
-seq_IQR <- function(x, length.out = NULL, by = NULL, along.with = NULL,
-                    na.rm = TRUE) {
+seq_IQR <- function(
+  x,
+  length.out = NULL,
+  by = NULL,
+  along.with = NULL,
+  na.rm = TRUE
+) {
   cl <- match.call()
   cl[[1]] <- quote(seq_quantile)
   cl$probs <- c(.25, .75)
@@ -69,7 +89,9 @@ seq_IQR <- function(x, length.out = NULL, by = NULL, along.with = NULL,
 
 #' @keywords internal
 .seq <- function(range, length.out = NULL, by = NULL, along.with = NULL) {
-  if (is.null(length.out) && is.null(by) && is.null(along.with)) length.out <- 20
+  if (is.null(length.out) && is.null(by) && is.null(along.with)) {
+    length.out <- 20
+  }
   cl <- quote(seq(range[1], range[2]))
   cl$length.out <- length.out
   cl$by <- by
@@ -100,7 +122,8 @@ median_mad <- function(x, na.rm = TRUE, out = c("vector", "data.frame")) {
   match.call()
   out <- match.arg(out)
 
-  x <- stats::median(x, na.rm = na.rm) + c(-1, 0, 1) * stats::mad(x, na.rm = na.rm)
+  x <- stats::median(x, na.rm = na.rm) +
+    c(-1, 0, 1) * stats::mad(x, na.rm = na.rm)
   names(x) <- c("-MAD", "Median", "+MAD")
   if (out == "data.frame") {
     x <- as.data.frame(as.list(x))

@@ -9,12 +9,14 @@
 #' age_in_unit(DOB, TODAY)
 #'
 #' @export
-age_in_unit <- function(DOB,
-                        REFDATE = Sys.Date(),
-                        years = TRUE,
-                        months = TRUE,
-                        weeks = TRUE,
-                        days = TRUE) {
+age_in_unit <- function(
+  DOB,
+  REFDATE = Sys.Date(),
+  years = TRUE,
+  months = TRUE,
+  weeks = TRUE,
+  days = TRUE
+) {
   .check_namespace("lubridate")
 
   diff <- lubridate::as.duration(lubridate::interval(DOB, REFDATE))

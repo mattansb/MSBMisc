@@ -51,9 +51,13 @@
 #' )
 #'
 #' @export
-crop_coord_polar <- function(plot, start = 0, end = 2 * pi,
-                             padding = 0.02,
-                             fix_aspect.ratio = TRUE) {
+crop_coord_polar <- function(
+  plot,
+  start = 0,
+  end = 2 * pi,
+  padding = 0.02,
+  fix_aspect.ratio = TRUE
+) {
   .check_namespace("ggplot2", "ggtrace")
 
   stopifnot(
@@ -75,14 +79,15 @@ crop_coord_polar <- function(plot, start = 0, end = 2 * pi,
   if (isTRUE(fix_aspect.ratio)) {
     aspect.ratio <-
       (trbl[["b."]] - trbl[["t."]]) /
-        (trbl[["l."]] - trbl[["r."]])
+      (trbl[["l."]] - trbl[["r."]])
 
-    if (!all(aspect.ratio[1] == aspect.ratio)) aspect.ratio <- 1
+    if (!all(aspect.ratio[1] == aspect.ratio)) {
+      aspect.ratio <- 1
+    }
 
     plot <- plot +
       ggplot2::theme(aspect.ratio = aspect.ratio[1])
   }
-
 
   expr <- substitute(
     {
@@ -92,13 +97,22 @@ crop_coord_polar <- function(plot, start = 0, end = 2 * pi,
       l <- l.
 
       n_panels <- length(panels)
-      if (length(b) != n_panels) b <- rep(b, length.out = n_panels)
-      if (length(t) != n_panels) t <- rep(t, length.out = n_panels)
-      if (length(r) != n_panels) r <- rep(r, length.out = n_panels)
-      if (length(l) != n_panels) l <- rep(l, length.out = n_panels)
+      if (length(b) != n_panels) {
+        b <- rep(b, length.out = n_panels)
+      }
+      if (length(t) != n_panels) {
+        t <- rep(t, length.out = n_panels)
+      }
+      if (length(r) != n_panels) {
+        r <- rep(r, length.out = n_panels)
+      }
+      if (length(l) != n_panels) {
+        l <- rep(l, length.out = n_panels)
+      }
 
       for (p in seq_len(n_panels)) {
-        panels[[p]] <- editGrob(panels[[p]],
+        panels[[p]] <- editGrob(
+          panels[[p]],
           vp = viewport(
             yscale = c(b[p], t[p]),
             xscale = c(l[p], r[p])
@@ -131,12 +145,18 @@ crop_coord_polar <- function(plot, start = 0, end = 2 * pi,
 #' @keywords internal
 .is_between_angle <- function(min, theta, max) {
   arc_long <- max - min
-  if (arc_long < 0) arc_long <- arc_long + 360
+  if (arc_long < 0) {
+    arc_long <- arc_long + 360
+  }
 
   arc_short1 <- theta - min
   arc_short2 <- max - theta
-  if (arc_short1 < 0) arc_short1 <- arc_short1 + 360
-  if (arc_short2 < 0) arc_short2 <- arc_short2 + 360
+  if (arc_short1 < 0) {
+    arc_short1 <- arc_short1 + 360
+  }
+  if (arc_short2 < 0) {
+    arc_short2 <- arc_short2 + 360
+  }
 
   arc_long >= arc_short1 && arc_long >= arc_short2
 }

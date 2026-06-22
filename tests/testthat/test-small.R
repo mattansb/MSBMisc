@@ -11,7 +11,10 @@ test_that("print_library", {
 
 test_that("age_in_unit", {
   skip_if_not_installed("lubridate")
-  expect_equal(age_in_unit("1989-08-05", "2021-11-16"), "32 years, 3 months, 1 weeks, 4 days")
+  expect_equal(
+    age_in_unit("1989-08-05", "2021-11-16"),
+    "32 years, 3 months, 1 weeks, 4 days"
+  )
 })
 
 
@@ -59,7 +62,11 @@ test_that("chisq FU", {
   expect_equal(o1$df, 2L)
   expect_equal(o2$Chi.sq, c(1.7178, 29.0595, 9.3356), tolerance = 0.0001)
   expect_equal(o2$df, c(1, 1, 1))
-  expect_equal(o3$z.value, c(2.1989, -2.5047, 0.4114, -0.4686, -2.8432, 3.2387), tolerance = 0.0001)
+  expect_equal(
+    o3$z.value,
+    c(2.1989, -2.5047, 0.4114, -0.4686, -2.8432, 3.2387),
+    tolerance = 0.0001
+  )
   expect_equal(o3$n.obs, c(762, 484, 327, 239, 468, 477))
 })
 
@@ -101,7 +108,9 @@ test_that("vlookup", {
   expect_warning(r <- vlookup(c("a", "e", "c"), df, key = "a", value = "b"))
   expect_equal(r, c(a = 51L, e = 56L, c = 54L))
 
-  expect_warning(r <- vlookup(c("a", "e", "c"), df, key = "a", value = "b", add = TRUE))
+  expect_warning(
+    r <- vlookup(c("a", "e", "c"), df, key = "a", value = "b", add = TRUE)
+  )
   expect_s3_class(r, "data.frame")
 })
 
@@ -112,9 +121,9 @@ test_that("simple_effects", {
   skip_if_not_installed("insight")
   skip_if_not_installed("stringr")
 
-
   obk.long <- afex::obk.long
-  A <- afex::aov_car(value ~ treatment * gender + Error(id / (phase * hour)),
+  A <- afex::aov_car(
+    value ~ treatment * gender + Error(id / (phase * hour)),
     data = obk.long
   )
 
@@ -140,9 +149,16 @@ test_that("ll lnorm", {
   m1 <- lm(log(mpg) ~ factor(cyl), mtcars)
   m2 <- lm(log(mpg) ~ factor(cyl) * am, mtcars)
 
-  expect_equal(sapply(list(m0, m1, m2), AIC_lnorm), c(205.379, 168.365, 170.345), tolerance = 0.001)
-  expect_equal(sapply(list(m0, m1, m2), BIC_lnorm), c(208.310, 174.228, 180.605), tolerance = 0.001)
-
+  expect_equal(
+    sapply(list(m0, m1, m2), AIC_lnorm),
+    c(205.379, 168.365, 170.345),
+    tolerance = 0.001
+  )
+  expect_equal(
+    sapply(list(m0, m1, m2), BIC_lnorm),
+    c(208.310, 174.228, 180.605),
+    tolerance = 0.001
+  )
 
   mb <- lm(mpg ~ factor(cyl) * am, mtcars)
   expect_error(logLik_lnorm(mb), "not log-normal")
@@ -154,9 +170,7 @@ test_that("ll lnorm", {
 test_that("delta method", {
   skip_if_not_installed("emmeans")
 
-  m <- glm(am ~ factor(cyl),
-    family = binomial(), data = mtcars
-  )
+  m <- glm(am ~ factor(cyl), family = binomial(), data = mtcars)
 
   em <- emmeans::emmeans(m, ~cyl) |>
     emmeans::regrid(transform = "none")
@@ -164,8 +178,11 @@ test_that("delta method", {
   names(em@bhat) <- paste0("p", c(4, 6, 8))
 
   d <- delta_method(
-    1 / (1 + exp(-p4)), 1 / (1 + exp(-p6)), 1 / (1 + exp(-p8)),
-    .means = em@bhat, .V = em@V
+    1 / (1 + exp(-p4)),
+    1 / (1 + exp(-p6)),
+    1 / (1 + exp(-p8)),
+    .means = em@bhat,
+    .V = em@V
   )
 
   em <- emmeans::regrid(em)

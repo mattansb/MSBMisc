@@ -47,8 +47,11 @@ contrast_weights <- function(..., .name = "custom", .adjust = NULL) {
   if (nrow(df) == 1L) {
     x <- c(...)
     stopifnot(
-      "Weights do not define a proper contrast!" =
-        isTRUE(all.equal(sum(x), 0)) && any(x > 0)
+      "Weights do not define a proper contrast!" = isTRUE(all.equal(
+        sum(x),
+        0
+      )) &&
+        any(x > 0)
     )
 
     nf <- sum(x[x > 0])

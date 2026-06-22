@@ -30,9 +30,17 @@
 
 #'
 #' @export
-simple_mediation_plot <- function(a = NA, b = NA, direct = NA,
-                                  indirect = NA, total = NA,
-                                  X_name = "X", M_name = "M", Y_name = "Y", ...) {
+simple_mediation_plot <- function(
+  a = NA,
+  b = NA,
+  direct = NA,
+  indirect = NA,
+  total = NA,
+  X_name = "X",
+  M_name = "M",
+  Y_name = "Y",
+  ...
+) {
   .check_namespace("tidySEM")
 
   nodes <- data.frame(
@@ -53,7 +61,8 @@ simple_mediation_plot <- function(a = NA, b = NA, direct = NA,
     linetype = c("solid", "solid", "solid")
   )
 
-  layout <- structure(c(NA, "X", "M", NA, NA, "Y"),
+  layout <- structure(
+    c(NA, "X", "M", NA, NA, "Y"),
     .Dim = 2:3,
     class = c("matrix", "array")
   )
@@ -71,9 +80,15 @@ simple_mediation_plot <- function(a = NA, b = NA, direct = NA,
     edges <- rbind(
       edges,
       data.frame(
-        from = "X_", to = "Y_", label = total,
-        connect_from = "right", connect_to = "left",
-        arrow = "last", show = TRUE, curvature = NA, linetype = "solid"
+        from = "X_",
+        to = "Y_",
+        label = total,
+        connect_from = "right",
+        connect_to = "left",
+        arrow = "last",
+        show = TRUE,
+        curvature = NA,
+        linetype = "solid"
       )
     )
 
