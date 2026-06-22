@@ -1,96 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Paste.html</loc>
-  </url>
-  <url>
-    <loc>/reference/R2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/age_in_unit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bracketifyFile.html</loc>
-  </url>
-  <url>
-    <loc>/reference/chisq_pairwise.html</loc>
-  </url>
-  <url>
-    <loc>/reference/compare_cor.html</loc>
-  </url>
-  <url>
-    <loc>/reference/compare_freqs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/contrast_weights.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crop_coord_polar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dbind.html</loc>
-  </url>
-  <url>
-    <loc>/reference/delta_method.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fa_reliability.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_data_for_grid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gt.html</loc>
-  </url>
-  <url>
-    <loc>/reference/has_any_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is.TRUE.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lnorm_mean.html</loc>
-  </url>
-  <url>
-    <loc>/reference/logLik_lnorm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/php.t.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print_library.html</loc>
-  </url>
-  <url>
-    <loc>/reference/qq_worm_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/r_SB.html</loc>
-  </url>
-  <url>
-    <loc>/reference/seq_range.html</loc>
-  </url>
-  <url>
-    <loc>/reference/simple_effects.html</loc>
-  </url>
-  <url>
-    <loc>/reference/simple_mediation_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat_demo_apps.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vlookup.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/Paste.html</loc></url>
+<url><loc>/reference/R2.html</loc></url>
+<url><loc>/reference/age_in_unit.html</loc></url>
+<url><loc>/reference/bracketifyFile.html</loc></url>
+<url><loc>/reference/chisq_pairwise.html</loc></url>
+<url><loc>/reference/compare_cor.html</loc></url>
+<url><loc>/reference/compare_freqs.html</loc></url>
+<url><loc>/reference/contrast_weights.html</loc></url>
+<url><loc>/reference/crop_coord_polar.html</loc></url>
+<url><loc>/reference/dbind.html</loc></url>
+<url><loc>/reference/delta_method.html</loc></url>
+<url><loc>/reference/fa_reliability.html</loc></url>
+<url><loc>/reference/get_data_for_grid.html</loc></url>
+<url><loc>/reference/gt.html</loc></url>
+<url><loc>/reference/has_any_data.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/is.TRUE.html</loc></url>
+<url><loc>/reference/lnorm_mean.html</loc></url>
+<url><loc>/reference/logLik_lnorm.html</loc></url>
+<url><loc>/reference/php.t.html</loc></url>
+<url><loc>/reference/print_library.html</loc></url>
+<url><loc>/reference/qq_worm_plot.html</loc></url>
+<url><loc>/reference/r2_pseudo.html</loc></url>
+<url><loc>/reference/r_SB.html</loc></url>
+<url><loc>/reference/seq_range.html</loc></url>
+<url><loc>/reference/simple_effects.html</loc></url>
+<url><loc>/reference/simple_mediation_plot.html</loc></url>
+<url><loc>/reference/stat_demo_apps.html</loc></url>
+<url><loc>/reference/vlookup.html</loc></url>
 </urlset>
+
