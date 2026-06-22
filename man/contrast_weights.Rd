@@ -44,7 +44,7 @@ my_contrasts <- data.frame(
 (my_contrasts2 <- cw(my_contrasts))
 my_contrasts3 <- cw(my_contrasts, .adjust = "fdr")
 
-\dontshow{if (require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("emmeans")) withAutoprint(\{ # examplesIf}
 library(emmeans)
 (emms <- emmeans(mod, ~ cyl + am))
 

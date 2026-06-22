@@ -60,7 +60,7 @@ name of grouping variable is automatically detected from the model.}
 Get raw data for plotting with model predictions
 }
 \examples{
-\dontshow{if (require("insight")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("insight")) withAutoprint(\{ # examplesIf}
 
 data("mtcars")
 mtcars <- mtcars |> transform(cyl = factor(cyl))
@@ -77,7 +77,7 @@ get_data_for_grid(nd, mod)
 
 get_data_for_grid(nd, mod, residualize = TRUE, pred_name = "predicted_mpg")
 \dontshow{\}) # examplesIf}
-\dontshow{if (require("insight") && require("ggeffects")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("insight") && require("ggeffects")) withAutoprint(\{ # examplesIf}
 
 library(ggplot2)
 ggplot(nd, aes(hp, predicted_mpg)) +
@@ -98,20 +98,20 @@ ggplot(nd, aes(hp, predicted_mpg)) +
 # - emmeans
 # - marginaleffects
 \dontshow{\}) # examplesIf}
-\dontshow{if (require("insight") && require("ggeffects")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("insight") && require("ggeffects")) withAutoprint(\{ # examplesIf}
 pred_ggeffects <- ggeffects::ggpredict(mod, c("hp [50:350, by = 50]", "cyl [4]"))
 get_data_for_grid(pred_ggeffects, residualize = TRUE)
 \dontshow{\}) # examplesIf}
-\dontshow{if (require("insight") && require("emmeans")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("insight") && require("emmeans")) withAutoprint(\{ # examplesIf}
 at <- list(hp = seq(50, 350, by = 50), cyl = "4")
 pred_emmeans <- emmeans::emmeans(mod, ~ hp + cyl, at = at)
 get_data_for_grid(pred_emmeans, mod, residualize = TRUE)
 \dontshow{\}) # examplesIf}
-\dontshow{if (require("insight") && require("marginaleffects")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("insight") && require("marginaleffects")) withAutoprint(\{ # examplesIf}
 # pred_marginaleffects <- marginaleffects::predictions(mod, newdata = nd)
 # get_data_for_grid(pred_marginaleffects, residualize = TRUE)
 \dontshow{\}) # examplesIf}
-\dontshow{if (require("insight") && require("marginaleffects") && require("lme4")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("insight") && require("marginaleffects") && require("lme4")) withAutoprint(\{ # examplesIf}
 ## Collapes across group ------
 fm1 <- lme4::lmer(angle ~ temperature + (1 | recipe),
   data = cake

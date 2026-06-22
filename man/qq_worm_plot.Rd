@@ -20,7 +20,7 @@ This function is a wrapper around \code{qqplotr::stat_pp_*(detrend = TRUE)}.
 \href{https://twitter.com/mattansb/status/1199936633413476358}{Some related tweets}.
 }
 \examples{
-\dontshow{if (require("ggplot2") && require("qqplotr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggplot2") && require("qqplotr")) withAutoprint(\{ # examplesIf}
 x <- rnorm(100)
 qq_worm_plot(x)
 

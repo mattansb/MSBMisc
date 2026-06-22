@@ -27,7 +27,7 @@ simple_mediation_plot(
 Plot simple mediations with \code{tidySEM}
 }
 \examples{
-\dontshow{if (require("tidySEM") && require("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("tidySEM") && require("ggplot2")) withAutoprint(\{ # examplesIf}
 mod_a <- lm(hp ~ gear, data = mtcars)
 mod_bc <- lm(mpg ~ hp + gear, data = mtcars)
 

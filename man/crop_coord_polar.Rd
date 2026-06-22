@@ -31,7 +31,7 @@ This function uses
 from \href{https://twitter.com/yjunechoe/status/1506672410208051201}{this twitter thread}.
 }
 \examples{
-\dontshow{if (require("ggplot2") && require("ggtrace")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggplot2") && require("ggtrace")) withAutoprint(\{ # examplesIf}
 
 library(ggplot2)
 

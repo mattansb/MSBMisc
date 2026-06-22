@@ -23,7 +23,7 @@ This is a wrapper for \code{emmeans::joint_tests()} that provides an easy way to
 specify which simple effects we wish to test, and within what variable(s).
 }
 \examples{
-\dontshow{if (require("ggplot2") && require("insight") && require("stringr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggplot2") && require("insight") && require("stringr")) withAutoprint(\{ # examplesIf}
 library(afex)
 
 data(obk.long, package = "afex")

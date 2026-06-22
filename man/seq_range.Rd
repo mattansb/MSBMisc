@@ -66,7 +66,7 @@ seq_quantile(x, c(.05, .95), length.out = 5)
 
 mean_sd(x)
 
-\dontshow{if (require("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("ggplot2")) withAutoprint(\{ # examplesIf}
 library(ggplot2)
 ggplot(mtcars, aes(cyl, mpg)) +
   stat_summary(aes(color = "Mean (SD)"),

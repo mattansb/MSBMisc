@@ -31,7 +31,7 @@ be used to select a range of variables.}
 Test rowwise if each row is missing / has all data in select columns
 }
 \examples{
-\dontshow{if (require("dplyr")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("dplyr")) withAutoprint(\{ # examplesIf}
 data(mtcars)
 
 mtcars[1, 1] <- NA
