@@ -31,5 +31,5 @@ age_in_unit(
 DOB <- as.Date("1989-08-05")
 TODAY <- Sys.Date()
 age_in_unit(DOB, TODAY)
-#> [1] "36 years, 10 months, 2 weeks, 2 days"
+#> [1] "36 years, 10 months, 2 weeks, 3 days"
 ```

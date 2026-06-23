@@ -19,9 +19,12 @@
 <url><loc>/reference/has_any_data.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/is.TRUE.html</loc></url>
+<url><loc>/reference/jaccard_avg.html</loc></url>
 <url><loc>/reference/lnorm_mean.html</loc></url>
 <url><loc>/reference/logLik_lnorm.html</loc></url>
+<url><loc>/reference/metric_by_event.html</loc></url>
 <url><loc>/reference/php.t.html</loc></url>
+<url><loc>/reference/pred_strength.html</loc></url>
 <url><loc>/reference/print_library.html</loc></url>
 <url><loc>/reference/qq_worm_plot.html</loc></url>
 <url><loc>/reference/r2_pseudo.html</loc></url>

@@ -56,6 +56,9 @@
   [`allTRUE()`](is.TRUE.md) [`anyTRUE()`](is.TRUE.md) : It's just
   logical
 
+- [`jaccard_avg()`](jaccard_avg.md) : Estimate the Average Jaccard Index
+  for Cluster Stability
+
 - [`lnorm_mean()`](lnorm_mean.md) [`lnorm_median()`](lnorm_mean.md)
   [`lnorm_var()`](lnorm_mean.md) [`lnorm_sd()`](lnorm_mean.md) :
   Functions to convert parameters of a log-normal distribution to
@@ -65,9 +68,15 @@
   [`BIC_lnorm()`](logLik_lnorm.md) : Information criteria for log-normal
   models
 
+- [`metric_by_event()`](metric_by_event.md) : Compute class-wise metrics
+  for a metric set in a multiclass setting
+
 - [`php.t()`](php.t.md) [`php.F()`](php.t.md) [`php.z()`](php.t.md)
   [`php.chisq()`](php.t.md) [`php.guf()`](php.t.md) : Function for
   Post-Hoc Power analysis
+
+- [`pred_strength()`](pred_strength.md) : Estimate the Prediction
+  Strength of a Clustering Model
 
 - [`print_library()`](print_library.md)
   [`print_require()`](print_library.md)
