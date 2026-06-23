@@ -17,13 +17,14 @@ Imports:
 Suggests:
     afex,
     clipr,
+    cli,
     dplyr,
     correlation,
     effectsize,
     emmeans,
+    forcats,
     ggeffects,
     ggplot2,
-    ggtrace,
     GPArotation,
     insight,
     lavaan,
@@ -33,6 +34,7 @@ Suggests:
     MASS,
     patchwork,
     psych,
+    purrr,
     qqplotr,
     rstudioapi,
     semTools,
@@ -40,6 +42,10 @@ Suggests:
     stringr,
     tidySEM,
     testthat (>= 3.0.0),
+    tibble,
+    tidyclust,
+    workflows,
+    yardstick,
     knitr
 Remotes:
     yjunechoe/ggtrace

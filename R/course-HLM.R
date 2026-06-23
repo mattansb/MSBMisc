@@ -48,54 +48,61 @@
 #' @family HLM4Psych
 #' @export
 r2_pseudo <- function(mf, mr, mnull = mr) {
-  V_full <- .V_table(mf)
-  V_restricted <- .V_table(mr)
-  V_empty <- .V_table(mnull)
+  V_full <- V_table(mf)
+  V_restricted <- V_table(mr)
+  V_empty <- V_table(mnull)
 
   V_full |>
     dplyr::inner_join(V_restricted, by = c("grp", "var")) |>
     dplyr::inner_join(V_empty, by = c("grp", "var")) |>
     dplyr::mutate(
-      r2 = (vcov.y - vcov.x) / vcov,
+      r2 = (.data$vcov.y - .data$vcov.x) / .data$vcov,
     ) |>
-    dplyr::select(grp, var, r2)
+    dplyr::select(dplyr::all_of(c("grp", "var", "r2")))
 }
 
-.V_table <- function(model) {
-  UseMethod(".V_table")
+#' @export
+V_table <- function(model) {
+  UseMethod("V_table")
 }
 
-.V_table.lm <- function(model) {
+#' @export
+V_table.lm <- function(model) {
   tibble::tibble(
     grp = "Residual",
     var = NA,
-    vcov = sigma(model)^2
+    vcov = stats::sigma(model)^2
   )
 }
 
-.V_table.glm <- .V_table.lm
+#' @export
+V_table.glm <- V_table.lm
 
-.V_table.lmerMod <- function(model) {
+#' @export
+V_table.lmerMod <- function(model) {
   tibble::as_tibble(lme4::VarCorr(model)) |>
-    dplyr::filter(is.na(var2)) |>
-    dplyr::select(-sdcor, -var2) |>
-    dplyr::rename(var = var1)
+    dplyr::filter(is.na(.data$var2)) |>
+    dplyr::select(-dplyr::all_of(c("sdcor", "var2"))) |>
+    dplyr::rename(dplyr::all_of(c(var = "var1")))
 }
 
-.V_table.glmerMod <- function(model) {
+#' @export
+V_table.glmerMod <- function(model) {
   res <- tibble::tibble(
     grp = "Residual",
     var = NA,
-    vcov = sigma(model)^2
+    vcov = stats::sigma(model)^2
   )
 
-  .V_table.lmerMod(model) |>
+  V_table.lmerMod(model) |>
     dplyr::bind_rows(res)
 }
 
-.V_table.stanreg <- .V_table.lmerMod
+#' @export
+V_table.stanreg <- V_table.lmerMod
 
-.V_table.brmsfit <- function(model) {
+#' @export
+V_table.brmsfit <- function(model) {
   V <- lme4::VarCorr(model)
 
   purrr::imap(V, \(v, grp) {
@@ -109,8 +116,9 @@ r2_pseudo <- function(mf, mr, mnull = mr) {
     purrr::list_rbind()
 }
 
-.V_table.glmmTMB <- function(model) {
-  V <- VarCorr(model)
+#' @export
+V_table.glmmTMB <- function(model) {
+  V <- lme4::VarCorr(model)
 
   L <- purrr::imap(V[["cond"]], \(v, grp) {
     x <- diag(v)
@@ -128,9 +136,10 @@ r2_pseudo <- function(mf, mr, mnull = mr) {
     purrr::list_rbind()
 }
 
-.V_table.default <- function(model) {
-  f <- ls(all.names = TRUE, pattern = "^\\.V_table\\.", envir = .GlobalEnv)
-  cls <- sub("^\\.V_table\\.", "", f)
+#' @export
+V_table.default <- function(model) {
+  f <- ls(all.names = TRUE, pattern = "^V_table\\.", envir = .GlobalEnv)
+  cls <- sub("^V_table\\.", "", f)
   stop(
     sprintf(
       "No method for objects of class '%s'\n\nSupported classes:\n%s",

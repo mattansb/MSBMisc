@@ -71,7 +71,7 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL, ci = 0.95) {
 
   if (is.null(data2)) {
     # This is a dependent correlation
-    data <- na.omit(data[unique(c(r1, r2))])
+    data <- stats::na.omit(data[unique(c(r1, r2))])
     n <- nrow(data)
 
     if (!any(r2 %in% r1)) {
@@ -133,10 +133,10 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL, ci = 0.95) {
     stopifnot(all(r2 %in% colnames(data2)))
     # independent variables
 
-    data <- na.omit(data[r1])
+    data <- stats::na.omit(data[r1])
     n <- nrow(data)
 
-    data2 <- na.omit(data2[r2])
+    data2 <- stats::na.omit(data2[r2])
     n2 <- nrow(data2)
 
     out <- psych::r.test(
