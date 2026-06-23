@@ -23,6 +23,7 @@ Suggests:
     effectsize,
     emmeans,
     forcats,
+    generics,
     ggeffects,
     ggplot2,
     GPArotation,

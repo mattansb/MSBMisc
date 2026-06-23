@@ -76,14 +76,14 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL, ci = 0.95) {
 
     if (!any(r2 %in% r1)) {
       # Different variables
-      r <- cor(data[c(r1, r2)])
+      r <- stats::cor(data[c(r1, r2)])
 
       r12 <- r[1, 2]
-      r34 <- cor(data[r2])[1, 2]
+      r34 <- stats::cor(data[r2])[1, 2]
 
       # Other cors
-      r12 <- cor(data[r1])[1, 2]
-      r34 <- cor(data[r2])[1, 2]
+      r12 <- stats::cor(data[r1])[1, 2]
+      r34 <- stats::cor(data[r2])[1, 2]
 
       out <- psych::r.test(
         n = n,
@@ -113,10 +113,10 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL, ci = 0.95) {
 
       out <- psych::r.test(
         n = n,
-        r12 = r12 <- cor(data[[v1]], data[[v2]]),
-        r13 = r13 <- cor(data[[v1]], data[[v3]]),
+        r12 = r12 <- stats::cor(data[[v1]], data[[v2]]),
+        r13 = r13 <- stats::cor(data[[v1]], data[[v3]]),
         # Other cors
-        r23 = cor(data[[v2]], data[[v3]])
+        r23 = stats::cor(data[[v2]], data[[v3]])
       )
       Corr1 <- data.frame(
         r = r12,
@@ -142,8 +142,8 @@ compare_cor <- function(data, r1, r2, data2 = NULL, by = NULL, ci = 0.95) {
     out <- psych::r.test(
       n = n,
       n2 = n2,
-      r12 = r12 <- cor(data)[1, 2],
-      r34 = r34 <- cor(data2)[1, 2]
+      r12 = r12 <- stats::cor(data)[1, 2],
+      r34 = r34 <- stats::cor(data2)[1, 2]
     )
     Corr1 <- data.frame(
       r = r12,

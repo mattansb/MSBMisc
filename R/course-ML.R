@@ -90,12 +90,12 @@ metric_by_event <- function(
     }
     out_raw <- eval.parent(cl) |>
       dplyr::filter_out(
-        .estimator %in% c("macro", "macro_weighted", "micro", "hand_till")
+        .data$.estimator %in% c("macro", "macro_weighted", "micro", "hand_till")
       )
 
     # keep only metrics that use macro/micro multiclass estimators
     out <- out |>
-      dplyr::anti_join(out_raw, by = dplyr::join_by(.metric)) |>
+      dplyr::anti_join(out_raw, by = ".metric") |>
       # Add the (non-classwise) metrics
       dplyr::bind_rows(out_raw)
   }
@@ -192,17 +192,17 @@ jaccard_avg.cluster_fit <- function(object, new_data = NULL, ...) {
   }
 
   # 1. Fit a fresh reference model to the new data using the same spec
-  new_fit <- fit(
+  new_fit <- generics::fit(
     spec,
     ~.,
     data = new_data[, attr(object$preproc$terms, "term.labels"), drop = FALSE]
   )
 
   # 2. Extract independent test labels from the new fit
-  pred_new_fit <- predict(new_fit, new_data)[[".pred_cluster"]]
+  pred_new_fit <- stats::predict(new_fit, new_data)[[".pred_cluster"]]
 
   # 3. Predict test labels using the original training centroids
-  pred_fit <- predict(object, new_data)[[".pred_cluster"]]
+  pred_fit <- stats::predict(object, new_data)[[".pred_cluster"]]
 
   # 4. Compute stability metric
   jaccard_avg_impl(pred_fit, pred_new_fit)
@@ -223,13 +223,13 @@ jaccard_avg.workflow <- function(object, new_data = NULL, ...) {
   }
 
   # 1. Fit a fresh reference model to the new data using the same spec
-  new_fit <- fit(object, data = new_data)
+  new_fit <- generics::fit(object, data = new_data)
 
   # 2. Extract independent test labels from the new fit
-  pred_new_fit <- predict(new_fit, new_data)[[".pred_cluster"]]
+  pred_new_fit <- stats::predict(new_fit, new_data)[[".pred_cluster"]]
 
   # 3. Predict test labels using the original training centroids
-  pred_fit <- predict(object, new_data)[[".pred_cluster"]]
+  pred_fit <- stats::predict(object, new_data)[[".pred_cluster"]]
 
   # 4. Compute stability metric
   jaccard_avg_impl(pred_fit, pred_new_fit)
@@ -342,17 +342,17 @@ pred_strength.cluster_fit <- function(object, new_data = NULL, ...) {
   }
 
   # 1. Fit a fresh reference model to the new data using the same spec
-  new_fit <- fit(
+  new_fit <- generics::fit(
     spec,
     ~.,
     data = new_data[, attr(object$preproc$terms, "term.labels"), drop = FALSE]
   )
 
   # 2. Extract independent test labels from the new fit
-  pred_new_fit <- predict(new_fit, new_data)[[".pred_cluster"]]
+  pred_new_fit <- stats::predict(new_fit, new_data)[[".pred_cluster"]]
 
   # 3. Predict test labels using the original training centroids
-  pred_fit <- predict(object, new_data)[[".pred_cluster"]]
+  pred_fit <- stats::predict(object, new_data)[[".pred_cluster"]]
 
   # 4. Compute stability metric
   pred_strength_impl(pred_fit, pred_new_fit)
@@ -373,13 +373,13 @@ pred_strength.workflow <- function(object, new_data = NULL, ...) {
   }
 
   # 1. Fit a fresh reference model to the new data using the same spec
-  new_fit <- fit(object, data = new_data)
+  new_fit <- generics::fit(object, data = new_data)
 
   # 2. Extract independent test labels from the new fit
-  pred_new_fit <- predict(new_fit, new_data)[[".pred_cluster"]]
+  pred_new_fit <- stats::predict(new_fit, new_data)[[".pred_cluster"]]
 
   # 3. Predict test labels using the original training centroids
-  pred_fit <- predict(object, new_data)[[".pred_cluster"]]
+  pred_fit <- stats::predict(object, new_data)[[".pred_cluster"]]
 
   # 4. Compute stability metric
   pred_strength_impl(pred_fit, pred_new_fit)
