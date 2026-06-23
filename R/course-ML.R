@@ -161,10 +161,12 @@ jaccard_avg <- function(object, ...) {
   UseMethod("jaccard_avg")
 }
 
-jaccard_avg <- tidyclust::new_cluster_metric(
-  jaccard_avg,
-  direction = "maximize"
-)
+if (requireNamespace("tidyclust", quietly = TRUE)) {
+  jaccard_avg <- tidyclust::new_cluster_metric(
+    jaccard_avg,
+    direction = "maximize"
+  )
+}
 
 #' @export
 #' @rdname jaccard_avg
@@ -308,10 +310,13 @@ pred_strength <- function(object, ...) {
   UseMethod("pred_strength")
 }
 
-pred_strength <- tidyclust::new_cluster_metric(
-  pred_strength,
-  direction = "maximize"
-)
+
+if (requireNamespace("tidyclust", quietly = TRUE)) {
+  pred_strength <- tidyclust::new_cluster_metric(
+    pred_strength,
+    direction = "maximize"
+  )
+}
 
 #' @export
 #' @rdname pred_strength
