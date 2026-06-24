@@ -1,10 +1,13 @@
 Package: MSBMisc
 Type: Package
-Title: Some functions I wrote that I find useful
+Title: Some Functions I Wrote that I Find Useful
 Version: 0.0.1.15
-Author: person("Mattan S.", "Ben-Shachar")
+Authors@R: person(given = c("Mattan", "S."),
+                  family = "Ben-Shachar",
+                  role = "cre",
+                  email = "matanshm@post.bgu.ac.il")
 Maintainer: Mattan S. Ben-Shachar <matanshm@post.bgu.ac.il>
-Description: misc. functions.
+Description: Misc. functions.
 License: GPL-3
 URL: https://mattansb.github.io/MSBMisc/
 BugReports: https://github.com/mattansb/MSBMisc/issues/
@@ -47,8 +50,6 @@ Suggests:
     tidyclust (>= 0.3.1),
     tidymodels,
     workflows
-Remotes:
-    yjunechoe/ggtrace
 LazyData: true
 RoxygenNote: 7.3.3
 Config/testthat/edition: 3

@@ -30,7 +30,7 @@ php.guf(p, alpha = 0.05)
 \item{one.tailed}{Is the p-value from a one-tailed test?}
 }
 \description{
-Based on \href{https://stat.uiowa.edu/sites/stat.uiowa.edu/files/techrep/tr378.pdf}{Lenth (2007) \emph{Post Hoc Power: Tables and Commentary}}.
+Based on \href{https://stat.uiowa.edu/sites/stat.uiowa.edu/files/2024-04/Post-Hoc-Power-Tables-Commentary.pdf}{Lenth (2007) \emph{Post Hoc Power: Tables and Commentary}}.
 \code{php.guf()} give's Lenth's \emph{grand unified formula for post hoc power}.
 }
 \examples{

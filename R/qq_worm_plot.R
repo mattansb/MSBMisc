@@ -25,8 +25,6 @@
 #' # x <- runif(100)
 #' # qq_worm_plot(x, distribution = "unif")
 #'
-#' @details
-#' [Some related tweets](https://twitter.com/mattansb/status/1199936633413476358).
 #'
 #' @export
 qq_worm_plot <-

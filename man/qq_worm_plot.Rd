@@ -16,9 +16,6 @@ qq_worm_plot(x, distribution = "norm", ...)
 \description{
 This function is a wrapper around \code{qqplotr::stat_pp_*(detrend = TRUE)}.
 }
-\details{
-\href{https://twitter.com/mattansb/status/1199936633413476358}{Some related tweets}.
-}
 \examples{
 \dontshow{if (require("ggplot2") && require("qqplotr")) withAutoprint(\{ # examplesIf}
 x <- rnorm(100)
@@ -38,5 +35,6 @@ qq_worm_plot(x, distribution = "t", df = 3)
 
 # x <- runif(100)
 # qq_worm_plot(x, distribution = "unif")
+
 \dontshow{\}) # examplesIf}
 }
