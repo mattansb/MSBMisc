@@ -2,9 +2,12 @@
 % Please edit documentation in R/course-HLM.R
 \name{r2_pseudo}
 \alias{r2_pseudo}
+\alias{V_table}
 \title{Compute pseudo R-square for mixed models}
 \usage{
 r2_pseudo(mf, mr, mnull = mr)
+
+V_table(model)
 }
 \arguments{
 \item{mf}{The full model}
@@ -13,6 +16,8 @@ r2_pseudo(mf, mr, mnull = mr)
 
 \item{mnull}{The empty model, where some variance of interest is unmodeled
 (an "unconditional" model)}
+
+\item{model}{A fitted model object}
 }
 \value{
 A tibble with the following columns:

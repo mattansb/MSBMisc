@@ -62,6 +62,8 @@ r2_pseudo <- function(mf, mr, mnull = mr) {
 }
 
 #' @export
+#' @rdname r2_pseudo
+#' @param model A fitted model object
 V_table <- function(model) {
   UseMethod("V_table")
 }
