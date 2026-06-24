@@ -45,6 +45,7 @@ Suggests:
     testthat (>= 3.0.0),
     tibble,
     tidyclust (>= 0.3.1),
+    tidymodels,
     workflows,
     yardstick,
     knitr
