@@ -113,16 +113,16 @@ get_data_for_grid(pred_emmeans, mod, residualize = TRUE)
 \dontshow{\}) # examplesIf}
 \dontshow{if (require("insight") && require("marginaleffects") && require("lme4")) withAutoprint(\{ # examplesIf}
 ## Collapes across group ------
+data("cake", package = "lme4")
 fm1 <- lme4::lmer(angle ~ temperature + (1 | recipe),
   data = cake
 )
 
-pred_ggeffects <- ggeffects::ggpredict(fm1, c("temperature", "recipe"))
 nd <- marginaleffects::datagrid(
   temperature = unique(cake$temperature),
   model = fm1
 )
-pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd)
+suppressWarnings(pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd))
 
 get_data_for_grid(pred_marginaleffects, collapse_by = TRUE)
 # get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)

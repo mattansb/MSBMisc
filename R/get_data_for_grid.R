@@ -60,16 +60,16 @@
 #'
 #' @examplesIf require("insight") && require("marginaleffects") && require("lme4")
 #' ## Collapes across group ------
+#' data("cake", package = "lme4")
 #' fm1 <- lme4::lmer(angle ~ temperature + (1 | recipe),
 #'   data = cake
 #' )
 #'
-#' pred_ggeffects <- ggeffects::ggpredict(fm1, c("temperature", "recipe"))
 #' nd <- marginaleffects::datagrid(
 #'   temperature = unique(cake$temperature),
 #'   model = fm1
 #' )
-#' pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd)
+#' suppressWarnings(pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd))
 #'
 #' get_data_for_grid(pred_marginaleffects, collapse_by = TRUE)
 #' # get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)
@@ -197,18 +197,19 @@ get_data_for_grid.predictions <- function(
   collapse_by = FALSE,
   ...
 ) {
-  stopifnot("Type must be 'response'." = attr(grid, "type") == "response")
+  mfx <- attr(grid, "marginaleffects")
+  stopifnot("Type must be 'response'." = mfx@type == "response")
 
   if (missing(model)) {
-    model <- attr(grid, "model")
+    model <- mfx@model
   }
 
   get_data_for_grid.data.frame(
-    grid[c(unlist(attr(grid, "variables")), "predicted")],
+    as.data.frame(grid[c(mfx@variable_names_datagrid, "estimate")]),
     model,
     residualize = residualize,
     collapse_by = collapse_by,
-    pred_name = "predicted"
+    pred_name = "estimate"
   )
 }
 
