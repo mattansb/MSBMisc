@@ -26,7 +26,6 @@ Suggests:
     generics,
     ggeffects,
     ggplot2,
-    GPArotation,
     insight,
     lavaan,
     lme4,
@@ -45,15 +44,10 @@ Suggests:
     testthat (>= 3.0.0),
     tibble,
     tidyclust (>= 0.3.1),
-    tidymodels,
-    workflows,
-    yardstick,
-    knitr
+    workflows
 Remotes:
     yjunechoe/ggtrace
 LazyData: true
 RoxygenNote: 7.3.3
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
-VignetteBuilder:
-    knitr
