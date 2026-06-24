@@ -23,11 +23,6 @@ qq_worm_plot(x, distribution = "norm", ...)
 
   Args passed to `d*`, `p*` and `q*` functions.
 
-## Details
-
-[Some related
-tweets](https://twitter.com/mattansb/status/1199936633413476358).
-
 ## Examples
 
 ``` r

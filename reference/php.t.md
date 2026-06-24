@@ -1,7 +1,7 @@
 # Function for Post-Hoc Power analysis
 
 Based on [Lenth (2007) *Post Hoc Power: Tables and
-Commentary*](https://stat.uiowa.edu/sites/stat.uiowa.edu/files/techrep/tr378.pdf).
+Commentary*](https://stat.uiowa.edu/sites/stat.uiowa.edu/files/2024-04/Post-Hoc-Power-Tables-Commentary.pdf).
 `php.guf()` give's Lenth's *grand unified formula for post hoc power*.
 
 ## Usage
