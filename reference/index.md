@@ -25,6 +25,8 @@
 - [`contrast_weights()`](contrast_weights.md)
   [`cw()`](contrast_weights.md) : Build Contrast Weights
 
+- [`crop_coord_polar()`](crop_coord_polar.md) : Deprecated functions
+
 - [`dbind()`](dbind.md) : Bind matrices diagonally
 
 - [`delta_method()`](delta_method.md) :
