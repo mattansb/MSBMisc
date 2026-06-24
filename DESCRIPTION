@@ -26,6 +26,7 @@ Suggests:
     generics,
     ggeffects,
     ggplot2,
+    GPArotation,
     insight,
     lavaan,
     lme4,
@@ -44,6 +45,7 @@ Suggests:
     testthat (>= 3.0.0),
     tibble,
     tidyclust (>= 0.3.1),
+    tidymodels,
     workflows
 Remotes:
     yjunechoe/ggtrace
