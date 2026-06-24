@@ -205,24 +205,37 @@ name of grouping variable is automatically detected from the model.</p></dd>
 <span class="r-in"><span><span class="co"># pred_marginaleffects &lt;- marginaleffects::predictions(mod, newdata = nd)</span></span></span>
 <span class="r-in"><span><span class="co"># get_data_for_grid(pred_marginaleffects, residualize = TRUE)</span></span></span>
 <span class="r-in"><span><span class="co">## Collapes across group ------</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cake"</span>, package <span class="op">=</span> <span class="st">"lme4"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fm1</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">angle</span> <span class="op">~</span> <span class="va">temperature</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">recipe</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  data <span class="op">=</span> <span class="va">cake</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">pred_ggeffects</span> <span class="op">&lt;-</span> <span class="fu">ggeffects</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html" class="external-link">ggpredict</a></span><span class="op">(</span><span class="va">fm1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temperature"</span>, <span class="st">"recipe"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">nd</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/marginaleffects/man/datagrid.html" class="external-link">datagrid</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  temperature <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">cake</span><span class="op">$</span><span class="va">temperature</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  model <span class="op">=</span> <span class="va">fm1</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">pred_marginaleffects</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">fm1</span>, newdata <span class="op">=</span> <span class="va">nd</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>For this model type, `marginaleffects` only takes into account the uncertainty in fixed-effect parameters. This is often appropriate when `re.form=NA`, but may be surprising to users who set `re.form=NULL` (default) or to some other value. Call `options(marginaleffects_safe = FALSE)` to silence this warning.</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="va">pred_marginaleffects</span> <span class="op">&lt;-</span> <span class="fu">marginaleffects</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/marginaleffects/man/predictions.html" class="external-link">predictions</a></span><span class="op">(</span><span class="va">fm1</span>, newdata <span class="op">=</span> <span class="va">nd</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_data_for_grid</span><span class="op">(</span><span class="va">pred_marginaleffects</span>, collapse_by <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Could not recover model data from environment. Please make sure your</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   data is available in your workspace.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Trying to retrieve data from the model frame now.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Could not get model data.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> This function only works with mixed effects models.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    temperature recipe estimate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          175      A 29.13333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2          185      A 31.53333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3          195      A 30.80000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4          205      A 33.53333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5          215      A 38.66667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6          225      A 35.06667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7          175      B 26.86667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8          185      B 29.40000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9          195      B 31.73333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10         205      B 32.13333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11         215      B 34.46667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12         225      B 35.26667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13         175      C 27.93333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14         185      C 28.93333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15         195      C 31.73333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16         205      C 30.86667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17         215      C 34.40000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18         225      C 35.73333</span>
 <span class="r-in"><span><span class="co"># get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)</span></span></span>
 </code></pre></div>
     </div>

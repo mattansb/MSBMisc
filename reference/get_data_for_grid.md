@@ -169,23 +169,36 @@ get_data_for_grid(pred_emmeans, mod, residualize = TRUE)
 # pred_marginaleffects <- marginaleffects::predictions(mod, newdata = nd)
 # get_data_for_grid(pred_marginaleffects, residualize = TRUE)
 ## Collapes across group ------
+data("cake", package = "lme4")
 fm1 <- lme4::lmer(angle ~ temperature + (1 | recipe),
   data = cake
 )
 
-pred_ggeffects <- ggeffects::ggpredict(fm1, c("temperature", "recipe"))
 nd <- marginaleffects::datagrid(
   temperature = unique(cake$temperature),
   model = fm1
 )
-pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd)
-#> Warning: For this model type, `marginaleffects` only takes into account the uncertainty in fixed-effect parameters. This is often appropriate when `re.form=NA`, but may be surprising to users who set `re.form=NULL` (default) or to some other value. Call `options(marginaleffects_safe = FALSE)` to silence this warning.
+suppressWarnings(pred_marginaleffects <- marginaleffects::predictions(fm1, newdata = nd))
 
 get_data_for_grid(pred_marginaleffects, collapse_by = TRUE)
-#> Warning: Could not recover model data from environment. Please make sure your
-#>   data is available in your workspace.
-#>   Trying to retrieve data from the model frame now.
-#> Warning: Could not get model data.
-#> Error: This function only works with mixed effects models.
+#>    temperature recipe estimate
+#> 1          175      A 29.13333
+#> 2          185      A 31.53333
+#> 3          195      A 30.80000
+#> 4          205      A 33.53333
+#> 5          215      A 38.66667
+#> 6          225      A 35.06667
+#> 7          175      B 26.86667
+#> 8          185      B 29.40000
+#> 9          195      B 31.73333
+#> 10         205      B 32.13333
+#> 11         215      B 34.46667
+#> 12         225      B 35.26667
+#> 13         175      C 27.93333
+#> 14         185      C 28.93333
+#> 15         195      C 31.73333
+#> 16         205      C 30.86667
+#> 17         215      C 34.40000
+#> 18         225      C 35.73333
 # get_data_for_grid(pred_marginaleffects, collapse_by = TRUE, residualize = TRUE)
 ```
