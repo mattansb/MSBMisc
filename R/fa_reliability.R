@@ -64,7 +64,7 @@ fa_reliability.fa <- function(
 #' @rdname fa_reliability
 fa_reliability.lavaan <- function(x, ...) {
   .check_namespace("semTools")
-  Omega <- semTools::compRelSEM(x, tau.eq = FALSE, ...)
+  Omega <- semTools::compRelSEM(x, tau.eq = FALSE, return.df = TRUE, ...)
   Factor <- names(Omega)
 
   data.frame(Factor, Omega = as.vector(Omega))
