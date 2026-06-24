@@ -60,7 +60,6 @@ Other ML4Psych: [`jaccard_avg()`](jaccard_avg.md),
 ## Examples
 
 ``` r
-if (FALSE) { # require("tidymodels") && require("tidyclust")
 
 library(tidymodels)
 library(tidyclust)
@@ -79,5 +78,4 @@ res <- tune_cluster(
 # What's the largest k that has a good prediction strength?
 # (values above 0.8 are considered good)
 autoplot(res)
-}
 ```

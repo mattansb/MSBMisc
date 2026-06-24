@@ -37,17 +37,17 @@ meanlog <- coef(m)
 sdlog <- sigma(m)
 
 lnorm_mean(meanlog, sdlog)
-#> [1] 9.016069
+#> [1] 8.965027
 mean(x)
-#> [1] 9.000316
+#> [1] 9.049275
 
 lnorm_median(meanlog, sdlog)
-#> [1] 4.459222
+#> [1] 4.405787
 median(x)
-#> [1] 4.433352
+#> [1] 4.3756
 
 lnorm_sd(meanlog, sdlog)
-#> [1] 15.8438
+#> [1] 15.88742
 sd(x)
-#> [1] 15.30699
+#> [1] 18.52951
 ```

@@ -25,10 +25,6 @@
 - [`contrast_weights()`](contrast_weights.md)
   [`cw()`](contrast_weights.md) : Build Contrast Weights
 
-- [`crop_coord_polar()`](crop_coord_polar.md) :
-
-  Crop `coord_polar`
-
 - [`dbind()`](dbind.md) : Bind matrices diagonally
 
 - [`delta_method()`](delta_method.md) :
@@ -85,8 +81,8 @@
 
 - [`qq_worm_plot()`](qq_worm_plot.md) : Create a worm plot
 
-- [`r2_pseudo()`](r2_pseudo.md) : Compute pseudo R-square for mixed
-  models
+- [`r2_pseudo()`](r2_pseudo.md) [`V_table()`](r2_pseudo.md) : Compute
+  pseudo R-square for mixed models
 
 - [`r_SB()`](r_SB.md) : Spearman-Brown Split half reliability
 

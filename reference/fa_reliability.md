@@ -52,10 +52,10 @@ EFA <- psych::fa(Harman74.cor$cov, 4)
 
 fa_reliability(EFA)
 #>   Factor     Omega
-#> 1    MR1 0.3277063
-#> 2    MR3 0.3644803
-#> 3    MR4 0.6165837
-#> 4    MR2 0.3654178
+#> 1    MR3 0.3277087
+#> 2    MR2 0.3644751
+#> 3    MR1 0.6165841
+#> 4    MR4 0.3654222
 HS.model <- " visual  =~ x1 + x2 + x3
               textual =~ x4 + x5 + x6
               speed   =~ x7 + x8 + x9 "
@@ -63,5 +63,9 @@ HS.model <- " visual  =~ x1 + x2 + x3
 CFA <- lavaan::cfa(HS.model, data = lavaan::HolzingerSwineford1939)
 
 fa_reliability(CFA)
-#> Error in data.frame(Factor, Omega = as.vector(Omega)): arguments imply differing number of rows: 3, 1
+#> Argument return.df= is deprecated, replaced by simplify= argument.
+#>    Factor     Omega
+#> 1  visual 0.6120052
+#> 2 textual 0.8850608
+#> 3   speed 0.6858417
 ```

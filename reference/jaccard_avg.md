@@ -60,7 +60,6 @@ Other ML4Psych: [`metric_by_event()`](metric_by_event.md),
 ## Examples
 
 ``` r
-if (FALSE) { # require("tidymodels") && require("tidyclust")
 
 library(tidymodels)
 library(tidyclust)
@@ -79,5 +78,4 @@ res <- tune_cluster(
 # What's the largest k that has high recovery rate?
 # (values above 0.75 are considered good, values below 0.5 are considered bad)
 autoplot(res)
-}
 ```

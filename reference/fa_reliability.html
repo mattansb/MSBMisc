@@ -86,10 +86,10 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">fa_reliability</span><span class="op">(</span><span class="va">EFA</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Factor     Omega</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    MR1 0.3277063</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    MR3 0.3644803</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    MR4 0.6165837</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    MR2 0.3654178</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    MR3 0.3277087</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    MR2 0.3644751</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    MR1 0.6165841</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    MR4 0.3654222</span>
 <span class="r-in"><span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="st">" visual  =~ x1 + x2 + x3</span></span></span>
 <span class="r-in"><span><span class="st">              textual =~ x4 + x5 + x6</span></span></span>
 <span class="r-in"><span><span class="st">              speed   =~ x7 + x8 + x9 "</span></span></span>
@@ -97,7 +97,11 @@
 <span class="r-in"><span><span class="va">CFA</span> <span class="op">&lt;-</span> <span class="fu">lavaan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/cfa.html" class="external-link">cfa</a></span><span class="op">(</span><span class="va">HS.model</span>, data <span class="op">=</span> <span class="fu">lavaan</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/lavaan/man/HolzingerSwineford1939.html" class="external-link">HolzingerSwineford1939</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">fa_reliability</span><span class="op">(</span><span class="va">CFA</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in data.frame(Factor, Omega = as.vector(Omega)):</span> arguments imply differing number of rows: 3, 1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Argument return.df= is deprecated, replaced by simplify= argument.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Factor     Omega</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  visual 0.6120052</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 textual 0.8850608</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   speed 0.6858417</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

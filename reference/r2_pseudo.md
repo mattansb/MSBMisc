@@ -8,6 +8,8 @@ model and a reduced model.
 
 ``` r
 r2_pseudo(mf, mr, mnull = mr)
+
+V_table(model)
 ```
 
 ## Arguments
@@ -24,6 +26,10 @@ r2_pseudo(mf, mr, mnull = mr)
 
   The empty model, where some variance of interest is unmodeled (an
   "unconditional" model)
+
+- model:
+
+  A fitted model object
 
 ## Value
 

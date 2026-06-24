@@ -116,6 +116,11 @@ get_data_for_grid(nd, mod, residualize = TRUE, pred_name = "predicted_mpg")
 #> Merc 280            6 100      22.09131
 
 library(ggplot2)
+#> 
+#> Attaching package: ‘ggplot2’
+#> The following objects are masked from ‘package:psych’:
+#> 
+#>     %+%, alpha
 ggplot(nd, aes(hp, predicted_mpg)) +
   geom_line() +
   geom_point(aes(y = mpg, color = "Raw"),
