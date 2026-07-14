@@ -2,9 +2,12 @@
 % Please edit documentation in R/zzz-deprecated.R
 \name{crop_coord_polar}
 \alias{crop_coord_polar}
+\alias{pred_strength}
 \title{Deprecated functions}
 \usage{
 crop_coord_polar(...)
+
+pred_strength(...)
 }
 \arguments{
 \item{...}{Arguments (unused)}

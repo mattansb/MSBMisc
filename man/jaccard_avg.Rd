@@ -65,11 +65,11 @@ Hennig, C. (2007). Cluster-wise assessment of cluster stability.
 \code{\link[fpc:clusterboot]{fpc::clusterboot()}}
 
 Other cluster metric: 
-\code{\link{pred_strength}()}
+\code{\link{pred_strength_min}()}
 
 Other ML4Psych: 
 \code{\link{metric_by_event}()},
-\code{\link{pred_strength}()}
+\code{\link{pred_strength_min}()}
 }
 \concept{ML4Psych}
 \concept{cluster metric}

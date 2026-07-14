@@ -40,6 +40,6 @@ metric set to each binary version of the data.
 \seealso{
 Other ML4Psych: 
 \code{\link{jaccard_avg}()},
-\code{\link{pred_strength}()}
+\code{\link{pred_strength_min}()}
 }
 \concept{ML4Psych}

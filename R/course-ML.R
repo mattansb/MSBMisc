@@ -290,7 +290,7 @@ jaccard_avg_impl <- function(pred_clusters, pred_clusters_new) {
 #'   kmeans_spec,
 #'   ~ bill_length_mm + bill_depth_mm + flipper_length_mm + body_mass_g,
 #'   resamples = vfold_cv(penguins, v = 2, repeats = 10),
-#'   metrics = cluster_metric_set(pred_strength)
+#'   metrics = cluster_metric_set(pred_strength_min)
 #' )
 #'
 #' # What's the largest k that has a good prediction strength?
@@ -300,14 +300,14 @@ jaccard_avg_impl <- function(pred_clusters, pred_clusters_new) {
 #' @family ML4Psych
 #'
 #' @export
-pred_strength <- function(object, ...) {
-  UseMethod("pred_strength")
+pred_strength_min <- function(object, ...) {
+  UseMethod("pred_strength_min")
 }
 
 
 #' @export
-#' @rdname pred_strength
-pred_strength.cluster_spec <- function(object, ...) {
+#' @rdname pred_strength_min
+pred_strength_min.cluster_spec <- function(object, ...) {
   cli::cli_abort(
     c(
       "This function requires a fitted model.",
@@ -317,8 +317,8 @@ pred_strength.cluster_spec <- function(object, ...) {
 }
 
 #' @export
-#' @rdname pred_strength
-pred_strength.cluster_fit <- function(object, new_data = NULL, ...) {
+#' @rdname pred_strength_min
+pred_strength_min.cluster_fit <- function(object, new_data = NULL, ...) {
   spec <- object$spec
 
   if (is.null(new_data)) {
@@ -342,12 +342,12 @@ pred_strength.cluster_fit <- function(object, new_data = NULL, ...) {
   pred_fit <- stats::predict(object, new_data)[[".pred_cluster"]]
 
   # 4. Compute stability metric
-  pred_strength_impl(pred_fit, pred_new_fit)
+  pred_strength_min_impl(pred_fit, pred_new_fit)
 }
 
 #' @export
-#' @rdname pred_strength
-pred_strength.workflow <- function(object, new_data = NULL, ...) {
+#' @rdname pred_strength_min
+pred_strength_min.workflow <- function(object, new_data = NULL, ...) {
   if (!workflows::is_trained_workflow(object)) {
     stop("The workflow must be fitted before calculating cluster metrics.")
   }
@@ -369,12 +369,12 @@ pred_strength.workflow <- function(object, new_data = NULL, ...) {
   pred_fit <- stats::predict(object, new_data)[[".pred_cluster"]]
 
   # 4. Compute stability metric
-  pred_strength_impl(pred_fit, pred_new_fit)
+  pred_strength_min_impl(pred_fit, pred_new_fit)
 }
 
 
 # Core vector helper for prediction strength calculation
-pred_strength_impl <- function(pred_clusters, pred_clusters_new) {
+pred_strength_min_impl <- function(pred_clusters, pred_clusters_new) {
   split_preds <- split(pred_clusters, pred_clusters_new)
   ps_by_cluster <- purrr::map_dbl(split_preds, function(preds) {
     n <- length(preds)
@@ -388,7 +388,7 @@ pred_strength_impl <- function(pred_clusters, pred_clusters_new) {
 
   # Return structured tibble standard for tidyclust metrics
   tibble::tibble(
-    .metric = "pred_strength",
+    .metric = "pred_strength_min",
     .estimator = "standard",
     .estimate = min(ps_by_cluster)
   )
@@ -401,8 +401,8 @@ pred_strength_impl <- function(pred_clusters, pred_clusters_new) {
       tidyclust::new_cluster_metric(jaccard_avg, direction = "maximize")
     )
     utils::assignInMyNamespace(
-      "pred_strength",
-      tidyclust::new_cluster_metric(pred_strength, direction = "maximize")
+      "pred_strength_min",
+      tidyclust::new_cluster_metric(pred_strength_min, direction = "maximize")
     )
   }
 }
