@@ -6,6 +6,8 @@ Deprecated functions
 
 ``` r
 crop_coord_polar(...)
+
+pred_strength(...)
 ```
 
 ## Arguments

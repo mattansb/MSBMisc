@@ -25,7 +25,8 @@
 - [`contrast_weights()`](contrast_weights.md)
   [`cw()`](contrast_weights.md) : Build Contrast Weights
 
-- [`crop_coord_polar()`](crop_coord_polar.md) : Deprecated functions
+- [`crop_coord_polar()`](crop_coord_polar.md)
+  [`pred_strength()`](crop_coord_polar.md) : Deprecated functions
 
 - [`dbind()`](dbind.md) : Bind matrices diagonally
 
@@ -73,8 +74,8 @@
   [`php.chisq()`](php.t.md) [`php.guf()`](php.t.md) : Function for
   Post-Hoc Power analysis
 
-- [`pred_strength()`](pred_strength.md) : Estimate the Prediction
-  Strength of a Clustering Model
+- [`pred_strength_min()`](pred_strength_min.md) : Estimate the
+  Prediction Strength of a Clustering Model
 
 - [`print_library()`](print_library.md)
   [`print_require()`](print_library.md)

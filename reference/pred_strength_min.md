@@ -9,16 +9,16 @@ Walther, 2005).
 ## Usage
 
 ``` r
-pred_strength(object, ...)
+pred_strength_min(object, ...)
 
 # S3 method for class 'cluster_spec'
-pred_strength(object, ...)
+pred_strength_min(object, ...)
 
 # S3 method for class 'cluster_fit'
-pred_strength(object, new_data = NULL, ...)
+pred_strength_min(object, new_data = NULL, ...)
 
 # S3 method for class 'workflow'
-pred_strength(object, new_data = NULL, ...)
+pred_strength_min(object, new_data = NULL, ...)
 ```
 
 ## Arguments
@@ -72,7 +72,7 @@ res <- tune_cluster(
   kmeans_spec,
   ~ bill_length_mm + bill_depth_mm + flipper_length_mm + body_mass_g,
   resamples = vfold_cv(penguins, v = 2, repeats = 10),
-  metrics = cluster_metric_set(pred_strength)
+  metrics = cluster_metric_set(pred_strength_min)
 )
 
 # What's the largest k that has a good prediction strength?

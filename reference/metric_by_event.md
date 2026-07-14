@@ -58,4 +58,4 @@ which the metric was computed. For these rows, `.estimator` is set to
 ## See also
 
 Other ML4Psych: [`jaccard_avg()`](jaccard_avg.md),
-[`pred_strength()`](pred_strength.md)
+[`pred_strength_min()`](pred_strength_min.md)

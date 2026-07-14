@@ -52,10 +52,10 @@ Hennig, C. (2007). Cluster-wise assessment of cluster stability.
 
 `fpc::clusterboot()`
 
-Other cluster metric: [`pred_strength()`](pred_strength.md)
+Other cluster metric: [`pred_strength_min()`](pred_strength_min.md)
 
 Other ML4Psych: [`metric_by_event()`](metric_by_event.md),
-[`pred_strength()`](pred_strength.md)
+[`pred_strength_min()`](pred_strength_min.md)
 
 ## Examples
 
